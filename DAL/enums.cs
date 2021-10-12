@@ -20,4 +20,11 @@ namespace DAL
         Fast,
         Emergency
     }
+
+    public enum DroneStatuses
+    {
+        vacant,
+        maintenance,
+        Shipping
+    }
 }
