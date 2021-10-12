@@ -4,8 +4,15 @@ namespace DAL
 {
     namespace DO
     {
-        public class Class1
+        public class DataSource
         {
+            public string Name { get; set; }
+
+            public override string ToString()
+            {
+                return Name;
+            }
         }
     }
 }
+
