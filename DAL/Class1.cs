@@ -4,7 +4,22 @@ namespace DAL
 {
     namespace DO
     {
-        #Dror
+        public class Drone
+        {
+            public int Id { get; set; }
+            public string Model { get; set; }
+            public WeightCategories MaxWeight { get; set; }
+            public DroneStatuses Status { get; set; }
+            public double Battery { get; set; }
+        }
+
+        public class DroneCharge
+        {
+            public int DroneId { get; set; }
+            public int StationId { get; set; }
+
+        }
+
         public class Customer
         {
             public int Id { get; set; }
