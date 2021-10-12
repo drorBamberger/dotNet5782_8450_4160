@@ -3,19 +3,7 @@
 namespace DAL
 {
     namespace DO
-    {
-        enum WeightCategories
-        {
-            Light,
-            Medium,
-            Heavy
-        }
-        enum Priorities
-        {
-            Normal,
-            Fast,
-            Emergency
-        }
+    {        
 
         public class Customer
         {
