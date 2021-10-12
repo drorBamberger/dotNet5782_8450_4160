@@ -2,7 +2,10 @@
 
 namespace DAL
 {
-    public class Class1
+    namespace DO
     {
+        public class Class1
+        {
+        }
     }
 }
