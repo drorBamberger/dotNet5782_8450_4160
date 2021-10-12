@@ -29,7 +29,7 @@ namespace DAL
             public int DroneId { get; set; }
 
         }
-
+#aaa
     }
 }
 
