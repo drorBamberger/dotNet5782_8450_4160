@@ -30,6 +30,7 @@ namespace DAL
 
             public override string ToString(){return Name;}
         }
+
         public class Parcel
         {
             public int Id { get; set; }
@@ -44,6 +45,7 @@ namespace DAL
             public int DroneId { get; set; }
 
         }
+
         public class Station
         {
             public int Id { get; set; }
