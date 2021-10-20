@@ -14,7 +14,8 @@ namespace IDAL
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
 
-            public override string ToString() { return Name; }
+            public override string ToString() { return ("ID: " + Id + "Name: "+Name + "Phone" + Phone + "Longitude: "+ Longitude + "Lattitude: "+ Lattitude) ; }
         }
+        
     }
 }

@@ -21,9 +21,13 @@ namespace DalObject
             internal static int freeCustomer = 0;
             internal static int freeParcel = 0;
 
+            //TODO CREATION OF SOMETHING THAT I DIDNT UNDERSTAND
+        }
+        static void Initialize()
+        {
+            
 
         }
-
 
     }
 
