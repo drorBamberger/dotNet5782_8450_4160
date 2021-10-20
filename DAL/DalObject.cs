@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using IDAL.DO;
 
-namespace DAL
+namespace DalObject
 {
-    namespace DalObject
-    {
 
-        class DataSource
-        {
+    class DataSource
+    {
+        internal Drone[10];
         }
-    }
 }

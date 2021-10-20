@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL
+namespace IDAL
 {
     namespace DO
     {
@@ -12,19 +12,20 @@ namespace DAL
             Medium,
             Heavy
         }
-    }
 
-    public enum Priorities
-    {
-        Normal,
-        Fast,
-        Emergency
-    }
 
-    public enum DroneStatuses
-    {
-        vacant,
-        maintenance,
-        Shipping
+        public enum Priorities
+        {
+            Normal,
+            Fast,
+            Emergency
+        }
+
+        public enum DroneStatuses
+        {
+            vacant,
+            maintenance,
+            Shipping
+        }
     }
 }
