@@ -455,7 +455,6 @@ namespace ConsoleUI
             {
                 PrintDisplayLists();
                 choice = GetInt();
-                Console.WriteLine("Your Choice:", choice);
                 ToContinue = false;
                 switch (choice)
                 {

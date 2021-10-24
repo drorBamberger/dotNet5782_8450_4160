@@ -36,10 +36,10 @@ namespace IDAL
                     + "Drone Id:      " + DroneId + "\n"
                     + "Weight:        " + Weight + "\n"
                     + "Priority:       " + Priority + "\n"
-                    + "Time Reuqested:      " + Reuqested + "\n"
-                    + "Time Scheduled:      " + Scheduled + "\n"
-                    + "Time Delivered" + Delivered + "\n"
-                    + "Time PickedUp" + PickedUp + "\n"); }
+                    + "Time Reuqested:      " + Reuqested.ToString() + "\n"
+                    + "Time Scheduled:      " + Scheduled.ToString() + "\n"
+                    + "Time Delivered" + Delivered.ToString() + "\n"
+                    + "Time PickedUp" + PickedUp.ToString() + "\n"); }
 
         }
 
