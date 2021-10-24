@@ -257,7 +257,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            Console.WriteLine("Enter parcel id:");
+            Console.WriteLine("Enter station id:");
             stationId = GetInt();
 
             dataBase.ChargeDrone(droneId, stationId);
@@ -270,7 +270,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            Console.WriteLine("Enter parcel id:");
+            Console.WriteLine("Enter station id:");
             stationId = GetInt();
 
             dataBase.DisChargeDrone(droneId, stationId);
@@ -316,10 +316,42 @@ namespace ConsoleUI
             Console.WriteLine("Enter your choice:");
 
         }
-        static void DisplayStation() { }
-        static void DisplayDrone() { }
-        static void DisplayCustomer() { }
-        static void DisplayParcel() { }
+        static void DisplayStation() 
+        {
+            int id;
+
+            Console.WriteLine("Enter id:");
+            id = GetInt();
+
+            dataBase.displayStation(id);
+        }
+        static void DisplayDrone() 
+        {
+            int id;
+
+            Console.WriteLine("Enter id:");
+            id = GetInt();
+
+            dataBase.displayDrone(id);
+        }
+        static void DisplayCustomer() 
+        {
+            int id;
+
+            Console.WriteLine("Enter id:");
+            id = GetInt();
+
+            dataBase.displayCustomer(id);
+        }
+        static void DisplayParcel() 
+        {
+            int id;
+
+            Console.WriteLine("Enter id:");
+            id = GetInt();
+
+            dataBase.displayParcel(id);
+        }
         static void DisplayLists()
         {
             bool ToContinue;
@@ -333,22 +365,22 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        stationList();
+                        dataBase.stationList();
                         break;
                     case 2:
-                        droneList();
+                        dataBase.droneList();
                         break;
                     case 3:
-                        customerList();
+                        dataBase.customerList();
                         break;
                     case 4:
-                        parcelList();
+                        dataBase.parcelList();
                         break;
                     case 5:
-                        parcelListNotTaken();
+                        dataBase.parcelListNotTaken();
                         break;
                     case 6:
-                        freeStations();
+                        dataBase.freeStations();
                         break;
                     default:
                         ToContinue = true;
@@ -369,12 +401,6 @@ namespace ConsoleUI
             Console.WriteLine("Enter your choice:");
 
         }
-        static void stationList() { }
-        static void droneList() { }
-        static void customerList() { }
-        static void parcelList() { }
-        static void parcelListNotTaken() { }
-        static void freeStations() { }
 
         static void Main(string[] args)
         {
