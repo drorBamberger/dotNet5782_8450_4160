@@ -45,7 +45,7 @@ namespace DalObject
             //parcels initialization
             for (int i = 0; i < 10; i++)
             {
-                parcels[i] = new Parcel(Config.runningField++, rnd.Next(), customers[i].Id, (WeightCategories)rnd.Next(0, 3), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 3, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 1, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 20), (Priorities)rnd.Next(0, 3), rnd.Next());
+                parcels[i] = new Parcel(Config.runningField++, rnd.Next(), customers[i].Id, (WeightCategories)rnd.Next(0, 3),  (Priorities)rnd.Next(0, 3), rnd.Next());
             }
             
         }
@@ -54,7 +54,6 @@ namespace DalObject
 
     public class DalObject
     {
-        DateTime noDate  = new DateTime(0, 0, 0, 0, 0, 0);
         // cnstrct:
         public DalObject()
         {
@@ -108,16 +107,28 @@ namespace DalObject
             }
         }
 
-        public void PickedParcelUp(int droneID)
+        public void PickedParcelUp(int parcelId)
         {
             for (int i = 0; i < DataSource.Config.freeParcel; i++)
             {
-                if (DataSource.parcels[i].Id == parcelID)
+                if (DataSource.parcels[i].Id == parcelId)
                 {
                     DataSource.parcels[i].PickedUp = DateTime.Now;
                 }
             }
         }
+
+        public void ParcelDelivered(int parcelId)
+        {
+            for (int i = 0; i < DataSource.Config.freeParcel; i++)
+            {
+                if (DataSource.parcels[i].Id == parcelId)
+                {
+                    DataSource.parcels[i].Delivered = DateTime.Now;
+                }
+            }
+        }
+
 
 
 
@@ -170,7 +181,7 @@ namespace DalObject
                     return DataSource.parcels[i];
                 }
             }
-            return new Parcel(0, 0, 0, (WeightCategories)0, noDate, noDate, noDate, noDate, (Priorities)0, 0);
+            return new Parcel(0, 0, 0, (WeightCategories)0, (Priorities)0, 0);
         }
 
         //displays Lists
