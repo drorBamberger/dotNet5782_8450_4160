@@ -33,7 +33,7 @@ namespace DalObject
             string[] customerNames = new string[] { "Dror", "Yair", "Ofir", "Gil", "Benaya", "Ohad", "Michael", "Achiya", "Drew", "Shilo" };
             for (int i = 0; i < 10; ++i)
             {
-                customers[i] = new Customer(rnd.Next(), customerNames[i], "05" + (rnd.Next(10000000, 99999999)).ToString(), rnd.NextDouble() * 180 * Math.Pow(-1, rnd.Next(0, 1)), rnd.NextDouble() * 90 * Math.Pow(-1, rnd.Next(0, 1));
+                customers[i] = new Customer(rnd.Next(), customerNames[i], "05" + (rnd.Next(10000000, 99999999)).ToString(), rnd.NextDouble() * 180 * Math.Pow(-1, rnd.Next(0, 1)), rnd.NextDouble() * 90 * Math.Pow(-1, rnd.Next(0, 2)));
             }
 
             //drones initialization
@@ -45,7 +45,7 @@ namespace DalObject
             //pacels initialization
             for (int i = 0; i < 10; i++)
             {
-                parcels[i] = new Parcel(rnd.Next(), rnd.Next(), customers[i].Id, rnd.Next(0, 2), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 3, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 1, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 20), rnd.Next(0, 2), rnd.Next());
+                parcels[i] = new Parcel(rnd.Next(), rnd.Next(), customers[i].Id, (WeightCategories)rnd.Next(0, 3), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 3, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 1, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 20), (Priorities)rnd.Next(0, 3), rnd.Next());
             }
             
         }
@@ -54,6 +54,7 @@ namespace DalObject
 
     public class DalObject
     {
+        DateTime noDate  = new DateTime(0, 0, 0, 0, 0, 0);
         // cnstrct:
         public DalObject()
         {
@@ -67,10 +68,88 @@ namespace DalObject
             {
                 if(DataSource.stations[i].Id == id)
                 {
-
+                    return DataSource.stations[i];
                 }
             }
+            return new Station(0, "NO STATION FOUND", 0, 0, 0);
         }
 
+        public Drone displayDrone(int id)
+        {
+            for (int i = 0; i < DataSource.Config.freeDrone; i++)
+            {
+                if (DataSource.drones[i].Id == id)
+                {
+                    return DataSource.drones[i];
+                }
+            }
+            return new Drone(0 ,"NO DRONE FOUND", (WeightCategories)0, (DroneStatuses)0, 0);
+        }
+
+        public Customer displayCustomer(int id)
+        {
+            for (int i = 0; i < DataSource.Config.freeCustomer; i++)
+            {
+                if (DataSource.customers[i].Id == id)
+                {
+                    return DataSource.customers[i];
+                }
+            }
+            return new Customer(0, "no customer found", "0000000000", 0, 0);
+        }
+
+        public Parcel displayParcel(int id)
+        {
+            for (int i = 0; i < DataSource.Config.freeParcel; i++)
+            {
+                if (DataSource.parcels[i].Id == id)
+                {
+                    return DataSource.parcels[i];
+                }
+            }
+            return new Parcel(0, 0, 0, (WeightCategories)0, noDate, noDate, noDate, noDate, (Priorities)0, 0);
+        }
+
+        //displays Lists
+
+        public Station[] stationList()
+        {
+            Station[] StationList = new Station[DataSource.Config.freeStation];
+            for (int i = 0; i < DataSource.Config.freeStation; i++)
+            {
+                StationList[i] = DataSource.stations[i];
+            }
+            return StationList;
+        }
+
+        public Drone[] droneList()
+        {
+            Drone[] DroneList = new Drone[DataSource.Config.freeDrone];
+            for (int i = 0; i < DataSource.Config.freeDrone; i++)
+            {
+                DroneList[i] = DataSource.drones[i];
+            }
+            return DroneList;
+        }
+
+        public Customer[] customerList()
+        {
+            Customer[] CustomerList = new Customer[DataSource.Config.freeCustomer];
+            for (int i = 0; i < DataSource.Config.freeCustomer; i++)
+            {
+                CustomerList[i] = DataSource.customers[i];
+            }
+            return CustomerList;
+        }
+
+        public Parcel[] parcelList()
+        {
+            Parcel[] CustomerList = new Parcel[DataSource.Config.freeParcel];
+            for (int i = 0; i < DataSource.Config.freeParcel; i++)
+            {
+                CustomerList[i] = DataSource.parcels[i];
+            }
+            return CustomerList;
+        }
     }
 }
