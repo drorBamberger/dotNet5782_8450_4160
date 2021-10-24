@@ -42,7 +42,7 @@ namespace DalObject
             //drones initialization
             for (int i = 0; i < 5; i++)
             {
-                drones[5] = new Drone(rnd.Next(), "version" + i.ToString(), (WeightCategories)rnd.Next(0, 3), (DroneStatuses)rnd.Next(0, 3), rnd.NextDouble() * 100);
+                drones[i] = new Drone(rnd.Next(), "version" + i.ToString(), (WeightCategories)rnd.Next(0, 3), (DroneStatuses)rnd.Next(0, 3), rnd.NextDouble() * 100);
             }
 
             //parcels initialization
