@@ -467,10 +467,20 @@ namespace ConsoleUI
                         }
                         break;
                     case 2:
-                        Console.WriteLine(dataBase.droneList());
+                        Drone[] drones = dataBase.droneList();
+                        for (int i = 0; i < drones.Length; ++i)
+                        {
+                            Console.WriteLine(drones[i]);
+                            Console.WriteLine();
+                        }
                         break;
                     case 3:
-                        Console.WriteLine(dataBase.customerList());
+                        Customer[] customers = dataBase.customerList();
+                        for (int i = 0; i < customers.Length; ++i)
+                        {
+                            Console.WriteLine(customers[i]);
+                            Console.WriteLine();
+                        }
                         break;
                     case 4:
                         Parcel[] parcels = dataBase.parcelList();
@@ -482,10 +492,20 @@ namespace ConsoleUI
 
                         break;
                     case 5:
-                        Console.WriteLine(dataBase.parcelListNotTaken());
+                        parcels = dataBase.parcelListNotTaken();
+                        for (int i = 0; i < parcels.Length; ++i)
+                        {
+                            Console.WriteLine(parcels[i]);
+                            Console.WriteLine();
+                        }
                         break;
                     case 6:
-                        Console.WriteLine(dataBase.freeStations());
+                        stations = dataBase.freeStations(); 
+                        for (int i = 0; i < stations.Length; ++i)
+                        {
+                            Console.WriteLine(stations[i]);
+                            Console.WriteLine();
+                        }
                         break;
                     default:
                         ToContinue = true;
