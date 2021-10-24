@@ -38,12 +38,14 @@ namespace DalObject
             for (int i = 0; i < 10; ++i)
             {
                 customers[i] = new Customer(rnd.Next(), customerNames[i], "05" + (rnd.Next(10000000, 99999999)).ToString(), rnd.NextDouble() * 180 * Math.Pow(-1, rnd.Next(0, 1)), rnd.NextDouble() * 90 * Math.Pow(-1, rnd.Next(0, 2)));
+                DataSource.Config.freeCustomer++;
             }
 
             //drones initialization
             for (int i = 0; i < 5; i++)
             {
                 drones[i] = new Drone(rnd.Next(), "version" + i.ToString(), (WeightCategories)rnd.Next(0, 3), (DroneStatuses)rnd.Next(0, 3), rnd.NextDouble() * 100);
+                DataSource.Config.freeDrone++;
             }
 
             //parcels initialization
