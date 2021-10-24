@@ -69,9 +69,9 @@ namespace DalObject
             DataSource.Config.freeStation++;
         }
 
-        public void addDrone(int id, string model, WeightCategories maxWeight, DroneStatuses status, double battery)
+        public void addDrone(int id, string model, int maxWeight, int status, double battery)
         {
-            DataSource.drones[DataSource.Config.freeDrone] = new Drone(id, model, maxWeight, status, battery);
+            DataSource.drones[DataSource.Config.freeDrone] = new Drone(id, model, (WeightCategories)maxWeight, (DroneStatuses)status, battery);
             DataSource.Config.freeDrone++;
         }
 
