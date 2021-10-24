@@ -48,7 +48,7 @@ namespace DalObject
             //parcels initialization
             for (int i = 0; i < 10; i++)
             {
-                parcels[i] = new Parcel(Config.runningField++, rnd.Next(), customers[i].Id, (WeightCategories)rnd.Next(0, 3),  (Priorities)rnd.Next(0, 3), rnd.Next());
+                parcels[i] = new Parcel(Config.runningField++, customers[rnd.Next(0, 10)].Id, customers[rnd.Next(0, 10)].Id, (WeightCategories)rnd.Next(0, 3),  (Priorities)rnd.Next(0, 3), drones[rnd.Next(0, 5)].Id);
             }
             
         }
