@@ -4,6 +4,7 @@ namespace ConsoleUI
 {
     class Program
     {
+        static DalObject.DalObject dataBase = new DalObject.DalObject();
         static void PrintMain()
         {
             Console.WriteLine("Welcome to the drones delivery!");
@@ -25,22 +26,52 @@ namespace ConsoleUI
         static void Add()
         {
             bool ToContinue = false;
-            string Choice;
-            int res;
+            string temp;
+            int choice;
             PrintAdd();
-            Choice = Console.ReadLine();
-            res = Convert.ToInt32(Choice);
-            Console.WriteLine("Your Choice:", Choice);
+            temp = Console.ReadLine();
+            int.TryParse(temp, out choice);
+            Console.WriteLine("Your Choice:", temp);
             do
             {
                 ToContinue = false;
-                switch (res)
+                switch (choice)
                 {
                     case 1:
-                        
+                        int stationId;
+                        string name;
+                        double longitude;
+                        double lattitude;
+                        int chargeSlots;
+
+                        Console.WriteLine("Enter id:");
+                        temp = Console.ReadLine();
+                        int.TryParse(temp,out id);
+
+                        Console.WriteLine("Enter name:");
+                        name = Console.ReadLine();
+
+                        Console.WriteLine("Enter longitude:");
+                        temp = Console.ReadLine();
+                        longitude = Convert.ToDouble(temp);
+
+                        Console.WriteLine("Enter lattitude:");
+                        temp = Console.ReadLine();
+                        lattitude = Convert.ToDouble(temp);
+
+                        Console.WriteLine("Enter chargeSlots:");
+                        temp = Console.ReadLine();
+                        int.TryParse(temp, out chargeSlots);
+
+                        dataBase.addStation(id, name, longitude, lattitude, chargeSlots);
                         break;
                     case 2:
-                        
+                        int DroneId;
+                        string model;
+                        int maxWeight;
+                        int status;
+                        double battery;
+                        dataBase.addDrone(DroneId, model, maxWeight, status, battery);
                         break;
                     case 3:
                         
@@ -60,15 +91,16 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             bool ToContinue = true;
-            string Choice;
-            int res;
+            string temp;
+            int choice;
             while (ToContinue)
             {
                 PrintMain();
-                Choice = Console.ReadLine();
-                res = Convert.ToInt32(Choice);
-                Console.WriteLine("Your Choice:", Choice);
-                switch(res)
+                temp = Console.ReadLine();
+                int.TryParse(temp, out choice);
+
+                Console.WriteLine("Your Choice:", temp);
+                switch(choice)
                 {
                     case 1:
                         //Add();
