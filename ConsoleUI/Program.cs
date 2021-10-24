@@ -6,9 +6,9 @@ namespace ConsoleUI
     {
         static DalObject.DalObject dataBase = new DalObject.DalObject();
         /// <summary>
-        /// 
+        /// get int from the console
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the input in int format </returns>
         static int GetInt()
         {
             int res;
@@ -17,10 +17,11 @@ namespace ConsoleUI
             int.TryParse(temp, out res);
             return res;
         }
+
         /// <summary>
-        /// 
+        /// get double from the console
         /// </summary>
-        /// <returns></returns>
+        /// <returns> the input in double format </returns>
         static double GetDouble()
         {
             double res;
@@ -29,8 +30,9 @@ namespace ConsoleUI
             double.TryParse(temp, out res);
             return res;
         }
+
         /// <summary>
-        /// 
+        /// print the main menu to the console
         /// </summary>
         static void PrintMain()
         {
@@ -42,8 +44,9 @@ namespace ConsoleUI
             Console.WriteLine("4. Display lists");
             Console.WriteLine("5. Exit");
         }
+
         /// <summary>
-        /// 
+        /// Handles in case the user wants to add things to the database
         /// </summary>
         static void Add()
         {
@@ -76,8 +79,9 @@ namespace ConsoleUI
                 }
             } while (ToContinue);
         }
+
         /// <summary>
-        /// 
+        /// Print the Add menu to the console
         /// </summary>
         static void PrintAdd()
         {
@@ -89,8 +93,9 @@ namespace ConsoleUI
             Console.WriteLine("Enter your choice:");
 
         }
+
         /// <summary>
-        /// 
+        /// Add a Station to data base
         /// </summary>
         static void AddStation()
         {
@@ -117,8 +122,9 @@ namespace ConsoleUI
 
             dataBase.addStation(stationId, name, longitude, lattitude, chargeSlots);
         }
+
         /// <summary>
-        /// 
+        /// Add a Drone to data base
         /// </summary>
         static void AddDrone()
         {
@@ -145,8 +151,9 @@ namespace ConsoleUI
 
             dataBase.addDrone(DroneId, model, maxWeight, status, battery);
         }
+
         /// <summary>
-        /// 
+        /// Add a Customer to data base
         /// </summary>
         static void AddCustomer()
         {
@@ -173,8 +180,9 @@ namespace ConsoleUI
 
             dataBase.addCustomer(id, name, phone, longitude, lattitude);
         }
+
         /// <summary>
-        /// 
+        /// Add a Parcel to data base
         /// </summary>
         static void AddParcel()
         {
@@ -202,8 +210,9 @@ namespace ConsoleUI
 
             dataBase.addParcel(senderId, targetId, weight, priority, droneId);
         }
+
         /// <summary>
-        /// 
+        /// Handles in case the user wants to update things to the database
         /// </summary>
         static void Update()
         {
@@ -239,8 +248,9 @@ namespace ConsoleUI
                 }
             } while (ToContinue);
         }
+
         /// <summary>
-        /// 
+        /// Print the Update menu to the console
         /// </summary>
         static void PrintUpdate()
         {
@@ -253,6 +263,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter your choice:");
 
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -269,6 +280,7 @@ namespace ConsoleUI
 
             dataBase.attribution(droneId, parcelId);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -281,6 +293,7 @@ namespace ConsoleUI
 
             dataBase.PickedParcelUp(parcelId);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -293,6 +306,7 @@ namespace ConsoleUI
 
             dataBase.ParcelDelivered(parcelId);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -309,6 +323,7 @@ namespace ConsoleUI
 
             dataBase.ChargeDrone(droneId, stationId);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -325,8 +340,9 @@ namespace ConsoleUI
 
             dataBase.DisChargeDrone(droneId, stationId);
         }
+
         /// <summary>
-        /// 
+        /// Handles in case the user wants to display things to the database
         /// </summary>
         static void Display()
         {
@@ -359,8 +375,9 @@ namespace ConsoleUI
                 }
             } while (ToContinue);
         }
+
         /// <summary>
-        /// 
+        /// Print the Display menu to the console
         /// </summary>
         static void PrintDisplay()
         {
@@ -372,6 +389,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter your choice:");
 
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -384,6 +402,7 @@ namespace ConsoleUI
 
             dataBase.displayStation(id);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -396,6 +415,7 @@ namespace ConsoleUI
 
             dataBase.displayDrone(id);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -408,6 +428,7 @@ namespace ConsoleUI
 
             dataBase.displayCustomer(id);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -420,8 +441,9 @@ namespace ConsoleUI
 
             dataBase.displayParcel(id);
         }
+
         /// <summary>
-        /// 
+        /// Handles in case the user wants to display lists things to the database
         /// </summary>
         static void DisplayLists()
         {
@@ -460,8 +482,9 @@ namespace ConsoleUI
                 }
             } while (ToContinue);
         }
+
         /// <summary>
-        /// 
+        /// Print the DisplayLists menu to the console
         /// </summary>
         static void PrintDisplayLists()
         {
@@ -475,10 +498,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter your choice:");
 
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
+
         static void Main(string[] args)
         {
             bool ToContinue = true;
