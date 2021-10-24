@@ -37,7 +37,6 @@ namespace ConsoleUI
         /// </summary>
         static void PrintMain()
         {
-            Console.WriteLine("Welcome to the drones delivery!");
             Console.WriteLine("Please enter your choice:");
             Console.WriteLine("1. Add");
             Console.WriteLine("2. Update");
@@ -54,11 +53,10 @@ namespace ConsoleUI
         {
             bool ToContinue;
             int choice;
-            PrintAdd();
-            choice = GetInt();
-            Console.WriteLine("Your Choice:", choice);
             do
             {
+                PrintAdd();
+                choice = GetInt();
                 ToContinue = false;
                 switch (choice)
                 {
@@ -90,7 +88,7 @@ namespace ConsoleUI
             Console.WriteLine("What you want to add?");
             Console.WriteLine("1. Station");
             Console.WriteLine("2. Drone");
-            Console.WriteLine("3. Costumer");
+            Console.WriteLine("3. Customer");
             Console.WriteLine("4. Parcel");
             Console.WriteLine("Enter your choice:");
 
@@ -221,11 +219,10 @@ namespace ConsoleUI
         {
             bool ToContinue;
             int choice;
-            PrintUpdate();
-            choice = GetInt();
-            Console.WriteLine("Your Choice:", choice);
             do
             {
+                PrintUpdate();
+                choice = GetInt();
                 ToContinue = false;
                 switch (choice)
                 {
@@ -352,11 +349,10 @@ namespace ConsoleUI
         {
             bool ToContinue;
             int choice;
-            PrintDisplay();
-            choice = GetInt();
-            Console.WriteLine("Your Choice:", choice);
             do
             {
+                PrintDisplay();
+                choice = GetInt();
                 ToContinue = false;
                 switch (choice)
                 {
@@ -388,7 +384,7 @@ namespace ConsoleUI
             Console.WriteLine("What you want to display?");
             Console.WriteLine("1. Station");
             Console.WriteLine("2. Drone");
-            Console.WriteLine("3. Costumer");
+            Console.WriteLine("3. Customer");
             Console.WriteLine("4. Parcel");
             Console.WriteLine("Enter your choice:");
 
@@ -454,11 +450,11 @@ namespace ConsoleUI
         {
             bool ToContinue;
             int choice;
-            PrintDisplayLists();
-            choice = GetInt();
-            Console.WriteLine("Your Choice:", choice);
             do
             {
+                PrintDisplayLists();
+                choice = GetInt();
+                Console.WriteLine("Your Choice:", choice);
                 ToContinue = false;
                 switch (choice)
                 {
@@ -496,10 +492,11 @@ namespace ConsoleUI
             Console.WriteLine("What you want to display?");
             Console.WriteLine("1. Stations");
             Console.WriteLine("2. Drones");
-            Console.WriteLine("3. Costumers");
+            Console.WriteLine("3. Customers");
             Console.WriteLine("4. Parcels");
             Console.WriteLine("5. Free Parcels");
             Console.WriteLine("6. Free stations");
+            Console.WriteLine();
             Console.WriteLine("Enter your choice:");
 
         }
@@ -508,11 +505,11 @@ namespace ConsoleUI
         {
             bool ToContinue = true;
             int choice;
+            Console.WriteLine("Welcome to the drones delivery!");
             while (ToContinue)
             {
                 PrintMain();
                 choice = GetInt();
-                Console.WriteLine("Your Choice:", choice);
 
                 switch(choice)
                 {
