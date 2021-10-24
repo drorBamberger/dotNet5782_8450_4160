@@ -32,6 +32,7 @@ namespace DalObject
             //stations initialization
             stations[0] = new Station(rnd.Next(), "London", -0.118092, 51.509865, 10);
             stations[1] = new Station(rnd.Next(), "Paris", 2.349014, 48.864716, 8);
+            DataSource.Config.freeStation += 2;
             //customers initialization
             string[] customerNames = new string[] { "Dror", "Yair", "Ofir", "Gil", "Benaya", "Ohad", "Michael", "Achiya", "Drew", "Shilo" };
             for (int i = 0; i < 10; ++i)
