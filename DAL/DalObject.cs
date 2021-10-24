@@ -61,6 +61,20 @@ namespace DalObject
             DataSource.Initialize();
         }
 
+        //add option
+
+        public void addStation(int id, string name, double longitude, double lattitude, int chargeSlots)
+        {
+            DataSource.stations[DataSource.Config.freeStation] = new Station(id, name, longitude, lattitude, chargeSlots);
+            DataSource.Config.freeStation++;
+        }
+
+        public void addDrone(int id, string model, WeightCategories maxWeight, DroneStatuses status, double battery)
+        {
+            DataSource.drones[DataSource.Config.freeDrone] = new Drone(id, model, maxWeight, status, battery);
+            DataSource.Config.freeDrone++;
+        }
+
         //displays
         public Station displayStation(int id)
         {
@@ -144,12 +158,55 @@ namespace DalObject
 
         public Parcel[] parcelList()
         {
-            Parcel[] CustomerList = new Parcel[DataSource.Config.freeParcel];
+            Parcel[] ParcelList = new Parcel[DataSource.Config.freeParcel];
             for (int i = 0; i < DataSource.Config.freeParcel; i++)
             {
-                CustomerList[i] = DataSource.parcels[i];
+                ParcelList[i] = DataSource.parcels[i];
             }
-            return CustomerList;
+            return ParcelList;
         }
+
+        public Parcel[] parcelListNotTaken()
+        {
+            int count = 0;
+            for (int i = 0; i < DataSource.Config.freeParcel; i++)
+            {
+                if(DataSource.parcels[i].DroneId == 0)
+                {
+                    ++count;
+                }
+            }
+            Parcel[] ParcelList = new Parcel[count];
+            for (int i = 0; i < DataSource.Config.freeParcel; i++)
+            {
+                if (DataSource.parcels[i].DroneId == 0)
+                {
+                    ParcelList[i] = DataSource.parcels[i];
+                }
+            }
+            return ParcelList;
+        }
+
+        public Station[] freeStations()
+        {
+            int count = 0;
+            for (int i = 0; i < DataSource.Config.freeStation; i++)
+            {
+                if (DataSource.stations[i].ChargeSlots != 0)
+                {
+                    ++count;
+                }
+            }
+            Station[] StationList = new Station[count];
+            for (int i = 0; i < DataSource.Config.freeStation; i++)
+            {
+                if (DataSource.stations[i].ChargeSlots != 0)
+                {
+                    StationList[i] = DataSource.stations[i];
+                }
+            }
+            return StationList;
+        }
+
     }
 }
