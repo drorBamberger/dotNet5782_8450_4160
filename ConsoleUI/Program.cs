@@ -37,6 +37,7 @@ namespace ConsoleUI
         /// </summary>
         static void PrintMain()
         {
+            Console.WriteLine();
             Console.WriteLine("Please enter your choice:");
             Console.WriteLine("1. Add");
             Console.WriteLine("2. Update");
@@ -459,22 +460,22 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        dataBase.stationList();
+                        Console.WriteLine(dataBase.stationList());
                         break;
                     case 2:
-                        dataBase.droneList();
+                        Console.WriteLine(dataBase.droneList());
                         break;
                     case 3:
-                        dataBase.customerList();
+                        Console.WriteLine(dataBase.customerList());
                         break;
                     case 4:
-                        dataBase.parcelList();
+                        Console.WriteLine(dataBase.parcelList());
                         break;
                     case 5:
-                        dataBase.parcelListNotTaken();
+                        Console.WriteLine(dataBase.parcelListNotTaken());
                         break;
                     case 6:
-                        dataBase.freeStations();
+                        Console.WriteLine(dataBase.freeStations());
                         break;
                     default:
                         ToContinue = true;
@@ -510,8 +511,9 @@ namespace ConsoleUI
             {
                 PrintMain();
                 choice = GetInt();
+                Console.WriteLine();
 
-                switch(choice)
+                switch (choice)
                 {
                     case 1:
                         Add();
