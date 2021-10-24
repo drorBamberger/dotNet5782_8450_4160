@@ -410,40 +410,40 @@ namespace ConsoleUI
         /// <summary>
         /// 
         /// </summary>
-        static void DisplayDrone() 
+        static Drone DisplayDrone() 
         {
             int id;
 
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            dataBase.displayDrone(id);
+            return dataBase.displayDrone(id);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        static void DisplayCustomer() 
+        static Customer DisplayCustomer() 
         {
             int id;
 
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            dataBase.displayCustomer(id);
+            return dataBase.displayCustomer(id);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        static void DisplayParcel() 
+        static Parcel DisplayParcel() 
         {
             int id;
 
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            dataBase.displayParcel(id);
+            return dataBase.displayParcel(id);
         }
 
         //~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~
