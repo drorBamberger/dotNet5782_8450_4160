@@ -49,6 +49,7 @@ namespace DalObject
             for (int i = 0; i < 10; i++)
             {
                 parcels[i] = new Parcel(Config.runningField++, customers[rnd.Next(0, 10)].Id, customers[rnd.Next(0, 10)].Id, (WeightCategories)rnd.Next(0, 3),  (Priorities)rnd.Next(0, 3), drones[rnd.Next(0, 5)].Id);
+                DataSource.Config.freeParcel++;
             }
             
         }
@@ -85,7 +86,7 @@ namespace DalObject
 
         public void addParcel(int senderId, int targetId, int weight, int priority, int droneId)
         {
-            DataSource.parcels[DataSource.Config.freeParcel] = new Parcel(DataSource.Config.runningField, senderId, targetId,(WeightCategories)weight, (Priorities)priority, droneId);
+            DataSource.parcels[DataSource.Config.freeParcel] = new Parcel(DataSource.Config.runningField++, senderId, targetId,(WeightCategories)weight, (Priorities)priority, droneId);
             DataSource.Config.freeParcel++;
         }
         //update options
