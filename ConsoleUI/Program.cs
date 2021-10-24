@@ -460,7 +460,12 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine(dataBase.stationList());
+                        Station[] stations = dataBase.stationList();
+                        for (int i = 0; i < stations.Length; ++i)
+                        {
+                            Console.WriteLine(stations[i]);
+                            Console.WriteLine();
+                        }
                         break;
                     case 2:
                         Console.WriteLine(dataBase.droneList());
@@ -469,7 +474,13 @@ namespace ConsoleUI
                         Console.WriteLine(dataBase.customerList());
                         break;
                     case 4:
-                        Console.WriteLine(dataBase.parcelList());
+                        Parcel[] parcels = dataBase.parcelList();
+                        for (int i = 0; i < parcels.Length; ++i)
+                        {
+                            Console.WriteLine(parcels[i]);
+                            Console.WriteLine();
+                        }
+
                         break;
                     case 5:
                         Console.WriteLine(dataBase.parcelListNotTaken());
