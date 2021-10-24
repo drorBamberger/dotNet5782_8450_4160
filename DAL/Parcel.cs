@@ -30,16 +30,16 @@ namespace IDAL
             public int DroneId { get; set; }
 
             public override string ToString() { return 
-                    ("ID:        " + Id + "\n"
-                    + "Sender Id:      " + SenderId + "\n"
-                    + "Target Id:      " + TargetId + "\n"
-                    + "Drone Id:      " + DroneId + "\n"
-                    + "Weight:        " + Weight + "\n"
-                    + "Priority:       " + Priority + "\n"
-                    + "Time Reuqested:      " + Reuqested.ToString() + "\n"
-                    + "Time Scheduled:      " + Scheduled.ToString() + "\n"
-                    + "Time Delivered" + Delivered.ToString() + "\n"
-                    + "Time PickedUp" + PickedUp.ToString() + "\n"); }
+                    ("ID:               " + Id + "\n"
+                    + "Sender Id:       " + SenderId + "\n"
+                    + "Target Id:       " + TargetId + "\n"
+                    + "Drone Id:        " + DroneId + "\n"
+                    + "Weight:          " + Weight + "\n"
+                    + "Priority:        " + Priority + "\n"
+                    + "Time Reuqested:  " + Reuqested.ToString() + "\n"
+                    + "Time Scheduled:  " + Scheduled.ToString() + "\n"
+                    + "Time Delivered:  " + Delivered.ToString() + "\n"
+                    + "Time PickedUp:   " + PickedUp.ToString() + "\n"); }
 
         }
 
