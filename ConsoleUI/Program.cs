@@ -1,4 +1,5 @@
 ﻿using System;
+using IDAL.DO;
 
 namespace ConsoleUI
 {
@@ -45,6 +46,7 @@ namespace ConsoleUI
             Console.WriteLine("5. Exit");
         }
 
+        //~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to add things to the database
         /// </summary>
@@ -211,6 +213,7 @@ namespace ConsoleUI
             dataBase.addParcel(senderId, targetId, weight, priority, droneId);
         }
 
+        //~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to update things to the database
         /// </summary>
@@ -341,6 +344,7 @@ namespace ConsoleUI
             dataBase.DisChargeDrone(droneId, stationId);
         }
 
+        //~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to display things to the database
         /// </summary>
@@ -357,16 +361,16 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        DisplayStation();
+                        Console.WriteLine(DisplayStation());
                         break;
                     case 2:
-                        DisplayDrone();
+                        Console.WriteLine(DisplayDrone());
                         break;
                     case 3:
-                        DisplayCustomer();
+                        Console.WriteLine(DisplayCustomer());
                         break;
                     case 4:
-                        DisplayParcel();
+                        Console.WriteLine(DisplayParcel());
                         break;
                     default:
                         ToContinue = true;
@@ -393,14 +397,14 @@ namespace ConsoleUI
         /// <summary>
         /// 
         /// </summary>
-        static void DisplayStation() 
+        static Station DisplayStation() 
         {
             int id;
 
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            dataBase.displayStation(id);
+            return dataBase.displayStation(id);
         }
 
         /// <summary>
@@ -442,6 +446,7 @@ namespace ConsoleUI
             dataBase.displayParcel(id);
         }
 
+        //~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to display lists things to the database
         /// </summary>
