@@ -29,6 +29,18 @@ namespace IDAL
             public Priorities Priority { get; set; }
             public int DroneId { get; set; }
 
+            public override string ToString() { return 
+                    ("ID:        " + Id + "\n"
+                    + "Sender Id:      " + SenderId + "\n"
+                    + "Target Id:      " + TargetId + "\n"
+                    + "Drone Id:      " + DroneId + "\n"
+                    + "Weight:        " + Weight + "\n"
+                    + "Priority:       " + Priority + "\n"
+                    + "Time Reuqested:      " + Reuqested + "\n"
+                    + "Time Scheduled:      " + Scheduled + "\n"
+                    + "Time Delivered" + Delivered + "\n"
+                    + "Time PickedUp" + PickedUp + "\n"); }
+
         }
 
     }

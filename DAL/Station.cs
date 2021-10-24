@@ -22,6 +22,7 @@ namespace IDAL
                 Lattitude = lattitude;
                 ChargeSlots = chargeSlots;
             }
+            public override string ToString() { return ("ID:        " + Id + "\n" + "Name:      " + Name + "\n" + "PhFree ChargeSlots:      " + ChargeSlots + "\n" + "Longitude:      " + Longitude + "\n" + "Lattitude:        " + Lattitude); }
         }
     }
 }
