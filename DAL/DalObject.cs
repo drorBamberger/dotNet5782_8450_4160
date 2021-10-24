@@ -90,11 +90,11 @@ namespace DalObject
         }
         //update options
 
-        public void attribution(int droneID, int parcelID)
+        public void attribution(int droneId, int parcelId)
         {
             for (int i = 0; i < DataSource.Config.freeDrone; i++)
             {
-                if (DataSource.drones[i].Id == droneID)
+                if (DataSource.drones[i].Id == droneId)
                 {
                     DataSource.drones[i].Status = DroneStatuses.Shipping;
                 }
@@ -102,9 +102,9 @@ namespace DalObject
 
             for (int i = 0; i < DataSource.Config.freeParcel; i++)
             {
-                if (DataSource.parcels[i].Id == parcelID)
+                if (DataSource.parcels[i].Id == parcelId)
                 {
-                    DataSource.parcels[i].DroneId = droneID;
+                    DataSource.parcels[i].DroneId = droneId;
                     DataSource.parcels[i].Scheduled = DateTime.Now;
                 }
             }

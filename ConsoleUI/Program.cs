@@ -5,6 +5,22 @@ namespace ConsoleUI
     class Program
     {
         static DalObject.DalObject dataBase = new DalObject.DalObject();
+        static int GetInt()
+        {
+            int res;
+            string temp;
+            temp = Console.ReadLine();
+            int.TryParse(temp, out res);
+            return res;
+        }
+        static double GetDouble()
+        {
+            double res;
+            string temp;
+            temp = Console.ReadLine();
+            double.TryParse(temp, out res);
+            return res;
+        }
         static void PrintMain()
         {
             Console.WriteLine("Welcome to the drones delivery!");
@@ -15,146 +31,13 @@ namespace ConsoleUI
             Console.WriteLine("4. Display lists");
             Console.WriteLine("5. Exit");
         }
-        static void PrintAdd()
-        {
-            Console.WriteLine("What you want to add:");
-            Console.WriteLine("1. Station");
-            Console.WriteLine("2. Drone");
-            Console.WriteLine("3. Costumer");
-            Console.WriteLine("4. Parcel");
-        }
-        static void AddStation()
-        {
-            string temp;
-            int stationId;
-            string name;
-            double longitude;
-            double lattitude;
-            int chargeSlots;
-
-            Console.WriteLine("Enter id:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out stationId);
-
-            Console.WriteLine("Enter name:");
-            name = Console.ReadLine();
-
-            Console.WriteLine("Enter longitude:");
-            temp = Console.ReadLine();
-            double.TryParse(temp, out longitude);
-
-            Console.WriteLine("Enter lattitude:");
-            temp = Console.ReadLine();
-            double.TryParse(temp, out lattitude);
-
-            Console.WriteLine("Enter chargeSlots:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out chargeSlots);
-
-            dataBase.addStation(stationId, name, longitude, lattitude, chargeSlots);
-        }
-        static void AddDrone()
-        {
-            string temp;
-            int DroneId;
-            string model;
-            int maxWeight;
-            int status;
-            double battery;
-
-            Console.WriteLine("Enter id:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out DroneId);
-
-            Console.WriteLine("Enter model:");
-            model = Console.ReadLine();
-
-            Console.WriteLine("Enter maxWeight:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out maxWeight);
-
-            Console.WriteLine("Enter status:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out status);
-
-            Console.WriteLine("Enter battery:");
-            temp = Console.ReadLine();
-            double.TryParse(temp, out battery);
-
-            dataBase.addDrone(DroneId, model, maxWeight, status, battery);
-        }
-        static void AddCustomer()
-        {
-            string temp;
-            int id;
-            string name;
-            string phone;
-            double longitude;
-            double lattitude;
-
-            Console.WriteLine("Enter id:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out id);
-
-            Console.WriteLine("Enter name:");
-            name = Console.ReadLine();
-
-            Console.WriteLine("Enter phone:");
-            phone = Console.ReadLine();
-
-            Console.WriteLine("Enter longitude:");
-            temp = Console.ReadLine();
-            double.TryParse(temp, out longitude);
-
-            Console.WriteLine("Enter lattitude:");
-            temp = Console.ReadLine();
-            double.TryParse(temp, out lattitude);
-
-            dataBase.addCustomer(id, name, phone, longitude, lattitude);
-        }
-
-        static void AddParcel()
-        {
-
-            string temp;
-            int senderId;
-            int targetId;
-            int weight;
-            int priority;
-            int droneId;
-
-            Console.WriteLine("Enter sender id:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out senderId);
-
-            Console.WriteLine("Enter target id:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out targetId);
-
-            Console.WriteLine("Enter weight:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out weight);
-
-            Console.WriteLine("Enter priority:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out priority);
-
-            Console.WriteLine("Enter drone id:");
-            temp = Console.ReadLine();
-            int.TryParse(temp, out droneId);
-
-            dataBase.addParcel(senderId, targetId, weight, priority, droneId);
-        }
-
         static void Add()
         {
-            bool ToContinue = false;
-            string temp;
+            bool ToContinue;
             int choice;
             PrintAdd();
-            temp = Console.ReadLine();
-            int.TryParse(temp, out choice);
-            Console.WriteLine("Your Choice:", temp);
+            choice = GetInt();
+            Console.WriteLine("Your Choice:", choice);
             do
             {
                 ToContinue = false;
@@ -179,37 +62,343 @@ namespace ConsoleUI
                 }
             } while (ToContinue);
         }
+        static void PrintAdd()
+        {
+            Console.WriteLine("What you want to add?");
+            Console.WriteLine("1. Station");
+            Console.WriteLine("2. Drone");
+            Console.WriteLine("3. Costumer");
+            Console.WriteLine("4. Parcel");
+            Console.WriteLine("Enter your choice:");
 
+        }
+        static void AddStation()
+        {
+            int stationId;
+            string name;
+            double longitude;
+            double lattitude;
+            int chargeSlots;
+
+            Console.WriteLine("Enter id:");
+            stationId = GetInt();
+
+            Console.WriteLine("Enter name:");
+            name = Console.ReadLine();
+
+            Console.WriteLine("Enter longitude:");
+            longitude = GetDouble();
+
+            Console.WriteLine("Enter lattitude:");
+            lattitude = GetDouble();
+
+            Console.WriteLine("Enter chargeSlots:");
+            chargeSlots = GetInt();
+
+            dataBase.addStation(stationId, name, longitude, lattitude, chargeSlots);
+        }
+        static void AddDrone()
+        {
+            int DroneId;
+            string model;
+            int maxWeight;
+            int status;
+            double battery;
+
+            Console.WriteLine("Enter id:");
+            DroneId = GetInt();
+
+            Console.WriteLine("Enter model:");
+            model = Console.ReadLine();
+
+            Console.WriteLine("Enter maxWeight:");
+            maxWeight = GetInt();
+
+            Console.WriteLine("Enter status:");
+            status = GetInt();
+
+            Console.WriteLine("Enter battery:");
+            battery = GetDouble();
+
+            dataBase.addDrone(DroneId, model, maxWeight, status, battery);
+        }
+        static void AddCustomer()
+        {
+            int id;
+            string name;
+            string phone;
+            double longitude;
+            double lattitude;
+
+            Console.WriteLine("Enter id:");
+            id = GetInt();
+
+            Console.WriteLine("Enter name:");
+            name = Console.ReadLine();
+
+            Console.WriteLine("Enter phone:");
+            phone = Console.ReadLine();
+
+            Console.WriteLine("Enter longitude:");
+            longitude = GetDouble();
+
+            Console.WriteLine("Enter lattitude:");
+            lattitude = GetDouble();
+
+            dataBase.addCustomer(id, name, phone, longitude, lattitude);
+        }
+        static void AddParcel()
+        {
+
+            int senderId;
+            int targetId;
+            int weight;
+            int priority;
+            int droneId;
+
+            Console.WriteLine("Enter sender id:");
+            senderId = GetInt();
+
+            Console.WriteLine("Enter target id:");
+            targetId = GetInt();
+
+            Console.WriteLine("Enter weight:");
+            weight = GetInt();
+
+            Console.WriteLine("Enter priority:");
+            priority = GetInt();
+
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
+
+            dataBase.addParcel(senderId, targetId, weight, priority, droneId);
+        }
+        static void Update()
+        {
+            bool ToContinue;
+            int choice;
+            PrintUpdate();
+            choice = GetInt();
+            Console.WriteLine("Your Choice:", choice);
+            do
+            {
+                ToContinue = false;
+                switch (choice)
+                {
+                    case 1:
+                        attribution();
+                        break;
+                    case 2:
+                        PickedParcelUp();
+                        break;
+                    case 3:
+                        ParcelDelivered();
+                        break;
+                    case 4:
+                        ChargeDrone();
+                        break;
+                    case 5:
+                        DisChargeDrone();
+                        break;
+                    default:
+                        ToContinue = true;
+                        Console.WriteLine("No valid, please enter and number between 1 and 4:");
+                        break;
+                }
+            } while (ToContinue);
+        }
+        static void PrintUpdate()
+        {
+            Console.WriteLine("What you want to update?");
+            Console.WriteLine("1. Link parcel to drone");
+            Console.WriteLine("2. Pick up parcel by drone");
+            Console.WriteLine("3. Deliver parcel to customer");
+            Console.WriteLine("4. Send drone to charge");
+            Console.WriteLine("5. Release drone from charger");
+            Console.WriteLine("Enter your choice:");
+
+        }
+        static void attribution() 
+        {
+            int droneId;
+            int parcelId;
+
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
+
+            Console.WriteLine("Enter parcel id:");
+            parcelId = GetInt();
+
+            dataBase.attribution(droneId, parcelId);
+        }
+        static void PickedParcelUp() 
+        {
+            int parcelId;
+
+            Console.WriteLine("Enter parcel id:");
+            parcelId = GetInt();
+
+            dataBase.PickedParcelUp(parcelId);
+        }
+        static void ParcelDelivered() 
+        {
+            int parcelId;
+
+            Console.WriteLine("Enter parcel id:");
+            parcelId = GetInt();
+
+            dataBase.ParcelDelivered(parcelId);
+        }
+        static void ChargeDrone() 
+        {
+            int droneId;
+            int stationId;
+
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
+
+            Console.WriteLine("Enter parcel id:");
+            stationId = GetInt();
+
+            dataBase.ChargeDrone(droneId, stationId);
+        }
+        static void DisChargeDrone() 
+        {
+            int droneId;
+            int stationId;
+
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
+
+            Console.WriteLine("Enter parcel id:");
+            stationId = GetInt();
+
+            dataBase.DisChargeDrone(droneId, stationId);
+        }
+        static void Display()
+        {
+            bool ToContinue;
+            int choice;
+            PrintDisplay();
+            choice = GetInt();
+            Console.WriteLine("Your Choice:", choice);
+            do
+            {
+                ToContinue = false;
+                switch (choice)
+                {
+                    case 1:
+                        DisplayStation();
+                        break;
+                    case 2:
+                        DisplayDrone();
+                        break;
+                    case 3:
+                        DisplayCustomer();
+                        break;
+                    case 4:
+                        DisplayParcel();
+                        break;
+                    default:
+                        ToContinue = true;
+                        Console.WriteLine("No valid, please enter and number between 1 and 4:");
+                        break;
+                }
+            } while (ToContinue);
+        }
+        static void PrintDisplay()
+        {
+            Console.WriteLine("What you want to display?");
+            Console.WriteLine("1. Station");
+            Console.WriteLine("2. Drone");
+            Console.WriteLine("3. Costumer");
+            Console.WriteLine("4. Parcel");
+            Console.WriteLine("Enter your choice:");
+
+        }
+        static void DisplayStation() { }
+        static void DisplayDrone() { }
+        static void DisplayCustomer() { }
+        static void DisplayParcel() { }
+        static void DisplayLists()
+        {
+            bool ToContinue;
+            int choice;
+            PrintDisplayLists();
+            choice = GetInt();
+            Console.WriteLine("Your Choice:", choice);
+            do
+            {
+                ToContinue = false;
+                switch (choice)
+                {
+                    case 1:
+                        stationList();
+                        break;
+                    case 2:
+                        droneList();
+                        break;
+                    case 3:
+                        customerList();
+                        break;
+                    case 4:
+                        parcelList();
+                        break;
+                    case 5:
+                        parcelListNotTaken();
+                        break;
+                    case 6:
+                        freeStations();
+                        break;
+                    default:
+                        ToContinue = true;
+                        Console.WriteLine("No valid, please enter and number between 1 and 4:");
+                        break;
+                }
+            } while (ToContinue);
+        }
+        static void PrintDisplayLists()
+        {
+            Console.WriteLine("What you want to display?");
+            Console.WriteLine("1. Stations");
+            Console.WriteLine("2. Drones");
+            Console.WriteLine("3. Costumers");
+            Console.WriteLine("4. Parcels");
+            Console.WriteLine("5. Free Parcels");
+            Console.WriteLine("6. Free stations");
+            Console.WriteLine("Enter your choice:");
+
+        }
+        static void stationList() { }
+        static void droneList() { }
+        static void customerList() { }
+        static void parcelList() { }
+        static void parcelListNotTaken() { }
+        static void freeStations() { }
 
         static void Main(string[] args)
         {
             bool ToContinue = true;
-            string temp;
             int choice;
             while (ToContinue)
             {
                 PrintMain();
-                temp = Console.ReadLine();
-                int.TryParse(temp, out choice);
+                choice = GetInt();
+                Console.WriteLine("Your Choice:", choice);
 
-                Console.WriteLine("Your Choice:", temp);
                 switch(choice)
                 {
                     case 1:
-                        //Add();
-                        Console.WriteLine("Add");
+                        Add();
                         break;
                     case 2:
-                        //Update();
-                        Console.WriteLine("Update");
+                        Update();
                         break;
                     case 3:
-                        //Display();
-                        Console.WriteLine("Display");
+                        Display();
                         break;
                     case 4:
-                        //DisplayLists();
-                        Console.WriteLine("DisplayLists");
+                        DisplayLists();
                         break;
                     case 5:
                         ToContinue = false;
