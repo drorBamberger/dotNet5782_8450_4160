@@ -23,6 +23,131 @@ namespace ConsoleUI
             Console.WriteLine("3. Costumer");
             Console.WriteLine("4. Parcel");
         }
+        static void AddStation()
+        {
+            string temp;
+            int stationId;
+            string name;
+            double longitude;
+            double lattitude;
+            int chargeSlots;
+
+            Console.WriteLine("Enter id:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out stationId);
+
+            Console.WriteLine("Enter name:");
+            name = Console.ReadLine();
+
+            Console.WriteLine("Enter longitude:");
+            temp = Console.ReadLine();
+            double.TryParse(temp, out longitude);
+
+            Console.WriteLine("Enter lattitude:");
+            temp = Console.ReadLine();
+            double.TryParse(temp, out lattitude);
+
+            Console.WriteLine("Enter chargeSlots:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out chargeSlots);
+
+            dataBase.addStation(stationId, name, longitude, lattitude, chargeSlots);
+        }
+        static void AddDrone()
+        {
+            string temp;
+            int DroneId;
+            string model;
+            int maxWeight;
+            int status;
+            double battery;
+
+            Console.WriteLine("Enter id:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out DroneId);
+
+            Console.WriteLine("Enter model:");
+            model = Console.ReadLine();
+
+            Console.WriteLine("Enter maxWeight:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out maxWeight);
+
+            Console.WriteLine("Enter status:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out status);
+
+            Console.WriteLine("Enter battery:");
+            temp = Console.ReadLine();
+            double.TryParse(temp, out battery);
+
+            dataBase.addDrone(DroneId, model, maxWeight, status, battery);
+        }
+        static void AddCustomer()
+        {
+            string temp;
+            int id;
+            string name;
+            string phone;
+            double longitude;
+            double lattitude;
+
+            Console.WriteLine("Enter id:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out id);
+
+            Console.WriteLine("Enter name:");
+            name = Console.ReadLine();
+
+            Console.WriteLine("Enter phone:");
+            phone = Console.ReadLine();
+
+            Console.WriteLine("Enter longitude:");
+            temp = Console.ReadLine();
+            double.TryParse(temp, out longitude);
+
+            Console.WriteLine("Enter lattitude:");
+            temp = Console.ReadLine();
+            double.TryParse(temp, out lattitude);
+
+            dataBase.addCustomer(id, name, phone, longitude, lattitude);
+        }
+
+        static void AddParcel()
+        {
+
+            int senderId;
+            int targetId;
+            int weight;
+            DateTime reuqested;
+            DateTime delivered;
+            DateTime pickedUp;
+            DateTime scheduled;
+            int priority;
+            int droneId;
+
+            Console.WriteLine("Enter id:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out DroneId);
+
+            Console.WriteLine("Enter model:");
+            model = Console.ReadLine();
+
+            Console.WriteLine("Enter maxWeight:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out maxWeight);
+
+            Console.WriteLine("Enter status:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out status);
+
+            Console.WriteLine("Enter battery:");
+            temp = Console.ReadLine();
+            double.TryParse(temp, out battery);
+
+            dataBase.addParcel(senderId, targetId, weight, reuqested, delivered, pickedUp, scheduled, priority, droneId)
+        }
+
         static void Add()
         {
             bool ToContinue = false;
@@ -38,46 +163,16 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        int stationId;
-                        string name;
-                        double longitude;
-                        double lattitude;
-                        int chargeSlots;
-
-                        Console.WriteLine("Enter id:");
-                        temp = Console.ReadLine();
-                        int.TryParse(temp,out id);
-
-                        Console.WriteLine("Enter name:");
-                        name = Console.ReadLine();
-
-                        Console.WriteLine("Enter longitude:");
-                        temp = Console.ReadLine();
-                        longitude = Convert.ToDouble(temp);
-
-                        Console.WriteLine("Enter lattitude:");
-                        temp = Console.ReadLine();
-                        lattitude = Convert.ToDouble(temp);
-
-                        Console.WriteLine("Enter chargeSlots:");
-                        temp = Console.ReadLine();
-                        int.TryParse(temp, out chargeSlots);
-
-                        dataBase.addStation(id, name, longitude, lattitude, chargeSlots);
+                        AddStation();
                         break;
                     case 2:
-                        int DroneId;
-                        string model;
-                        int maxWeight;
-                        int status;
-                        double battery;
-                        dataBase.addDrone(DroneId, model, maxWeight, status, battery);
+                        AddDrone();
                         break;
                     case 3:
-                        
+                        AddCustomer();
                         break;
                     case 4:
-                        
+                        AddParcel();
                         break;
                     default:
                         ToContinue = true;
