@@ -143,7 +143,6 @@ namespace ConsoleUI
             temp = Console.ReadLine();
             int.TryParse(temp, out droneId);
 
-
             dataBase.addParcel(senderId, targetId, weight, priority, droneId);
         }
 
