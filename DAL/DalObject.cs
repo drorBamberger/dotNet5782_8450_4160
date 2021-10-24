@@ -81,11 +81,37 @@ namespace DalObject
             DataSource.Config.freeCustomer++;
         }
 
-        public void addParcel(int senderId, int targetId, WeightCategories weight, DateTime reuqested, DateTime delivered, DateTime pickedUp, DateTime scheduled, Priorities priority, int droneId)
+        public void addParcel(int senderId, int targetId, int weight, DateTime reuqested, DateTime delivered, DateTime pickedUp, DateTime scheduled, int priority, int droneId)
         {
-            DataSource.parcels[DataSource.Config.freeParcel] = new Parcel(DataSource.Config.runningField, senderId, targetId, weight, reuqested, delivered, pickedUp, scheduled, priority, droneId);
+            DataSource.parcels[DataSource.Config.freeParcel] = new Parcel(DataSource.Config.runningField, senderId, targetId, (WeightCategories)weight, reuqested, delivered, pickedUp, scheduled, (Priorities)priority, droneId);
             DataSource.Config.freeParcel++;
         }
+        //update options
+
+        public void attribution(int droneID, int parcelID)
+        {
+            for (int i = 0; i < DataSource.Config.freeDrone; i++)
+            {
+                if (DataSource.drones[i].Id == droneID)
+                {
+                    DataSource.drones[i].Status = DroneStatuses.Shipping;
+                }
+            }
+
+            for (int i = 0; i < DataSource.Config.freeParcel; i++)
+            {
+                if (DataSource.parcels[i].Id == parcelID)
+                {
+                    DataSource.parcels[i].DroneId = droneID;
+                    DataSource.parcels[i].
+                }
+            }
+        }
+
+
+
+
+
         //displays
         public Station displayStation(int id)
         {
