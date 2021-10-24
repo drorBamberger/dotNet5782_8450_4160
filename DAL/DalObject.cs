@@ -20,7 +20,7 @@ namespace DalObject
             internal static int freeStation = 0;
             internal static int freeCustomer = 0;
             internal static int freeParcel = 0;
-
+            internal static int runningField = 1;
             //TODO CREATION OF SOMETHING THAT I DIDNT UNDERSTAND
         }
         public static void Initialize()
@@ -42,10 +42,10 @@ namespace DalObject
                 drones[5] = new Drone(rnd.Next(), "version" + i.ToString(), (WeightCategories)rnd.Next(0, 3), (DroneStatuses)rnd.Next(0, 3), rnd.NextDouble() * 100);
             }
 
-            //pacels initialization
+            //parcels initialization
             for (int i = 0; i < 10; i++)
             {
-                parcels[i] = new Parcel(rnd.Next(), rnd.Next(), customers[i].Id, (WeightCategories)rnd.Next(0, 3), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 3, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 1, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 20), (Priorities)rnd.Next(0, 3), rnd.Next());
+                parcels[i] = new Parcel(Config.runningField++, rnd.Next(), customers[i].Id, (WeightCategories)rnd.Next(0, 3), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 3, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2 + 1, i * 6, i + 8), new DateTime(2021, 5, i + 1, i * 2, i * 6, i + 20), (Priorities)rnd.Next(0, 3), rnd.Next());
             }
             
         }
@@ -75,6 +75,17 @@ namespace DalObject
             DataSource.Config.freeDrone++;
         }
 
+        public void addCustomer(int id, string name, string phone, double longitude, double lattitude)
+        {
+            DataSource.customers[DataSource.Config.freeCustomer] = new Customer(id, name, phone, longitude, lattitude);
+            DataSource.Config.freeCustomer++;
+        }
+
+        public void addParcel(int senderId, int targetId, WeightCategories weight, DateTime reuqested, DateTime delivered, DateTime pickedUp, DateTime scheduled, Priorities priority, int droneId)
+        {
+            DataSource.parcels[DataSource.Config.freeParcel] = new Parcel(DataSource.Config.runningField, senderId, targetId, weight, reuqested, delivered, pickedUp, scheduled, priority, droneId);
+            DataSource.Config.freeParcel++;
+        }
         //displays
         public Station displayStation(int id)
         {
