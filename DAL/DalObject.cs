@@ -12,6 +12,8 @@ namespace DalObject
         static internal Station[] stations = new Station[5];
         static internal Customer[] customers = new Customer[100];
         static internal Parcel[] parcels = new Parcel[1000];
+        static internal DroneCharge[] charging = new DroneCharge[10];
+
 
         internal class Config
         {
@@ -20,6 +22,7 @@ namespace DalObject
             internal static int freeStation = 0;
             internal static int freeCustomer = 0;
             internal static int freeParcel = 0;
+            internal static int freeCharging = 0;
             internal static int runningField = 1;
             //TODO CREATION OF SOMETHING THAT I DIDNT UNDERSTAND
         }
@@ -129,10 +132,44 @@ namespace DalObject
             }
         }
 
+        public void ChargeDrone(int droneId, int stationId)
+        {
+            for (int i = 0; i < DataSource.Config.freeStation; i++)
+            {
+                if (DataSource.stations[i].Id == stationId)
+                {
+                    DataSource.charging[DataSource.Config.freeCharging++].DroneId = droneId;
+                    DataSource.charging[DataSource.Config.freeCharging].StationId = stationId;
+                    DataSource.stations[i].ChargeSlots--;
+                }
+            }
+            for (int i = 0; i < DataSource.Config.freeDrone; i++)
+            {
+                if (DataSource.drones[i].Id == droneId)
+                {
+                    DataSource.drones[i].Status = DroneStatuses.maintenance;
+                }
+            }
+        }
 
-
-
-
+        public void DisChargeDrone(int droneId, int stationId)
+        {
+            for (int i = 0; i < DataSource.Config.freeStation; i++)
+            {
+                if (DataSource.stations[i].Id == stationId)
+                {
+                    DataSource.Config.freeCharging--;
+                    DataSource.stations[i].ChargeSlots++;
+                }
+            }
+            for (int i = 0; i < DataSource.Config.freeDrone; i++)
+            {
+                if (DataSource.drones[i].Id == droneId)
+                {
+                    DataSource.drones[i].Status = DroneStatuses.vacant;
+                }
+            }
+        }
 
 
         //displays
