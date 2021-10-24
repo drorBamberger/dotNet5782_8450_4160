@@ -8,16 +8,13 @@ namespace IDAL
     {
         public struct Parcel
         {
-            public Parcel(int id, int senderId, int targetId, WeightCategories weight, DateTime reuqested, DateTime delivered, DateTime pickedUp, DateTime scheduled, Priorities priority, int droneId)
+            public Parcel(int id, int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId): this()
             {
                 Id = id;
                 SenderId = senderId;
                 TargetId = targetId;
                 Weight = weight;
-                Reuqested = reuqested;
-                Delivered = delivered;
-                PickedUp = pickedUp;
-                Scheduled = scheduled;
+                Reuqested = DateTime.Now;
                 Priority = priority;
                 DroneId = droneId;
             }

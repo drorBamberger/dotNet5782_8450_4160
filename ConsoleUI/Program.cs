@@ -116,36 +116,35 @@ namespace ConsoleUI
         static void AddParcel()
         {
 
+            string temp;
             int senderId;
             int targetId;
             int weight;
-            DateTime reuqested;
-            DateTime delivered;
-            DateTime pickedUp;
-            DateTime scheduled;
             int priority;
             int droneId;
 
-            Console.WriteLine("Enter id:");
+            Console.WriteLine("Enter sender id:");
             temp = Console.ReadLine();
-            int.TryParse(temp, out DroneId);
+            int.TryParse(temp, out senderId);
 
-            Console.WriteLine("Enter model:");
-            model = Console.ReadLine();
-
-            Console.WriteLine("Enter maxWeight:");
+            Console.WriteLine("Enter target id:");
             temp = Console.ReadLine();
-            int.TryParse(temp, out maxWeight);
+            int.TryParse(temp, out targetId);
 
-            Console.WriteLine("Enter status:");
+            Console.WriteLine("Enter weight:");
             temp = Console.ReadLine();
-            int.TryParse(temp, out status);
+            int.TryParse(temp, out weight);
 
-            Console.WriteLine("Enter battery:");
+            Console.WriteLine("Enter priority:");
             temp = Console.ReadLine();
-            double.TryParse(temp, out battery);
+            int.TryParse(temp, out priority);
 
-            dataBase.addParcel(senderId, targetId, weight, reuqested, delivered, pickedUp, scheduled, priority, droneId)
+            Console.WriteLine("Enter drone id:");
+            temp = Console.ReadLine();
+            int.TryParse(temp, out droneId);
+
+
+            dataBase.addParcel(senderId, targetId, weight, priority, droneId);
         }
 
         static void Add()
