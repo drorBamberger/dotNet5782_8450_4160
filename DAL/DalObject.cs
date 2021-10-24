@@ -103,10 +103,22 @@ namespace DalObject
                 if (DataSource.parcels[i].Id == parcelID)
                 {
                     DataSource.parcels[i].DroneId = droneID;
-                    DataSource.parcels[i].
+                    DataSource.parcels[i].Scheduled = DateTime.Now;
                 }
             }
         }
+
+        public void PickedParcelUp(int droneID)
+        {
+            for (int i = 0; i < DataSource.Config.freeParcel; i++)
+            {
+                if (DataSource.parcels[i].Id == parcelID)
+                {
+                    DataSource.parcels[i].PickedUp = DateTime.Now;
+                }
+            }
+        }
+
 
 
 
