@@ -268,7 +268,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Link parcel to drone
         /// </summary>
         static void attribution() 
         {
@@ -285,7 +285,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Pick up parcel by drone
         /// </summary>
         static void PickedParcelUp() 
         {
@@ -298,7 +298,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Deliver parcel to customer
         /// </summary>
         static void ParcelDelivered() 
         {
@@ -311,7 +311,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Send drone to charge
         /// </summary>
         static void ChargeDrone() 
         {
@@ -328,7 +328,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Release drone from charger
         /// </summary>
         static void DisChargeDrone() 
         {
@@ -395,7 +395,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Print the requested station to the console
         /// </summary>
         static Station DisplayStation() 
         {
@@ -408,7 +408,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Print the requested drone to the console
         /// </summary>
         static void DisplayDrone() 
         {
@@ -421,7 +421,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Print the requested customer to the console
         /// </summary>
         static void DisplayCustomer() 
         {
@@ -434,7 +434,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// 
+        /// Print the requested parcel to the console
         /// </summary>
         static void DisplayParcel() 
         {
