@@ -278,11 +278,12 @@ namespace DalObject
                 }
             }
             Parcel[] ParcelList = new Parcel[count];
+            count = 0;
             for (int i = 0; i < DataSource.Config.freeParcel; i++)
             {
                 if (DataSource.parcels[i].DroneId == 0)
                 {
-                    ParcelList[i] = DataSource.parcels[i];
+                    ParcelList[count++] = DataSource.parcels[i];
                 }
             }
             return ParcelList;
