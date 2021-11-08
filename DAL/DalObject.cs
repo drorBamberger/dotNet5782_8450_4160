@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using IDAL.DO;
 
+
+
+
 namespace DalObject
 {
 
@@ -16,10 +19,11 @@ namespace DalObject
 
         internal class Config
         {
-            //folowing the first - not full place in every array
-
-            internal static int runningField = 1;
-            //TODO CREATION OF SOMETHING THAT I DIDNT UNDERSTAND
+            public static double Available = 1.2;
+            public static double SmallPackege = 3;
+            public static double MediumPackege = 6;
+            public static double HeavyPackege = 10;
+            public static double ChargePerHour = 20;
         }
         public static void Initialize()
         {
@@ -53,7 +57,7 @@ namespace DalObject
 
     }
 
-    public class DalObject
+    public class DalObject : IDal
     {
         // cnstrct:
         public DalObject()
@@ -80,7 +84,7 @@ namespace DalObject
 
         public void addParcel(int senderId, int targetId, int weight, int priority, int droneId)
         {
-            DataSource.Parcels.Add(new Parcel(DataSource.Config.runningField++, senderId, targetId,(WeightCategories)weight
+            DataSource.Parcels.Add(new Parcel(DataSource.Config.runningField++, senderId, targetId, (WeightCategories)weight
                 , (Priorities)priority, droneId));
         }
         //update options
@@ -151,7 +155,7 @@ namespace DalObject
                     DataSource.Stations[i] = tmp;
                 }
             }
-            
+
         }
 
 
@@ -160,7 +164,7 @@ namespace DalObject
         {
             for (int i = 0; i < DataSource.Stations.Count; i++)
             {
-                if(DataSource.Stations[i].Id == id)
+                if (DataSource.Stations[i].Id == id)
                 {
                     return DataSource.Stations[i];
                 }
@@ -177,7 +181,7 @@ namespace DalObject
                     return DataSource.Drones[i];
                 }
             }
-            return new Drone(0 ,"NO DRONE FOUND", (WeightCategories)0);
+            return new Drone(0, "NO DRONE FOUND", (WeightCategories)0);
         }
 
         public Customer DisplayCustomer(int id)
@@ -212,7 +216,7 @@ namespace DalObject
             stationList = DataSource.Stations;
             return (IEnumerator<Station>)stationList;
         }
-        
+
         public IEnumerator<Drone> DroneList()
         {
             Drone[] DroneList = new Drone[DataSource.Config.freeDrone];
@@ -248,7 +252,7 @@ namespace DalObject
             int count = 0;
             for (int i = 0; i < DataSource.Parcels.Count; i++)
             {
-                if(DataSource.Parcels[i].DroneId == 0)
+                if (DataSource.Parcels[i].DroneId == 0)
                 {
                     ++count;
                 }
@@ -284,6 +288,11 @@ namespace DalObject
                 }
             }
             return StationList;
+        }
+        double[] AskForElectricity(int droneId)
+        {
+            return new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
+                DataSource.Config.HeavyPackege, DataSource.Config.ChargePerHour };
         }
 
     }
