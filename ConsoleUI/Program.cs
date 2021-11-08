@@ -132,8 +132,6 @@ namespace ConsoleUI
             int DroneId;
             string model;
             int maxWeight;
-            int status;
-            double battery;
 
             Console.WriteLine("Enter id:");
             DroneId = GetInt();
@@ -144,13 +142,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter maxWeight:");
             maxWeight = GetInt();
 
-            Console.WriteLine("Enter status:");
-            status = GetInt();
-
-            Console.WriteLine("Enter battery:");
-            battery = GetDouble();
-
-            dataBase.addDrone(DroneId, model, maxWeight, status, battery);
+            dataBase.addDrone(DroneId, model, maxWeight);
         }
 
         /// <summary>

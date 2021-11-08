@@ -44,7 +44,7 @@ namespace DalObject
             //drones initialization
             for (int i = 0; i < 5; i++)
             {
-                drones[i] = new Drone(rnd.Next(), "version" + i.ToString(), (WeightCategories)rnd.Next(0, 3), (DroneStatuses)rnd.Next(0, 3), rnd.NextDouble() * 100);
+                drones[i] = new Drone(rnd.Next(), "version" + i.ToString(), (WeightCategories)rnd.Next(0, 3));
                 DataSource.Config.freeDrone++;
             }
 
@@ -75,9 +75,9 @@ namespace DalObject
             DataSource.Config.freeStation++;
         }
 
-        public void addDrone(int id, string model, int maxWeight, int status, double battery)
+        public void addDrone(int id, string model, int maxWeight)
         {
-            DataSource.drones[DataSource.Config.freeDrone] = new Drone(id, model, (WeightCategories)maxWeight, (DroneStatuses)status, battery);
+            DataSource.drones[DataSource.Config.freeDrone] = new Drone(id, model, (WeightCategories)maxWeight);
             DataSource.Config.freeDrone++;
         }
 
@@ -96,13 +96,6 @@ namespace DalObject
 
         public void attribution(int droneId, int parcelId)
         {
-            for (int i = 0; i < DataSource.Config.freeDrone; i++)
-            {
-                if (DataSource.drones[i].Id == droneId)
-                {
-                    DataSource.drones[i].Status = DroneStatuses.Shipping;
-                }
-            }
 
             for (int i = 0; i < DataSource.Config.freeParcel; i++)
             {
@@ -147,13 +140,6 @@ namespace DalObject
                     DataSource.stations[i].ChargeSlots--;
                 }
             }
-            for (int i = 0; i < DataSource.Config.freeDrone; i++)
-            {
-                if (DataSource.drones[i].Id == droneId)
-                {
-                    DataSource.drones[i].Status = DroneStatuses.maintenance;
-                }
-            }
         }
 
         public void DisChargeDrone(int droneId, int stationId)
@@ -164,13 +150,6 @@ namespace DalObject
                 {
                     DataSource.Config.freeCharging--;
                     DataSource.stations[i].ChargeSlots++;
-                }
-            }
-            for (int i = 0; i < DataSource.Config.freeDrone; i++)
-            {
-                if (DataSource.drones[i].Id == droneId)
-                {
-                    DataSource.drones[i].Status = DroneStatuses.vacant;
                 }
             }
         }
@@ -198,7 +177,7 @@ namespace DalObject
                     return DataSource.drones[i];
                 }
             }
-            return new Drone(0 ,"NO DRONE FOUND", (WeightCategories)0, (DroneStatuses)0, 0);
+            return new Drone(0 ,"NO DRONE FOUND", (WeightCategories)0);
         }
 
         public Customer displayCustomer(int id)
