@@ -406,7 +406,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.displayDrone(id);
+            return dataBase.DisplayDrone(id);
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.displayCustomer(id);
+            return dataBase.DisplayCustomer(id);
         }
 
         /// <summary>
@@ -432,7 +432,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.displayParcel(id);
+            return dataBase.DisplayParcel(id);
         }
 
         //~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -451,7 +451,7 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        Station[] stations = dataBase.stationList();
+                        Station[] stations = dataBase.StationList();
                         for (int i = 0; i < stations.Length; ++i)
                         {
                             Console.WriteLine(stations[i]);
@@ -459,7 +459,7 @@ namespace ConsoleUI
                         }
                         break;
                     case 2:
-                        Drone[] drones = dataBase.droneList();
+                        Drone[] drones = dataBase.DroneList();
                         for (int i = 0; i < drones.Length; ++i)
                         {
                             Console.WriteLine(drones[i]);

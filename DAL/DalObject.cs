@@ -162,14 +162,13 @@ namespace DalObject
             {
                 if(DataSource.Stations[i].Id == id)
                 {
-                    Station tmp = DataSource.Stations[i];
-                    return tmp;
+                    return DataSource.Stations[i];
                 }
             }
             return new Station(0, "NO STATION FOUND", 0, 0, 0);
         }
 
-        public Drone displayDrone(int id)
+        public Drone DisplayDrone(int id)
         {
             for (int i = 0; i < DataSource.Drones.Count; i++)
             {
@@ -181,7 +180,7 @@ namespace DalObject
             return new Drone(0 ,"NO DRONE FOUND", (WeightCategories)0);
         }
 
-        public Customer displayCustomer(int id)
+        public Customer DisplayCustomer(int id)
         {
             for (int i = 0; i < DataSource.Customers.Count; i++)
             {
@@ -193,7 +192,7 @@ namespace DalObject
             return new Customer(0, "no customer found", "0000000000", 0, 0);
         }
 
-        public Parcel displayParcel(int id)
+        public Parcel DisplayParcel(int id)
         {
             for (int i = 0; i < DataSource.Parcels.Count; i++)
             {
@@ -207,17 +206,14 @@ namespace DalObject
 
         //displays Lists
 
-        public Station[] stationList()
+        public IEnumerator<Station> StationList()
         {
-            Station[] StationList = new Station[DataSource.Config.freeStation];
-            for (int i = 0; i < DataSource.Stations.Count; i++)
-            {
-                StationList[i] = DataSource.Stations[i];
-            }
-            return StationList;
+            List<Station> stationList = new List<Station>();
+            stationList = DataSource.Stations;
+            return (IEnumerator<Station>)stationList;
         }
-
-        public Drone[] droneList()
+        
+        public IEnumerator<Drone> DroneList()
         {
             Drone[] DroneList = new Drone[DataSource.Config.freeDrone];
             for (int i = 0; i < DataSource.Drones.Count; i++)
@@ -227,7 +223,7 @@ namespace DalObject
             return DroneList;
         }
 
-        public Customer[] customerList()
+        public IEnumerator<Customer> customerList()
         {
             Customer[] CustomerList = new Customer[DataSource.Config.freeCustomer];
             for (int i = 0; i < DataSource.Customers.Count; i++)
@@ -237,7 +233,7 @@ namespace DalObject
             return CustomerList;
         }
 
-        public Parcel[] parcelList()
+        public IEnumerator<Parcel> parcelList()
         {
             Parcel[] ParcelList = new Parcel[DataSource.Config.freeParcel];
             for (int i = 0; i < DataSource.Parcels.Count; i++)
@@ -247,7 +243,7 @@ namespace DalObject
             return ParcelList;
         }
 
-        public Parcel[] parcelListNotTaken()
+        public IEnumerator<Parcel> parcelListNotTaken()
         {
             int count = 0;
             for (int i = 0; i < DataSource.Parcels.Count; i++)
@@ -269,7 +265,7 @@ namespace DalObject
             return ParcelList;
         }
 
-        public Station[] freeStations()
+        public IEnumerator<Station> freeStations()
         {
             int count = 0;
             for (int i = 0; i < DataSource.Stations.Count; i++)
