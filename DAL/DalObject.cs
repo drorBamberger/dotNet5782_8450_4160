@@ -8,11 +8,11 @@ namespace DalObject
 
     class DataSource
     {
-        static List<Drone> Drones;
-        static List<Station> Stations;
-        static List<Customer> Customers;
-        static List<Parcel> Parcels;
-        static List<DroneCharge> Charging;
+        public static List<Drone> Drones;
+        public static List<Station> Stations;
+        public static List<Customer> Customers;
+        public static List<Parcel> Parcels;
+        public static List<DroneCharge> Charging;
 
         internal class Config
         {
