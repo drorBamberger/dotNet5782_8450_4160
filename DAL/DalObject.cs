@@ -57,7 +57,7 @@ namespace DalObject
 
     }
 
-    public class DalObject : IDal
+    public class DalObject : IDAL.IDal
     {
         // cnstrct:
         public DalObject()
@@ -250,88 +250,61 @@ namespace DalObject
 
         //displays Lists
 
-        public IEnumerator<Station> StationList()
+        public IEnumerable<Station> StationList()
         {
             List<Station> stationList = new List<Station>();
             stationList = DataSource.Stations;
-            return (IEnumerator<Station>)stationList;
+            return stationList;
         }
 
-        public IEnumerator<Drone> DroneList()
+        public IEnumerable<Drone> DroneList()
         {
-            Drone[] DroneList = new Drone[DataSource.Config.freeDrone];
-            for (int i = 0; i < DataSource.Drones.Count; i++)
-            {
-                DroneList[i] = DataSource.Drones[i];
-            }
-            return DroneList;
+            List<Drone> droneList = new List<Drone>();
+            droneList = DataSource.Drones;
+            return droneList;
         }
 
-        public IEnumerator<Customer> customerList()
+        public IEnumerable<Customer> customerList()
         {
-            Customer[] CustomerList = new Customer[DataSource.Config.freeCustomer];
-            for (int i = 0; i < DataSource.Customers.Count; i++)
-            {
-                CustomerList[i] = DataSource.Customers[i];
-            }
-            return CustomerList;
+            List<Customer> customerList = new List<Customer>();
+            customerList = DataSource.Customers;
+            return customerList;
         }
 
-        public IEnumerator<Parcel> parcelList()
+        public IEnumerable<Parcel> parcelList()
         {
-            Parcel[] ParcelList = new Parcel[DataSource.Config.freeParcel];
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
-            {
-                ParcelList[i] = DataSource.Parcels[i];
-            }
-            return ParcelList;
+            List<Parcel> parcelList = new List<Parcel>();
+            parcelList = DataSource.Parcels;
+            return parcelList;
         }
 
-        public IEnumerator<Parcel> parcelListNotTaken()
+        public IEnumerable<Parcel> parcelListNotTaken()
         {
-            int count = 0;
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
+            List<Parcel> parcelList = new List<Parcel>();
+            foreach (var item in DataSource.Parcels)
             {
-                if (DataSource.Parcels[i].DroneId == 0)
+                if (item.DroneId == 0)
                 {
-                    ++count;
+                    parcelList.Add(item);
                 }
             }
-            Parcel[] ParcelList = new Parcel[count];
-            count = 0;
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
-            {
-                if (DataSource.Parcels[i].DroneId == 0)
-                {
-                    ParcelList[count++] = DataSource.Parcels[i];
-                }
-            }
-            return ParcelList;
+            return parcelList;
         }
 
-        public IEnumerator<Station> freeStations()
+        public IEnumerable<Station> freeStations()
         {
-            int count = 0;
-            for (int i = 0; i < DataSource.Stations.Count; i++)
+            List<Station> stationList = new List<Station>();
+            foreach (var item in DataSource.Stations)
             {
-                if (DataSource.Stations[i].ChargeSlots != 0)
+                if (item.ChargeSlots != 0)
                 {
-                    ++count;
+                    stationList.Add(item);
                 }
             }
-            Station[] StationList = new Station[count];
-            for (int i = 0; i < DataSource.Stations.Count; i++)
-            {
-                if (DataSource.Stations[i].ChargeSlots != 0)
-                {
-                    StationList[i] = DataSource.Stations[i];
-                }
-            }
-            return StationList;
+            return stationList;
         }
-        public double[] AskForElectricity(int droneId)
+        public double[] AskForElectricity()
         {
-            IsIdExist(DataSource.Drones, droneId);
             return new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
                 DataSource.Config.HeavyPackege, DataSource.Config.ChargePerHour };
         }

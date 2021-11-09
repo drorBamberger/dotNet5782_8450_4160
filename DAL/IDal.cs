@@ -1,7 +1,7 @@
 ﻿using IDAL.DO;
 using System.Collections.Generic;
 
-namespace DalObject
+namespace IDAL
 {
     public interface IDal
     {
@@ -11,20 +11,20 @@ namespace DalObject
         void addStation(int id, string name, double longitude, double lattitude, int chargeSlots);
         void attribution(int droneId, int parcelId);
         void ChargeDrone(int droneId, int stationId);
-        IEnumerator<Customer> customerList();
+        IEnumerable<Customer> customerList();
         void DisChargeDrone(int droneId, int stationId);
         Customer DisplayCustomer(int id);
         Drone DisplayDrone(int id);
         Parcel DisplayParcel(int id);
         Station displayStation(int id);
-        IEnumerator<Drone> DroneList();
-        IEnumerator<Station> freeStations();
+        IEnumerable<Drone> DroneList();
+        IEnumerable<Station> freeStations();
         void ParcelDelivered(int parcelId);
-        IEnumerator<Parcel> parcelList();
-        IEnumerator<Parcel> parcelListNotTaken();
+        IEnumerable<Parcel> parcelList();
+        IEnumerable<Parcel> parcelListNotTaken();
         void PickedParcelUp(int parcelId);
-        IEnumerator<Station> StationList();
+        IEnumerable<Station> StationList();
 
-        double[] AskForElectricity(int droneId);
+        double[] AskForElectricity();
     }
 }
