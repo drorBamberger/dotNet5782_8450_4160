@@ -7,7 +7,7 @@ namespace DalObject
     {
         void addCustomer(int id, string name, string phone, double longitude, double lattitude);
         void addDrone(int id, string model, int maxWeight);
-        void addParcel(int senderId, int targetId, int weight, int priority, int droneId);
+        void addParcel(int id, int senderId, int targetId, int weight, int priority, int droneId);
         void addStation(int id, string name, double longitude, double lattitude, int chargeSlots);
         void attribution(int droneId, int parcelId);
         void ChargeDrone(int droneId, int stationId);

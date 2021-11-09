@@ -49,7 +49,7 @@ namespace DalObject
             //parcels initialization
             for (int i = 0; i < 10; i++)
             {
-                Parcels.Add(new Parcel(Config.runningField++, Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id, 
+                Parcels.Add(new Parcel(i+1, Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id, 
                    (WeightCategories)rnd.Next(0, 3),  (Priorities)rnd.Next(0, 3), Drones[rnd.Next(0, 5)].Id));
             }
             
@@ -65,32 +65,62 @@ namespace DalObject
             DataSource.Initialize();
         }
 
+        //help funcs:
+        private void IsIdTaken<T>(List<T> list, int id)
+        {
+            foreach(T item in list)
+            {
+                int itemId = (int)((typeof(T).GetProperty("Id").GetValue(item, null)));
+                if (itemId == id)
+                {
+                    throw new IdTakenException(id);
+                }
+            }
+        }
+        private void IsIdExist<T>(List<T> list, int id)
+        {
+            foreach (var item in list)
+            {
+                int itemId = (int)((typeof(T).GetProperty("Id").GetValue(item, null)));
+                if (itemId == id)
+                {
+                    return;
+                }
+            }
+            throw new IdNotExistException(id);
+        }
         //add option
 
         public void addStation(int id, string name, double longitude, double lattitude, int chargeSlots)
         {
+            IsIdTaken(DataSource.Stations, id);
             DataSource.Stations.Add(new Station(id, name, longitude, lattitude, chargeSlots));
         }
 
         public void addDrone(int id, string model, int maxWeight)
         {
+            IsIdTaken(DataSource.Drones, id);
             DataSource.Drones.Add(new Drone(id, model, (WeightCategories)maxWeight));
         }
 
         public void addCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
+            IsIdTaken(DataSource.Customers, id);
             DataSource.Customers.Add(new Customer(id, name, phone, longitude, lattitude));
         }
 
-        public void addParcel(int senderId, int targetId, int weight, int priority, int droneId)
+        public void addParcel(int id, int senderId, int targetId, int weight, int priority, int droneId)
         {
-            DataSource.Parcels.Add(new Parcel(DataSource.Config.runningField++, senderId, targetId, (WeightCategories)weight
+            IsIdTaken(DataSource.Stations, id);
+            DataSource.Parcels.Add(new Parcel(id, senderId, targetId, (WeightCategories)weight
                 , (Priorities)priority, droneId));
         }
         //update options
 
         public void attribution(int droneId, int parcelId)
         {
+            IsIdExist(DataSource.Drones, droneId);
+            IsIdExist(DataSource.Parcels, parcelId);
             for (int i = 0; i < DataSource.Parcels.Count; i++)
             {
                 if (DataSource.Parcels[i].Id == parcelId)
@@ -105,6 +135,7 @@ namespace DalObject
 
         public void PickedParcelUp(int parcelId)
         {
+            IsIdExist(DataSource.Parcels, parcelId);
             for (int i = 0; i < DataSource.Parcels.Count; i++)
             {
                 if (DataSource.Parcels[i].Id == parcelId)
@@ -118,6 +149,7 @@ namespace DalObject
 
         public void ParcelDelivered(int parcelId)
         {
+            IsIdExist(DataSource.Parcels, parcelId);
             for (int i = 0; i < DataSource.Parcels.Count; i++)
             {
                 if (DataSource.Parcels[i].Id == parcelId)
@@ -131,6 +163,8 @@ namespace DalObject
 
         public void ChargeDrone(int droneId, int stationId)
         {
+            IsIdExist(DataSource.Drones, droneId);
+            IsIdExist(DataSource.Stations, stationId);
             for (int i = 0; i < DataSource.Stations.Count; i++)
             {
                 if (DataSource.Stations[i].Id == stationId)
@@ -146,6 +180,8 @@ namespace DalObject
 
         public void DisChargeDrone(int droneId, int stationId)
         {
+            IsIdExist(DataSource.Drones, droneId);
+            IsIdExist(DataSource.Stations, stationId);
             for (int i = 0; i < DataSource.Stations.Count; i++)
             {
                 if (DataSource.Stations[i].Id == stationId)
@@ -162,6 +198,7 @@ namespace DalObject
         //displays
         public Station displayStation(int id)
         {
+            IsIdExist(DataSource.Stations, id);
             for (int i = 0; i < DataSource.Stations.Count; i++)
             {
                 if (DataSource.Stations[i].Id == id)
@@ -174,6 +211,7 @@ namespace DalObject
 
         public Drone DisplayDrone(int id)
         {
+            IsIdExist(DataSource.Drones, id);
             for (int i = 0; i < DataSource.Drones.Count; i++)
             {
                 if (DataSource.Drones[i].Id == id)
@@ -186,6 +224,7 @@ namespace DalObject
 
         public Customer DisplayCustomer(int id)
         {
+            IsIdExist(DataSource.Customers, id);
             for (int i = 0; i < DataSource.Customers.Count; i++)
             {
                 if (DataSource.Customers[i].Id == id)
@@ -198,6 +237,7 @@ namespace DalObject
 
         public Parcel DisplayParcel(int id)
         {
+            IsIdExist(DataSource.Parcels, id);
             for (int i = 0; i < DataSource.Parcels.Count; i++)
             {
                 if (DataSource.Parcels[i].Id == id)
@@ -289,8 +329,9 @@ namespace DalObject
             }
             return StationList;
         }
-        double[] AskForElectricity(int droneId)
+        public double[] AskForElectricity(int droneId)
         {
+            IsIdExist(DataSource.Drones, droneId);
             return new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
                 DataSource.Config.HeavyPackege, DataSource.Config.ChargePerHour };
         }
