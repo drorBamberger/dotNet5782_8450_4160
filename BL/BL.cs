@@ -23,6 +23,10 @@ namespace BL
 
 
         }
+        public void AddStation(int id, string name, Location location, int chargeSlots)
+        {
+
+        }
     }
 
 }
