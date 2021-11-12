@@ -393,7 +393,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.displayStation(id);
+            return dataBase.DisplayStation(id);
         }
 
         /// <summary>

@@ -27,6 +27,13 @@ namespace BL
         {
 
         }
+
+        //display
+        public Station DisplayStation(int id)
+        {
+            return new Station((MyDal.DisplayStation(id)).Id, MyDal.DisplayStation(id).Name, 
+                new Location(MyDal.DisplayStation(id).Longitude, MyDal.DisplayStation(id).Lattitude), MyDal.DisplayStation(id).ChargeSlots, )
+        }
     }
 
 }

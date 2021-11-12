@@ -16,7 +16,7 @@ namespace IDAL
         Customer DisplayCustomer(int id);
         Drone DisplayDrone(int id);
         Parcel DisplayParcel(int id);
-        Station displayStation(int id);
+        Station DisplayStation(int id);
         IEnumerable<Drone> DroneList();
         IEnumerable<Station> freeStations();
         void ParcelDelivered(int parcelId);

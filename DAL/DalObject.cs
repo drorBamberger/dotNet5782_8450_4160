@@ -196,7 +196,7 @@ namespace DalObject
 
 
         //displays
-        public Station displayStation(int id)
+        public Station DisplayStation(int id)
         {
             IsIdExist(DataSource.Stations, id);
             for (int i = 0; i < DataSource.Stations.Count; i++)

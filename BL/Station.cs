@@ -6,8 +6,17 @@ namespace IBL
 {
     namespace BO
     {
-        class Station
+        public class Station
         {
+            public Station(int id, string name, Location myLocation, int chargeSlots, List<DroneInCharge> drones)
+            {
+                Id = id;
+                Name = name;
+                MyLocation = myLocation;
+                ChargeSlots = chargeSlots;
+                Drones = drones;
+            }
+
             public int Id { get; set; }
             public string Name { get; set; }
             public Location MyLocation { get; set; }
