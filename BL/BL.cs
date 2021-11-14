@@ -31,8 +31,17 @@ namespace BL
         //display
         public Station DisplayStation(int id)
         {
-            return new Station((MyDal.DisplayStation(id)).Id, MyDal.DisplayStation(id).Name, 
-                new Location(MyDal.DisplayStation(id).Longitude, MyDal.DisplayStation(id).Lattitude), MyDal.DisplayStation(id).ChargeSlots, )
+            IDAL.DO.Station StructToClass =  MyDal.DisplayStation(id);
+            List<DroneInCharge> DronesInStation = new List<DroneInCharge>;
+            foreach(var item in Drones)
+            {
+                if(item.MyLocation.Longitude == StructToClass.Longitude && item.MyLocation.Latitude == StructToClass.Lattitude)
+                {
+                    DronesInStation.Add(new DroneInCharge(item.Id, item.Battery));
+                }
+            }
+            return new Station(StructToClass.Id, StructToClass.Name, new Location(StructToClass.Longitude, StructToClass.Lattitude), 
+                StructToClass.ChargeSlots, DronesInStation);
         }
     }
 
