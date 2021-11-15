@@ -1,6 +1,6 @@
 ﻿using IBL.BO;
 
-namespace BL
+namespace IBL
 {
     public interface IBL
     {
