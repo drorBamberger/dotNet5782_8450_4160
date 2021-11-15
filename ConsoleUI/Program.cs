@@ -121,7 +121,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter chargeSlots:");
             chargeSlots = GetInt();
 
-            dataBase.addStation(stationId, name, longitude, lattitude, chargeSlots);
+            dataBase.AddStation(stationId, name, longitude, lattitude, chargeSlots);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter maxWeight:");
             maxWeight = GetInt();
 
-            dataBase.addDrone(DroneId, model, maxWeight);
+            dataBase.AddDrone(DroneId, model, maxWeight);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter lattitude:");
             lattitude = GetDouble();
 
-            dataBase.addCustomer(id, name, phone, longitude, lattitude);
+            dataBase.AddCustomer(id, name, phone, longitude, lattitude);
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        attribution();
+                        Attribution();
                         break;
                     case 2:
                         PickedParcelUp();
@@ -260,7 +260,7 @@ namespace ConsoleUI
         /// <summary>
         /// Link parcel to drone
         /// </summary>
-        static void attribution() 
+        static void Attribution() 
         {
             int droneId;
             int parcelId;

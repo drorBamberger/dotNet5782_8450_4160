@@ -91,19 +91,19 @@ namespace DalObject
         }
         //add option
 
-        public void addStation(int id, string name, double longitude, double lattitude, int chargeSlots)
+        public void AddStation(int id, string name, double longitude, double lattitude, int chargeSlots)
         {
             IsIdTaken(DataSource.Stations, id);
             DataSource.Stations.Add(new Station(id, name, longitude, lattitude, chargeSlots));
         }
 
-        public void addDrone(int id, string model, int maxWeight)
+        public void AddDrone(int id, string model, int maxWeight)
         {
             IsIdTaken(DataSource.Drones, id);
             DataSource.Drones.Add(new Drone(id, model, (WeightCategories)maxWeight));
         }
 
-        public void addCustomer(int id, string name, string phone, double longitude, double lattitude)
+        public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
             IsIdTaken(DataSource.Customers, id);
             DataSource.Customers.Add(new Customer(id, name, phone, longitude, lattitude));

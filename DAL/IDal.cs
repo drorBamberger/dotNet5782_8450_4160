@@ -5,10 +5,10 @@ namespace IDAL
 {
     public interface IDal
     {
-        void addCustomer(int id, string name, string phone, double longitude, double lattitude);
-        void addDrone(int id, string model, int maxWeight);
+        void AddCustomer(int id, string name, string phone, double longitude, double lattitude);
+        void AddDrone(int id, string model, int maxWeight);
         void addParcel(int id, int senderId, int targetId, int weight, int priority, int droneId);
-        void addStation(int id, string name, double longitude, double lattitude, int chargeSlots);
+        void AddStation(int id, string name, double longitude, double lattitude, int chargeSlots);
         void attribution(int droneId, int parcelId);
         void ChargeDrone(int droneId, int stationId);
         IEnumerable<Customer> customerList();

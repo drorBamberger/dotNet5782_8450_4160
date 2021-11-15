@@ -4,12 +4,12 @@ using IBL.BO;
 namespace ConsoleUI_BL
 {
     class Program
-    { }
-        IBL.IBL DB;
+    { 
+        static IBL.IBL dataBase;
         /// <summary>
         /// get int from the console
         /// </summary>
-        /// <returns>the input in int format </returns>1
+        /// <returns>the input in int format </returns>
         static int GetInt()
         {
             int res;
@@ -118,10 +118,12 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter lattitude:");
             lattitude = GetDouble();
 
+            Location loc = new Location(longitude, lattitude);
+
             Console.WriteLine("Enter chargeSlots:");
             chargeSlots = GetInt();
 
-            dataBase.addStation(stationId, name, longitude, lattitude, chargeSlots);
+            dataBase.AddStation(stationId, name, loc, chargeSlots);
         }
 
         /// <summary>
@@ -132,6 +134,7 @@ namespace ConsoleUI_BL
             int DroneId;
             string model;
             int maxWeight;
+            int numStat;
 
             Console.WriteLine("Enter id:");
             DroneId = GetInt();
@@ -142,7 +145,10 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter maxWeight:");
             maxWeight = GetInt();
 
-            dataBase.addDrone(DroneId, model, maxWeight);
+            Console.WriteLine("Enter station number for initial charging:");
+            numStat = GetInt();
+
+            dataBase.AddDrone(DroneId, model, maxWeight, numStat);
         }
 
         /// <summary>
@@ -171,7 +177,9 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter lattitude:");
             lattitude = GetDouble();
 
-            dataBase.addCustomer(id, name, phone, longitude, lattitude);
+            Location loc = new Location(longitude, lattitude);
+
+            dataBase.AddCustomer(id, name, phone, loc);
         }
 
         /// <summary>
@@ -184,7 +192,6 @@ namespace ConsoleUI_BL
             int targetId;
             int weight;
             int priority;
-            int droneId;
 
             Console.WriteLine("Enter sender id:");
             senderId = GetInt();
@@ -198,10 +205,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter priority:");
             priority = GetInt();
 
-            Console.WriteLine("Enter drone id:");
-            droneId = GetInt();
-
-            dataBase.addParcel(senderId, targetId, weight, priority, droneId);
+            dataBase.AddParcel(senderId, targetId, weight, priority);
         }
 
         //~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -220,19 +224,28 @@ namespace ConsoleUI_BL
                 switch (choice)
                 {
                     case 1:
-                        attribution();
+                        DroneUpdate();
                         break;
                     case 2:
-                        PickedParcelUp();
+                        StationUpdate();
                         break;
                     case 3:
-                        ParcelDelivered();
+                        CustomerUpdate();
                         break;
                     case 4:
                         ChargeDrone();
                         break;
                     case 5:
                         DisChargeDrone();
+                        break;
+                    case 6:
+                        Attribution();
+                        break;
+                    case 7:
+                        PickedParcelUp();
+                        break;
+                    case 8:
+                        ParcelDelivered();
                         break;
                     default:
                         ToContinue = true;
@@ -248,30 +261,118 @@ namespace ConsoleUI_BL
         static void PrintUpdate()
         {
             Console.WriteLine("What you want to update?");
-            Console.WriteLine("1. Link parcel to drone");
-            Console.WriteLine("2. Pick up parcel by drone");
-            Console.WriteLine("3. Deliver parcel to customer");
+            Console.WriteLine("1. Name of drone");
+            Console.WriteLine("2. Station");
+            Console.WriteLine("3. Customer");
             Console.WriteLine("4. Send drone to charge");
             Console.WriteLine("5. Release drone from charger");
+            Console.WriteLine("6. Link parcel to drone");
+            Console.WriteLine("7. Pick up parcel by drone");
+            Console.WriteLine("8. Deliver parcel by drone");
             Console.WriteLine("Enter your choice:");
 
         }
 
         /// <summary>
-        /// Link parcel to drone
+        /// update name of drone
         /// </summary>
-        static void attribution()
+        static void DroneUpdate()
         {
             int droneId;
-            int parcelId;
+            string droneName;
 
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            Console.WriteLine("Enter parcel id:");
-            parcelId = GetInt();
+            Console.WriteLine("Enter the new name of the drone:");
+            droneName = Console.ReadLine();
 
-            dataBase.attribution(droneId, parcelId);
+            dataBase.DroneUpdate(droneId, droneName);
+        }
+
+        /// <summary>
+        /// update station details
+        /// </summary>
+        static void StationUpdate()
+        {
+            int stationId;
+            string stationName;
+            int chargeSlots;
+
+            Console.WriteLine("Enter station id:");
+            stationId = GetInt();
+
+            Console.WriteLine("Enter the new name of the station:");
+            stationName = Console.ReadLine();
+
+            Console.WriteLine("Enter chargeSlots:");
+            chargeSlots = GetInt();
+            //TO DO: Empty input
+            dataBase.StationUpdate(stationId, stationName, chargeSlots);
+        }
+        
+        /// <summary>
+        /// update customer details
+        /// </summary>
+        static void CustomerUpdate()
+        {
+            int Id;
+            string customerName;
+            int phoneNumber;
+
+            Console.WriteLine("Enter customer id:");
+            Id = GetInt();
+
+            Console.WriteLine("Enter the new name of the station:");
+            customerName = Console.ReadLine();
+
+            Console.WriteLine("Enter phone number:");
+            phoneNumber = GetInt();
+            //TO DO: Empty input
+            dataBase.CustomerUpdate(Id, customerName, phoneNumber);
+        }
+
+        /// <summary>
+        /// Send drone to charge
+        /// </summary>
+        static void ChargeDrone()
+        {
+            int droneId;
+
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
+
+            dataBase.ChargeDrone(droneId);
+        }
+
+        /// <summary>
+        /// Release drone from charger
+        /// </summary>
+        static void DisChargeDrone()
+        {
+            int droneId;
+            int time;
+
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
+
+            Console.WriteLine("Enter time in charge:");
+            time = GetInt();
+
+            dataBase.DisChargeDrone(droneId, time);
+        }
+
+        /// <summary>
+        /// Link parcel to drone
+        /// </summary>
+        static void Attribution()
+        {
+            int droneId;
+
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
+
+            dataBase.Attribution(droneId);
         }
 
         /// <summary>
@@ -292,46 +393,12 @@ namespace ConsoleUI_BL
         /// </summary>
         static void ParcelDelivered()
         {
-            int parcelId;
-
-            Console.WriteLine("Enter parcel id:");
-            parcelId = GetInt();
-
-            dataBase.ParcelDelivered(parcelId);
-        }
-
-        /// <summary>
-        /// Send drone to charge
-        /// </summary>
-        static void ChargeDrone()
-        {
             int droneId;
-            int stationId;
 
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            Console.WriteLine("Enter station id:");
-            stationId = GetInt();
-
-            dataBase.ChargeDrone(droneId, stationId);
-        }
-
-        /// <summary>
-        /// Release drone from charger
-        /// </summary>
-        static void DisChargeDrone()
-        {
-            int droneId;
-            int stationId;
-
-            Console.WriteLine("Enter drone id:");
-            droneId = GetInt();
-
-            Console.WriteLine("Enter station id:");
-            stationId = GetInt();
-
-            dataBase.DisChargeDrone(droneId, stationId);
+            dataBase.ParcelDelivered(droneId);
         }
 
         //~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -467,7 +534,7 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case 3:
-                        Customer[] customers = dataBase.customerList();
+                        Customer[] customers = dataBase.CustomerList();
                         for (int i = 0; i < customers.Length; ++i)
                         {
                             Console.WriteLine(customers[i]);
@@ -475,7 +542,7 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case 4:
-                        Parcel[] parcels = dataBase.parcelList();
+                        Parcel[] parcels = dataBase.ParcelList();
                         for (int i = 0; i < parcels.Length; ++i)
                         {
                             Console.WriteLine(parcels[i]);
@@ -484,7 +551,7 @@ namespace ConsoleUI_BL
 
                         break;
                     case 5:
-                        parcels = dataBase.parcelListNotTaken();
+                        parcels = dataBase.ParcelListNotTaken();
                         for (int i = 0; i < parcels.Length; ++i)
                         {
                             Console.WriteLine(parcels[i]);
@@ -492,7 +559,7 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case 6:
-                        stations = dataBase.freeStations();
+                        stations = dataBase.FreeStations();
                         for (int i = 0; i < stations.Length; ++i)
                         {
                             Console.WriteLine(stations[i]);
