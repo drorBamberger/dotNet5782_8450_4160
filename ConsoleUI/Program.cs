@@ -271,7 +271,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter parcel id:");
             parcelId = GetInt();
 
-            dataBase.attribution(droneId, parcelId);
+            dataBase.Attribution(droneId, parcelId);
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace ConsoleUI
                         }
                         break;
                     case 3:
-                        Customer[] customers = dataBase.customerList();
+                        Customer[] customers = dataBase.CustomerList();
                         for (int i = 0; i < customers.Length; ++i)
                         {
                             Console.WriteLine(customers[i]);

@@ -109,7 +109,7 @@ namespace DalObject
             DataSource.Customers.Add(new Customer(id, name, phone, longitude, lattitude));
         }
 
-        public void addParcel(int id, int senderId, int targetId, int weight, int priority, int droneId)
+        public void AddParcel(int id, int senderId, int targetId, int weight, int priority, int droneId)
         {
             IsIdTaken(DataSource.Stations, id);
             DataSource.Parcels.Add(new Parcel(id, senderId, targetId, (WeightCategories)weight
@@ -117,7 +117,7 @@ namespace DalObject
         }
         //update options
 
-        public void attribution(int droneId, int parcelId)
+        public void Attribution(int droneId, int parcelId)
         {
             IsIdExist(DataSource.Drones, droneId);
             IsIdExist(DataSource.Parcels, parcelId);
@@ -264,7 +264,7 @@ namespace DalObject
             return droneList;
         }
 
-        public IEnumerable<Customer> customerList()
+        public IEnumerable<Customer> CustomerList()
         {
             List<Customer> customerList = new List<Customer>();
             customerList = DataSource.Customers;
