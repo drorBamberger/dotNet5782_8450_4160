@@ -8,9 +8,24 @@ namespace IBL
     {
         public class Parcel
         {
+            public Parcel(int id, CustomerInParcel sender, CustomerInParcel target, WeightCategories weight, Priorities priority, 
+                DroneInParcel myDrone, DateTime reuqested, DateTime scheduled, DateTime pickedUp, DateTime delivered)
+            {
+                Id = id;
+                Sender = sender;
+                Target = target;
+                Weight = weight;
+                Priority = priority;
+                MyDrone = myDrone;
+                Reuqested = reuqested;
+                Scheduled = scheduled;
+                PickedUp = pickedUp;
+                Delivered = delivered;
+            }
+
             public int Id { get; set; }
             public CustomerInParcel Sender { get; set; }
-            public CustomerInParcel Receiver { get; set; }
+            public CustomerInParcel Target { get; set; }
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
             public DroneInParcel MyDrone { get; set; }

@@ -8,7 +8,7 @@ namespace IBL
     {
         public class Customer
         {
-            public Customer(int id, string name, int phoneNum, Location customerLocation, List<ParcelForCustomer> fromCustomer, List<ParcelForCustomer> toCustomer)
+            public Customer(int id, string name, string phoneNum, Location customerLocation, List<ParcelForCustomer> fromCustomer, List<ParcelForCustomer> toCustomer)
             {
                 Id = id;
                 Name = name;
@@ -20,7 +20,7 @@ namespace IBL
 
             public int Id { get; set; }
             public string Name { get; set; }
-            public int PhoneNum { get; set; }
+            public string PhoneNum { get; set; }
             public Location CustomerLocation { get; set; }
             public List<ParcelForCustomer> FromCustomer { get; set; }
             public List<ParcelForCustomer> ToCustomer { get; set; }

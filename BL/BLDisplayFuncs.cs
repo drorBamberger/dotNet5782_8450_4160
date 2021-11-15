@@ -21,23 +21,12 @@ namespace BL
 
         public string DisplayCustomer(int id)
         {
-            IDAL.DO.Customer StructToClass = MyDal.DisplayCustomer(id);
-            List<ParcelForCustomer> fromCustomer = new List<ParcelForCustomer>;
-            List<ParcelForCustomer> toCustomer = new List<ParcelForCustomer>;
-            foreach(var item in MyDal.ParcelList())
-            {
-                if(item.SenderId == id)
-                {
-                    fromCustomer.Add(new ParcelForCustomer(item.Id, (WeightCategories)item.Weight), (Priorities)item.Priority, , new CustomerInParcel(item.TargetId, ))
-                }
-                if(item.TargetId == id)
-                {
+            return GetCustomer(id).ToString();
+        }
 
-                }
-            }
-
-
-            return new Customer(StructToClass.Id, StructToClass.Name, StructToClass.Phone, new Location(StructToClass.Longitude, StructToClass.Lattitude), ).ToString;
+        public string DisplayParcel(int id)
+        {
+            return GetParcel(id).ToString();
         }
     }
 }

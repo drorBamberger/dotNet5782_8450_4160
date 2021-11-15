@@ -8,6 +8,13 @@ namespace IBL
     {
         public class DroneInParcel
         {
+            public DroneInParcel(int id, double battery, Location myLocation)
+            {
+                Id = id;
+                Battery = battery;
+                MyLocation = myLocation;
+            }
+
             public int Id { get; set; }
             public double Battery { get; set; }
             public Location MyLocation { get; set; }

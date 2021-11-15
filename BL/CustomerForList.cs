@@ -8,9 +8,19 @@ namespace IBL
     {
         public class CustomerForList
         {
+            public CustomerForList(int id, string name, string phoneNum, int sendProvided, int parcelArrived, int parcelOnTheWay)
+            {
+                Id = id;
+                Name = name;
+                PhoneNum = phoneNum;
+                SendProvided = sendProvided;
+                ParcelArrived = parcelArrived;
+                ParcelOnTheWay = parcelOnTheWay;
+            }
+
             public int Id { get; set; }
             public string Name { get; set; }
-            public int PhoneNum { get; set; }
+            public string PhoneNum { get; set; }
             public int SendProvided  { get; set; }
             public int ParcelArrived { get; set; }
             public int ParcelOnTheWay { get; set; }

@@ -84,11 +84,33 @@ namespace BL
         internal Customer GetCustomer(int id)
         {
             IDAL.DO.Customer StructToClass = MyDal.DisplayCustomer(id);
+            List<ParcelForCustomer> fromCustomers = new List<ParcelForCustomer>();
+            List<ParcelForCustomer> toCustomers = new List<ParcelForCustomer>();
+            foreach(var item in MyDal.ParcelList())
+            {
+                if(item.SenderId == id)
+                {
+                    fromCustomers.Add(GetParcelForCustomer(item.SenderId, new CustomerInParcel(item.TargetId, MyDal.DisplayCustomer(item.TargetId).Name)));
+                }
+                if (item.TargetId == id)
+                {
+                    toCustomers.Add(GetParcelForCustomer(item.TargetId, new CustomerInParcel(item.SenderId, MyDal.DisplayCustomer(item.SenderId).Name)));
+                }
+            }
 
-
-
-            return new Customer(id, StructToClass.Name, StructToClass.Phone, new Location(StructToClass.Longitude, StructToClass.Lattitude), );
+            return new Customer(id, StructToClass.Name, StructToClass.Phone, new Location(StructToClass.Longitude, StructToClass.Lattitude),
+                fromCustomers, toCustomers);
                 
+        }
+
+        internal Parcel GetParcel(int id)
+        {
+            IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
+
+
+            return new Parcel(id, new CustomerInParcel(StructToClass.SenderId, MyDal.DisplayCustomer(StructToClass.SenderId).Name),
+                new CustomerInParcel(StructToClass.TargetId, MyDal.DisplayCustomer(StructToClass.TargetId).Name), (WeightCategories)StructToClass.Weight,
+                (Priorities)StructToClass.Priority, GetDroneInParcel(id), StructToClass.Reuqested, StructToClass.Scheduled, StructToClass.PickedUp, StructToClass.Delivered);
         }
         internal ParcelOnDelivery GetParcelOnDelivery(int droneId)
         {
@@ -105,7 +127,7 @@ namespace BL
                 TargetLocation, DistanceTo(SenderLocation, TargetLocation));
         }
 
-        internal ParcelForCustomer GetParcelForCustomer(int id)
+        internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide)
         {
             IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
             DateTime theDefault = new DateTime();
@@ -120,7 +142,12 @@ namespace BL
                 status = ParcelStatuses.Reuqested;
 
             return new ParcelForCustomer(id, (WeightCategories)StructToClass.Weight, (Priorities)StructToClass.Priority,
-                status, new CustomerInParcel();
+                status, otherSide);
+        }
+        internal DroneInParcel GetDroneInParcel(int parcelId)
+        {
+            DroneForList myDrone = Drones.Find(x => x.ParcelId == parcelId);
+            return new DroneInParcel(myDrone.Id, myDrone.Battery, myDrone.MyLocation);
         }
     }
 }
