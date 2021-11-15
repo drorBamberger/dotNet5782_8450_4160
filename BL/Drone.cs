@@ -8,6 +8,17 @@ namespace IBL
     {
         class Drone
         {
+            public Drone(int id, string model, WeightCategories maxWeight, double battery, DroneStatuses status, ParcelOnDelivery myParcel, Location myLocation)
+            {
+                Id = id;
+                Model = model;
+                MaxWeight = maxWeight;
+                Battery = battery;
+                Status = status;
+                MyParcel = myParcel;
+                MyLocation = myLocation;
+            }
+
             public int Id { get; set; }
             public string Model { get; set; }
             public WeightCategories MaxWeight { get; set; }

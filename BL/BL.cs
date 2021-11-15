@@ -6,7 +6,7 @@ using IBL.BO;
 namespace BL
 {
 
-    public partial class BL
+    public partial class BL : IBL
     {
         List<DroneForList> Drones;
         IDAL.IDal MyDal;
@@ -14,12 +14,12 @@ namespace BL
         public double SmallPackege;
         public double MediumPackege;
         public double HeavyPackege;
-        public double ChargePerHour ;
+        public double ChargePerHour;
         public BL()
         {
             MyDal = new DalObject.DalObject();
             GetElecticity();
-            
+
 
 
         }
@@ -28,20 +28,30 @@ namespace BL
 
         }
 
-        //display
+        //displays
         public Station DisplayStation(int id)
         {
-            IDAL.DO.Station StructToClass =  MyDal.DisplayStation(id);
-            List<DroneInCharge> DronesInStation = new List<DroneInCharge>;
-            foreach(var item in Drones)
+            IDAL.DO.Station StructToClass = MyDal.DisplayStation(id);
+            List<DroneInCharge> DronesInStation = new List<DroneInCharge> { };
+            foreach (var item in Drones)
             {
-                if(item.MyLocation.Longitude == StructToClass.Longitude && item.MyLocation.Latitude == StructToClass.Lattitude)
+                if (item.MyLocation.Longitude == StructToClass.Longitude && item.MyLocation.Latitude == StructToClass.Lattitude)
                 {
                     DronesInStation.Add(new DroneInCharge(item.Id, item.Battery));
                 }
             }
-            return new Station(StructToClass.Id, StructToClass.Name, new Location(StructToClass.Longitude, StructToClass.Lattitude), 
+            return new Station(StructToClass.Id, StructToClass.Name, new Location(StructToClass.Longitude, StructToClass.Lattitude),
                 StructToClass.ChargeSlots, DronesInStation);
+        }
+
+        public Drone DisplayDrone(int id)
+        {
+            IDAL.DO.Drone StructToClass = MyDal.DisplayDrone(id);
+
+
+
+            return new Drone(StructToClass.Id, )
+
         }
     }
 
