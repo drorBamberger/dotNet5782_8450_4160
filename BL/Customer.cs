@@ -8,6 +8,16 @@ namespace IBL
     {
         public class Customer
         {
+            public Customer(int id, string name, int phoneNum, Location customerLocation, List<ParcelForCustomer> fromCustomer, List<ParcelForCustomer> toCustomer)
+            {
+                Id = id;
+                Name = name;
+                PhoneNum = phoneNum;
+                CustomerLocation = customerLocation;
+                FromCustomer = fromCustomer;
+                ToCustomer = toCustomer;
+            }
+
             public int Id { get; set; }
             public string Name { get; set; }
             public int PhoneNum { get; set; }

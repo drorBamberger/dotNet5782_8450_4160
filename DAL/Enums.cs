@@ -8,7 +8,7 @@ namespace IDAL
     {
         public enum WeightCategories
         {
-            Light,
+            Light  =0,
             Medium,
             Heavy
         }
@@ -16,7 +16,7 @@ namespace IDAL
 
         public enum Priorities
         {
-            Normal,
+            Normal = 0,
             Fast,
             Emergency
         }

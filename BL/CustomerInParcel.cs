@@ -8,6 +8,12 @@ namespace IBL
     {
         public class CustomerInParcel
         {
+            public CustomerInParcel(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
+
             public int Id { get; set; }
             public string Name { get; set; }
             public override string ToString()

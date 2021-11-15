@@ -8,7 +8,7 @@ namespace IBL
     {
         public enum WeightCategories
         {
-            Light,
+            Light = 0,
             Medium,
             Heavy
         }
@@ -16,7 +16,7 @@ namespace IBL
 
         public enum Priorities
         {
-            Normal,
+            Normal = 0,
             Fast,
             Emergency
         }
@@ -30,14 +30,14 @@ namespace IBL
 
         public enum ParcelStatuses
         {
-            Reuqested,
+            Reuqested = 0,
             Scheduled,
             PickedUp,
             Delivered
         }
         public enum ParcelOnDeliveryStatuses
         {
-            Waiting,
+            Waiting = 0,
             onTheWay
         }
     }

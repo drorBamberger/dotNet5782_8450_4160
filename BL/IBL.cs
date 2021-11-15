@@ -20,10 +20,10 @@ namespace IBL
         public void CustomerUpdate(int id, int phone);
 
         //displays
-        public Drone DisplayDrone(int id);
-        public Station DisplayStation(int id);
-        public Station DisplayCustomer(int id);
-        public Station DisplayParcel(int id);
+        public string DisplayDrone(int id);
+        public string DisplayStation(int id);
+        public string DisplayCustomer(int id);
+        public string DisplayParcel(int id);
 
         //display lists
         public IEnumerable<StationForList> StationList();
@@ -33,7 +33,16 @@ namespace IBL
         public IEnumerable<ParcelForList> ParcelListNotTaken();
         public IEnumerable<StationForList> FreeStations();
 
+        //helpFuncs
 
+        internal double DistanceTo(Location x1, Location x2, char unit = 'K');
+        internal void GetElecticity();
+        internal Station GetStation(int id);
+        internal Drone GetDrone(int id);
+        internal Customer GetCustomer(int id);
+        internal Parcel GetParcel(int id);
+        internal ParcelOnDelivery GetParcelOnDelivery(int droneId);
+        internal ParcelForCustomer GetParcelForCustomer(int id);
 
     }
 }

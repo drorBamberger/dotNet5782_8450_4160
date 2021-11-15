@@ -8,6 +8,20 @@ namespace IBL
     {
         public class ParcelOnDelivery
         {
+            public ParcelOnDelivery(int id, ParcelOnDeliveryStatuses status, WeightCategories weight, Priorities priority, CustomerInParcel sender,
+                CustomerInParcel receiver, Location collecting, Location target, double transferDistance)
+            {
+                Id = id;
+                Status = status;
+                Weight = weight;
+                Priority = priority;
+                Sender = sender;
+                Receiver = receiver;
+                Collecting = collecting;
+                Target = target;
+                TransferDistance = transferDistance;
+            }
+
             public int Id { get; set; }
             public ParcelOnDeliveryStatuses Status { get; set; }
             public WeightCategories Weight { get; set; }
