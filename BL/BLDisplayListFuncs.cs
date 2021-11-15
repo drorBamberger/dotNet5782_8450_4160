@@ -7,5 +7,6 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
+
     }
 }
