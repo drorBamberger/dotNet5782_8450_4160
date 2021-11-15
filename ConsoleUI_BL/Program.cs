@@ -296,20 +296,40 @@ namespace ConsoleUI_BL
         /// </summary>
         static void StationUpdate()
         {
-            int stationId;
+            int Id;
             string stationName;
+            string temp;
             int chargeSlots;
 
             Console.WriteLine("Enter station id:");
-            stationId = GetInt();
+            Id = GetInt();
 
             Console.WriteLine("Enter the new name of the station:");
             stationName = Console.ReadLine();
 
             Console.WriteLine("Enter chargeSlots:");
-            chargeSlots = GetInt();
-            //TO DO: Empty input
-            dataBase.StationUpdate(stationId, stationName, chargeSlots);
+            temp = Console.ReadLine();
+            int.TryParse(temp, out chargeSlots);
+
+            if (stationName == "")
+            {
+                if (temp == "")
+                {
+                    Console.WriteLine("Wrong, must to input some of details");
+                }
+                else
+                {
+                    dataBase.StationUpdateCharge(Id, chargeSlots);
+                }
+            }
+            else if (temp == "")
+            {
+                dataBase.StationUpdateName(Id, stationName);
+            }
+            else
+            {
+                dataBase.StationUpdateAll(Id, stationName, chargeSlots);
+            }
         }
         
         /// <summary>
@@ -319,7 +339,7 @@ namespace ConsoleUI_BL
         {
             int Id;
             string customerName;
-            int phoneNumber;
+            string phoneNumber;
 
             Console.WriteLine("Enter customer id:");
             Id = GetInt();
@@ -328,9 +348,28 @@ namespace ConsoleUI_BL
             customerName = Console.ReadLine();
 
             Console.WriteLine("Enter phone number:");
-            phoneNumber = GetInt();
-            //TO DO: Empty input
-            dataBase.CustomerUpdate(Id, customerName, phoneNumber);
+            phoneNumber = Console.ReadLine();
+            
+            if(customerName == "")
+            {
+                if (phoneNumber == "")
+                {
+                    Console.WriteLine("Wrong, must to input some of details");
+                }
+                else
+                {
+                    dataBase.CustomerUpdatePhone(Id, phoneNumber);
+                }
+            }
+            else if(phoneNumber == "")
+            {
+                dataBase.CustomerUpdateName(Id, customerName);
+            }
+            else
+            {
+                dataBase.CustomerUpdateAll(Id, customerName, phoneNumber);
+            }
+            
         }
 
         /// <summary>
@@ -454,7 +493,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// Print the requested station to the console
         /// </summary>
-        static Station DisplayStation()
+        static string DisplayStation()
         {
             int id;
 
@@ -467,7 +506,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// Print the requested drone to the console
         /// </summary>
-        static Drone DisplayDrone()
+        static string DisplayDrone()
         {
             int id;
 
@@ -480,7 +519,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// Print the requested customer to the console
         /// </summary>
-        static Customer DisplayCustomer()
+        static string DisplayCustomer()
         {
             int id;
 
@@ -493,7 +532,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// Print the requested parcel to the console
         /// </summary>
-        static Parcel DisplayParcel()
+        static string DisplayParcel()
         {
             int id;
 
@@ -519,59 +558,56 @@ namespace ConsoleUI_BL
                 switch (choice)
                 {
                     case 1:
-                        Station[] stations = dataBase.StationList();
-                        for (int i = 0; i < stations.Length; ++i)
+                        IEnumerable<StationForList> stations = dataBase.StationList();
+                        foreach (var item in stations)
                         {
-                            Console.WriteLine(stations[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 2:
-                        List<DroneForList> drones = new List<DroneForList>();
-                        drones= dataBase.DroneList();
-                        for (int i = 0; i < drones.Count; ++i)
+                        IEnumerable<DroneForList> drones = dataBase.DroneList();
+                        foreach (var item in drones)
                         {
-                            Console.WriteLine(drones[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 3:
-                        Customer[] customers = dataBase.CustomerList();
-                        for (int i = 0; i < customers.Length; ++i)
+                        IEnumerable<CustomerForList> customers = dataBase.CustomerList();
+                        foreach (var item in customers)
                         {
-                            Console.WriteLine(customers[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 4:
-                        List<Parcel> parcels = new List<Parcel>;
-                        dataBase.ParcelList();
-                        for (int i = 0; i < parcels.Length; ++i)
+                        IEnumerable<ParcelForList> parcels = dataBase.ParcelList();
+                        foreach (var item in parcels)
                         {
-                            Console.WriteLine(parcels[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
-
                         break;
                     case 5:
                         parcels = dataBase.ParcelListNotTaken();
-                        for (int i = 0; i < parcels.Length; ++i)
+                        foreach (var item in parcels)
                         {
-                            Console.WriteLine(parcels[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 6:
                         stations = dataBase.FreeStations();
-                        for (int i = 0; i < stations.Length; ++i)
+                        foreach (var item in stations)
                         {
-                            Console.WriteLine(stations[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     default:
                         ToContinue = true;
-                        Console.WriteLine("No valid, please enter and number between 1 and 4:");
+                        Console.WriteLine("No valid, please enter and number between 1 and 6:");
                         break;
                 }
             } while (ToContinue);
@@ -588,8 +624,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("3. Customers");
             Console.WriteLine("4. Parcels");
             Console.WriteLine("5. Free Parcels");
-            Console.WriteLine("6. Free stations");
-            Console.WriteLine();
+            Console.WriteLine("6. Free stations\n");
             Console.WriteLine("Enter your choice:");
 
         }
