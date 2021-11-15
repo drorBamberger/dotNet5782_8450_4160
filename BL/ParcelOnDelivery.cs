@@ -6,7 +6,7 @@ namespace IBL
 {
     namespace BO
     {
-        class ParcelOnDelivery
+        public class ParcelOnDelivery
         {
             public int Id { get; set; }
             public ParcelOnDeliveryStatuses Status { get; set; }

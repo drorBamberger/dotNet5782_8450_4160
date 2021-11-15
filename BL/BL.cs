@@ -6,7 +6,7 @@ using IBL.BO;
 namespace BL
 {
 
-    public partial class BL : IBL
+    public partial class BL : IBL.IBL
     {
         List<DroneForList> Drones;
         IDAL.IDal MyDal;
@@ -23,36 +23,29 @@ namespace BL
 
 
         }
+
+        //aads
         public void AddStation(int id, string name, Location location, int chargeSlots)
         {
 
         }
 
-        //displays
-        public Station DisplayStation(int id)
+        public void AddDrone(int id, string model, WeightCategories maxWeight, int stationId)
         {
-            IDAL.DO.Station StructToClass = MyDal.DisplayStation(id);
-            List<DroneInCharge> DronesInStation = new List<DroneInCharge> { };
-            foreach (var item in Drones)
-            {
-                if (item.MyLocation.Longitude == StructToClass.Longitude && item.MyLocation.Latitude == StructToClass.Lattitude)
-                {
-                    DronesInStation.Add(new DroneInCharge(item.Id, item.Battery));
-                }
-            }
-            return new Station(StructToClass.Id, StructToClass.Name, new Location(StructToClass.Longitude, StructToClass.Lattitude),
-                StructToClass.ChargeSlots, DronesInStation);
+
         }
 
-        public Drone DisplayDrone(int id)
+        public void AddCustomer(int id, string name,  int phone, Location location)
         {
-            IDAL.DO.Drone StructToClass = MyDal.DisplayDrone(id);
-
-
-
-            return new Drone(StructToClass.Id, )
 
         }
+
+        public void AddParcel(int senderId, int recieverId, WeightCategories maxWeight, Priorities priority)
+        {
+
+        }
+
+        
     }
 
 }
