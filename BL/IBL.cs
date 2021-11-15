@@ -7,7 +7,7 @@ namespace IBL
         //adds
         public void AddStation(int id, string name, Location location, int chargeSlots);
         public void AddDrone(int id, string model, WeightCategories maxWeight, int stationId);
-        public void AddCustomer(int id, string name, int phone, Location location);
+        public void AddCustomer(int id, string name, string phone, Location location);
         public void AddParcel(int senderId, int recieverId, WeightCategories maxWeight, Priorities priority);
 
         //updates
@@ -15,9 +15,9 @@ namespace IBL
         public void StationUpdateAll(int id, string name, int allChargeSlot);
         public void StationUpdateName(int id, string name);
         public void StationUpdateCharge(int id, int allChargeSlot);
-        public void CustomerUpdateAll(int id, string name, int phone);
+        public void CustomerUpdateAll(int id, string name, string phone);
         public void CustomerUpdateName(int id, string name);
-        public void CustomerUpdatePhone(int id, int phone);
+        public void CustomerUpdatePhone(int id, string phone);
 
         //displays
         public string DisplayDrone(int id);

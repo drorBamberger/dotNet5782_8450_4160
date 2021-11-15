@@ -17,7 +17,7 @@ namespace BL
 
         }
 
-        public void AddCustomer(int id, string name, int phone, Location location)
+        public void AddCustomer(int id, string name, string phone, Location location)
         {
 
         }
