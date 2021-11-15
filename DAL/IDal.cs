@@ -18,10 +18,10 @@ namespace IDAL
         public Parcel DisplayParcel(int id);
         public Station DisplayStation(int id);
         public IEnumerable<Drone> DroneList();
-        public IEnumerable<Station> freeStations();
+        public IEnumerable<Station> FreeStations();
         public void ParcelDelivered(int parcelId);
-        public IEnumerable<Parcel> parcelList();
-        public IEnumerable<Parcel> parcelListNotTaken();
+        public IEnumerable<Parcel> ParcelList();
+        public IEnumerable<Parcel> ParcelListNotTaken();
         public void PickedParcelUp(int parcelId);
         public IEnumerable<Station> StationList();
         public double[] AskForElectricity();

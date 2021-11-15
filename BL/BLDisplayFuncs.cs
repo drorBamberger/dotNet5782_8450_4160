@@ -26,16 +26,26 @@ namespace BL
         public Drone DisplayDrone(int id)
         {
             IDAL.DO.Drone StructToClass = MyDal.DisplayDrone(id);
-            double battery;
+            double battery =0;
+            DroneStatuses status = 0;
+            ParcelOnDelivery parcel;
+            Location loc = new Location(0, 0);
+            foreach (var item in MyDal.ParcelList)
+            {
+
+            }
             foreach (var item in Drones)
             {
                 if(item.Id == id)
                 {
-
+                    battery = item.Battery;
+                    status = item.Status;
+                    loc = item.MyLocation;
+                    break;
                 }
             }
 
-                return new Drone(StructToClass.Id, StructToClass.Model, StructToClass.MaxWeight, )
+            return new Drone(StructToClass.Id, StructToClass.Model, StructToClass.MaxWeight, battery, status,  , loc);
 
         }
     }

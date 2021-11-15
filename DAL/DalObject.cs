@@ -271,14 +271,14 @@ namespace DalObject
             return customerList;
         }
 
-        public IEnumerable<Parcel> parcelList()
+        public IEnumerable<Parcel> ParcelList()
         {
             List<Parcel> parcelList = new List<Parcel>();
             parcelList = DataSource.Parcels;
             return parcelList;
         }
 
-        public IEnumerable<Parcel> parcelListNotTaken()
+        public IEnumerable<Parcel> ParcelListNotTaken()
         {
             List<Parcel> parcelList = new List<Parcel>();
             foreach (var item in DataSource.Parcels)
@@ -291,7 +291,7 @@ namespace DalObject
             return parcelList;
         }
 
-        public IEnumerable<Station> freeStations()
+        public IEnumerable<Station> FreeStations()
         {
             List<Station> stationList = new List<Station>();
             foreach (var item in DataSource.Stations)
