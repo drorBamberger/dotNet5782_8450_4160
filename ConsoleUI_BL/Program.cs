@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IBL.BO;
 
 namespace ConsoleUI_BL
@@ -526,8 +527,9 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case 2:
-                        Drone[] drones = dataBase.DroneList();
-                        for (int i = 0; i < drones.Length; ++i)
+                        List<DroneForList> drones = new List<DroneForList>();
+                        drones= dataBase.DroneList();
+                        for (int i = 0; i < drones.Count; ++i)
                         {
                             Console.WriteLine(drones[i]);
                             Console.WriteLine();
@@ -542,7 +544,8 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case 4:
-                        Parcel[] parcels = dataBase.ParcelList();
+                        List<Parcel> parcels = new List<Parcel>;
+                        dataBase.ParcelList();
                         for (int i = 0; i < parcels.Length; ++i)
                         {
                             Console.WriteLine(parcels[i]);
