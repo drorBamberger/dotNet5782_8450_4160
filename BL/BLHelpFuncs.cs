@@ -130,6 +130,18 @@ namespace BL
         internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide)
         {
             IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
+            return new ParcelForCustomer(id, (WeightCategories)StructToClass.Weight, (Priorities)StructToClass.Priority,
+                GetParcelStatus(id), otherSide);
+        }
+        internal DroneInParcel GetDroneInParcel(int parcelId)
+        {
+            DroneForList myDrone = Drones.Find(x => x.ParcelId == parcelId);
+            return new DroneInParcel(myDrone.Id, myDrone.Battery, myDrone.MyLocation);
+        }
+
+        internal ParcelStatuses GetParcelStatus(int id)
+        {
+            IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
             DateTime theDefault = new DateTime();
             ParcelStatuses status;
             if (StructToClass.Delivered != theDefault)
@@ -141,13 +153,7 @@ namespace BL
             else
                 status = ParcelStatuses.Reuqested;
 
-            return new ParcelForCustomer(id, (WeightCategories)StructToClass.Weight, (Priorities)StructToClass.Priority,
-                status, otherSide);
-        }
-        internal DroneInParcel GetDroneInParcel(int parcelId)
-        {
-            DroneForList myDrone = Drones.Find(x => x.ParcelId == parcelId);
-            return new DroneInParcel(myDrone.Id, myDrone.Battery, myDrone.MyLocation);
+            return status;
         }
     }
 }
