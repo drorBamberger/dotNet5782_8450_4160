@@ -25,5 +25,9 @@ namespace IDAL
         public void PickedParcelUp(int parcelId);
         public IEnumerable<Station> StationList();
         public double[] AskForElectricity();
+
+        public void UpDateDrone(Drone newDrone);
+        public void UpDateCustomer(Customer newCustomer);
+        public void UpDateStation(Station newStation);
     }
 }

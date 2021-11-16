@@ -12,12 +12,8 @@ namespace IBL
 
         //updates
         public void DroneUpdate(int id, string name);
-        public void StationUpdateAll(int id, string name, int allChargeSlot);
-        public void StationUpdateName(int id, string name);
-        public void StationUpdateCharge(int id, int allChargeSlot);
-        public void CustomerUpdateAll(int id, string name, string phone);
-        public void CustomerUpdateName(int id, string name);
-        public void CustomerUpdatePhone(int id, string phone);
+        public void StationUpdate(int id, string name, int allChargeSlot);
+        public void CustomerUpdate(int id, string name, string phone);
 
         //displays
         public string DisplayDrone(int id);

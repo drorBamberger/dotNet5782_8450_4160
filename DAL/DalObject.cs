@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using IDAL.DO;
 
@@ -306,6 +307,21 @@ namespace DalObject
         {
             return new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
                 DataSource.Config.HeavyPackege, DataSource.Config.ChargePerHour };
+        }
+
+        //update funcs:
+
+        public void UpDateDrone(Drone newDrone)
+        {
+            DataSource.Drones[DataSource.Drones.FindIndex(x => x.Id == newDrone.Id)] = newDrone;
+        }
+        public void UpDateCustomer(Customer newCustomer)
+        {
+            DataSource.Customers[DataSource.Customers.FindIndex(x => x.Id == newCustomer.Id)] = newCustomer;
+        }
+        public void UpDateStation(Station newStation)
+        {
+            DataSource.Stations[DataSource.Stations.FindIndex(x => x.Id == newStation.Id)] = newStation;
         }
 
     }
