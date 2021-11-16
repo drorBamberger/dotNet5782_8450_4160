@@ -311,7 +311,7 @@ namespace ConsoleUI_BL
             temp = Console.ReadLine();
             int.TryParse(temp, out chargeSlots);
 
-            dataBase.StationUpdateAll(Id, stationName, chargeSlots);
+            dataBase.StationUpdate(Id, stationName, chargeSlots);
         }
         
         /// <summary>
@@ -332,7 +332,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter phone number:");
             phoneNumber = Console.ReadLine();
 
-            dataBase.CustomerUpdateAll(Id, customerName, phoneNumber);
+            dataBase.CustomerUpdate(Id, customerName, phoneNumber);
             
         }
 
