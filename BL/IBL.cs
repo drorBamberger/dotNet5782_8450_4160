@@ -35,16 +35,16 @@ namespace IBL
 
         //helpFuncs
 
-        internal double DistanceTo(Location x1, Location x2, char unit = 'K');
-        internal void GetElecticity();
-        internal Station GetStation(int id);
-        internal Drone GetDrone(int id);
-        internal Customer GetCustomer(int id);
-        internal Parcel GetParcel(int id);
-        internal ParcelOnDelivery GetParcelOnDelivery(int droneId);
-        internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide);
-        internal DroneInParcel GetDroneInParcel(int parcelId);
-        internal ParcelStatuses GetParcelStatus(int id);
+        //internal double DistanceTo(Location x1, Location x2, char unit = 'K');
+        //internal void GetElecticity();
+        //internal Station GetStation(int id);
+        //internal Drone GetDrone(int id);
+        //internal Customer GetCustomer(int id);
+        //internal Parcel GetParcel(int id);
+        //internal ParcelOnDelivery GetParcelOnDelivery(int droneId);
+        //internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide);
+        //internal DroneInParcel GetDroneInParcel(int parcelId);
+        //internal ParcelStatuses GetParcelStatus(int id);
 
     }
 }
