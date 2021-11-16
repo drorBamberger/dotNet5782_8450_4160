@@ -84,5 +84,26 @@ namespace BL
             }
             return comeBack;
         }
+
+        public IEnumerable<ParcelForList> ParcelListNotTaken()
+        {
+            List<ParcelForList> comeBack = new List<ParcelForList>();
+            foreach(var parcel in ParcelList())
+            {
+                if (parcel.Status == ParcelStatuses.Reuqested)
+                    comeBack.Add(parcel);
+            }
+            return comeBack;
+        }
+        public IEnumerable<StationForList> FreeStations()
+        {
+            List<StationForList> comeBack = new List<StationForList>();
+            foreach (var station in StationList())
+            {
+                if (station.FreeChargeSlots!=0)
+                    comeBack.Add(station);
+            }
+            return comeBack;
+        }
     }
 }
