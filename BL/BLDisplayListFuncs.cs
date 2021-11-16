@@ -75,11 +75,12 @@ namespace BL
         {
             IEnumerable<IDAL.DO.Parcel> original = MyDal.ParcelList();
             List<ParcelForList> comeBack = new List<ParcelForList>();
+            ParcelStatuses status;
             foreach (var item in original)
             {
                 comeBack.Add(new ParcelForList(item.Id, MyDal.DisplayCustomer(item.SenderId).Name,
                     MyDal.DisplayCustomer(item.TargetId).Name, (WeightCategories)item.Weight,
-                    (Priorities)item.Priority, GetParcelStatus(item.Id)));
+                    (Priorities)item.Priority, GetParcelStatus(item.Id))); 
             }
             return comeBack;
         }

@@ -143,7 +143,7 @@ namespace BL
         {
             IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
             DateTime theDefault = new DateTime();
-            ParcelStatuses status;
+            ParcelStatuses status = new ParcelStatuses;
             if (StructToClass.Delivered != theDefault)
                 status = ParcelStatuses.Delivered;
             else if (StructToClass.PickedUp != theDefault)
