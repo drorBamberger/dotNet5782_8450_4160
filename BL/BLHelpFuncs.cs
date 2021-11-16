@@ -142,13 +142,12 @@ namespace BL
         internal ParcelStatuses GetParcelStatus(int id)
         {
             IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
-            DateTime theDefault = new DateTime();
-            ParcelStatuses status = new ParcelStatuses;
-            if (StructToClass.Delivered != theDefault)
+            ParcelStatuses status = new ParcelStatuses();
+            if (StructToClass.Delivered != DateTime.MinValue)
                 status = ParcelStatuses.Delivered;
-            else if (StructToClass.PickedUp != theDefault)
+            else if (StructToClass.PickedUp != DateTime.MinValue)
                 status = ParcelStatuses.PickedUp;
-            else if (StructToClass.Scheduled != theDefault)
+            else if (StructToClass.Scheduled != DateTime.MinValue)
                 status = ParcelStatuses.Scheduled;
             else
                 status = ParcelStatuses.Reuqested;

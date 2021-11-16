@@ -8,13 +8,16 @@ namespace IDAL
     {
         public struct Parcel
         {
-            public Parcel(int id, int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId): this()
+            public Parcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId): this()
             {
-                Id = id;
+                Id = DalObject.DataSource.ParcelId++;
                 SenderId = senderId;
                 TargetId = targetId;
                 Weight = weight;
                 Reuqested = DateTime.Now;
+                Scheduled = DateTime.MinValue;
+                PickedUp = DateTime.MinValue;
+                Delivered = DateTime.MinValue;
                 Priority = priority;
                 DroneId = droneId;
             }

@@ -43,7 +43,6 @@ namespace BL
         {
             IEnumerable<IDAL.DO.Customer> original = MyDal.CustomerList();
             List<CustomerForList> comeBack = new List<CustomerForList>();
-            DateTime theDefault = new DateTime();
             int counterSendProvide = 0, counterSendNotProvide = 0, counterGot = 0, counterOnTheWay = 0;
             foreach(var item in original)
             {
@@ -51,14 +50,14 @@ namespace BL
                 {
                     if(parcel.SenderId == item.Id)
                     {
-                        if (parcel.Delivered == theDefault)
+                        if (parcel.Delivered == DateTime.MinValue)
                             counterSendNotProvide++;
                         else
                             counterSendProvide++;
                     }
                     if (parcel.TargetId == item.Id)
                     {
-                        if (parcel.Delivered == theDefault)
+                        if (parcel.Delivered == DateTime.MinValue)
                             counterOnTheWay++;
                         else
                             counterGot++;

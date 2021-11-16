@@ -6,9 +6,9 @@ namespace IBL
     {
         //adds
         public void AddStation(int id, string name, Location location, int chargeSlots);
-        public void AddDrone(int id, string model, WeightCategories maxWeight, int stationId);
+        public void AddDrone(int id, string model, int maxWeight, int stationId);
         public void AddCustomer(int id, string name, string phone, Location location);
-        public void AddParcel(int senderId, int recieverId, WeightCategories maxWeight, Priorities priority);
+        public void AddParcel(int senderId, int recieverId, int maxWeight, int priority);
 
         //updates
         public void DroneUpdate(int id, string name);

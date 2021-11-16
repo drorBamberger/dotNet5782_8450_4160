@@ -16,7 +16,7 @@ namespace DalObject
         public static List<Customer> Customers;
         public static List<Parcel> Parcels;
         public static List<DroneCharge> Charging;
-
+        public static int ParcelId = 0;
         internal class Config
         {
             public static double Available = 1.2;
@@ -47,9 +47,9 @@ namespace DalObject
             }
 
             //parcels initialization
-            for (int i = 0; i < 10; i++)
+            for (ParcelId = 1; ParcelId < 11; ParcelId++)
             {
-                Parcels.Add(new Parcel(i+1, Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id, 
+                Parcels.Add(new Parcel(Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id, 
                    (WeightCategories)rnd.Next(0, 3),  (Priorities)rnd.Next(0, 3), Drones[rnd.Next(0, 5)].Id));
             }
             
@@ -109,10 +109,9 @@ namespace DalObject
             DataSource.Customers.Add(new Customer(id, name, phone, longitude, lattitude));
         }
 
-        public void AddParcel(int id, int senderId, int targetId, int weight, int priority, int droneId)
+        public void AddParcel(int senderId, int targetId, int weight, int priority, int droneId)
         {
-            IsIdTaken(DataSource.Stations, id);
-            DataSource.Parcels.Add(new Parcel(id, senderId, targetId, (WeightCategories)weight
+            DataSource.Parcels.Add(new Parcel(senderId, targetId, (WeightCategories)weight
                 , (Priorities)priority, droneId));
         }
         //update options
@@ -245,7 +244,7 @@ namespace DalObject
                     return DataSource.Parcels[i];
                 }
             }
-            return new Parcel(0, 0, 0, (WeightCategories)0, (Priorities)0, 0);
+            return new Parcel(0, 0, (WeightCategories)0, (Priorities)0, 0);
         }
 
         //displays Lists
