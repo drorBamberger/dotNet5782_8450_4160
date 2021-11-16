@@ -309,7 +309,14 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Enter chargeSlots:");
             temp = Console.ReadLine();
-            int.TryParse(temp, out chargeSlots);
+            if(temp == "")
+            {
+                chargeSlots = -1;
+            }
+            else
+            {
+                int.TryParse(temp, out chargeSlots);
+            }
 
             dataBase.StationUpdate(Id, stationName, chargeSlots);
         }
