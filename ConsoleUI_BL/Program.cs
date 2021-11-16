@@ -311,25 +311,7 @@ namespace ConsoleUI_BL
             temp = Console.ReadLine();
             int.TryParse(temp, out chargeSlots);
 
-            if (stationName == "")
-            {
-                if (temp == "")
-                {
-                    Console.WriteLine("Wrong, must to input some of details");
-                }
-                else
-                {
-                    dataBase.StationUpdateCharge(Id, chargeSlots);
-                }
-            }
-            else if (temp == "")
-            {
-                dataBase.StationUpdateName(Id, stationName);
-            }
-            else
-            {
-                dataBase.StationUpdateAll(Id, stationName, chargeSlots);
-            }
+            dataBase.StationUpdateAll(Id, stationName, chargeSlots);
         }
         
         /// <summary>
@@ -349,26 +331,8 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Enter phone number:");
             phoneNumber = Console.ReadLine();
-            
-            if(customerName == "")
-            {
-                if (phoneNumber == "")
-                {
-                    Console.WriteLine("Wrong, must to input some of details");
-                }
-                else
-                {
-                    dataBase.CustomerUpdatePhone(Id, phoneNumber);
-                }
-            }
-            else if(phoneNumber == "")
-            {
-                dataBase.CustomerUpdateName(Id, customerName);
-            }
-            else
-            {
-                dataBase.CustomerUpdateAll(Id, customerName, phoneNumber);
-            }
+
+            dataBase.CustomerUpdateAll(Id, customerName, phoneNumber);
             
         }
 
