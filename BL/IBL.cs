@@ -29,6 +29,9 @@ namespace IBL
         public IEnumerable<ParcelForList> ParcelListNotTaken();
         public IEnumerable<StationForList> FreeStations();
 
+        //charge and disCharge:
+        public void ChargeDrone(int id);
+        public void DisChargeDrone(int id, double time);
         //helpFuncs
 
         //internal double DistanceTo(Location x1, Location x2, char unit = 'K');
