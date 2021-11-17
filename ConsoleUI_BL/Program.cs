@@ -401,6 +401,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
+            catch (BL.BO.DroneIsntVacant err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -425,6 +429,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
+            catch (BL.BO.DroneIsntMaintenance err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -445,6 +453,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
+
         }
 
         /// <summary>
@@ -465,6 +474,18 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
+            catch (BL.BO.DroneIsntShipping err)
+            {
+                Console.WriteLine(err);
+            }
+            catch (BL.BO.IdTakenException err)
+            { 
+                Console.WriteLine(err);
+            }
+            catch (BL.BO.ParcelDeliveredOrNotPickedUp err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -482,6 +503,18 @@ namespace ConsoleUI_BL
                 dataBase.ParcelDelivered(droneId);
             }
             catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
+            catch (BL.BO.DroneIsntShipping err)
+            {
+                Console.WriteLine(err);
+            }
+            catch (BL.BO.IdTakenException err)
+            {
+                Console.WriteLine(err);
+            }
+            catch (BL.BO.ParcelPickedUpOrIsntBinded err)
             {
                 Console.WriteLine(err);
             }

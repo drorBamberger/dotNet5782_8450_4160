@@ -279,12 +279,12 @@ namespace ConsoleUI
         /// </summary>
         static void PickedParcelUp() 
         {
-            int parcelId;
+            int droneId;
 
-            Console.WriteLine("Enter parcel id:");
-            parcelId = GetInt();
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
 
-            dataBase.PickedParcelUp(parcelId);
+            dataBase.PickedParcelUp(droneId);
         }
 
         /// <summary>
@@ -292,12 +292,12 @@ namespace ConsoleUI
         /// </summary>
         static void ParcelDelivered() 
         {
-            int parcelId;
+            int droneId;
 
-            Console.WriteLine("Enter parcel id:");
-            parcelId = GetInt();
+            Console.WriteLine("Enter drone id:");
+            droneId = GetInt();
 
-            dataBase.ParcelDelivered(parcelId);
+            dataBase.ParcelDelivered(droneId);
         }
 
         /// <summary>

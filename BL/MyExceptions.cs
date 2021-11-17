@@ -54,5 +54,41 @@ namespace BL
             }
             public int Id { get; set; }
         }
+        public class DroneIsntShipping : Exception
+        {
+            public DroneIsntShipping(int id)
+            {
+                Id = id;
+            }
+            override public string ToString()
+            {
+                return "The drone with id: " + Id + "isn't shipping";
+            }
+            public int Id { get; set; }
+        }
+        public class ParcelPickedUpOrIsntBinded : Exception
+        {
+            public ParcelPickedUpOrIsntBinded(int id)
+            {
+                Id = id;
+            }
+            override public string ToString()
+            {
+                return "The parcel with id:" + Id + " picked up or isn't binded";
+            }
+            public int Id { get; set; }
+        }
+        public class ParcelDeliveredOrNotPickedUp : Exception
+        {
+            public ParcelDeliveredOrNotPickedUp(int id)
+            {
+                Id = id;
+            }
+            override public string ToString()
+            {
+                return "The parcel with id:" + Id + " delivered of isn't picked up";
+            }
+            public int Id { get; set; }
+        }
     }
 }
