@@ -154,5 +154,34 @@ namespace BL
 
             return status;
         }
+
+        internal IDAL.DO.Station GetClosestStation(Location locationA, List<IDAL.DO.Station> stations)
+        {
+            double smallDistance = double.MaxValue, tmpDis;
+            IDAL.DO.Station comeBack = new IDAL.DO.Station();
+            foreach (var station in stations)
+            {
+                Location stationLocation = new Location(station.Longitude, station.Lattitude);
+                tmpDis = DistanceTo(locationA, stationLocation);
+                if (tmpDis < smallDistance)
+                {
+                    smallDistance = tmpDis;
+                    comeBack = station;
+                }
+            }
+            return comeBack;
+        }
+
+        internal double GetElectricityPerKM(double distance, WeightCategories a = WeightCategories.Light, bool isFree = false)
+        {
+            if (isFree)
+                return Available;
+            if(a == WeightCategories.Light)
+                return SmallPackege;
+            if (a == WeightCategories.Medium)
+                return MediumPackege;
+            return HeavyPackege;
+
+        }
     }
 }

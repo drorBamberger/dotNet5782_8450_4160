@@ -17,11 +17,13 @@ namespace BL
         public double ChargePerHour;
         public BL()
         {
+            Random rnd = new Random();
             GetElecticity();
             var dalDrones = MyDal.DroneList();
             int parcelIndex = 0;
             IDAL.DO.Parcel myParcel;
-            Location droneLocation, senderLocation;
+            Location droneLocation = new Location(0,0);
+            Location senderLocation, targetLocation;
             foreach(var drone in dalDrones)
             {
                 parcelIndex = ((List<IDAL.DO.Parcel>)MyDal.ParcelList()).FindIndex(x => x.DroneId == drone.Id && x.Delivered == DateTime.MinValue);
@@ -31,25 +33,20 @@ namespace BL
                     myParcel = ((List<IDAL.DO.Parcel>)(MyDal.ParcelList()))[parcelIndex];
                     senderLocation = new Location(MyDal.DisplayCustomer(myParcel.SenderId).Longitude,
                             MyDal.DisplayCustomer(myParcel.SenderId).Longitude);
+                    targetLocation = new Location(MyDal.DisplayCustomer(myParcel.TargetId).Longitude,
+                            MyDal.DisplayCustomer(myParcel.TargetId).Longitude);
+                    double minimumBatteryNeeded = 0;
                     if (myParcel.PickedUp == DateTime.MinValue)
                     {
                         droneLocation = senderLocation;
+                        minimumBatteryNeeded = DistanceTo(droneLocation, targetLocation)*
                     }
                     else
                     {
-                        //finding the closest station
-                        double smallDistance = int.MaxValue, tmpDis;
-                        foreach(var station in MyDal.StationList())
-                        {
-                            Location stationLocation = new Location(station.Longitude, station.Lattitude);
-                            tmpDis = DistanceTo(senderLocation, stationLocation);
-                            if (tmpDis<smallDistance)
-                            {
-                                smallDistance = tmpDis;
-                                droneLocation = stationLocation;
-                            }
-                        }
+                        IDAL.DO.Station closestStation = GetClosestStation(senderLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+                        droneLocation = new Location(closestStation.Longitude, closestStation.Lattitude);
                     }
+
                     Drones.Add(new DroneForList(drone.Id, drone.Model, (WeightCategories)drone.MaxWeight,
                         , DroneStatuses.Shipping, myParcel.Id, droneLocation));
                 }
