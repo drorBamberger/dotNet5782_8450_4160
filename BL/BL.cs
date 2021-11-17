@@ -47,6 +47,10 @@ namespace BL
                     {
                         IDAL.DO.Station closestStation = GetClosestStation(senderLocation, (List<IDAL.DO.Station>)MyDal.StationList());
                         droneLocation = new Location(closestStation.Longitude, closestStation.Lattitude);
+                        closestStation = GetClosestStation(targetLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+                        minimumBatteryNeeded = DistanceTo(droneLocation, senderLocation) * Available +
+                            GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)myParcel.Weight) +
+                            DistanceTo(targetLocation, new Location(closestStation.Longitude, closestStation.Lattitude)) * Available;
                     }
 
                     Drones.Add(new DroneForList(drone.Id, drone.Model, (WeightCategories)drone.MaxWeight,
