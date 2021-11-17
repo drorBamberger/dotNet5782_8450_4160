@@ -44,6 +44,5 @@ namespace IBL
         //internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide);
         //internal DroneInParcel GetDroneInParcel(int parcelId);
         //internal ParcelStatuses GetParcelStatus(int id);
-
     }
 }
