@@ -16,5 +16,17 @@ namespace BL
         {
 
         }
+        public void Attribution(int droneId)
+        {
+
+        }
+        public void PickedParcelUp(int parcelId)
+        {
+
+        }
+        public void ParcelDelivered(int parcelId)
+        {
+
+        }
     }
 }

@@ -14,7 +14,6 @@ namespace BL
             d.Model = name;
             MyDal.UpDateDrone(d);
         }
-
         public void StationUpdate(int id, string name, int allChargeSlot)
         {
             var d = MyDal.DisplayStation(id);

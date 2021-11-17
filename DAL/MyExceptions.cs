@@ -30,9 +30,5 @@ namespace IDAL
             }
             public int Id { get; set; }
         }
-
-
-
-
     }
 }

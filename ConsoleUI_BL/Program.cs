@@ -124,7 +124,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter chargeSlots:");
             chargeSlots = GetInt();
 
-            dataBase.AddStation(stationId, name, loc, chargeSlots);
+            try
+            {
+                dataBase.AddStation(stationId, name, loc, chargeSlots);
+            }
+            catch(BL.BO.IdTakenException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -148,8 +155,14 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Enter station number for initial charging:");
             numStat = GetInt();
-
-            dataBase.AddDrone(DroneId, model, maxWeight, numStat);
+            try
+            {
+                dataBase.AddDrone(DroneId, model, maxWeight, numStat);
+            }
+            catch (BL.BO.IdTakenException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -179,8 +192,14 @@ namespace ConsoleUI_BL
             lattitude = GetDouble();
 
             Location loc = new Location(longitude, lattitude);
-
-            dataBase.AddCustomer(id, name, phone, loc);
+            try
+            {
+                dataBase.AddCustomer(id, name, phone, loc);
+            }
+            catch (BL.BO.IdTakenException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
