@@ -23,7 +23,7 @@ namespace IBL
 
         public enum DroneStatuses
         {
-            vacant,
+            vacant = 0,
             maintenance,
             Shipping
         }
