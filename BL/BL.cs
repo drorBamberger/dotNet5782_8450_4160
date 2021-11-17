@@ -39,7 +39,9 @@ namespace BL
                     if (myParcel.PickedUp == DateTime.MinValue)
                     {
                         droneLocation = senderLocation;
-                        minimumBatteryNeeded = DistanceTo(droneLocation, targetLocation)*
+                        IDAL.DO.Station closestStation = GetClosestStation(targetLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+                        minimumBatteryNeeded = GetElectricityPerKM(DistanceTo(droneLocation, targetLocation), (WeightCategories)myParcel.Weight) +
+                            DistanceTo(targetLocation, new Location(closestStation.Longitude, closestStation.Lattitude))*Available;
                     }
                     else
                     {
@@ -48,6 +50,7 @@ namespace BL
                     }
 
                     Drones.Add(new DroneForList(drone.Id, drone.Model, (WeightCategories)drone.MaxWeight,
+                        rnd.NextDouble()*(100- minimumBatteryNeeded)+ minimumBatteryNeeded//(nextDouble between 0 - 1)*(between 0 - 100-minimumBatteryNeeded)*(between minimumBatteryNeeded - 100)
                         , DroneStatuses.Shipping, myParcel.Id, droneLocation));
                 }
             }
