@@ -172,10 +172,8 @@ namespace BL
             return comeBack;
         }
 
-        internal double GetElectricityPerKM(double distance, WeightCategories a = WeightCategories.Light, bool isFree = false)
+        internal double GetElectricityPerKM(double distance, WeightCategories a = WeightCategories.Light)
         {
-            if (isFree)
-                return Available;
             if(a == WeightCategories.Light)
                 return SmallPackege;
             if (a == WeightCategories.Medium)
