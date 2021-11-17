@@ -30,5 +30,29 @@ namespace BL
             }
             public int Id { get; set; }
         }
+        public class DroneIsntVacant : Exception
+        {
+            public DroneIsntVacant(int id)
+            {
+                Id = id;
+            }
+            override public string ToString()
+            {
+                return "The drone with id: " + Id + "isn't vacant";
+            }
+            public int Id { get; set; }
+        }
+        public class DroneIsntMaintenance : Exception
+        {
+            public DroneIsntMaintenance(int id)
+            {
+                Id = id;
+            }
+            override public string ToString()
+            {
+                return "The drone with id: " + Id + "isn't maintenance";
+            }
+            public int Id { get; set; }
+        }
     }
 }
