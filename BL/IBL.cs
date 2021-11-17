@@ -32,6 +32,9 @@ namespace IBL
         //charge and disCharge:
         public void ChargeDrone(int id);
         public void DisChargeDrone(int id, double time);
+        public void Attribution(int droneId);
+        public void PickedParcelUp(int parcelId);
+        public void ParcelDelivered(int parcelId);
         //helpFuncs
 
         //internal double DistanceTo(Location x1, Location x2, char unit = 'K');

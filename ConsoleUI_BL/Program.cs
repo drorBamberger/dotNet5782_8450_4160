@@ -307,7 +307,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter the new name of the drone:");
             droneName = Console.ReadLine();
 
-            dataBase.DroneUpdate(droneId, droneName);
+            try
+            {
+                dataBase.DroneUpdate(droneId, droneName);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -337,7 +344,14 @@ namespace ConsoleUI_BL
                 int.TryParse(temp, out chargeSlots);
             }
 
-            dataBase.StationUpdate(Id, stationName, chargeSlots);
+            try
+            {
+                dataBase.StationUpdate(Id, stationName, chargeSlots);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
         
         /// <summary>
@@ -358,8 +372,15 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter phone number:");
             phoneNumber = Console.ReadLine();
 
-            dataBase.CustomerUpdate(Id, customerName, phoneNumber);
-            
+            try
+            {
+                dataBase.CustomerUpdate(Id, customerName, phoneNumber);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
+
         }
 
         /// <summary>
@@ -371,8 +392,15 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
-
-            dataBase.ChargeDrone(droneId);
+            
+            try
+            {
+                dataBase.ChargeDrone(droneId);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -389,7 +417,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter time in charge:");
             time = GetInt();
 
-            dataBase.DisChargeDrone(droneId, time);
+            try
+            {
+                dataBase.DisChargeDrone(droneId, time);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -402,7 +437,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            dataBase.Attribution(droneId);
+            try
+            {
+                dataBase.Attribution(droneId);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -415,7 +457,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter parcel id:");
             parcelId = GetInt();
 
-            dataBase.PickedParcelUp(parcelId);
+            try
+            {
+                dataBase.PickedParcelUp(parcelId);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -428,7 +477,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            dataBase.ParcelDelivered(droneId);
+            try
+            {
+                dataBase.ParcelDelivered(droneId);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         //~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -490,7 +546,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.DisplayStation(id);
+            try
+            {
+                return dataBase.DisplayStation(id);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                return err.ToString();
+            }
         }
 
         /// <summary>
@@ -503,7 +566,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.DisplayDrone(id);
+            try
+            {
+                return dataBase.DisplayDrone(id);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                return err.ToString();
+            }
         }
 
         /// <summary>
@@ -516,7 +586,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.DisplayCustomer(id);
+            try
+            {
+                return dataBase.DisplayCustomer(id);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                return err.ToString();
+            }
         }
 
         /// <summary>
@@ -529,7 +606,14 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter id:");
             id = GetInt();
 
-            return dataBase.DisplayParcel(id);
+            try
+            {
+                return dataBase.DisplayParcel(id);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                return err.ToString();
+            }
         }
 
         //~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~
