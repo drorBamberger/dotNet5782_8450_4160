@@ -121,61 +121,36 @@ namespace DalObject
         {
             IsIdExist(DataSource.Drones, droneId);
             IsIdExist(DataSource.Parcels, parcelId);
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
-            {
-                if (DataSource.Parcels[i].Id == parcelId)
-                {
-                    Parcel tmp = DataSource.Parcels[i];
-                    tmp.DroneId = droneId;
-                    tmp.Scheduled = DateTime.Now;
-                    DataSource.Parcels[i] = tmp;
-                }
-            }
+            Parcel tmp = DataSource.Parcels.Find(x => x.Id == parcelId);
+            tmp.DroneId = droneId;
+            tmp.Scheduled = DateTime.Now;
+            DataSource.Parcels[DataSource.Parcels.FindIndex(x => x.Id == parcelId)] = tmp;
         }
 
         public void PickedParcelUp(int parcelId)
         {
             IsIdExist(DataSource.Parcels, parcelId);
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
-            {
-                if (DataSource.Parcels[i].Id == parcelId)
-                {
-                    Parcel tmp = DataSource.Parcels[i];
-                    tmp.PickedUp = DateTime.Now;
-                    DataSource.Parcels[i] = tmp;
-                }
-            }
+            Parcel tmp = DataSource.Parcels.Find(x => x.Id == parcelId);
+            tmp.PickedUp = DateTime.Now;
+            DataSource.Parcels[DataSource.Parcels.FindIndex(x => x.Id == parcelId)] = tmp;
         }
 
         public void ParcelDelivered(int parcelId)
         {
             IsIdExist(DataSource.Parcels, parcelId);
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
-            {
-                if (DataSource.Parcels[i].Id == parcelId)
-                {
-                    Parcel tmp = DataSource.Parcels[i];
-                    tmp.Delivered = DateTime.Now;
-                    DataSource.Parcels[i] = tmp;
-                }
-            }
+            Parcel tmp = DataSource.Parcels.Find(x => x.Id == parcelId);
+            tmp.Delivered = DateTime.Now;
+            DataSource.Parcels[DataSource.Parcels.FindIndex(x => x.Id == parcelId)] = tmp;
         }
 
         public void ChargeDrone(int droneId, int stationId)
         {
             IsIdExist(DataSource.Drones, droneId);
             IsIdExist(DataSource.Stations, stationId);
-            for (int i = 0; i < DataSource.Stations.Count; i++)
-            {
-                if (DataSource.Stations[i].Id == stationId)
-                {
-
-                    DataSource.Charging.Add(new DroneCharge(droneId, stationId));
-                    Station tmp = DataSource.Stations[i];
-                    tmp.ChargeSlots--;
-                    DataSource.Stations[i] = tmp;
-                }
-            }
+            Station tmp = DataSource.Stations.Find(x => x.Id == stationId);
+            DataSource.Charging.Add(new DroneCharge(droneId, stationId));
+            tmp.ChargeSlots--;
+            DataSource.Stations[DataSource.Stations.FindIndex(x => x.Id == stationId)] = tmp;
         }
 
         public void DisChargeDrone(int droneId, int stationId)
@@ -193,53 +168,25 @@ namespace DalObject
         public Station DisplayStation(int id)
         {
             IsIdExist(DataSource.Stations, id);
-            for (int i = 0; i < DataSource.Stations.Count; i++)
-            {
-                if (DataSource.Stations[i].Id == id)
-                {
-                    return DataSource.Stations[i];
-                }
-            }
-            return new Station(0, "NO STATION FOUND", 0, 0, 0);
+            return DataSource.Stations.Find(x => x.Id == id);
         }
 
         public Drone DisplayDrone(int id)
         {
-            IsIdExist(DataSource.Drones, id);
-            for (int i = 0; i < DataSource.Drones.Count; i++)
-            {
-                if (DataSource.Drones[i].Id == id)
-                {
-                    return DataSource.Drones[i];
-                }
-            }
-            return new Drone(0, "NO DRONE FOUND", (WeightCategories)0);
+            IsIdExist(DataSource.Stations, id);
+            return DataSource.Drones.Find(x => x.Id == id);
         }
 
         public Customer DisplayCustomer(int id)
         {
-            IsIdExist(DataSource.Customers, id);
-            for (int i = 0; i < DataSource.Customers.Count; i++)
-            {
-                if (DataSource.Customers[i].Id == id)
-                {
-                    return DataSource.Customers[i];
-                }
-            }
-            return new Customer(0, "no customer found", "0000000000", 0, 0);
+            IsIdExist(DataSource.Stations, id);
+            return DataSource.Customers.Find(x => x.Id == id);
         }
 
         public Parcel DisplayParcel(int id)
         {
-            IsIdExist(DataSource.Parcels, id);
-            for (int i = 0; i < DataSource.Parcels.Count; i++)
-            {
-                if (DataSource.Parcels[i].Id == id)
-                {
-                    return DataSource.Parcels[i];
-                }
-            }
-            return new Parcel(0, 0, (WeightCategories)0, (Priorities)0, 0);
+            IsIdExist(DataSource.Stations, id);
+            return DataSource.Parcels.Find(x => x.Id == id);
         }
 
         //displays Lists
