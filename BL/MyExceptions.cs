@@ -90,5 +90,18 @@ namespace BL
             }
             public int Id { get; set; }
         }
+
+        public class DroneCantGetToTheClosestStation : Exception
+        {
+            public DroneCantGetToTheClosestStation(int id)
+            {
+                Id = id;
+            }
+            override public string ToString()
+            {
+                return "The drone with id:" + Id + " cant travel to the closest station";
+            }
+            public int Id { get; set; }
+        }
     }
 }

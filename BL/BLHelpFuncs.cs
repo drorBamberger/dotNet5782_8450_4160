@@ -181,5 +181,15 @@ namespace BL
             return HeavyPackege;
 
         }
+        internal IDAL.DO.Station GetClosestStationWithChargeSlots(Location locationA, List<IDAL.DO.Station> stations)
+        {
+            var closestStation = GetClosestStation(locationA, stations);
+            while(closestStation.ChargeSlots == 0)
+            {
+                stations.Remove(closestStation);
+                closestStation = GetClosestStation(locationA, stations);
+            }
+            return closestStation;
+        }
     }
 }

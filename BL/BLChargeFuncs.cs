@@ -13,11 +13,23 @@ namespace BL
             {
                 throw new BO.IdNotExistException(id);
             }
-            if (Drones.Find(x => x.Id == id).Status != DroneStatuses.vacant)
+            var drone = Drones.Find(x => x.Id == id);
+            if (drone.Status != DroneStatuses.vacant)
             {
                 throw new BO.DroneIsntVacant(id);
             }
-            //TO DO: func and exp if impossible
+            var station = GetClosestStationWithChargeSlots(drone.MyLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+            Location stationLocation = new Location(station.Longitude, station.Lattitude);
+            if (DistanceTo(drone.MyLocation, stationLocation )* Available>drone.Battery)
+            {
+                throw new BO.DroneCantGetToTheClosestStation(id);
+            }
+            drone.Battery -= DistanceTo(drone.MyLocation, stationLocation) * Available;
+            drone.MyLocation = stationLocation;
+            drone.Status = DroneStatuses.maintenance;
+            Drones.RemoveAll(x => x.Id == drone.Id);
+            Drones.Add(drone);
+            MyDal.ChargeDrone(id, station.Id);
         }
 
         public void DisChargeDrone(int id, double time)
