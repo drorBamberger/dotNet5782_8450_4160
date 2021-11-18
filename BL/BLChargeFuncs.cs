@@ -38,12 +38,17 @@ namespace BL
             {
                 throw new BO.IdNotExistException(id);
             }
-            if (Drones.Find(x => x.Id == id).Status != DroneStatuses.maintenance)
+            var drone = Drones.Find(x => x.Id == id);
+            if (drone.Status != DroneStatuses.maintenance)
             {
                 throw new BO.DroneIsntMaintenance(id);
             }
-            //TO DO: func and exp
-
+            drone.Battery += time * ChargePerHour;
+            drone.Status = DroneStatuses.vacant;
+            Drones.RemoveAll(x => x.Id == drone.Id);
+            Drones.Add(drone);
+            MyDal.DisChargeDrone(id,
+                ((List<IDAL.DO.Station>)(MyDal.StationList())).Find(x => new Location(x.Longitude, x.Lattitude) == drone.MyLocation).Id);
         }
         public void Attribution(int droneId)
         {

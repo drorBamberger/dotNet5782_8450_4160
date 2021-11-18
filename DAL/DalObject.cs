@@ -50,10 +50,10 @@ namespace DalObject
             //parcels initialization
             for (ParcelId = 1; ParcelId < 11; ParcelId++)
             {
-                Parcels.Add(new Parcel(Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id, 
-                   (WeightCategories)rnd.Next(0, 3),  (Priorities)rnd.Next(0, 3), Drones[rnd.Next(0, 5)].Id));
+                Parcels.Add(new Parcel(Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id,
+                   (WeightCategories)rnd.Next(0, 3), (Priorities)rnd.Next(0, 3), Drones[rnd.Next(0, 5)].Id));
             }
-            
+
         }
 
     }
@@ -69,7 +69,7 @@ namespace DalObject
         //help funcs:
         private void IsIdTaken<T>(List<T> list, int id)
         {
-            foreach(T item in list)
+            foreach (T item in list)
             {
                 int itemId = (int)((typeof(T).GetProperty("Id").GetValue(item, null)));
                 if (itemId == id)
@@ -182,16 +182,10 @@ namespace DalObject
         {
             IsIdExist(DataSource.Drones, droneId);
             IsIdExist(DataSource.Stations, stationId);
-            for (int i = 0; i < DataSource.Stations.Count; i++)
-            {
-                if (DataSource.Stations[i].Id == stationId)
-                {
-                    Station tmp = DataSource.Stations[i];
-                    tmp.ChargeSlots++;
-                    DataSource.Stations[i] = tmp;
-                }
-            }
-
+            Station station = DataSource.Stations.Find(x => x.Id == stationId);
+            station.ChargeSlots++;
+            DataSource.Stations[DataSource.Stations.FindIndex(x => x.Id == stationId)] = station;
+            DataSource.Charging.RemoveAll(x => x.DroneId == droneId);
         }
 
 
