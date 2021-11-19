@@ -86,7 +86,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The parcel with id:" + Id + " delivered of isn't picked up";
+                return "The parcel with id:" + Id + " delivered or isn't picked up";
             }
             public int Id { get; set; }
         }
@@ -100,6 +100,19 @@ namespace BL
             override public string ToString()
             {
                 return "The drone with id:" + Id + " have too little battery to travel that far";
+            }
+            public int Id { get; set; }
+        }
+
+        public class NoParcelMatch : Exception
+        {
+            public NoParcelMatch(int id)
+            {
+                Id = id;
+            }
+            override public string ToString()
+            {
+                return "The drone with id:" + Id + " coudn't find any proper parcel";
             }
             public int Id { get; set; }
         }

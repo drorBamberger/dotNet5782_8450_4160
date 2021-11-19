@@ -65,6 +65,10 @@ namespace BL
             }
             List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList();
             parcelList.RemoveAll(x => (int)x.Weight > (int)drone.MaxWeight);//removing all the to heavy parcels
+            if(parcelList.Count == 0)
+            {
+                throw new BO.NoParcelMatch(droneId);
+            }
             //now i will order the list so the priority is the main influancer then the weight(bigger better) and then the distance(smaller better)
             parcelList.OrderByDescending(x => (int)x.Priority * 10 + (int)x.Weight + 1/DistanceTo(drone.MyLocation, GetParcelSenderLocation(x.Id)));
             foreach(var parcel in parcelList)
@@ -107,8 +111,11 @@ namespace BL
             {
                 throw new BO.ParcelDeliveredOrNotPickedUp(parcel.Id);
             }
-            //TO DO: func and exp
-
+            Location parcelLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
+            drone.Battery -= GetElectricityPerKM(DistanceTo(drone.MyLocation, parcelLocation), (WeightCategories)parcel.Weight);
+            drone.MyLocation = parcelLocation;
+            Drones[Drones.FindIndex(x => x.Id == dronelId)] = drone;
+            MyDal.PickedParcelUp(parcel.Id);
         }
         public void ParcelDelivered(int dronelId)
         {
