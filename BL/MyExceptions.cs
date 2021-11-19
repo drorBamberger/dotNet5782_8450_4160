@@ -91,15 +91,15 @@ namespace BL
             public int Id { get; set; }
         }
 
-        public class DroneCantGetToTheClosestStation : Exception
+        public class DroneHaveToLittleBattery : Exception
         {
-            public DroneCantGetToTheClosestStation(int id)
+            public DroneHaveToLittleBattery(int id)
             {
                 Id = id;
             }
             override public string ToString()
             {
-                return "The drone with id:" + Id + " cant travel to the closest station";
+                return "The drone with id:" + Id + " have too little battery to travel that far";
             }
             public int Id { get; set; }
         }

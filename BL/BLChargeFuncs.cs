@@ -23,7 +23,7 @@ namespace BL
             Location stationLocation = new Location(station.Longitude, station.Lattitude);
             if (DistanceTo(drone.MyLocation, stationLocation )* Available>drone.Battery)
             {
-                throw new BO.DroneCantGetToTheClosestStation(id);
+                throw new BO.DroneHaveToLittleBattery(id);
             }
             drone.Battery -= DistanceTo(drone.MyLocation, stationLocation) * Available;
             drone.MyLocation = stationLocation;
@@ -64,6 +64,8 @@ namespace BL
                 throw new BO.DroneIsntVacant(droneId);
             }
             List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList();
+            parcelList.RemoveAll(x => (int)x.Weight > (int)drone.MaxWeight);//removing all the to heavy parcels
+            //now i will order the list so the priority is the main influancer then the weight(bigger better) and then the distance(smaller better)
             parcelList.OrderByDescending(x => (int)x.Priority * 10 + (int)x.Weight + 1/DistanceTo(drone.MyLocation, GetParcelSenderLocation(x.Id)));
             foreach(var parcel in parcelList)
             {
@@ -76,8 +78,10 @@ namespace BL
                     drone.Status = DroneStatuses.Shipping;
                     Drones[Drones.FindIndex(x => x.Id == drone.Id)] = drone;
                     MyDal.Attribution(drone.Id, parcel.Id);
+                    return;
                 }
             }
+            throw new BO.DroneHaveToLittleBattery(droneId);
         }
         public void PickedParcelUp(int dronelId)
         {
