@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using IBL.BO;
 
 namespace ConsoleUI_BL
 {
     class Program
     { 
-        static IBL.IBL dataBase;
+        static BL.BL dataBase = new BL.BL();
         /// <summary>
         /// get int from the console
         /// </summary>
@@ -514,7 +515,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.ParcelPickedUpOrIsntBinded err)
+            catch (BL.BO.ParcelPickedUpOrIsntScheduled err)
             {
                 Console.WriteLine(err);
             }

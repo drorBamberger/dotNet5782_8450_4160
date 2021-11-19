@@ -39,7 +39,7 @@ namespace IBL
                 return
                     ("ID:               " + Id + "\n"
                     +"Sender:           " + Sender + "\n"
-                    +"Target:           " + Receiver + "\n"
+                    +"Target:           " + Target + "\n"
                     +"Drone Id:         " + MyDrone + "\n"
                     +"Weight:           " + Weight + "\n"
                     +"Priority:         " + Priority + "\n"
