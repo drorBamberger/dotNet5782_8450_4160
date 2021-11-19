@@ -191,13 +191,13 @@ namespace BL
         }
 
 
-        internal double GetElectricityPerKM(double distance, WeightCategories a = WeightCategories.Light)
+        internal double GetElectricityPerKM(double distance, WeightCategories a)
         {
             if(a == WeightCategories.Light)
-                return SmallPackege;
+                return SmallPackege*distance;
             if (a == WeightCategories.Medium)
-                return MediumPackege;
-            return HeavyPackege;
+                return MediumPackege*distance;
+            return HeavyPackege*distance;
 
         }
         internal IDAL.DO.Station GetClosestStationWithChargeSlots(Location locationA, List<IDAL.DO.Station> stations)
@@ -209,6 +209,16 @@ namespace BL
                 closestStation = GetClosestStation(locationA, stations);
             }
             return closestStation;
+        }
+        internal Location GetParcelSenderLocation(int id)
+        {
+            var parcel = MyDal.DisplayParcel(id);
+            return new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Longitude);
+        }
+        internal Location GetParcelTargetLocation(int id)
+        {
+            var parcel = MyDal.DisplayParcel(id);
+            return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Longitude);
         }
     }
 }

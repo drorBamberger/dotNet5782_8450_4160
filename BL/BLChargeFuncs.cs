@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using IBL.BO;
 
@@ -57,24 +58,26 @@ namespace BL
                 throw new BO.IdNotExistException(droneId);
             }
             var drone = Drones.Find(x => x.Id == droneId);
+            
             if(drone.Status != DroneStatuses.vacant)
             {
                 throw new BO.DroneIsntVacant(droneId);
             }
-            List<IDAL.DO.Parcel> priorityCheckGroup, checkGroup;
-            IDAL.DO.Parcel potentialParcel;
-            for (int i = 2; i >=0 ; i--)
+            List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList();
+            parcelList.OrderByDescending(x => (int)x.Priority * 10 + (int)x.Weight + 1/DistanceTo(drone.MyLocation, GetParcelSenderLocation(x.Id)));
+            foreach(var parcel in parcelList)
             {
-                priorityCheckGroup = ((List<IDAL.DO.Parcel>)(MyDal.ParcelList())).FindAll(X=>(int)X.Priority == i);
-                for (int j = (int)drone.MaxWeight; j >= 0; j--)
+                Location senderLocation = GetParcelSenderLocation(parcel.Id), targetLocation = GetParcelTargetLocation(parcel.Id);
+                var closestStationToTarget = GetClosestStation(targetLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+                if (DistanceTo(drone.MyLocation, senderLocation)*Available + 
+                    GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)parcel.Weight) + 
+                    DistanceTo(targetLocation, new Location(closestStationToTarget.Longitude, closestStationToTarget.Lattitude))*Available < drone.Battery)
                 {
-                    checkGroup = priorityCheckGroup.FindAll(x => (int)x.Weight == j);
-                    potentialParcel = GetClosestParcel(drone.MyLocation, checkGroup);
-                    if(drone.Battery < DistanceTo(drone.MyLocation, ))
+                    drone.Status = DroneStatuses.Shipping;
+                    Drones[Drones.FindIndex(x => x.Id == drone.Id)] = drone;
+                    MyDal.Attribution(drone.Id, parcel.Id);
                 }
             }
-            //TO DO: func and exp
-
         }
         public void PickedParcelUp(int dronelId)
         {
