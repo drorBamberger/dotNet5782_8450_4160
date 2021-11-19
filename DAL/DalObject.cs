@@ -31,7 +31,7 @@ namespace DalObject
             Random rnd = new Random();
             //stations initialization
             Stations.Add(new Station(rnd.Next(), "London", -0.118092, 51.509865, 10));
-            Stations.Add(new Station(rnd.Next(), "Paris", 2.349014, 48.864716, 8));
+            Stations.Add(new Station(rnd.Next(), "Brighton", -0.13947, 50.82838, 8));
             //customers initialization
             string[] customerNames = new string[] { "Dror", "Yair", "Ofir", "Gil", "Benaya", "Ohad", "Michael", "Achiya", "Drew", "Shilo" };
             for (int i = 0; i < 10; ++i)
@@ -193,56 +193,36 @@ namespace DalObject
 
         public IEnumerable<Station> StationList()
         {
-            List<Station> stationList = new List<Station>();
-            stationList = DataSource.Stations;
+            List<Station> stationList = DataSource.Stations;
             return stationList;
         }
 
         public IEnumerable<Drone> DroneList()
         {
-            List<Drone> droneList = new List<Drone>();
-            droneList = DataSource.Drones;
+            List<Drone> droneList = DataSource.Drones;
             return droneList;
         }
 
         public IEnumerable<Customer> CustomerList()
         {
-            List<Customer> customerList = new List<Customer>();
-            customerList = DataSource.Customers;
+            List<Customer> customerList = DataSource.Customers;
             return customerList;
         }
 
         public IEnumerable<Parcel> ParcelList()
         {
-            List<Parcel> parcelList = new List<Parcel>();
-            parcelList = DataSource.Parcels;
+            List<Parcel> parcelList = DataSource.Parcels;
             return parcelList;
         }
 
         public IEnumerable<Parcel> ParcelListNotTaken()
         {
-            List<Parcel> parcelList = new List<Parcel>();
-            foreach (var item in DataSource.Parcels)
-            {
-                if (item.DroneId == 0)
-                {
-                    parcelList.Add(item);
-                }
-            }
-            return parcelList;
+            return DataSource.Parcels.FindAll(item => item.DroneId == 0);
         }
 
         public IEnumerable<Station> FreeStations()
         {
-            List<Station> stationList = new List<Station>();
-            foreach (var item in DataSource.Stations)
-            {
-                if (item.ChargeSlots != 0)
-                {
-                    stationList.Add(item);
-                }
-            }
-            return stationList;
+            return DataSource.Stations.FindAll(item => item.ChargeSlots != 0);
         }
         public double[] AskForElectricity()
         {
@@ -254,16 +234,18 @@ namespace DalObject
 
         public void UpDateDrone(Drone newDrone)
         {
+            IsIdExist(DataSource.Drones, newDrone.Id);
             DataSource.Drones[DataSource.Drones.FindIndex(x => x.Id == newDrone.Id)] = newDrone;
         }
         public void UpDateCustomer(Customer newCustomer)
         {
+            IsIdExist(DataSource.Customers, newCustomer.Id);
             DataSource.Customers[DataSource.Customers.FindIndex(x => x.Id == newCustomer.Id)] = newCustomer;
         }
         public void UpDateStation(Station newStation)
         {
+            IsIdExist(DataSource.Stations, newStation.Id);
             DataSource.Stations[DataSource.Stations.FindIndex(x => x.Id == newStation.Id)] = newStation;
         }
-
     }
 }
