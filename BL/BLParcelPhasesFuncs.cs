@@ -75,16 +75,16 @@ namespace BL
             Drones[Drones.FindIndex(x => x.Id == dronelId)] = drone;
             MyDal.PickedParcelUp(parcel.Id);
         }
-        public void ParcelDelivered(int dronelId)
+        public void ParcelDelivered(int droneId)
         {
-            if (!Drones.Exists(x => x.Id == dronelId))
+            if (!Drones.Exists(x => x.Id == droneId))
             {
-                throw new BO.IdNotExistException(dronelId);
+                throw new BO.IdNotExistException(droneId);
             }
-            DroneForList drone = Drones.Find(x => x.ParcelId == dronelId);
+            DroneForList drone = Drones.Find(x => x.ParcelId == droneId);
             if (drone.Status != DroneStatuses.Shipping)
             {
-                throw new BO.DroneIsntShipping(dronelId);
+                throw new BO.DroneIsntShipping(droneId);
             }
             IDAL.DO.Parcel parcel;
             try
@@ -105,7 +105,7 @@ namespace BL
             drone.Battery -= GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)parcel.Weight);
             drone.MyLocation = targetLocation;
             drone.Status = DroneStatuses.vacant;
-            Drones[Drones.FindIndex(x => x.Id == dronelId)] = drone;
+            Drones[Drones.FindIndex(x => x.Id == droneId)] = drone;
             MyDal.ParcelDelivered(parcel.Id);
         }
     }

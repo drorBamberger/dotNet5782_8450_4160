@@ -47,11 +47,19 @@ namespace BL
         //gets--------------------------------------------------------------
         internal Station GetStation(int id)
         {
-            IDAL.DO.Station StructToClass = MyDal.DisplayStation(id);
+            IDAL.DO.Station StructToClass;
+            try
+            {
+                StructToClass = MyDal.DisplayStation(id);
+            }
+            catch(IDAL.DO.IdNotExistException err)
+            {
+                throw new BO.IdNotExistException(err.Id);
+            }
             List<DroneInCharge> DronesInStation = new List<DroneInCharge> { };
             foreach (var item in Drones)
             {
-                if (item.MyLocation.Longitude == StructToClass.Longitude && item.MyLocation.Latitude == StructToClass.Lattitude)
+                if (item.MyLocation == new Location(StructToClass.Longitude, StructToClass.Lattitude))
                 {
                     DronesInStation.Add(new DroneInCharge(item.Id, item.Battery));
                 }
@@ -62,28 +70,31 @@ namespace BL
 
         internal Drone GetDrone(int id)
         {
-            IDAL.DO.Drone StructToClass = MyDal.DisplayDrone(id);
-            double battery = 0;
-            DroneStatuses status = 0;
-            Location DroneLocation = new Location(0, 0);
-            foreach (var item in Drones)
+            IDAL.DO.Drone StructToClass;
+            try
             {
-                if (item.Id == id)
-                {
-                    battery = item.Battery;
-                    status = item.Status;
-                    DroneLocation = item.MyLocation;
-                    break;
-                }
+                StructToClass = MyDal.DisplayDrone(id);
             }
-            
+            catch (IDAL.DO.IdNotExistException err)
+            {
+                throw new BO.IdNotExistException(err.Id);
+            }
+            var drone = Drones.Find(item => item.Id == id);
             return new Drone(id, StructToClass.Model, (WeightCategories)StructToClass.MaxWeight,
-                battery, status, GetParcelOnDelivery(id), DroneLocation);
+                drone.Battery, drone.Status, GetParcelOnDelivery(id), drone.MyLocation);
         }
 
         internal Customer GetCustomer(int id)
         {
-            IDAL.DO.Customer StructToClass = MyDal.DisplayCustomer(id);
+            IDAL.DO.Customer StructToClass;
+            try
+            {
+                StructToClass = MyDal.DisplayCustomer(id);
+            }
+            catch (IDAL.DO.IdNotExistException err)
+            {
+                throw new BO.IdNotExistException(err.Id);
+            }
             List<ParcelForCustomer> fromCustomers = new List<ParcelForCustomer>();
             List<ParcelForCustomer> toCustomers = new List<ParcelForCustomer>();
             foreach(var item in MyDal.ParcelList())
@@ -105,20 +116,36 @@ namespace BL
 
         internal Parcel GetParcel(int id)
         {
-            IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
-
+            IDAL.DO.Parcel StructToClass;
+            try
+            {
+                StructToClass = MyDal.DisplayParcel(id);
+            }
+            catch (IDAL.DO.IdNotExistException err)
+            {
+                throw new BO.IdNotExistException(err.Id);
+            }
 
             return new Parcel(id, new CustomerInParcel(StructToClass.SenderId, MyDal.DisplayCustomer(StructToClass.SenderId).Name),
                 new CustomerInParcel(StructToClass.TargetId, MyDal.DisplayCustomer(StructToClass.TargetId).Name), (WeightCategories)StructToClass.Weight,
-                (Priorities)StructToClass.Priority, GetDroneInParcel(id), StructToClass.Reuqested, StructToClass.Scheduled, StructToClass.PickedUp, StructToClass.Delivered);
+                (Priorities)StructToClass.Priority, GetDroneInParcel(id), StructToClass.Reuqested,
+                StructToClass.Scheduled, StructToClass.PickedUp, StructToClass.Delivered);
         }
         internal ParcelOnDelivery GetParcelOnDelivery(int droneId)
         {
-            IDAL.DO.Parcel parcel = MyDal.ParcelList().First(p => p.DroneId == droneId);
+            if (!Drones.Exists(x => x.Id == droneId))
+            {
+                throw new BO.IdNotExistException(droneId);
+            }
+            if(Drones.Find(x=>x.Id == droneId).ParcelId == 0)
+            {
+                return default;
+            }
+            IDAL.DO.Parcel parcel = MyDal.DisplayParcel(Drones.Find(x => x.Id == droneId).ParcelId);
             IDAL.DO.Customer sender = MyDal.DisplayCustomer(parcel.SenderId);
             IDAL.DO.Customer target = MyDal.DisplayCustomer(parcel.TargetId);
-            Location SenderLocation = new Location(sender.Longitude, sender.Lattitude);
-            Location TargetLocation = new Location(target.Longitude, target.Lattitude);
+            Location SenderLocation = GetParcelSenderLocation(parcel.Id);
+            Location TargetLocation = GetParcelTargetLocation(parcel.Id);
             CustomerInParcel senderInParcel = new CustomerInParcel(sender.Id, sender.Name);
             CustomerInParcel targetInParcel = new CustomerInParcel(sender.Id, sender.Name);
 
