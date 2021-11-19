@@ -21,13 +21,13 @@ namespace BL
                 throw new BO.DroneIsntVacant(droneId);
             }
             List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList();
-            parcelList.RemoveAll(x => (int)x.Weight > (int)drone.MaxWeight);//removing all the to heavy parcels
+            parcelList.RemoveAll(x => (int)x.Weight > (int)drone.MaxWeight);//removing all the too heavy parcels
             if (parcelList.Count == 0)
             {
                 throw new BO.NoParcelMatch(droneId);
             }
             //now i will order the list so the priority is the main influancer then the weight(bigger better) and then the distance(smaller better)
-            parcelList.OrderByDescending(x => (int)x.Priority * 10 + (int)x.Weight + 1 / DistanceTo(drone.MyLocation, GetParcelSenderLocation(x.Id)));
+            parcelList.OrderByDescending(x => (int)x.Priority * 10 + (int)x.Weight + 1.0 / DistanceTo(drone.MyLocation, GetParcelSenderLocation(x.Id)));
             foreach (var parcel in parcelList)
             {
                 Location senderLocation = GetParcelSenderLocation(parcel.Id), targetLocation = GetParcelTargetLocation(parcel.Id);
@@ -37,6 +37,7 @@ namespace BL
                     DistanceTo(targetLocation, new Location(closestStationToTarget.Longitude, closestStationToTarget.Lattitude)) * Available < drone.Battery)
                 {
                     drone.Status = DroneStatuses.Shipping;
+                    drone.ParcelId = parcel.Id;
                     Drones[Drones.FindIndex(x => x.Id == drone.Id)] = drone;
                     MyDal.Attribution(drone.Id, parcel.Id);
                     return;
@@ -60,15 +61,15 @@ namespace BL
             {
                 parcel = MyDal.DisplayParcel(drone.ParcelId);
             }
-            catch (IDAL.DO.IdTakenException err)
+            catch (IDAL.DO.IdNotExistException err)
             {
-                throw new BO.IdTakenException(err.Id);
+                throw new BO.IdNotExistException(err.Id);
             }
-            if (parcel.Scheduled != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
+            if (parcel.Scheduled == DateTime.MinValue || parcel.PickedUp != DateTime.MinValue)
             {
-                throw new BO.ParcelDeliveredOrNotPickedUp(parcel.Id);
+                throw new BO.ParcelPickedUpOrIsntScheduled(parcel.Id);
             }
-            Location parcelLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
+            Location parcelLocation = GetParcelSenderLocation(parcel.Id);
             drone.Battery -= DistanceTo(drone.MyLocation, parcelLocation) * Available;
             drone.MyLocation = parcelLocation;
             Drones[Drones.FindIndex(x => x.Id == dronelId)] = drone;
@@ -90,16 +91,16 @@ namespace BL
             {
                 parcel = MyDal.DisplayParcel(drone.ParcelId);
             }
-            catch (IDAL.DO.IdTakenException err)
+            catch (IDAL.DO.IdNotExistException err)
             {
-                throw new BO.IdTakenException(err.Id);
+                throw new BO.IdNotExistException(err.Id);
             }
-            if (parcel.PickedUp != DateTime.MinValue || parcel.Delivered == DateTime.MinValue)
+            if (parcel.PickedUp == DateTime.MinValue || parcel.Delivered != DateTime.MinValue)
             {
-                throw new BO.ParcelPickedUpOrIsntBinded(parcel.Id);
+                throw new BO.ParcelDeliveredOrNotPickedUp(parcel.Id);
             }
-            Location senderLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
-            Location targetLocation = new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Lattitude);
+            Location senderLocation = GetParcelSenderLocation(parcel.Id);
+            Location targetLocation = GetParcelTargetLocation(parcel.Id);
 
             drone.Battery -= GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)parcel.Weight);
             drone.MyLocation = targetLocation;

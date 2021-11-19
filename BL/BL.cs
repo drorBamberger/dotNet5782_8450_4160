@@ -34,10 +34,10 @@ namespace BL
                 {
                     myParcel = ((List<IDAL.DO.Parcel>)(MyDal.ParcelList()))[parcelIndex];
                     senderLocation = new Location(MyDal.DisplayCustomer(myParcel.SenderId).Longitude,
-                            MyDal.DisplayCustomer(myParcel.SenderId).Longitude);
+                            MyDal.DisplayCustomer(myParcel.SenderId).Lattitude);
                     targetLocation = new Location(MyDal.DisplayCustomer(myParcel.TargetId).Longitude,
-                            MyDal.DisplayCustomer(myParcel.TargetId).Longitude);
-                    if (myParcel.PickedUp == DateTime.MinValue)
+                            MyDal.DisplayCustomer(myParcel.TargetId).Lattitude);
+                    if (myParcel.PickedUp != DateTime.MinValue)
                     {
                         droneLocation = senderLocation;
                         IDAL.DO.Station closestStation = GetClosestStation(targetLocation, (List<IDAL.DO.Station>)MyDal.StationList());
@@ -55,7 +55,7 @@ namespace BL
                     }
 
                     Drones.Add(new DroneForList(drone.Id, drone.Model, (WeightCategories)drone.MaxWeight,
-                        rnd.NextDouble()*(100- minimumBatteryNeeded)+ minimumBatteryNeeded//(nextDouble between 0 - 1)*(between 0 - 100-minimumBatteryNeeded)*(between minimumBatteryNeeded - 100)
+                        rnd.NextDouble()*(100- minimumBatteryNeeded)+ minimumBatteryNeeded//(nextDouble between 0 - 1)*(between 0 - 100-minimumBatteryNeeded)+(between minimumBatteryNeeded - 100)
                         , DroneStatuses.Shipping, myParcel.Id, droneLocation));
                 }
                 else
@@ -64,21 +64,23 @@ namespace BL
                     if(status == DroneStatuses.vacant)
                     {
                         var parcelList = ((List<IDAL.DO.Parcel>)MyDal.ParcelList());
-                        int customerId = parcelList.FindAll(x => x.Delivered != DateTime.MinValue)[rnd.Next(0, parcelList.Count())].TargetId;
+                        parcelList = parcelList.FindAll(x => x.Delivered != DateTime.MinValue);
+                        int customerId = parcelList[rnd.Next(0, parcelList.Count())].TargetId;
                         var myCustomer = MyDal.DisplayCustomer(customerId);
-                        var closestStation = GetClosestStation(new Location(myCustomer.Longitude, myCustomer.Lattitude), (List<IDAL.DO.Station>)MyDal.StationList());
-                        double distance = DistanceTo(new Location(myCustomer.Longitude, myCustomer.Lattitude),
+                        Location customerLocation = new Location(myCustomer.Longitude, myCustomer.Lattitude);
+                        var closestStation = GetClosestStation(customerLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+                        double distance = DistanceTo(customerLocation,
                             new Location(closestStation.Longitude, closestStation.Lattitude));
                         minimumBatteryNeeded = distance * Available;
                         Drones.Add(new DroneForList(drone.Id, drone.Model, (WeightCategories)drone.MaxWeight,
                             rnd.NextDouble() * (100 - minimumBatteryNeeded) + minimumBatteryNeeded, DroneStatuses.vacant, 0,
-                            new Location(myCustomer.Longitude, myCustomer.Lattitude)));
+                            customerLocation));
                     }
                     else
                     {
                         List < IDAL.DO.Station > stationList = (List<IDAL.DO.Station>)(MyDal.StationList());
                         Drones.Add(new DroneForList(drone.Id, drone.Model, (WeightCategories)drone.MaxWeight,
-                            rnd.NextDouble() * 20, status, 0,
+                            rnd.NextDouble() * 20, DroneStatuses.maintenance, 0,
                             new Location(stationList[rnd.Next(0, stationList.Count())].Longitude,
                             stationList[rnd.Next(0, stationList.Count())].Lattitude)));
                     }

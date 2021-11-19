@@ -28,8 +28,7 @@ namespace BL
             drone.Battery -= DistanceTo(drone.MyLocation, stationLocation) * Available;
             drone.MyLocation = stationLocation;
             drone.Status = DroneStatuses.maintenance;
-            Drones.RemoveAll(x => x.Id == drone.Id);
-            Drones.Add(drone);
+            Drones[Drones.FindIndex(x => x.Id == id)] = drone;
             MyDal.ChargeDrone(id, station.Id);
         }
 
@@ -46,8 +45,7 @@ namespace BL
             }
             drone.Battery += time * ChargePerHour;
             drone.Status = DroneStatuses.vacant;
-            Drones.RemoveAll(x => x.Id == drone.Id);
-            Drones.Add(drone);
+            Drones[Drones.FindIndex(x => x.Id == id)] = drone;
             MyDal.DisChargeDrone(id,
                 ((List<IDAL.DO.Station>)(MyDal.StationList())).Find(x => new Location(x.Longitude, x.Lattitude) == drone.MyLocation).Id);
         }

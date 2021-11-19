@@ -66,15 +66,15 @@ namespace BL
             }
             public int Id { get; set; }
         }
-        public class ParcelPickedUpOrIsntBinded : Exception
+        public class ParcelPickedUpOrIsntScheduled : Exception
         {
-            public ParcelPickedUpOrIsntBinded(int id)
+            public ParcelPickedUpOrIsntScheduled(int id)
             {
                 Id = id;
             }
             override public string ToString()
             {
-                return "The parcel with id:" + Id + " picked up or isn't binded";
+                return "The parcel with id:" + Id + " picked up or isn't Scheduled";
             }
             public int Id { get; set; }
         }
