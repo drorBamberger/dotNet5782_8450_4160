@@ -112,7 +112,7 @@ namespace BL
                 throw new BO.ParcelDeliveredOrNotPickedUp(parcel.Id);
             }
             Location parcelLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
-            drone.Battery -= GetElectricityPerKM(DistanceTo(drone.MyLocation, parcelLocation), (WeightCategories)parcel.Weight);
+            drone.Battery -= DistanceTo(drone.MyLocation, parcelLocation)*Available;
             drone.MyLocation = parcelLocation;
             Drones[Drones.FindIndex(x => x.Id == dronelId)] = drone;
             MyDal.PickedParcelUp(parcel.Id);
@@ -141,7 +141,14 @@ namespace BL
             {
                 throw new BO.ParcelPickedUpOrIsntBinded(parcel.Id);
             }
-            //TO DO: func and exp
+            Location senderLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
+            Location targetLocation = new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Lattitude);
+
+            drone.Battery -= GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)parcel.Weight);
+            drone.MyLocation = targetLocation;
+            drone.Status = DroneStatuses.vacant;
+            Drones[Drones.FindIndex(x => x.Id == dronelId)] = drone;
+            MyDal.ParcelDelivered(parcel.Id);
         }
     }
 }
