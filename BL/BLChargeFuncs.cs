@@ -56,6 +56,23 @@ namespace BL
             {
                 throw new BO.IdNotExistException(droneId);
             }
+            var drone = Drones.Find(x => x.Id == droneId);
+            if(drone.Status != DroneStatuses.vacant)
+            {
+                throw new BO.DroneIsntVacant(droneId);
+            }
+            List<IDAL.DO.Parcel> priorityCheckGroup, checkGroup;
+            IDAL.DO.Parcel potentialParcel;
+            for (int i = 2; i >=0 ; i--)
+            {
+                priorityCheckGroup = ((List<IDAL.DO.Parcel>)(MyDal.ParcelList())).FindAll(X=>(int)X.Priority == i);
+                for (int j = (int)drone.MaxWeight; j >= 0; j--)
+                {
+                    checkGroup = priorityCheckGroup.FindAll(x => (int)x.Weight == j);
+                    potentialParcel = GetClosestParcel(drone.MyLocation, checkGroup);
+                    if(drone.Battery < DistanceTo(drone.MyLocation, ))
+                }
+            }
             //TO DO: func and exp
 
         }

@@ -172,6 +172,25 @@ namespace BL
             return comeBack;
         }
 
+        internal IDAL.DO.Parcel GetClosestParcel(Location locationA, List<IDAL.DO.Parcel> parcels)
+        {
+            double smallDistance = double.MaxValue, tmpDis;
+            IDAL.DO.Parcel comeBack = new IDAL.DO.Parcel();
+            foreach (var parcel in parcels)
+            {
+                Location parcelLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude,
+                    MyDal.DisplayCustomer(parcel.SenderId).Longitude);
+                tmpDis = DistanceTo(locationA, parcelLocation);
+                if (tmpDis < smallDistance)
+                {
+                    smallDistance = tmpDis;
+                    comeBack = parcel;
+                }
+            }
+            return comeBack;
+        }
+
+
         internal double GetElectricityPerKM(double distance, WeightCategories a = WeightCategories.Light)
         {
             if(a == WeightCategories.Light)
