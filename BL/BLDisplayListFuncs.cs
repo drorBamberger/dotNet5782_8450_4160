@@ -13,30 +13,18 @@ namespace BL
             IEnumerable<IDAL.DO.Station> original = MyDal.StationList();
             List<StationForList> comeBack = new List<StationForList>();
             int counter = 0;
-            
-            foreach(var item in original)
+            foreach(var station in original)
             {
-                foreach (var drone in Drones)
-                {
-                    if (drone.MyLocation == new Location(item.Longitude, item.Lattitude))
-                        counter++;
-                        
-                }
-                comeBack.Add(new StationForList(item.Id, item.Name, item.ChargeSlots, counter));
-                counter = 0;
+                counter = Drones.FindAll(x => x.MyLocation == new Location(station.Longitude, station.Lattitude) &&
+                x.Status == DroneStatuses.maintenance).Count();
+                comeBack.Add(new StationForList(station.Id, station.Name, station.ChargeSlots, counter));
             }
             return comeBack;
         }
 
         public IEnumerable<DroneForList> DroneList()
         {
-            List<DroneForList> comeBack = new List<DroneForList>();
-            foreach(var item in Drones)
-            {
-                comeBack.Add(new DroneForList(item.Id, item.Model, item.MaxWeight,
-                    item.Battery, item.Status, item.ParcelId, item.MyLocation));
-            }
-            return comeBack;
+            return Drones;
         }
 
         public IEnumerable<CustomerForList> CustomerList()
@@ -44,65 +32,38 @@ namespace BL
             IEnumerable<IDAL.DO.Customer> original = MyDal.CustomerList();
             List<CustomerForList> comeBack = new List<CustomerForList>();
             int counterSendProvide = 0, counterSendNotProvide = 0, counterGot = 0, counterOnTheWay = 0;
-            foreach(var item in original)
+            foreach(var customer in original)
             {
-                foreach(var parcel in MyDal.ParcelList())
-                {
-                    if(parcel.SenderId == item.Id)
-                    {
-                        if (parcel.Delivered == DateTime.MinValue)
-                            counterSendNotProvide++;
-                        else
-                            counterSendProvide++;
-                    }
-                    if (parcel.TargetId == item.Id)
-                    {
-                        if (parcel.Delivered == DateTime.MinValue)
-                            counterOnTheWay++;
-                        else
-                            counterGot++;
-                    }
-                }
-                comeBack.Add(new CustomerForList(item.Id, item.Name, item.Phone,
+                counterSendProvide = MyDal.ParcelList().Where(x => x.SenderId == customer.Id && x.Delivered != DateTime.MinValue).Count();
+                counterSendNotProvide = MyDal.ParcelList().Where(x => x.SenderId == customer.Id && x.Delivered == DateTime.MinValue).Count();
+                counterGot = MyDal.ParcelList().Where(x => x.TargetId == customer.Id && x.Delivered != DateTime.MinValue).Count();
+                counterOnTheWay = MyDal.ParcelList().Where(x => x.TargetId == customer.Id && x.Delivered == DateTime.MinValue).Count();
+                comeBack.Add(new CustomerForList(customer.Id, customer.Name, customer.Phone,
                     counterSendProvide, counterSendNotProvide, counterGot, counterOnTheWay));
-
-                counterSendProvide = 0; counterSendNotProvide = 0; counterGot = 0; counterOnTheWay = 0;
             }
             return comeBack;
         }
+
         public IEnumerable<ParcelForList> ParcelList()
         {
             IEnumerable<IDAL.DO.Parcel> original = MyDal.ParcelList();
             List<ParcelForList> comeBack = new List<ParcelForList>();
-            ParcelStatuses status;
-            foreach (var item in original)
+            foreach (var parcel in original)
             {
-                comeBack.Add(new ParcelForList(item.Id, MyDal.DisplayCustomer(item.SenderId).Name,
-                    MyDal.DisplayCustomer(item.TargetId).Name, (WeightCategories)item.Weight,
-                    (Priorities)item.Priority, GetParcelStatus(item.Id))); 
+                comeBack.Add(new ParcelForList(parcel.Id, MyDal.DisplayCustomer(parcel.SenderId).Name,
+                    MyDal.DisplayCustomer(parcel.TargetId).Name, (WeightCategories)parcel.Weight,
+                    (Priorities)parcel.Priority, GetParcelStatus(parcel.Id))); 
             }
             return comeBack;
         }
 
         public IEnumerable<ParcelForList> ParcelListNotTaken()
         {
-            List<ParcelForList> comeBack = new List<ParcelForList>();
-            foreach(var parcel in ParcelList())
-            {
-                if (parcel.Status == ParcelStatuses.Reuqested)
-                    comeBack.Add(parcel);
-            }
-            return comeBack;
+            return ParcelList().Where(x => x.Status == ParcelStatuses.Reuqested);
         }
         public IEnumerable<StationForList> FreeStations()
         {
-            List<StationForList> comeBack = new List<StationForList>();
-            foreach (var station in StationList())
-            {
-                if (station.FreeChargeSlots!=0)
-                    comeBack.Add(station);
-            }
-            return comeBack;
+            return StationList().Where(x => x.FreeChargeSlots != 0);
         }
     }
 }
