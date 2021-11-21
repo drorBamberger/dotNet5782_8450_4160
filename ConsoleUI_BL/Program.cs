@@ -225,8 +225,14 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Enter priority:");
             priority = GetInt();
-
-            dataBase.AddParcel(senderId, targetId, weight, priority);
+            try
+            {
+                dataBase.AddParcel(senderId, targetId, weight, priority);
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         //~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~
