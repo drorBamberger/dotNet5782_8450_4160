@@ -15,7 +15,10 @@ namespace IDAL
                 TargetId = targetId;
                 Weight = weight;
                 Reuqested = DateTime.Now;
-                Scheduled = DateTime.MinValue;
+                if (droneId == 0)
+                    Scheduled = DateTime.MinValue;
+                else
+                    Scheduled = DateTime.Now;
                 PickedUp = DateTime.MinValue;
                 Delivered = DateTime.MinValue;
                 Priority = priority;

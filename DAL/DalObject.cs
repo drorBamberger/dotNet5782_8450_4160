@@ -50,8 +50,9 @@ namespace DalObject
             //parcels initialization
             for (ParcelId = 1; ParcelId < 11; ParcelId++)
             {
+                int[] droneId = new int[]{ Drones[rnd.Next(0, 5)].Id, 0 };
                 Parcels.Add(new Parcel(Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id,
-                   (WeightCategories)rnd.Next(0, 3), (Priorities)rnd.Next(0, 3), Drones[rnd.Next(0, 5)].Id));
+                   (WeightCategories)rnd.Next(0, 3), (Priorities)rnd.Next(0, 3), droneId[rnd.Next(0, 2)]));
             }
 
         }
@@ -173,19 +174,19 @@ namespace DalObject
 
         public Drone DisplayDrone(int id)
         {
-            IsIdExist(DataSource.Stations, id);
+            IsIdExist(DataSource.Drones, id);
             return DataSource.Drones.Find(x => x.Id == id);
         }
 
         public Customer DisplayCustomer(int id)
         {
-            IsIdExist(DataSource.Stations, id);
+            IsIdExist(DataSource.Customers, id);
             return DataSource.Customers.Find(x => x.Id == id);
         }
 
         public Parcel DisplayParcel(int id)
         {
-            IsIdExist(DataSource.Stations, id);
+            IsIdExist(DataSource.Parcels, id);
             return DataSource.Parcels.Find(x => x.Id == id);
         }
 
