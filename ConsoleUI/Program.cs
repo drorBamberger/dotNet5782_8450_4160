@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using IDAL.DO;
 
 namespace ConsoleUI
@@ -201,7 +204,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            dataBase.addParcel(senderId, targetId, weight, priority, droneId);
+            dataBase.AddParcel(senderId, targetId, weight, priority, droneId);
         }
 
         //~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -451,51 +454,51 @@ namespace ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        Station[] stations = dataBase.StationList();
-                        for (int i = 0; i < stations.Length; ++i)
+                        List<Station> stations = (List<Station>)dataBase.StationList();
+                        foreach (var item in stations)
                         {
-                            Console.WriteLine(stations[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 2:
-                        Drone[] drones = dataBase.DroneList();
-                        for (int i = 0; i < drones.Length; ++i)
+                        List<Drone> drones = (List<Drone>)dataBase.DroneList();
+                        foreach (var item in drones)
                         {
-                            Console.WriteLine(drones[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 3:
-                        Customer[] customers = dataBase.CustomerList();
-                        for (int i = 0; i < customers.Length; ++i)
+                        List<Customer> customers = (List<Customer>)dataBase.CustomerList();
+                        foreach (var item in customers)
                         {
-                            Console.WriteLine(customers[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 4:
-                        Parcel[] parcels = dataBase.parcelList();
-                        for (int i = 0; i < parcels.Length; ++i)
+                        List<Parcel> parcels = (List<Parcel>)dataBase.ParcelList();
+                        foreach (var item in parcels)
                         {
-                            Console.WriteLine(parcels[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
 
                         break;
                     case 5:
-                        parcels = dataBase.parcelListNotTaken();
-                        for (int i = 0; i < parcels.Length; ++i)
+                        parcels = (List<Parcel>)dataBase.ParcelListNotTaken();
+                        foreach (var item in parcels)
                         {
-                            Console.WriteLine(parcels[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;
                     case 6:
-                        stations = dataBase.freeStations(); 
-                        for (int i = 0; i < stations.Length; ++i)
+                        stations = (List<Station>)dataBase.FreeStations();
+                        foreach (var item in stations)
                         {
-                            Console.WriteLine(stations[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                         break;

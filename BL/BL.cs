@@ -10,7 +10,7 @@ namespace BL
     public partial class BL : IBL.IBL
     {
         List<DroneForList> Drones = new List<DroneForList>();
-        static DalObject.DalObject MyDal = new DalObject.DalObject();
+        static DalObject.DalObject MyDal;
         public double Available;
         public double SmallPackege;
         public double MediumPackege;
@@ -18,6 +18,7 @@ namespace BL
         public double ChargePerHour;
         public BL()
         {
+            MyDal = new DalObject.DalObject();
             Random rnd = new Random();
             GetElecticity();
             var dalDrones = MyDal.DroneList();
