@@ -17,7 +17,7 @@ namespace DalObject
         public static List<Customer> Customers = new List<Customer>();
         public static List<Parcel> Parcels = new List<Parcel>();
         public static List<DroneCharge> Charging = new List<DroneCharge>();
-        public static int ParcelId = 0;
+        public static int ParcelId = 1;
         internal class Config
         {
             public static double Available = 1.2;
@@ -48,7 +48,7 @@ namespace DalObject
             }
 
             //parcels initialization
-            for (ParcelId = 1; ParcelId < 11; ParcelId++)
+            for (int i = 0; i < 10; i++)
             {
                 int[] droneId = new int[]{ Drones[rnd.Next(0, 5)].Id, 0 };
                 Parcels.Add(new Parcel(Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id,
