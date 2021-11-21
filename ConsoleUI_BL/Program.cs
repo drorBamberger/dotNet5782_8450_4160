@@ -412,6 +412,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
+            
         }
 
         /// <summary>
