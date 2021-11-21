@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using IBL.BO;
 
@@ -51,14 +52,15 @@ namespace BL
 
         public void AddParcel(int senderId, int targetId, int maxWeight, int priority)
         {
-            try
+            if(MyDal.CustomerList().Where(x=>x.Id == senderId).Any())
             {
-                MyDal.AddParcel(senderId, targetId, maxWeight, priority, 0);
+                throw new BO.IdNotExistException(senderId);
             }
-            catch (IDAL.DO.IdTakenException err)
+            if(MyDal.CustomerList().Where(x => x.Id == targetId).Any())
             {
-                throw new BO.IdTakenException(err.Id);
+                throw new BO.IdNotExistException(targetId);
             }
+            MyDal.AddParcel(senderId, targetId, maxWeight, priority, 0);
         }
     }
 }
