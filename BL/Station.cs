@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace IBL
@@ -25,11 +26,12 @@ namespace IBL
 
             public override string ToString()
             {
+                
                 return ("ID:               " + Id + "\n" +
                         "Name:             " + Name + "\n" +
                         "Free ChargeSlots: " + ChargeSlots + "\n" +
                         "Location:         " + MyLocation + "\n" +
-                        "Drones In Charge: " + Drones.ToString() + "\n");
+                        "Drones In Charge: " + (Drones.Count() != 0?Drones.ToString():"--------") + "\n");
             }
         }
     }
