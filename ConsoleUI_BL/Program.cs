@@ -288,7 +288,7 @@ namespace ConsoleUI_BL
         static void PrintUpdate()
         {
             Console.WriteLine("What you want to update?");
-            Console.WriteLine("1. Moudle of drone");
+            Console.WriteLine("1. Model of drone");
             Console.WriteLine("2. Station");
             Console.WriteLine("3. Customer");
             Console.WriteLine("4. Send drone to charge");
