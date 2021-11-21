@@ -293,7 +293,7 @@ namespace ConsoleUI_BL
         static void PrintUpdate()
         {
             Console.WriteLine("What you want to update?");
-            Console.WriteLine("1. Name of drone");
+            Console.WriteLine("1. Model of drone");
             Console.WriteLine("2. Station");
             Console.WriteLine("3. Customer");
             Console.WriteLine("4. Send drone to charge");
@@ -378,7 +378,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter customer id:");
             Id = GetInt();
 
-            Console.WriteLine("Enter the new name of the station:");
+            Console.WriteLine("Enter the new name of the customer:");
             customerName = Console.ReadLine();
 
             Console.WriteLine("Enter phone number:");
