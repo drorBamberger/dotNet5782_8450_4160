@@ -164,6 +164,11 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
+            catch (BL.BO.IdNotExistException err)
+            {
+                Console.WriteLine(err);
+            }
+
         }
 
         /// <summary>

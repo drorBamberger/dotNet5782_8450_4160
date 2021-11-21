@@ -10,7 +10,7 @@ namespace BL
     {
         public void ChargeDrone(int id)
         {
-            if (!Drones.Exists(x => x.Id == id))
+            if (Drones.Exists(x => x.Id == id) == false)
             {
                 throw new BO.IdNotExistException(id);
             }

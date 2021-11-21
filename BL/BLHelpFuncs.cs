@@ -162,6 +162,10 @@ namespace BL
         }
         internal DroneInParcel GetDroneInParcel(int parcelId)
         {
+            if(Drones.FindIndex(x=>x.ParcelId == parcelId) == -1)
+            {
+                return default;
+            }
             DroneForList myDrone = Drones.Find(x => x.ParcelId == parcelId);
             return new DroneInParcel(myDrone.Id, myDrone.Battery, myDrone.MyLocation);
         }
