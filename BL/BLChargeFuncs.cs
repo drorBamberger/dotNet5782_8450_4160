@@ -34,6 +34,10 @@ namespace BL
 
         public void DisChargeDrone(int id, double time)
         {
+            if (time <= 0)
+            {
+                throw new BO.CantBeNegative(time);
+            }
             if (!Drones.Exists(x => x.Id == id))
             {
                 throw new BO.IdNotExistException(id);

@@ -436,7 +436,11 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.DroneIsntMaintenance err)
+            catch (BL.BO.DroneIsntMaintenance err) 
+            {
+                Console.WriteLine(err);
+            }
+            catch (BL.BO.CantBeNegative err)
             {
                 Console.WriteLine(err);
             }

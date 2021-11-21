@@ -90,6 +90,18 @@ namespace BL
             }
             public int Id { get; set; }
         }
+        public class CantBeNegative : Exception
+        {
+            public CantBeNegative(double num)
+            {
+                Num = num;
+            }
+            override public string ToString()
+            {
+                return "The number: " + Num + " must be positive!!!";
+            }
+            public double Num { get; set; }
+        }
 
         public class DroneHaveToLittleBattery : Exception
         {
