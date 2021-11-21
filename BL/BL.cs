@@ -9,8 +9,8 @@ namespace BL
 
     public partial class BL : IBL.IBL
     {
-        List<DroneForList> Drones;
-        IDAL.IDal MyDal;
+        List<DroneForList> Drones = new List<DroneForList>();
+        static DalObject.DalObject MyDal = new DalObject.DalObject();
         public double Available;
         public double SmallPackege;
         public double MediumPackege;

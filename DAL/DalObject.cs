@@ -10,13 +10,13 @@ using IDAL.DO;
 namespace DalObject
 {
 
-    class DataSource
+    public class DataSource
     {
-        public static List<Drone> Drones;
-        public static List<Station> Stations;
-        public static List<Customer> Customers;
-        public static List<Parcel> Parcels;
-        public static List<DroneCharge> Charging;
+        public static List<Drone> Drones = new List<Drone>();
+        public static List<Station> Stations = new List<Station>();
+        public static List<Customer> Customers = new List<Customer>();
+        public static List<Parcel> Parcels = new List<Parcel>();
+        public static List<DroneCharge> Charging = new List<DroneCharge>();
         public static int ParcelId = 0;
         internal class Config
         {
@@ -226,8 +226,9 @@ namespace DalObject
         }
         public double[] AskForElectricity()
         {
-            return new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
+            double[] s = new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
                 DataSource.Config.HeavyPackege, DataSource.Config.ChargePerHour };
+            return s;
         }
 
         //update funcs:
