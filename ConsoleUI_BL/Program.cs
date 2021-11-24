@@ -306,22 +306,22 @@ namespace ConsoleUI_BL
         }
 
         /// <summary>
-        /// update name of drone
+        /// update model of drone
         /// </summary>
         static void DroneUpdate()
         {
             int droneId;
-            string droneName;
+            string droneModel;
 
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
             Console.WriteLine("Enter the new model of the drone:");
-            droneName = Console.ReadLine();
+            droneModel = Console.ReadLine();
 
             try
             {
-                dataBase.DroneUpdate(droneId, droneName);
+                dataBase.DroneUpdate(droneId, droneModel);
             }
             catch (BL.BO.IdNotExistException err)
             {

@@ -31,8 +31,8 @@ namespace IBL
                 return ("ID:                        " + Id + "\n" +
                         "Name:                      " + Name + "\n" +
                         "Phone:                     " + PhoneNum + "\n" +
-                        "Parcels From Customer:     " + (FromCustomer.Count()!=0? FromCustomer.ToString():"-------" )+ "\n" +
-                        "Parcel To Customer:        " + (ToCustomer.Count() != 0 ? ToCustomer.ToString() : "-------") + "\n");
+                        "Parcels From Customer:     " + (FromCustomer.Count()!=0? FromCustomer.ToString():"-----------" )+ "\n" +
+                        "Parcel To Customer:        " + (ToCustomer.Count() != 0 ? ToCustomer.ToString() : "-----------") + "\n");
             }
         }
     }

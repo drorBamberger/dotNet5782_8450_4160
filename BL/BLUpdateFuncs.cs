@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using IBL.BO;
 
@@ -9,6 +10,10 @@ namespace BL
     {
         public void DroneUpdate(int id, string name)
         {
+            if(Drones.FindIndex(x=>x.Id == id) == -1)
+            {
+                throw new BO.IdNotExistException(id);
+            }
             Drones.Find(x => x.Id == id).Model = name;
             var d = MyDal.DisplayDrone(id);
             d.Model = name;
@@ -16,6 +21,10 @@ namespace BL
         }
         public void StationUpdate(int id, string name, int allChargeSlot)
         {
+            if (MyDal.StationList().Any(x => x.Id == id) == false)
+            {
+                throw new BO.IdNotExistException(id);
+            }
             var d = MyDal.DisplayStation(id);
             int counter = 0;
             if(name != "")
@@ -37,6 +46,10 @@ namespace BL
         }
         public void CustomerUpdate(int id, string name, string phone)
         {
+            if (MyDal.CustomerList().Any(x => x.Id == id) == false)
+            {
+                throw new BO.IdNotExistException(id);
+            }
             var d = MyDal.DisplayCustomer(id);
             if (name != "")
             {
@@ -44,7 +57,7 @@ namespace BL
             }
             if (phone != "")
             {
-                d.Phone = name;
+                d.Phone = phone;
             }
             MyDal.UpDateCustomer(d);
         }

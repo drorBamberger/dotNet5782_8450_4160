@@ -14,7 +14,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The id: " + Id + "isn't available";
+                return "The id: " + Id + " isn't available";
             }
             public int Id { get; set; }
         }
@@ -26,7 +26,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The id: " + Id + "isn't exist";
+                return "The id: " + Id + " isn't exist";
             }
             public int Id { get; set; }
         }
@@ -38,7 +38,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The drone with id: " + Id + "isn't vacant";
+                return "The drone with id: " + Id + " isn't vacant";
             }
             public int Id { get; set; }
         }
@@ -50,7 +50,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The drone with id: " + Id + "isn't maintenance";
+                return "The drone with id: " + Id + " isn't maintenance";
             }
             public int Id { get; set; }
         }
@@ -62,7 +62,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The drone with id: " + Id + "isn't shipping";
+                return "The drone with id: " + Id + " isn't shipping";
             }
             public int Id { get; set; }
         }
@@ -74,7 +74,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The parcel with id:" + Id + " picked up or isn't Scheduled";
+                return "The parcel with id: " + Id + " picked up or isn't Scheduled";
             }
             public int Id { get; set; }
         }
@@ -86,7 +86,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The parcel with id:" + Id + " delivered or isn't picked up";
+                return "The parcel with id: " + Id + " delivered or isn't picked up";
             }
             public int Id { get; set; }
         }
@@ -111,7 +111,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The drone with id:" + Id + " have too little battery to travel that far";
+                return "The drone with id: " + Id + " have too little battery to travel that far";
             }
             public int Id { get; set; }
         }
@@ -124,7 +124,7 @@ namespace BL
             }
             override public string ToString()
             {
-                return "The drone with id:" + Id + " coudn't find any proper parcel";
+                return "The drone with id: " + Id + " coudn't find any proper parcel";
             }
             public int Id { get; set; }
         }
