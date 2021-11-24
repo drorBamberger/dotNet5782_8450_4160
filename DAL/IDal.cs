@@ -29,5 +29,6 @@ namespace IDAL
         public void UpDateDrone(Drone newDrone);
         public void UpDateCustomer(Customer newCustomer);
         public void UpDateStation(Station newStation);
+        public void DeleteDrone(int id);
     }
 }

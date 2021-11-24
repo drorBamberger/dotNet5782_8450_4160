@@ -316,7 +316,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            Console.WriteLine("Enter the new name of the drone:");
+            Console.WriteLine("Enter the new model of the drone:");
             droneName = Console.ReadLine();
 
             try
@@ -682,7 +682,8 @@ namespace ConsoleUI_BL
                 switch (choice)
                 {
                     case 1:
-                        IEnumerable<StationForList> stations = dataBase.StationList();
+                        IEnumerable<StationForList> stations;
+                        stations = dataBase.StationList();
                         foreach (var item in stations)
                         {
                             Console.WriteLine(item);

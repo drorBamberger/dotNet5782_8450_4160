@@ -20,10 +20,10 @@ namespace DalObject
         public static int ParcelId = 1;
         internal class Config
         {
-            public static double Available = 1.2;
-            public static double SmallPackege = 3;
-            public static double MediumPackege = 6;
-            public static double HeavyPackege = 10;
+            public static double Available = 0.00001;
+            public static double SmallPackege = 0.001;
+            public static double MediumPackege = 0.003;
+            public static double HeavyPackege = 0.005;
             public static double ChargePerHour = 20;
         }
         public static void Initialize()
@@ -249,5 +249,11 @@ namespace DalObject
             IsIdExist(DataSource.Stations, newStation.Id);
             DataSource.Stations[DataSource.Stations.FindIndex(x => x.Id == newStation.Id)] = newStation;
         }
+        public void DeleteDrone(int id)
+        {
+            DataSource.Drones.RemoveAll(
+                x => x.Id == id);
+        }
+
     }
 }
