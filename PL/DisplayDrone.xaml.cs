@@ -65,21 +65,22 @@ namespace PL
             InitializeComponent();
             dataBase = bl;
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
+            bool flag = myDrone.Status == IBL.BO.DroneStatuses.Shipping ;
             idLabel.Content = "Id: " + myDrone.Id;
             maxWeightLabel.Content = "max weight drone can lift:\n" + myDrone.MaxWeight;
             batteryLabel.Content = (int)myDrone.Battery+"%";
             statusLabel.Content = myDrone.Status;
-            parcelIdLabel.Content = "parcel ID: "+myDrone.MyParcel.Id;
-            parcelStatusLabel.Content = "parcel status: "+myDrone.MyParcel.Status;
-            parcelWeightLabel.Content = "parcel weight: "+myDrone.MyParcel.Weight;
-            parcelPriorityLabel.Content = "priority: "+myDrone.MyParcel.Priority;
-            senderIdLabel.Content = "sender ID: "+myDrone.MyParcel.Sender.Id;
-            senderNameLabel.Content = "sender name: " + myDrone.MyParcel.Sender.Name;
-            sendelLocLabel.Content = "sender location: " + myDrone.MyParcel.Collecting;
-            targetIdLabel.Content = "target ID: " + myDrone.MyParcel.Receiver.Id;
-            targetNameLabel.Content = "target name: " + myDrone.MyParcel.Receiver.Name;
-            targetLocLabel.Content = "target location: " + myDrone.MyParcel.Target;
-            transferDisLabel.Content = "distance: "+(int)myDrone.MyParcel.TransferDistance;
+            parcelIdLabel.Content = flag?"parcel ID: " +myDrone.MyParcel.Id: "";
+            parcelStatusLabel.Content = flag?"parcel status: " +myDrone.MyParcel.Status : "";
+            parcelWeightLabel.Content = flag?"parcel weight: " +myDrone.MyParcel.Weight : "";
+            parcelPriorityLabel.Content = flag?"priority: " +myDrone.MyParcel.Priority : "";
+            senderIdLabel.Content = flag?"sender ID: " +myDrone.MyParcel.Sender.Id : "";
+            senderNameLabel.Content = flag ? "sender name: " + myDrone.MyParcel.Sender.Name : "";
+            sendelLocLabel.Content = flag ? "sender location: " + myDrone.MyParcel.Collecting : "";
+            targetIdLabel.Content = flag ? "target ID: " + myDrone.MyParcel.Receiver.Id : "";
+            targetNameLabel.Content = flag ? "target name: " + myDrone.MyParcel.Receiver.Name : "";
+            targetLocLabel.Content = flag ? "target location: " + myDrone.MyParcel.Target : "";
+            transferDisLabel.Content = flag ? "distance: " +(int)myDrone.MyParcel.TransferDistance : "";
             droneLocationLabel.Content = "drone location: "+myDrone.MyLocation;
         }
 
