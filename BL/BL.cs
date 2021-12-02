@@ -45,6 +45,7 @@ namespace BL
                         minimumBatteryNeeded = GetElectricityPerKM(DistanceTo(droneLocation, targetLocation), (WeightCategories)myParcel.Weight) +
                             DistanceTo(targetLocation, new Location(closestStation.Longitude, closestStation.Lattitude))*Available;
                     }
+                    
                     else
                     {
                         IDAL.DO.Station closestStation = GetClosestStation(senderLocation, (List<IDAL.DO.Station>)MyDal.StationList());
