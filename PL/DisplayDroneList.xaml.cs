@@ -17,9 +17,28 @@ namespace PL
     /// </summary>
     public partial class DisplayDroneList : Window
     {
+        private IBL.IBL dataBase;
         public DisplayDroneList()
         {
             InitializeComponent();
+        }
+        public DisplayDroneList(IBL.IBL bl)
+        {
+            InitializeComponent();
+            dataBase = bl;
+            DronesListView.ItemsSource = bl.DroneList();
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
+        }
+
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            StatusSelector.SelectedItem
+        }
+
+        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

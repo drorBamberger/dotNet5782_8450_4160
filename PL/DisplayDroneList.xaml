@@ -19,8 +19,9 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="StatusSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" Width="120" Margin="30,14,50,13"/>
-            <Label x:Name="logo" Content="YairDrones" Grid.Column="0" HorizontalAlignment="Left" Margin="22,14,0,0" VerticalAlignment="Top"/>
+            <ComboBox Name="StatusSelector" Grid.Column="1" Margin="26,22,26,21" SelectionChanged="StatusSelector_SelectionChanged"/>
+            <Label x:Name="logo" Content="DroneBamberger" Grid.Column="0" HorizontalAlignment="Left" Margin="22,14,0,0" VerticalAlignment="Top"/>
+            <ComboBox Grid.Column="2" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top" Width="146" Height="37" SelectionChanged="WeightSelector_SelectionChanged"/>
         </Grid>
         <ListView Grid.Row="1" x:Name="DronesListView">
             <ListView.View>
