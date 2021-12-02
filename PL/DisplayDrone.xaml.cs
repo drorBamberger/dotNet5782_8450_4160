@@ -27,10 +27,35 @@ namespace PL
             InitializeComponent();
             dataBase = bl;
 
-            Label labelyID = new Label();
-            labelyID.Content = "Enter the id of the drone: ";
-            labelyID.FontSize = 30;
-            displayDrone.Children.Add(labelyID);
+            Label labelId = new Label();
+            labelId.Content = "Enter the id of the drone: ";
+            labelId.FontSize = 25;
+            Grid.SetRow(labelId, 0);
+            Grid.SetColumn(labelId, 0);
+            displayDrone.Children.Add(labelId);
+
+            Label labelModel = new Label();
+            labelModel.Content = "Enter the model of the drone: ";
+            labelModel.FontSize = 25;
+            Grid.SetRow(labelModel, 2);
+            Grid.SetColumn(labelModel, 0);
+            displayDrone.Children.Add(labelModel);
+
+            Label labelWeight = new Label();
+            labelWeight.Content = "Enter max weight of the drone: ";
+            labelWeight.FontSize = 25;
+            Grid.SetRow(labelWeight, 4);
+            Grid.SetColumn(labelWeight, 0);
+            displayDrone.Children.Add(labelWeight);
+
+            Label labelStatId = new Label();
+            labelStatId.Content = "Enter station id for initial charging: ";
+            labelStatId.FontSize = 25;
+            Grid.SetRow(labelStatId, 6);
+            Grid.SetColumn(labelStatId, 0);
+            displayDrone.Children.Add(labelStatId);
+
+
         }
 
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drones) //display and edit drone
