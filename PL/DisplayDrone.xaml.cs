@@ -20,11 +20,11 @@ namespace PL
         private IBL.IBL dataBase;
         public DisplayDrone()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
         public DisplayDrone(IBL.IBL bl) //add drone
         {
-            //InitializeComponent();
+            InitializeComponent();
             dataBase = bl;
 
             Label labelId = new Label();
@@ -62,11 +62,11 @@ namespace PL
 
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drone) //display and edit drone
         {
-            //InitializeComponent();
+            InitializeComponent();
             dataBase = bl;
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            idLabel.Content = "Id: "+ myDrone.Id;
-            maxWeightLabel.Content = "max weight drone can lift:\n"+myDrone.MaxWeight;
+            idLabel.Content = "Id: " + myDrone.Id;
+            maxWeightLabel.Content = "max weight drone can lift:\n" + myDrone.MaxWeight;
             batteryLabel.Content = (int)myDrone.Battery+"%";
             statusLabel.Content = myDrone.Status;
             parcelIdLabel.Content = "parcel ID: "+myDrone.MyParcel.Id;
