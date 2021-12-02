@@ -174,7 +174,7 @@ namespace PL
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            IBL.BO.DroneForList drone
+            IBL.BO.DroneForList drone;
             drone.Id = (int)droneId.Text;
             this.Close();
         }
