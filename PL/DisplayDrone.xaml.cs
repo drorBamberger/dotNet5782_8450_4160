@@ -18,6 +18,7 @@ namespace PL
     public partial class DisplayDrone : Window
     {
         private IBL.IBL dataBase;
+        TextBox droneId = new TextBox();
         public DisplayDrone()
         {
             InitializeComponent();
@@ -57,7 +58,6 @@ namespace PL
             Grid.SetColumn(labelStatId, 0);
             displayDrone.Children.Add(labelStatId);
 
-            TextBox droneId = new TextBox();
             droneId.FontSize = 25;
             Grid.SetColumn(droneId, 1);
             Grid.SetRow(droneId, 0);
@@ -108,41 +108,101 @@ namespace PL
             dataBase = bl;
 
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
+            bool flag = myDrone.Status == IBL.BO.DroneStatuses.Shipping ;
             idLabel.Content = "Id: " + myDrone.Id;
             maxWeightLabel.Content = "max weight drone can lift:\n" + myDrone.MaxWeight;
             batteryLabel.Content = (int)myDrone.Battery+"%";
             statusLabel.Content = myDrone.Status;
-            parcelIdLabel.Content = "parcel ID: "+myDrone.MyParcel.Id;
-            parcelStatusLabel.Content = "parcel status: "+myDrone.MyParcel.Status;
-            parcelWeightLabel.Content = "parcel weight: "+myDrone.MyParcel.Weight;
-            parcelPriorityLabel.Content = "priority: "+myDrone.MyParcel.Priority;
-            senderIdLabel.Content = "sender ID: "+myDrone.MyParcel.Sender.Id;
-            senderNameLabel.Content = "sender name: " + myDrone.MyParcel.Sender.Name;
-            sendelLocLabel.Content = "sender location: " + myDrone.MyParcel.Collecting;
-            targetIdLabel.Content = "target ID: " + myDrone.MyParcel.Receiver.Id;
-            targetNameLabel.Content = "target name: " + myDrone.MyParcel.Receiver.Name;
-            targetLocLabel.Content = "target location: " + myDrone.MyParcel.Target;
-            transferDisLabel.Content = "distance: "+(int)myDrone.MyParcel.TransferDistance;
-            droneLocationLabel.Content = "drone location: " + myDrone.MyLocation;
-            /*
-            <Button FontStyle="Italic" FontSize="32" Content="func1" Click="func1_Click" Height="74" Width="400" Grid.Row="6"/>
-            Button FontStyle="Italic" FontSize="32" Content="func2" Click="func2_Click" Height="74" Width="400" Grid.Row="6" Grid.Column="1"/>
-            */
+            parcelIdLabel.Content = flag?"parcel ID: " +myDrone.MyParcel.Id: "";
+            parcelStatusLabel.Content = flag?"parcel status: " +myDrone.MyParcel.Status : "";
+            parcelWeightLabel.Content = flag?"parcel weight: " +myDrone.MyParcel.Weight : "";
+            parcelPriorityLabel.Content = flag?"priority: " +myDrone.MyParcel.Priority : "";
+            senderIdLabel.Content = flag?"sender ID: " +myDrone.MyParcel.Sender.Id : "";
+            senderNameLabel.Content = flag ? "sender name: " + myDrone.MyParcel.Sender.Name : "";
+            sendelLocLabel.Content = flag ? "sender location: " + myDrone.MyParcel.Collecting : "";
+            targetIdLabel.Content = flag ? "target ID: " + myDrone.MyParcel.Receiver.Id : "";
+            targetNameLabel.Content = flag ? "target name: " + myDrone.MyParcel.Receiver.Name : "";
+            targetLocLabel.Content = flag ? "target location: " + myDrone.MyParcel.Target : "";
+            transferDisLabel.Content = flag ? "distance: " +(int)myDrone.MyParcel.TransferDistance : "";
+            droneLocationLabel.Content = "drone location: "+myDrone.MyLocation;
+
+            Button func1 = new Button();
+            func1.Height = 74;
+            func1.Width = 400;
+            func1.FontSize = 32;
+            func1.FontStyle = FontStyles.Italic;
+            Grid.SetRow(func1, 6);
+
+            Button func2 = new Button();
+            func2.Height = 74;
+            func2.Width = 400;
+            func2.FontSize = 32;
+            func2.FontStyle = FontStyles.Italic;
+            Grid.SetRow(func2, 6);
+            Grid.SetColumn(func2, 1);
+            if (drone.Status == IBL.BO.DroneStatuses.maintenance)
+            {
+                func1.Content = "Release drone from charger";
+                func1.Click += DisChargeDrone;
+            }
+            else if(drone.Status == IBL.BO.DroneStatuses.vacant)
+            {
+                func1.Content = "Send drone to charge";
+                func1.Click += ChargeDrone;
+
+                func2.Content = "Link parcel to drone";
+                func2.Click += Attribution;
+                displayDrone.Children.Add(func2);
+            }
+            else //shipping
+            {
+                if (1==1)// חבילה עוד לא נאספה
+                {
+                    func1.Content = "Pick up parcel by drone";
+                    func1.Click += PickedParcelUp;
+                }
+                else // חבילה כבר נאספה
+                {
+                    func1.Content = "Deliver parcel by drone";
+                    func1.Click += ParcelDelivered;
+                }
+
+            }
+            displayDrone.Children.Add(func1);
+
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            IBL.BO.DroneForList drone
+            drone.Id = (int)droneId.Text;
+            this.Close();
+        }
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void DisChargeDrone(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void ChargeDrone(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void Attribution(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void PickedParcelUp(object sender, RoutedEventArgs e)
+        {
+            
+            this.Close();
+        }
+        private void ParcelDelivered(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void Update_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
