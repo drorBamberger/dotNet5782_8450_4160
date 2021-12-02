@@ -20,10 +20,15 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        static BL.BL dataBase = new BL.BL();
+        static IBL.IBL dataBase = new BL.BL();
         public MainWindow()
         {
             InitializeComponent();
         }
+        private void NewEvent(object sender, RoutedEventArgs e)
+        {
+            new DisplayDroneList(dataBase).Show();
+        }
+        
     }
 }
