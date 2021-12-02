@@ -34,6 +34,8 @@ namespace PL
             Grid.SetColumn(labelId, 0);
             displayDrone.Children.Add(labelId);
 
+            TextBox text = new TextBox();
+
             Label labelModel = new Label();
             labelModel.Content = "Enter the model of the drone: ";
             labelModel.FontSize = 25;
