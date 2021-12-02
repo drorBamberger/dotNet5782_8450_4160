@@ -22,7 +22,7 @@
             <RowDefinition Height="18*"/>
             <RowDefinition Height="65*"/>
         </Grid.RowDefinitions>
-        <Button FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click" Height="72" Width="800" Grid.Row="8" Grid.ColumnSpan="2"/>
+        <Button FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Close_Click" Height="72" Width="800" Grid.Row="8" Grid.ColumnSpan="2"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="1" Background="#CF22C0B8"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="1" Grid.Column="1" Background="#CF22C0B8"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="3" Background="#CF22C0B8"/>

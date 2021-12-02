@@ -63,17 +63,34 @@ namespace PL
             InitializeComponent();
             dataBase = bl;
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            Label id = new Label(), battery = new Label();
-            id.Content = "Drone ID: " + myDrone.Id;
-            battery.Content = (int)myDrone.Battery + "%";
-            id.FontSize = 30;
-            
-            Grid.SetColumn(battery, 1);
-            displayDrone.Children.Add(id);
-            displayDrone.Children.Add(battery);
+            Label[] labels = new Label[4];
+            TextBox model = new TextBox();
+            for (int i = 0;i< 4;++i )
+            {
+                labels[i] = new Label();
+            }
+            model.Text = "\n\n\n"+myDrone.Model;
+            Grid.SetColumn(model, 1);
+            displayDrone.Children.Add(model);
+            bl.DroneUpdate(drone.Id, model.Text);
+            labels[0].Content = "Drone ID " + myDrone.Id;
+            labels[0].FontSize = 30;
+            labels[1].Content = (int)myDrone.Battery + "%";
+            Grid.SetColumn(labels[1], 1);
+            labels[2].Content = "\nmaximum weight: " + myDrone.MaxWeight;
+            Grid.SetColumn(labels[2], 1);
+            labels[3].Content = "\n\nstatus: " + myDrone.Status;
+
+
+            Grid.SetColumn(labels[3], 1);
+
+            foreach (var label in labels)
+            {
+                displayDrone.Children.Add(label);
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
