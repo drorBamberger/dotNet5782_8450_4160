@@ -38,9 +38,14 @@ namespace PL
             InitializeComponent();
             dataBase = bl;
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            Label id = new Label();
+            Label id = new Label(), battery = new Label();
             id.Content = "Drone ID: " + myDrone.Id;
-            d
+            battery.Content = (int)myDrone.Battery + "%";
+            id.FontSize = 30;
+            
+            Grid.SetColumn(battery, 1);
+            displayDrone.Children.Add(id);
+            displayDrone.Children.Add(battery);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
