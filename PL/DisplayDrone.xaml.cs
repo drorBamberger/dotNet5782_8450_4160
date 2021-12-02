@@ -65,31 +65,22 @@ namespace PL
             InitializeComponent();
             dataBase = bl;
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            Label[] labels = new Label[4];
-            TextBox model = new TextBox();
-            for (int i = 0;i< 4;++i )
-            {
-                labels[i] = new Label();
-            }
-            model.Text = "\n\n\n"+myDrone.Model;
-            Grid.SetColumn(model, 1);
-            displayDrone.Children.Add(model);
-            bl.DroneUpdate(drone.Id, model.Text);
-            labels[0].Content = "Drone ID " + myDrone.Id;
-            labels[0].FontSize = 30;
-            labels[1].Content = (int)myDrone.Battery + "%";
-            Grid.SetColumn(labels[1], 1);
-            labels[2].Content = "\nmaximum weight: " + myDrone.MaxWeight;
-            Grid.SetColumn(labels[2], 1);
-            labels[3].Content = "\n\nstatus: " + myDrone.Status;
-
-
-            Grid.SetColumn(labels[3], 1);
-
-            foreach (var label in labels)
-            {
-                displayDrone.Children.Add(label);
-            }
+            idLabel.Content = myDrone.Id;
+            maxWeightLabel.Content = myDrone.MaxWeight;
+            batteryLabel.Content = (int)myDrone.Battery;
+            statusLabel.Content = myDrone.Status;
+            parcelIdLabel.Content = myDrone.MyParcel.Id;
+            parcelStatusLabel.Content = myDrone.MyParcel.Status;
+            parcelWeightLabel.Content = myDrone.MyParcel.Weight;
+            parcelPriorityLabel.Content = myDrone.MyParcel.Priority;
+            senderIdLabel.Content = myDrone.MyParcel.Sender.Id;
+            senderNameLabel.Content = myDrone.MyParcel.Sender.Name;
+            sendelLocLabel.Content = myDrone.MyParcel.Collecting;
+            targetIdLabel.Content = myDrone.MyParcel.Receiver.Id;
+            targetNameLabel.Content = myDrone.MyParcel.Receiver.Name;
+            targetLocLabel.Content = myDrone.MyParcel.Target;
+            transferDisLabel.Content = (int)myDrone.MyParcel.TransferDistance;
+            droneLocationLabel.Content = myDrone.MyLocation;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
