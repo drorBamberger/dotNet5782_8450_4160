@@ -65,22 +65,22 @@ namespace PL
             InitializeComponent();
             dataBase = bl;
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            idLabel.Content = myDrone.Id;
-            maxWeightLabel.Content = myDrone.MaxWeight;
-            batteryLabel.Content = (int)myDrone.Battery;
+            idLabel.Content = "Id: "+myDrone.Id;
+            maxWeightLabel.Content = "max weight drone can lift:\n"+myDrone.MaxWeight;
+            batteryLabel.Content = (int)myDrone.Battery+"%";
             statusLabel.Content = myDrone.Status;
-            parcelIdLabel.Content = myDrone.MyParcel.Id;
-            parcelStatusLabel.Content = myDrone.MyParcel.Status;
-            parcelWeightLabel.Content = myDrone.MyParcel.Weight;
-            parcelPriorityLabel.Content = myDrone.MyParcel.Priority;
-            senderIdLabel.Content = myDrone.MyParcel.Sender.Id;
-            senderNameLabel.Content = myDrone.MyParcel.Sender.Name;
-            sendelLocLabel.Content = myDrone.MyParcel.Collecting;
-            targetIdLabel.Content = myDrone.MyParcel.Receiver.Id;
-            targetNameLabel.Content = myDrone.MyParcel.Receiver.Name;
-            targetLocLabel.Content = myDrone.MyParcel.Target;
-            transferDisLabel.Content = (int)myDrone.MyParcel.TransferDistance;
-            droneLocationLabel.Content = myDrone.MyLocation;
+            parcelIdLabel.Content = "parcel ID: "+myDrone.MyParcel.Id;
+            parcelStatusLabel.Content = "parcel status: "+myDrone.MyParcel.Status;
+            parcelWeightLabel.Content = "parcel weight: "+myDrone.MyParcel.Weight;
+            parcelPriorityLabel.Content = "priority: "+myDrone.MyParcel.Priority;
+            senderIdLabel.Content = "sender ID: "+myDrone.MyParcel.Sender.Id;
+            senderNameLabel.Content = "sender name: " + myDrone.MyParcel.Sender.Name;
+            sendelLocLabel.Content = "sender location: " + myDrone.MyParcel.Collecting;
+            targetIdLabel.Content = "target ID: " + myDrone.MyParcel.Receiver.Id;
+            targetNameLabel.Content = "target name: " + myDrone.MyParcel.Receiver.Name;
+            targetLocLabel.Content = "target location: " + myDrone.MyParcel.Target;
+            transferDisLabel.Content = "distance: "+(int)myDrone.MyParcel.TransferDistance;
+            droneLocationLabel.Content = "drone location: "+myDrone.MyLocation;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
