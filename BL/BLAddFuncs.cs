@@ -23,7 +23,7 @@ namespace BL
         public void AddDrone(int id, string model, int maxWeight, int stationId)
         {
             Random rnd = new Random();
-            if(MyDal.StationList().Any(x=>x.Id == stationId) == false )
+            if(MyDal.StationList(x => true).Any(x=>x.Id == stationId) == false )
             {
                 throw new BO.IdNotExistException(stationId);
             }
@@ -58,11 +58,11 @@ namespace BL
 
         public void AddParcel(int senderId, int targetId, int maxWeight, int priority)
         {
-            if(MyDal.CustomerList().Where(x=>x.Id == senderId).Any() == false)
+            if(MyDal.CustomerList(x => x.Id == senderId).Any() == false)
             {
                 throw new BO.IdNotExistException(senderId);
             }
-            if(MyDal.CustomerList().Where(x => x.Id == targetId).Any() == false)
+            if(MyDal.CustomerList(x => x.Id == targetId).Any() == false)
             {
                 throw new BO.IdNotExistException(targetId);
             }

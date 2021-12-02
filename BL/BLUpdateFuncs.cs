@@ -21,7 +21,7 @@ namespace BL
         }
         public void StationUpdate(int id, string name, int allChargeSlot)
         {
-            if (MyDal.StationList().Any(x => x.Id == id) == false)
+            if (MyDal.StationList(x => x.Id == id).Any(x=>true) == false)
             {
                 throw new BO.IdNotExistException(id);
             }
@@ -46,7 +46,7 @@ namespace BL
         }
         public void CustomerUpdate(int id, string name, string phone)
         {
-            if (MyDal.CustomerList().Any(x => x.Id == id) == false)
+            if (MyDal.CustomerList(x => x.Id == id).Any(x => true) == false)
             {
                 throw new BO.IdNotExistException(id);
             }

@@ -162,5 +162,7 @@ namespace IBL
         //internal IDAL.DO.Parcel GetClosestParcel(Location locationA, List<IDAL.DO.Parcel> parcels);
         //internal IDAL.DO.Station GetClosestStationWithChargeSlots(Location locationA, List<IDAL.DO.Station> stations);
         //internal double GetElectricityPerKM(double distance, WeightCategories a);
+        //internal IEnumerable<StationForList> StationsToBl(IEnumerable<IDAL.DO.Station> stations);
+        //internal IEnumerable<ParcelForList> ParcelsToBl(IEnumerable<IDAL.DO.Parcel> Parcels);
     }
 }

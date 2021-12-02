@@ -1,5 +1,8 @@
-﻿using IDAL.DO;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using IDAL.DO;
 
 namespace IDAL
 {
@@ -55,7 +58,7 @@ namespace IDAL
         /// return list of customers
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Customer> CustomerList();
+        public IEnumerable<Customer> CustomerList(Predicate<Customer> prediction);
         /// <summary>
         /// discharge drone
         /// </summary>
@@ -90,12 +93,7 @@ namespace IDAL
         /// return list of drones
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Drone> DroneList();
-        /// <summary>
-        /// return list of free stations
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Station> FreeStations();
+        public IEnumerable<Drone> DroneList(Predicate<Drone> prediction);
         /// <summary>
         /// Deliver parcel to customer
         /// </summary>
@@ -105,12 +103,7 @@ namespace IDAL
         /// return list of parcels
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Parcel> ParcelList();
-        /// <summary>
-        /// return list of free parcels
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Parcel> ParcelListNotTaken();
+        public IEnumerable<Parcel> ParcelList(Predicate<Parcel> prediction);
         /// <summary>
         /// Pick up parcel by drone
         /// </summary>
@@ -120,7 +113,7 @@ namespace IDAL
         /// return list of stations
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> StationList();
+        public IEnumerable<Station> StationList(Predicate<Station> prediction);
         /// <summary>
         /// get the amount of electricity that the drone uses per KM for each weight and the charge per hour
         /// </summary>

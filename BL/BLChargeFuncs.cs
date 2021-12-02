@@ -19,7 +19,7 @@ namespace BL
             {
                 throw new BO.DroneIsntVacant(id);
             }
-            var station = GetClosestStationWithChargeSlots(drone.MyLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+            var station = GetClosestStationWithChargeSlots(drone.MyLocation, (List<IDAL.DO.Station>)MyDal.StationList(x=>true));
             Location stationLocation = new Location(station.Longitude, station.Lattitude);
             if (DistanceTo(drone.MyLocation, stationLocation )* Available>drone.Battery)
             {
@@ -51,7 +51,7 @@ namespace BL
             drone.Battery = drone.Battery > 100 ? 100 : drone.Battery;
             drone.Status = DroneStatuses.vacant;
             Drones[Drones.FindIndex(x => x.Id == id)] = drone;
-            int stationId = MyDal.StationList().ToList().Find(x => x.Longitude== drone.MyLocation.Longitude && x.Lattitude == drone.MyLocation.Latitude).Id;
+            int stationId = MyDal.StationList(x => true).ToList().Find(x => x.Longitude== drone.MyLocation.Longitude && x.Lattitude == drone.MyLocation.Latitude).Id;
             MyDal.DisChargeDrone(id, stationId);
         }
         

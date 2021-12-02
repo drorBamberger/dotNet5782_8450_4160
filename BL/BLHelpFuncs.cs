@@ -97,7 +97,7 @@ namespace BL
             }
             List<ParcelForCustomer> fromCustomers = new List<ParcelForCustomer>();
             List<ParcelForCustomer> toCustomers = new List<ParcelForCustomer>();
-            foreach(var item in MyDal.ParcelList())
+            foreach(var item in MyDal.ParcelList(x=>true))
             {
                 if(item.SenderId == id)
                 {
@@ -174,11 +174,11 @@ namespace BL
         {
             IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
             ParcelStatuses status = new ParcelStatuses();
-            if (StructToClass.Delivered != DateTime.MinValue)
+            if (StructToClass.Delivered != null)
                 status = ParcelStatuses.Delivered;
-            else if (StructToClass.PickedUp != DateTime.MinValue)
+            else if (StructToClass.PickedUp != null)
                 status = ParcelStatuses.PickedUp;
-            else if (StructToClass.Scheduled != DateTime.MinValue)
+            else if (StructToClass.Scheduled != null)
                 status = ParcelStatuses.Scheduled;
             else
                 status = ParcelStatuses.Reuqested;
@@ -250,6 +250,31 @@ namespace BL
         {
             var parcel = MyDal.DisplayParcel(id);
             return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Longitude);
+        }
+
+        internal IEnumerable<StationForList> StationsToBL(IEnumerable<IDAL.DO.Station> stations)
+        {
+            IEnumerable<IDAL.DO.Station> original = stations;
+            List<StationForList> comeBack = new List<StationForList>();
+            int counter = 0;
+            foreach (var station in original)
+            {
+                counter = Drones.FindAll(x => x.MyLocation == new Location(station.Longitude, station.Lattitude) &&
+                x.Status == DroneStatuses.maintenance).Count();
+                comeBack.Add(new StationForList(station.Id, station.Name, station.ChargeSlots, counter));
+            }
+            return comeBack;
+        }
+        internal IEnumerable<ParcelForList> ParcelsToBL(IEnumerable<IDAL.DO.Parcel> Parcels)
+        {
+            List<ParcelForList> comeBack = new List<ParcelForList>();
+            foreach (var parcel in Parcels)
+            {
+                comeBack.Add(new ParcelForList(parcel.Id, MyDal.DisplayCustomer(parcel.SenderId).Name,
+                    MyDal.DisplayCustomer(parcel.TargetId).Name, (WeightCategories)parcel.Weight,
+                    (Priorities)parcel.Priority, GetParcelStatus(parcel.Id)));
+            }
+            return comeBack;
         }
     }
 }

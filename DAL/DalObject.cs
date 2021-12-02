@@ -192,39 +192,30 @@ namespace DalObject
 
         //displays Lists
 
-        public IEnumerable<Station> StationList()
+        public IEnumerable<Station> StationList(Predicate<Station> prediction)
         {
-            List<Station> stationList = DataSource.Stations;
+            List<Station> stationList = DataSource.Stations.FindAll(prediction);
             return stationList;
         }
-
-        public IEnumerable<Drone> DroneList()
+        
+        public IEnumerable<Drone> DroneList(Predicate<Drone> prediction)
         {
-            List<Drone> droneList = DataSource.Drones;
+            List<Drone> droneList = DataSource.Drones.FindAll(prediction);
             return droneList;
         }
 
-        public IEnumerable<Customer> CustomerList()
+        public IEnumerable<Customer> CustomerList(Predicate<Customer> prediction)
         {
-            List<Customer> customerList = DataSource.Customers;
+            List<Customer> customerList = DataSource.Customers.FindAll(prediction);
             return customerList;
         }
 
-        public IEnumerable<Parcel> ParcelList()
+        public IEnumerable<Parcel> ParcelList(Predicate<Parcel> prediction)
         {
-            List<Parcel> parcelList = DataSource.Parcels;
+            List<Parcel> parcelList = DataSource.Parcels.FindAll(prediction);
             return parcelList;
         }
 
-        public IEnumerable<Parcel> ParcelListNotTaken()
-        {
-            return DataSource.Parcels.FindAll(item => item.DroneId == 0);
-        }
-
-        public IEnumerable<Station> FreeStations()
-        {
-            return DataSource.Stations.FindAll(item => item.ChargeSlots != 0);
-        }
         public double[] AskForElectricity()
         {
             double[] s = new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,

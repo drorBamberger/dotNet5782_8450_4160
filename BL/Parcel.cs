@@ -9,7 +9,7 @@ namespace IBL
         public class Parcel
         {
             public Parcel(int id, CustomerInParcel sender, CustomerInParcel target, WeightCategories weight, Priorities priority, 
-                DroneInParcel myDrone, DateTime reuqested, DateTime scheduled, DateTime pickedUp, DateTime delivered)
+                DroneInParcel myDrone, DateTime? reuqested, DateTime? scheduled, DateTime? pickedUp, DateTime? delivered)
             {
                 Id = id;
                 Sender = sender;
@@ -29,10 +29,10 @@ namespace IBL
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
             public DroneInParcel MyDrone { get; set; }
-            public DateTime Reuqested { get; set; }
-            public DateTime Delivered { get; set; }
-            public DateTime PickedUp { get; set; }
-            public DateTime Scheduled { get; set; }
+            public DateTime? Reuqested { get; set; }
+            public DateTime? Delivered { get; set; }
+            public DateTime? PickedUp { get; set; }
+            public DateTime? Scheduled { get; set; }
 
             public override string ToString()
             {

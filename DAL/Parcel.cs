@@ -16,11 +16,11 @@ namespace IDAL
                 Weight = weight;
                 Reuqested = DateTime.Now;
                 if (droneId == 0)
-                    Scheduled = DateTime.MinValue;
+                    Scheduled = null;
                 else
                     Scheduled = DateTime.Now;
-                PickedUp = DateTime.MinValue;
-                Delivered = DateTime.MinValue;
+                PickedUp = null;
+                Delivered = null;
                 Priority = priority;
                 DroneId = droneId;
             }
@@ -28,10 +28,10 @@ namespace IDAL
             public int SenderId { get; set; }
             public int TargetId { get; set; }
             public WeightCategories Weight { get; set; }
-            public DateTime Reuqested { get; set; }
-            public DateTime Scheduled { get; set; }
-            public DateTime PickedUp { get; set; }
-            public DateTime Delivered { get; set; }
+            public DateTime? Reuqested { get; set; }
+            public DateTime? Scheduled { get; set; }
+            public DateTime? PickedUp { get; set; }
+            public DateTime? Delivered { get; set; }
             public Priorities Priority { get; set; }
             public int DroneId { get; set; }
 

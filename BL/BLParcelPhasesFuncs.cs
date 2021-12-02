@@ -20,8 +20,7 @@ namespace BL
             {
                 throw new BO.DroneIsntVacant(droneId);
             }
-            List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList();
-            parcelList.RemoveAll(x => (int)x.Weight > (int)drone.MaxWeight);//removing all the too heavy parcels
+            List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList(x => (int)x.Weight <= (int)drone.MaxWeight);//removing all the too heavy parcels
             if (parcelList.Count == 0)
             {
                 throw new BO.NoParcelMatch(droneId);
@@ -31,7 +30,7 @@ namespace BL
             foreach (var parcel in parcelList)
             {
                 Location senderLocation = GetParcelSenderLocation(parcel.Id), targetLocation = GetParcelTargetLocation(parcel.Id);
-                var closestStationToTarget = GetClosestStation(targetLocation, (List<IDAL.DO.Station>)MyDal.StationList());
+                var closestStationToTarget = GetClosestStation(targetLocation, (List<IDAL.DO.Station>)MyDal.StationList(x=>true));
                 if (DistanceTo(drone.MyLocation, senderLocation) * Available +
                     GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)parcel.Weight) +
                     DistanceTo(targetLocation, new Location(closestStationToTarget.Longitude, closestStationToTarget.Lattitude)) * Available < drone.Battery)
@@ -65,7 +64,7 @@ namespace BL
             {
                 throw new BO.IdNotExistException(err.Id);
             }
-            if (parcel.Scheduled == DateTime.MinValue || parcel.PickedUp != DateTime.MinValue)
+            if (parcel.Scheduled == null || parcel.PickedUp != null)
             {
                 throw new BO.ParcelPickedUpOrIsntScheduled(parcel.Id);
             }
@@ -95,7 +94,7 @@ namespace BL
             {
                 throw new BO.IdNotExistException(err.Id);
             }
-            if (parcel.PickedUp == DateTime.MinValue || parcel.Delivered != DateTime.MinValue)
+            if (parcel.PickedUp == null || parcel.Delivered != null)
             {
                 throw new BO.ParcelDeliveredOrNotPickedUp(parcel.Id);
             }
