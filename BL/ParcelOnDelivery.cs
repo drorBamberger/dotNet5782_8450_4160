@@ -39,8 +39,6 @@ namespace IBL
                     + "Status:                " + Status + "\n"
                     + "Weight:                " + Weight + "\n"
                     + "Priority:              " + Priority + "\n"
-                    + "Weight:                " + Weight + "\n"
-                    + "Priority:              " + Priority + "\n"
                     + "Sender:                " + Sender + "\n"
                     + "Receiver:              " + Receiver + "\n"
                     + "Collecting Location:   " + Collecting + "\n"
