@@ -26,10 +26,11 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
-            Label labely = new Label();
-            labely.Content = "Hiiiiiiiiiiiiiii";
-            labely.FontSize = 40; 
-            displayDrone.Children.Add(labely);
+
+            Label labelyID = new Label();
+            labelyID.Content = "Enter the id of the drone: ";
+            labelyID.FontSize = 30;
+            displayDrone.Children.Add(labelyID);
         }
 
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drones) //display and edit drone
