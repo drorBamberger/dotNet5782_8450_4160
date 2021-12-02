@@ -26,12 +26,18 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
+            Label label = new Label();
         }
 
-        public DisplayDrone(IBL.IBL bl, IBL.BO.Drone drone) //display and edit drone
+        public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drones) //display and edit drone
         {
             InitializeComponent();
             dataBase = bl;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

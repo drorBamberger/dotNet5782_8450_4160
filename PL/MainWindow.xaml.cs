@@ -29,6 +29,10 @@ namespace PL
         {
             new DisplayDroneList(dataBase).Show();
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -50,5 +50,10 @@ namespace PL
         {
             this.Close();
         }
+
+        private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            new DisplayDrone(dataBase, (IBL.BO.DroneForList)DronesListView.SelectedItem).Show();
+        }
     }
 }

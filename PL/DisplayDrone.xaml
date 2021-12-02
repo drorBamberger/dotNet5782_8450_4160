@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DisplayDrone" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Name="addDrone">
+        <Button Content="close Window" HorizontalAlignment="Left" Margin="722,0,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
+
 </Window>
