@@ -1,5 +1,8 @@
 ﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 namespace IBL
 {
     public interface IBL
@@ -97,6 +100,7 @@ namespace IBL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DroneForList> DroneList();
+        public IEnumerable<DroneForList> DroneList(Predicate<DroneForList> predictaion);
         /// <summary>
         /// display all the customers
         /// </summary>

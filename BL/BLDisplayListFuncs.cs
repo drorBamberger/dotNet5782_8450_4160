@@ -18,6 +18,11 @@ namespace BL
             return Drones;
         }
 
+        public IEnumerable<DroneForList> DroneList(Predicate<DroneForList> predictaion)
+        {
+            return Drones.FindAll(predictaion);
+        }
+
         public IEnumerable<CustomerForList> CustomerList()
         {
             IEnumerable<IDAL.DO.Customer> original = MyDal.CustomerList(x=>true);
