@@ -40,5 +40,10 @@ namespace IBL
             Waiting = 0,
             onTheWay
         }
+
+        public enum UpdateFuncs
+        {
+
+        }
     }
 }
