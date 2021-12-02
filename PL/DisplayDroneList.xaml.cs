@@ -28,17 +28,27 @@ namespace PL
             dataBase = bl;
             DronesListView.ItemsSource = bl.DroneList();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }
-
+        
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            StatusSelector.SelectedItem
+            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (IBL.BO.DroneStatuses)StatusSelector.SelectedItem);      
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new DisplayDrone(dataBase).Show();
+        }
+
+        private void Close_Window_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

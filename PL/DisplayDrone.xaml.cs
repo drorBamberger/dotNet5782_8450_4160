@@ -17,9 +17,21 @@ namespace PL
     /// </summary>
     public partial class DisplayDrone : Window
     {
+        private IBL.IBL dataBase;
         public DisplayDrone()
         {
             InitializeComponent();
+        }
+        public DisplayDrone(IBL.IBL bl) //add drone
+        {
+            InitializeComponent();
+            dataBase = bl;
+        }
+
+        public DisplayDrone(IBL.IBL bl, IBL.BO.Drone drone) //display and edit drone
+        {
+            InitializeComponent();
+            dataBase = bl;
         }
     }
 }
