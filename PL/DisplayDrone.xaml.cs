@@ -32,10 +32,14 @@ namespace PL
             displayDrone.Children.Add(labely);
         }
 
-        public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drones) //display and edit drone
+        public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
             dataBase = bl;
+            IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
+            Label id = new Label();
+            id.Content = "Drone ID: " + myDrone.Id;
+            d
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

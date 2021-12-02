@@ -68,7 +68,7 @@ namespace BL
                 StructToClass.ChargeSlots, DronesInStation);
         }
 
-        internal Drone GetDrone(int id)
+        public Drone GetDrone(int id)
         {
             IDAL.DO.Drone StructToClass;
             try

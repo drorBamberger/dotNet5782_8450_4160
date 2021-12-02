@@ -160,7 +160,7 @@ namespace IBL
         //internal double DistanceTo(Location x1, Location x2, char unit = 'K');
         //internal void GetElecticity();
         //internal Station GetStation(int id);
-        //internal Drone GetDrone(int id);
+        public Drone GetDrone(int id);
         //internal Customer GetCustomer(int id);
         //internal Parcel GetParcel(int id);
         //internal ParcelOnDelivery GetParcelOnDelivery(int droneId);
