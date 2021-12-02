@@ -35,7 +35,10 @@ namespace BL
             {
                 throw new BO.IdTakenException(err.Id);
             }
-
+            IDAL.DO.Station a = MyDal.DisplayStation(stationId);
+            a.ChargeSlots--;
+            MyDal.DeleteStations(stationId);
+            MyDal.AddStation(a.Id, a.Name, a.Longitude, a.Lattitude, a.ChargeSlots);
             Drones.Add(new DroneForList(id, model, (WeightCategories)maxWeight, rnd.NextDouble() * 20 + 20,
                 DroneStatuses.maintenance, 0, new Location(MyDal.DisplayStation(stationId).Longitude,
                 MyDal.DisplayStation(stationId).Lattitude)));

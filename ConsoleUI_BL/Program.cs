@@ -306,22 +306,22 @@ namespace ConsoleUI_BL
         }
 
         /// <summary>
-        /// update name of drone
+        /// update model of drone
         /// </summary>
         static void DroneUpdate()
         {
             int droneId;
-            string droneName;
+            string droneModel;
 
             Console.WriteLine("Enter drone id:");
             droneId = GetInt();
 
-            Console.WriteLine("Enter the new name of the drone:");
-            droneName = Console.ReadLine();
+            Console.WriteLine("Enter the new model of the drone:");
+            droneModel = Console.ReadLine();
 
             try
             {
-                dataBase.DroneUpdate(droneId, droneName);
+                dataBase.DroneUpdate(droneId, droneModel);
             }
             catch (BL.BO.IdNotExistException err)
             {
@@ -682,7 +682,8 @@ namespace ConsoleUI_BL
                 switch (choice)
                 {
                     case 1:
-                        IEnumerable<StationForList> stations = dataBase.StationList();
+                        IEnumerable<StationForList> stations;
+                        stations = dataBase.StationList();
                         foreach (var item in stations)
                         {
                             Console.WriteLine(item);

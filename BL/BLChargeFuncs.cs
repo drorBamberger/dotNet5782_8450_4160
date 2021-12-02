@@ -48,10 +48,11 @@ namespace BL
                 throw new BO.DroneIsntMaintenance(id);
             }
             drone.Battery += time * ChargePerHour;
+            drone.Battery = drone.Battery > 100 ? 100 : drone.Battery;
             drone.Status = DroneStatuses.vacant;
             Drones[Drones.FindIndex(x => x.Id == id)] = drone;
-            MyDal.DisChargeDrone(id,
-                ((List<IDAL.DO.Station>)(MyDal.StationList())).Find(x => new Location(x.Longitude, x.Lattitude) == drone.MyLocation).Id);
+            int stationId = MyDal.StationList().ToList().Find(x => x.Longitude== drone.MyLocation.Longitude && x.Lattitude == drone.MyLocation.Latitude).Id;
+            MyDal.DisChargeDrone(id, stationId);
         }
         
     }
