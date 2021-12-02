@@ -100,6 +100,11 @@ namespace IBL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DroneForList> DroneList();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predictaion"></param>
+        /// <returns></returns>
         public IEnumerable<DroneForList> DroneList(Predicate<DroneForList> predictaion);
         /// <summary>
         /// display all the customers

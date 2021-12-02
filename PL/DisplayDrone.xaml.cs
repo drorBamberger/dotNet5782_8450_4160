@@ -26,7 +26,10 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
-            Label label = new Label();
+            Label labely = new Label();
+            labely.Content = "Hiiiiiiiiiiiiiii";
+            labely.FontSize = 40; 
+            displayDrone.Children.Add(labely);
         }
 
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drones) //display and edit drone

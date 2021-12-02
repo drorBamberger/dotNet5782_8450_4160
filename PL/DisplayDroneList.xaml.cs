@@ -33,7 +33,7 @@ namespace PL
         
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (IBL.BO.DroneStatuses)StatusSelector.SelectedItem);      
+            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (IBL.BO.DroneStatuses)StatusSelector.SelectedItem); 
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
