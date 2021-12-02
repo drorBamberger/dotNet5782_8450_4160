@@ -14,11 +14,20 @@
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
 VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions >
+            <ComboBox Name="StatusSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" Width="120" Margin="30,14,50,13"/>
+            <Label x:Name="logo" Content="YairDrones" Grid.Column="0" HorizontalAlignment="Left" Margin="22,14,0,0" VerticalAlignment="Top"/>
         </Grid>
+        <ListView Grid.Row="1" x:Name="DronesListView">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
