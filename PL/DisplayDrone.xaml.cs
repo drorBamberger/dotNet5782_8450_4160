@@ -124,8 +124,10 @@ namespace PL
             targetLocLabel.Content = "target location: " + myDrone.MyParcel.Target;
             transferDisLabel.Content = "distance: "+(int)myDrone.MyParcel.TransferDistance;
             droneLocationLabel.Content = "drone location: " + myDrone.MyLocation;
-
-
+            /*
+            <Button FontStyle="Italic" FontSize="32" Content="func1" Click="func1_Click" Height="74" Width="400" Grid.Row="6"/>
+            Button FontStyle="Italic" FontSize="32" Content="func2" Click="func2_Click" Height="74" Width="400" Grid.Row="6" Grid.Column="1"/>
+            */
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
