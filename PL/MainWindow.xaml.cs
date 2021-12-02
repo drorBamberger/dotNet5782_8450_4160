@@ -20,6 +20,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        static BL.BL dataBase = new BL.BL();
         public MainWindow()
         {
             InitializeComponent();
