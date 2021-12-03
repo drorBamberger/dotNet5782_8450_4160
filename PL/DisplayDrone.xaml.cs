@@ -208,11 +208,11 @@ namespace PL
             {
                 myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
                 MessageBox.Show("drone added!!!!");
+                this.Close();
             }
             catch (BL.BO.IdTakenException err)
             {
                 MessageBox.Show("cannot to add because id is taken");
-                this.Close();
             }
             catch (BL.BO.IdNotExistException err)
             {
