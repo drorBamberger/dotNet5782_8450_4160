@@ -31,6 +31,7 @@ namespace PL
         public DisplayDrone(IBL.IBL bl) //add drone
         {
             InitializeComponent();
+            myBl = bl;
 
             Label labelId = new Label();
             labelId.Content = "Enter the id of the drone: ";
@@ -200,16 +201,32 @@ namespace PL
             int.TryParse(maxWeight.Text, out MaxWieght);
             int.TryParse(stationId.Text, out StationId);
 
+            try
+            {
+                myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
+                MessageBox.Show("drone added!!!!");
+            }
+            catch (BL.BO.IdTakenException err)
+            {
+                MessageBox.Show("cannot to add because id is taken");
+            }
+            catch (BL.BO.IdNotExistException err)
+            {
+                MessageBox.Show("cannot to add because id is not exist");
+            }
 
-            myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
-
-            MessageBox.Show("drone added!!!!");
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-
-            myBl.DroneUpdate(localDrone.Id, model.Text);
-            MessageBox.Show("drone updated!!!!");
+            if (model.Text != localDrone.Model)
+            {
+                myBl.DroneUpdate(localDrone.Id, model.Text);
+                MessageBox.Show("drone updated!!!!");
+            }
+            else
+            {
+                MessageBox.Show("No chnage to update");
+            }
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
