@@ -184,13 +184,9 @@ namespace PL
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            /*IBL.BO.DroneForList drone;
-            drone.Id = (int)droneId.Text;*/
-            this.Dispatcher.Invoke((Action)(() =>
-            {
-
+                new DisplayDroneList(myBl).Show();
                 this.Close();
-            }));
+            
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -208,6 +204,7 @@ namespace PL
             {
                 myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
                 MessageBox.Show("drone added!!!!");
+                new DisplayDroneList(myBl).Show();
                 this.Close();
             }
             catch (BL.BO.IdTakenException err)
@@ -235,7 +232,9 @@ namespace PL
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
             double time = 0.01;
+            
             myBl.DisChargeDrone(localDrone.Id, time);
+
             MessageBox.Show("drone disCharging!!!!");
             localDrone = myBl.GetDroneForList(localDrone.Id);
             new DisplayDrone(myBl, localDrone).Show();

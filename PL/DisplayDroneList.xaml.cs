@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -44,6 +45,8 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new DisplayDrone(dataBase).Show();
+            //new DisplayDroneList(dataBase).Show();
+            this.Close();
         }
 
         private void Close_Window_Click(object sender, RoutedEventArgs e)
@@ -58,6 +61,7 @@ namespace PL
         {
             current = new DisplayDrone(dataBase, (IBL.BO.DroneForList)DronesListView.SelectedItem);
             current.Show();
+            this.Close();
         }
     }
 }
