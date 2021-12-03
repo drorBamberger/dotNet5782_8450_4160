@@ -83,6 +83,11 @@ namespace BL
             return new Drone(id, StructToClass.Model, (WeightCategories)StructToClass.MaxWeight,
                 drone.Battery, drone.Status, GetParcelOnDelivery(id), drone.MyLocation);
         }
+        public DroneForList GetDroneForList(int id)
+        {
+            Drone drone = GetDrone(id);
+            return new DroneForList(id, drone.Model, drone.MaxWeight, drone.Battery, drone.Status, drone.MyParcel == null?0:drone.MyParcel.Id, drone.MyLocation);
+        }
 
         internal Customer GetCustomer(int id)
         {
@@ -139,7 +144,7 @@ namespace BL
             }
             if(Drones.Find(x=>x.Id == droneId).ParcelId == 0)
             {
-                return default;
+                return null;
             }
             IDAL.DO.Parcel parcel = MyDal.DisplayParcel(Drones.Find(x => x.Id == droneId).ParcelId);
             IDAL.DO.Customer sender = MyDal.DisplayCustomer(parcel.SenderId);

@@ -183,29 +183,66 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
+
             myBl.DroneUpdate(localDrone.Id, model.Text);
-            MessageBox.Show("updated");
+            MessageBox.Show("drone updated!!!!");
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
-            double time = 0;
+            double time = 0.01;
             myBl.DisChargeDrone(localDrone.Id, time);
+            MessageBox.Show("drone disCharging!!!!");
+            localDrone = myBl.GetDroneForList(localDrone.Id);
+            new DisplayDrone(myBl, localDrone).Show();
+            this.Close();
         }
         private void ChargeDrone(object sender, RoutedEventArgs e)
         {
-            myBl.ChargeDrone(localDrone.Id);
+            try
+            {
+                myBl.ChargeDrone(localDrone.Id);
+            }
+            catch(BL.BO.DroneIsntVacant ERR)
+            {
+                MessageBox.Show(ERR.ToString());
+                return;
+            }
+            MessageBox.Show("drone charging!!!!");
+            localDrone = myBl.GetDroneForList(localDrone.Id);
+            new DisplayDrone(myBl, localDrone).Show();
+            this.Close();
         }
         private void Attribution(object sender, RoutedEventArgs e)
         {
-            myBl.Attribution(localDrone.Id);
+            try
+            {
+                myBl.Attribution(localDrone.Id);
+            }
+            catch(BL.BO.NoParcelMatch ERR)
+            {
+                MessageBox.Show(ERR.ToString());
+                return;
+            }
+            localDrone = myBl.GetDroneForList(localDrone.Id);
+            MessageBox.Show("drone Attribution!!!!");
+            new DisplayDrone(myBl, localDrone).Show();
+            this.Close();
         }
         private void PickedParcelUp(object sender, RoutedEventArgs e)
         {
             myBl.PickedParcelUp(localDrone.ParcelId);
+            localDrone = myBl.GetDroneForList(localDrone.Id);
+            MessageBox.Show("drone picked parcel!!!!");
+            new DisplayDrone(myBl, localDrone).Show();
+            this.Close();
         }
         private void ParcelDelivered(object sender, RoutedEventArgs e)
         {
             myBl.ParcelDelivered(localDrone.ParcelId);
+            localDrone = myBl.GetDroneForList(localDrone.Id);
+            MessageBox.Show("parcel delivered!!!!");
+            new DisplayDrone(myBl, localDrone).Show();
+            this.Close();
         }
 
     }

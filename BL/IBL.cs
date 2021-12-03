@@ -148,8 +148,8 @@ namespace IBL
         /// <summary>
         /// Pick up parcel by drone
         /// </summary>
-        /// <param name="parcelId"></param>
-        public void PickedParcelUp(int parcelId);
+        /// <param name="droneId"></param>
+        public void PickedParcelUp(int droneId);
         /// <summary>
         /// Deliver parcel by drone
         /// </summary>
@@ -161,6 +161,7 @@ namespace IBL
         //internal void GetElecticity();
         //internal Station GetStation(int id);
         public Drone GetDrone(int id);
+        public DroneForList GetDroneForList(int id);
         //internal Customer GetCustomer(int id);
         public Parcel GetParcel(int id);
         //internal ParcelOnDelivery GetParcelOnDelivery(int droneId);

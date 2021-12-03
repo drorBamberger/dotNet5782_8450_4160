@@ -44,16 +44,16 @@ namespace BL
             }
             throw new BO.DroneHaveToLittleBattery(droneId);
         }
-        public void PickedParcelUp(int dronelId)
+        public void PickedParcelUp(int parcelId)
         {
-            if (!Drones.Exists(x => x.Id == dronelId))
+            if (Drones.FindIndex(x => x.ParcelId == parcelId) == -1)
             {
-                throw new BO.IdNotExistException(dronelId);
+                throw new BO.ParcelPickedUpOrIsntScheduled(parcelId);
             }
-            DroneForList drone = Drones.Find(x => x.ParcelId == dronelId);
+            DroneForList drone = Drones.Find(x => x.ParcelId == parcelId);
             if (drone.Status != DroneStatuses.Shipping)
             {
-                throw new BO.DroneIsntShipping(dronelId);
+                throw new BO.DroneIsntShipping(parcelId);
             }
             IDAL.DO.Parcel parcel;
             try
@@ -71,19 +71,19 @@ namespace BL
             Location parcelLocation = GetParcelSenderLocation(parcel.Id);
             drone.Battery -= DistanceTo(drone.MyLocation, parcelLocation) * Available;
             drone.MyLocation = parcelLocation;
-            Drones[Drones.FindIndex(x => x.Id == dronelId)] = drone;
+            Drones[Drones.FindIndex(x => x.ParcelId == parcelId)] = drone;
             MyDal.PickedParcelUp(parcel.Id);
         }
-        public void ParcelDelivered(int droneId)
+        public void ParcelDelivered(int parcelId)
         {
-            if (!Drones.Exists(x => x.Id == droneId))
+            if (Drones.FindIndex(x => x.ParcelId == parcelId) == -1)
             {
-                throw new BO.IdNotExistException(droneId);
+                throw new BO.ParcelPickedUpOrIsntScheduled(parcelId);
             }
-            DroneForList drone = Drones.Find(x => x.ParcelId == droneId);
+            DroneForList drone = Drones.Find(x => x.ParcelId == parcelId);
             if (drone.Status != DroneStatuses.Shipping)
             {
-                throw new BO.DroneIsntShipping(droneId);
+                throw new BO.DroneIsntShipping(parcelId);
             }
             IDAL.DO.Parcel parcel;
             try
@@ -104,7 +104,7 @@ namespace BL
             drone.Battery -= GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)parcel.Weight);
             drone.MyLocation = targetLocation;
             drone.Status = DroneStatuses.vacant;
-            Drones[Drones.FindIndex(x => x.Id == droneId)] = drone;
+            Drones[Drones.FindIndex(x => x.ParcelId == parcelId)] = drone;
             MyDal.ParcelDelivered(parcel.Id);
         }
     }
