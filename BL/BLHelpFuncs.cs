@@ -114,7 +114,7 @@ namespace BL
                 
         }
 
-        internal Parcel GetParcel(int id)
+        public Parcel GetParcel(int id)
         {
             IDAL.DO.Parcel StructToClass;
             try

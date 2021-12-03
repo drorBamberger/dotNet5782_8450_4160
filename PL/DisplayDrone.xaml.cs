@@ -17,7 +17,6 @@ namespace PL
     /// </summary>
     public partial class DisplayDrone : Window
     {
-        private IBL.IBL dataBase;
         TextBox droneId = new TextBox();
         public DisplayDrone()
         {
@@ -26,7 +25,6 @@ namespace PL
         public DisplayDrone(IBL.IBL bl) //add drone
         {
             InitializeComponent();
-            dataBase = bl;
 
             Label labelId = new Label();
             labelId.Content = "Enter the id of the drone: ";
@@ -105,7 +103,6 @@ namespace PL
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
-            dataBase = bl;
 
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
             bool flag = myDrone.Status == IBL.BO.DroneStatuses.Shipping ;
@@ -123,7 +120,7 @@ namespace PL
             targetIdLabel.Content = flag ? "target ID: " + myDrone.MyParcel.Receiver.Id : "";
             targetNameLabel.Content = flag ? "target name: " + myDrone.MyParcel.Receiver.Name : "";
             targetLocLabel.Content = flag ? "target location: " + myDrone.MyParcel.Target : "";
-            transferDisLabel.Content = flag ? "distance: " +(int)myDrone.MyParcel.TransferDistance : "";
+            transferDisLabel.Content = flag ? "distance: " +(int)myDrone.MyParcel.TransferDistance + " KM": "";
             droneLocationLabel.Content = "drone location: "+myDrone.MyLocation;
 
             Button func1 = new Button();
@@ -156,12 +153,12 @@ namespace PL
             }
             else //shipping
             {
-                if (1==1)// חבילה עוד לא נאספה
+                if (bl.GetParcel(myDrone.MyParcel.Id).PickedUp == null)
                 {
                     func1.Content = "Pick up parcel by drone";
                     func1.Click += PickedParcelUp;
                 }
-                else // חבילה כבר נאספה
+                else 
                 {
                     func1.Content = "Deliver parcel by drone";
                     func1.Click += ParcelDelivered;
@@ -180,7 +177,7 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
