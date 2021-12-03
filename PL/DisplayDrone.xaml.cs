@@ -184,29 +184,28 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            
+            myBl.DroneUpdate(localDrone.Id, model.Text);
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            double time = 0;
+            myBl.DisChargeDrone(localDrone.Id, time);
         }
         private void ChargeDrone(object sender, RoutedEventArgs e)
         {
-            
-            this.Close();
+            myBl.ChargeDrone(localDrone.Id);
         }
         private void Attribution(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            myBl.Attribution(localDrone.Id);
         }
         private void PickedParcelUp(object sender, RoutedEventArgs e)
         {
-            
-            this.Close();
+            myBl.PickedParcelUp(localDrone.ParcelId);
         }
         private void ParcelDelivered(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            myBl.ParcelDelivered(localDrone.ParcelId);
         }
 
     }
