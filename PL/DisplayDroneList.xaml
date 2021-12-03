@@ -25,7 +25,7 @@ VerticalAlignment="Stretch" Width="auto">
             <Button Content="add drone" Grid.Column="3" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Click="Button_Click"/>
             <Button x:Name="Close_Window" Content="Close Window" Grid.Column="3" HorizontalAlignment="Left" Margin="120,-1,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
         </Grid>
-        <ListView Grid.Row="1" x:Name="DronesListView" SelectionChanged="DronesListView_SelectionChanged">
+        <ListView Grid.Row="1" x:Name="DronesListView" MouseDoubleClick="DronesListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

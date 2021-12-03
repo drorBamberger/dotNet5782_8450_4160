@@ -179,7 +179,11 @@ namespace PL
         {
             /*IBL.BO.DroneForList drone;
             drone.Id = (int)droneId.Text;*/
-            this.Close();
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+
+                this.Close();
+            }));
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
