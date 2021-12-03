@@ -17,7 +17,13 @@ namespace PL
     /// </summary>
     public partial class DisplayDrone : Window
     {
+        IBL.BO.DroneForList localDrone;
+        IBL.IBL myBl;
+
         TextBox droneId = new TextBox();
+        TextBox model = new TextBox();
+        TextBox maxWeight = new TextBox();
+        TextBox stationId = new TextBox();
         public DisplayDrone()
         {
             InitializeComponent();
@@ -33,7 +39,6 @@ namespace PL
             Grid.SetColumn(labelId, 0);
             displayDrone.Children.Add(labelId);
 
-            TextBox text = new TextBox();
 
             Label labelModel = new Label();
             labelModel.Content = "Enter the model of the drone: ";
@@ -63,7 +68,6 @@ namespace PL
             droneId.Width = 380;
             displayDrone.Children.Add(droneId);
 
-            TextBox model = new TextBox();
             model.FontSize = 25;
             Grid.SetColumn(model, 1);
             Grid.SetRow(model, 2);
@@ -71,7 +75,6 @@ namespace PL
             model.Width = 380;
             displayDrone.Children.Add(model);
 
-            TextBox maxWeight = new TextBox();
             maxWeight.FontSize = 25;
             Grid.SetColumn(maxWeight, 1);
             Grid.SetRow(maxWeight, 4);
@@ -79,7 +82,6 @@ namespace PL
             maxWeight.Width = 380;
             displayDrone.Children.Add(maxWeight);
 
-            TextBox stationId = new TextBox();
             stationId.FontSize = 25;
             Grid.SetColumn(stationId, 1);
             Grid.SetRow(stationId, 6);
@@ -87,22 +89,14 @@ namespace PL
             stationId.Width = 380;
             displayDrone.Children.Add(stationId);
 
-        /*
-        < Button FontStyle="Italic" FontSize="32" Content="Add the drone" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" Height="72" Width="400" Grid.Row="8"/>
-        <Label  FontStyle="Italic" FontSize="25" Content="Enter id of drone:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label  FontStyle="Italic" FontSize="25" Content="Enter model of drone:" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Grid.Row="2"/>
-        <Label  FontStyle="Italic" FontSize="25" Content="Enter maximum weight:" HorizontalAlignment="Left" Margin="52,10,0,0" VerticalAlignment="Top" Grid.Row="4"/>
-        <Label  FontStyle="Italic" FontSize="25" Content="Enter station id for intial chrging:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6"/>
-        <TextBox FontStyle="Italic" FontSize="25" Grid.Column="1" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="380" Height="43"/>
-        <TextBox FontStyle="Italic" FontSize="25" Grid.Column="1" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="380" Height="43" Grid.Row="6"/>
-        <TextBox FontStyle="Italic" FontSize="25" Grid.Column="1" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="380" Height="43" Grid.Row="4"/>
-        <TextBox FontStyle="Italic" FontSize="25" Grid.Column="1" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="380" Height="43" Grid.Row = "2" />
-        */
         }
 
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
+
+            localDrone = drone;
+            myBl = bl;
 
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
             bool flag = myDrone.Status == IBL.BO.DroneStatuses.Shipping ;
@@ -185,6 +179,7 @@ namespace PL
         }
         private void ChargeDrone(object sender, RoutedEventArgs e)
         {
+            
             this.Close();
         }
         private void Attribution(object sender, RoutedEventArgs e)
