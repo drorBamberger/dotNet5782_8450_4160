@@ -117,6 +117,19 @@ namespace PL
             transferDisLabel.Content = flag ? "distance: " +(int)myDrone.MyParcel.TransferDistance + " KM": "";
             droneLocationLabel.Content = "drone location: "+myDrone.MyLocation;
 
+            TextBox droneModel = new TextBox();
+            Grid.SetRow(droneModel, 2);
+            droneModel.Height = 20;
+            droneModel.Width = 120;
+            Thickness myThickness = new Thickness();
+            myThickness.Bottom = 6;
+            myThickness.Left = 0;
+            myThickness.Right = 260;
+            myThickness.Top = 28;
+            droneModel.Margin = myThickness;
+            droneModel.Text = drone.Model;
+            displayDrone.Children.Add(droneModel);
+
             Button func1 = new Button();
             func1.Height = 74;
             func1.Width = 400;
