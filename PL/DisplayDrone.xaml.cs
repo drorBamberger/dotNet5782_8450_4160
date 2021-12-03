@@ -212,12 +212,13 @@ namespace PL
             catch (BL.BO.IdTakenException err)
             {
                 MessageBox.Show("cannot to add because id is taken");
+                this.Close();
             }
             catch (BL.BO.IdNotExistException err)
             {
                 MessageBox.Show("cannot to add because id is not exist");
             }
-
+            
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -240,6 +241,7 @@ namespace PL
             new DisplayDrone(myBl, localDrone).Show();
             this.Close();
         }
+
         private void ChargeDrone(object sender, RoutedEventArgs e)
         {
             try
