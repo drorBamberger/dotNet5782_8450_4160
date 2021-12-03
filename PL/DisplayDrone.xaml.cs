@@ -89,6 +89,7 @@ namespace PL
             stationId.Width = 380;
             displayDrone.Children.Add(stationId);
 
+            update.Click += Add_Click;
         }
 
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drone) //display and edit drone
@@ -173,6 +174,8 @@ namespace PL
             }
             displayDrone.Children.Add(func1);
 
+            update.Click += Update_Click;
+
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -184,6 +187,23 @@ namespace PL
 
                 this.Close();
             }));
+        }
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            int DroneId;
+            string Model;
+            int MaxWieght;
+            int StationId;
+
+            int.TryParse(droneId.Text, out DroneId);
+            Model = model.Text;
+            int.TryParse(maxWeight.Text, out MaxWieght);
+            int.TryParse(stationId.Text, out StationId);
+
+
+            myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
+
+            MessageBox.Show("drone added!!!!");
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
