@@ -184,6 +184,7 @@ namespace PL
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             myBl.DroneUpdate(localDrone.Id, model.Text);
+            MessageBox.Show("updated");
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
