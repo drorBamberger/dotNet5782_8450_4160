@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 
 
 namespace PL
@@ -31,6 +32,7 @@ namespace PL
         }
         public DisplayDrone(IBL.IBL bl) //add drone
         {
+            MessageBox.Show(bl.StationList().First().ToString());
             InitializeComponent();
             myBl = bl;
 
