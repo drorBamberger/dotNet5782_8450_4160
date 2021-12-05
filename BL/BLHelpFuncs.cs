@@ -249,12 +249,12 @@ namespace BL
         internal Location GetParcelSenderLocation(int id)
         {
             var parcel = MyDal.DisplayParcel(id);
-            return new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Longitude);
+            return new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
         }
         internal Location GetParcelTargetLocation(int id)
         {
             var parcel = MyDal.DisplayParcel(id);
-            return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Longitude);
+            return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Lattitude);
         }
 
         internal IEnumerable<StationForList> StationsToBL(IEnumerable<IDAL.DO.Station> stations)

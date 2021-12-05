@@ -27,7 +27,9 @@
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="3" Background="#CF22C0B8"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="3" Grid.Column="1" Background="#CF22C0B8"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="5" Background="#CF22C0B8"/>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="5" Grid.Column="1" Background="#CF22C0B8"/>
+        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="5" Grid.Column="1" Background="#CF22C0B8">
+            <Label Name="timeLabel" Content="" Margin="112,49,-129,-60"/>
+        </Border>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Background="#CF22C0B8"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Grid.Column="1" Background="#CF22C0B8"/>
         <Button FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Close_Click" Height="72" Width="400" Grid.Row="8" Grid.Column="1"/>
@@ -48,6 +50,7 @@
         <Label Name="targetNameLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Margin="0,3,0,0" Width="150"/>
         <Label Name="targetIdLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="177,5,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="148"/>
         <Label Name="targetLocLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,24,0,0" Grid.Row="4" VerticalAlignment="Top" Width="220" Height="42"/>
+        <TextBox Name ="timeText" IsEnabled="False" Visibility= "Hidden" HorizontalAlignment="Left" Grid.Row="6" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="32" Grid.Column="1" Margin="231,31,0,0"/>
     </Grid>
 
 </Window>
