@@ -33,9 +33,9 @@
         <Button FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Close_Click" Height="72" Width="400" Grid.Row="8" Grid.Column="1"/>
         <Button x:Name="update" FontStyle="Italic" FontSize="32" Content="Save Changed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="8"/>
         <Label Name ="batteryLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="88"/>
-        <Label Name ="idLabel" FontSize="30" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Height="54" Margin="158,21,0,0" Grid.RowSpan="2"/>
+        <Label Name ="idLabel" FontSize="30" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Height="54" Margin="6,27,0,0" Grid.RowSpan="2"/>
         <Label Name ="statusLabel" Content="" HorizontalAlignment="Left" Margin="89,2,0,0" VerticalAlignment="Top" Width="111" Height="37"/>
-        <Label Name ="maxWeightLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="159" Height="62" Margin="231,2,0,0"/>
+        <Label Name ="maxWeightLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="159" Height="62" Margin="231,27,0,0" Grid.RowSpan="2"/>
         <Label Name ="droneLocationLabel" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="400" Height="48"/>
         <Label FontSize ="30" Name ="parcelIdLabel" Content="" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="242" Height="63" Margin="158,4,0,0"/>
         <Label Name ="parcelStatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="176" Height="36"/>

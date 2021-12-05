@@ -32,7 +32,7 @@ namespace PL
         }
         public DisplayDrone(IBL.IBL bl) //add drone
         {
-            MessageBox.Show(bl.StationList().First().ToString());
+            //MessageBox.Show(bl.StationList().First().ToString());   // for knowing station id....
             InitializeComponent();
             myBl = bl;
 
@@ -231,7 +231,7 @@ namespace PL
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
-            double time = 0.01;
+            double time = 10;
             
             myBl.DisChargeDrone(localDrone.Id, time);
 

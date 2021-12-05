@@ -152,7 +152,7 @@ namespace BL
             Location SenderLocation = GetParcelSenderLocation(parcel.Id);
             Location TargetLocation = GetParcelTargetLocation(parcel.Id);
             CustomerInParcel senderInParcel = new CustomerInParcel(sender.Id, sender.Name);
-            CustomerInParcel targetInParcel = new CustomerInParcel(sender.Id, sender.Name);
+            CustomerInParcel targetInParcel = new CustomerInParcel(target.Id, target.Name);
 
             return new ParcelOnDelivery(parcel.Id, ParcelOnDeliveryStatuses.onTheWay,
                 (WeightCategories)parcel.Weight, (Priorities)parcel.Priority, senderInParcel, targetInParcel, SenderLocation,
