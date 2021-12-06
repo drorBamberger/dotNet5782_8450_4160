@@ -152,7 +152,7 @@ namespace BL
             Location SenderLocation = GetParcelSenderLocation(parcel.Id);
             Location TargetLocation = GetParcelTargetLocation(parcel.Id);
             CustomerInParcel senderInParcel = new CustomerInParcel(sender.Id, sender.Name);
-            CustomerInParcel targetInParcel = new CustomerInParcel(sender.Id, sender.Name);
+            CustomerInParcel targetInParcel = new CustomerInParcel(target.Id, target.Name);
 
             return new ParcelOnDelivery(parcel.Id, ParcelOnDeliveryStatuses.onTheWay,
                 (WeightCategories)parcel.Weight, (Priorities)parcel.Priority, senderInParcel, targetInParcel, SenderLocation,
@@ -249,12 +249,12 @@ namespace BL
         internal Location GetParcelSenderLocation(int id)
         {
             var parcel = MyDal.DisplayParcel(id);
-            return new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Longitude);
+            return new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
         }
         internal Location GetParcelTargetLocation(int id)
         {
             var parcel = MyDal.DisplayParcel(id);
-            return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Longitude);
+            return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Lattitude);
         }
 
         internal IEnumerable<StationForList> StationsToBL(IEnumerable<IDAL.DO.Station> stations)

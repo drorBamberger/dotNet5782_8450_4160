@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
-
+using Microsoft.VisualBasic;
 
 namespace PL
 {
@@ -32,7 +32,7 @@ namespace PL
         }
         public DisplayDrone(IBL.IBL bl) //add drone
         {
-            MessageBox.Show(bl.StationList().First().ToString());
+            //MessageBox.Show(bl.StationList().First().ToString());   // for knowing station id....
             InitializeComponent();
             myBl = bl;
 
@@ -151,6 +151,9 @@ namespace PL
             {
                 func1.Content = "Release drone from charger";
                 func1.Click += DisChargeDrone;
+                timeText.Visibility = Visibility.Visible;
+                timeText.IsEnabled = true;
+                timeLabel.Content = "enter time in charge:";
             }
             else if (drone.Status == IBL.BO.DroneStatuses.vacant)
             {
@@ -241,13 +244,17 @@ namespace PL
             }
             else
             {
-                MessageBox.Show("No chnage to update");
+                MessageBox.Show("No change to update");
             }
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
-            double time = 0.01;
-
+            double time = 10;
+            if(!double.TryParse(timeText.Text,out time))
+            {
+                MessageBoxResult a = MessageBox.Show("enter time in charge!!!");
+                return;
+            }
             myBl.DisChargeDrone(localDrone.Id, time);
 
             MessageBox.Show("drone disCharging!!!!");

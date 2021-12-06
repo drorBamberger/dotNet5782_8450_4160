@@ -20,7 +20,7 @@ namespace BL
             {
                 throw new BO.DroneIsntVacant(droneId);
             }
-            List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList(x => (int)x.Weight <= (int)drone.MaxWeight);//removing all the too heavy parcels
+            List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList(x => (int)x.Weight <= (int)drone.MaxWeight&& x.Scheduled == null);//removing all the too heavy parcels
             if (parcelList.Count == 0)
             {
                 throw new BO.NoParcelMatch(droneId);
