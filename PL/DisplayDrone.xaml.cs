@@ -159,7 +159,7 @@ namespace PL
             {
                 func1.Content = "Send drone to charge";
                 func1.Click += ChargeDrone;
-
+                batteryPic.Visibility = Visibility.Visible;
                 func2.Content = "Link parcel to drone";
                 func2.Click += Attribution;
                 displayDrone.Children.Add(func2);
@@ -196,7 +196,6 @@ namespace PL
             int MaxWieght;
             int StationId;
 
-            bool temp;
             if (int.TryParse(droneId.Text, out DroneId))
             {
                 if (int.TryParse(maxWeight.Text, out MaxWieght) && MaxWieght <= 2 && MaxWieght > -1)
@@ -250,13 +249,21 @@ namespace PL
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
             double time = 10;
-            if(!double.TryParse(timeText.Text,out time))
+            try
             {
-                MessageBoxResult a = MessageBox.Show("enter time in charge!!!");
+                if (!double.TryParse(timeText.Text, out time))
+                {
+                    MessageBoxResult a = MessageBox.Show("enter time in charge!!!");
+                    return;
+                }
+                myBl.DisChargeDrone(localDrone.Id, time);
+            }
+            catch(BL.BO.CantBeNegative ERR)
+            {
+                MessageBox.Show(ERR.ToString());
                 return;
             }
-            myBl.DisChargeDrone(localDrone.Id, time);
-
+            
             MessageBox.Show("drone disCharging!!!!");
             localDrone = myBl.GetDroneForList(localDrone.Id);
             new DisplayDrone(myBl, localDrone).Show();
@@ -311,5 +318,14 @@ namespace PL
             this.Close();
         }
 
+        private void batteryPic_RequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
+        {
+
+        }
+
+        private void batteryPic_PreviewDragOver(object sender, DragEventArgs e)
+        {
+
+        }
     }
 }

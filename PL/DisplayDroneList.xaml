@@ -23,7 +23,7 @@ VerticalAlignment="Stretch" Width="auto">
             <ComboBox Name = "WeightSelector" Grid.Column="2" Margin="26,22,30,24" SelectionChanged="WeightSelector_SelectionChanged"/>
             <Label x:Name="logo" Content="DroneBamberger" Grid.Column="0" HorizontalAlignment="Left" Margin="22,14,0,0" VerticalAlignment="Top"/>
             <Button Content="add drone" Grid.Column="3" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-            <Button x:Name="Close_Window" Content="Close Window" Grid.Column="3" HorizontalAlignment="Left" Margin="120,-1,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
+            <Button x:Name="Close_Window" Background="Red" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Margin="120,-1,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
         </Grid>
         <ListView Grid.Row="1" x:Name="DronesListView" MouseDoubleClick="DronesListView_SelectionChanged">
             <ListView.View>
