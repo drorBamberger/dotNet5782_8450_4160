@@ -51,16 +51,12 @@ namespace PL
 
         private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
-            this.Dispatcher.Invoke((Action)(() =>
-            {
-                this.Close();
-            }));
+            new MainWindow().Show();
+            this.Close();
         }
-        DisplayDrone current;
         private void DronesListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            current = new DisplayDrone(dataBase, (IBL.BO.DroneForList)DronesListView.SelectedItem);
-            current.Show();
+            new DisplayDrone(dataBase, (IBL.BO.DroneForList)DronesListView.SelectedItem).Show();
             this.Close();
         }
     }

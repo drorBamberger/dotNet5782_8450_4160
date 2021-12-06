@@ -21,11 +21,11 @@ namespace PL
     {
         IBL.BO.DroneForList localDrone;
         IBL.IBL myBl;
-
         TextBox droneId = new TextBox();
         TextBox model = new TextBox();
         TextBox maxWeight = new TextBox();
         TextBox stationId = new TextBox();
+
         public DisplayDrone()
         {
             InitializeComponent();
@@ -95,7 +95,6 @@ namespace PL
 
             update.Click += Add_Click;
         }
-
         public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
@@ -104,23 +103,23 @@ namespace PL
             myBl = bl;
 
             IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            bool flag = myDrone.Status == IBL.BO.DroneStatuses.Shipping ;
+            bool flag = myDrone.Status == IBL.BO.DroneStatuses.Shipping;
             idLabel.Content = "Id: " + myDrone.Id;
             maxWeightLabel.Content = "max weight drone can lift:\n" + myDrone.MaxWeight;
-            batteryLabel.Content = (int)myDrone.Battery+"%";
+            batteryLabel.Content = (int)myDrone.Battery + "%";
             statusLabel.Content = myDrone.Status;
-            parcelIdLabel.Content = flag?"parcel ID: " +myDrone.MyParcel.Id: "";
-            parcelStatusLabel.Content = flag?"parcel status: " +myDrone.MyParcel.Status : "";
-            parcelWeightLabel.Content = flag?"parcel weight: " +myDrone.MyParcel.Weight : "";
-            parcelPriorityLabel.Content = flag?"priority: " +myDrone.MyParcel.Priority : "";
-            senderIdLabel.Content = flag?"sender ID: " +myDrone.MyParcel.Sender.Id : "";
+            parcelIdLabel.Content = flag ? "parcel ID: " + myDrone.MyParcel.Id : "";
+            parcelStatusLabel.Content = flag ? "parcel status: " + myDrone.MyParcel.Status : "";
+            parcelWeightLabel.Content = flag ? "parcel weight: " + myDrone.MyParcel.Weight : "";
+            parcelPriorityLabel.Content = flag ? "priority: " + myDrone.MyParcel.Priority : "";
+            senderIdLabel.Content = flag ? "sender ID: " + myDrone.MyParcel.Sender.Id : "";
             senderNameLabel.Content = flag ? "sender name: " + myDrone.MyParcel.Sender.Name : "";
             sendelLocLabel.Content = flag ? "sender location: " + myDrone.MyParcel.Collecting : "";
             targetIdLabel.Content = flag ? "target ID: " + myDrone.MyParcel.Receiver.Id : "";
             targetNameLabel.Content = flag ? "target name: " + myDrone.MyParcel.Receiver.Name : "";
             targetLocLabel.Content = flag ? "target location: " + myDrone.MyParcel.Target : "";
-            transferDisLabel.Content = flag ? "distance: " +(int)myDrone.MyParcel.TransferDistance + " KM": "";
-            droneLocationLabel.Content = "drone location: "+myDrone.MyLocation;
+            transferDisLabel.Content = flag ? "distance: " + (int)myDrone.MyParcel.TransferDistance + " KM" : "";
+            droneLocationLabel.Content = "drone location: " + myDrone.MyLocation;
 
             Grid.SetRow(model, 2);
             model.Height = 20;
@@ -153,7 +152,7 @@ namespace PL
                 func1.Content = "Release drone from charger";
                 func1.Click += DisChargeDrone;
             }
-            else if(drone.Status == IBL.BO.DroneStatuses.vacant)
+            else if (drone.Status == IBL.BO.DroneStatuses.vacant)
             {
                 func1.Content = "Send drone to charge";
                 func1.Click += ChargeDrone;
@@ -169,7 +168,7 @@ namespace PL
                     func1.Content = "Pick up parcel by drone";
                     func1.Click += PickedParcelUp;
                 }
-                else 
+                else
                 {
                     func1.Content = "Deliver parcel by drone";
                     func1.Click += ParcelDelivered;
@@ -181,12 +180,11 @@ namespace PL
             update.Click += Update_Click;
 
         }
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-                new DisplayDroneList(myBl).Show();
-                this.Close();
-            
+            new DisplayDroneList(myBl).Show();
+            this.Close();
+
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -195,27 +193,44 @@ namespace PL
             int MaxWieght;
             int StationId;
 
-            int.TryParse(droneId.Text, out DroneId);
-            Model = model.Text;
-            int.TryParse(maxWeight.Text, out MaxWieght);
-            int.TryParse(stationId.Text, out StationId);
-
-            try
+            bool temp;
+            if (int.TryParse(droneId.Text, out DroneId))
             {
-                myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
-                MessageBox.Show("drone added!!!!");
-                new DisplayDroneList(myBl).Show();
-                this.Close();
+                if (int.TryParse(maxWeight.Text, out MaxWieght) && MaxWieght < 2 && MaxWieght > -1)
+                {
+                    if (int.TryParse(stationId.Text, out StationId))
+                    {
+                        Model = model.Text;
+                        try
+                        {
+                            myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
+                            MessageBox.Show("drone added!!!!");
+                            new DisplayDroneList(myBl).Show();
+                            this.Close();
+                        }
+                        catch (BL.BO.IdTakenException err)
+                        {
+                            MessageBox.Show("cannot to add because id is taken");
+                        }
+                        catch (BL.BO.IdNotExistException err)
+                        {
+                            MessageBox.Show("cannot to add because id is not exist");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("please enter number for station id):");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("please enter number between 0-2 for Maximum Wieght):");
+                }
             }
-            catch (BL.BO.IdTakenException err)
+            else
             {
-                MessageBox.Show("cannot to add because id is taken");
+                MessageBox.Show("please enter number for id):");
             }
-            catch (BL.BO.IdNotExistException err)
-            {
-                MessageBox.Show("cannot to add because id is not exist");
-            }
-            
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -232,7 +247,7 @@ namespace PL
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
             double time = 0.01;
-            
+
             myBl.DisChargeDrone(localDrone.Id, time);
 
             MessageBox.Show("drone disCharging!!!!");
@@ -240,14 +255,13 @@ namespace PL
             new DisplayDrone(myBl, localDrone).Show();
             this.Close();
         }
-
         private void ChargeDrone(object sender, RoutedEventArgs e)
         {
             try
             {
                 myBl.ChargeDrone(localDrone.Id);
             }
-            catch(BL.BO.DroneIsntVacant ERR)
+            catch (BL.BO.DroneIsntVacant ERR)
             {
                 MessageBox.Show(ERR.ToString());
                 return;
@@ -263,7 +277,7 @@ namespace PL
             {
                 myBl.Attribution(localDrone.Id);
             }
-            catch(BL.BO.NoParcelMatch ERR)
+            catch (BL.BO.NoParcelMatch ERR)
             {
                 MessageBox.Show(ERR.ToString());
                 return;
