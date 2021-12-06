@@ -199,7 +199,7 @@ namespace PL
             bool temp;
             if (int.TryParse(droneId.Text, out DroneId))
             {
-                if (int.TryParse(maxWeight.Text, out MaxWieght) && MaxWieght < 2 && MaxWieght > -1)
+                if (int.TryParse(maxWeight.Text, out MaxWieght) && MaxWieght <= 2 && MaxWieght > -1)
                 {
                     if (int.TryParse(stationId.Text, out StationId))
                     {
