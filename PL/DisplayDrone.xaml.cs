@@ -268,7 +268,7 @@ namespace PL
         {
             try
             {
-                myBl.Attribution(localDrone.Id);
+                myBl.Attribution(localDrone.Id);//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             }
             catch(BL.BO.NoParcelMatch ERR)
             {
