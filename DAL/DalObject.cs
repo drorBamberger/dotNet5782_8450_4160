@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IDAL.DO;
+using DO;
 
 
 
@@ -59,12 +59,13 @@ namespace DalObject
 
     }
 
-    public class DalObject : IDAL.IDal
+    internal sealed class DalObject  : DalApi.IDal
     {
         // cnstrct:
         public DalObject()
         {
             DataSource.Initialize();
+            
         }
 
         //help funcs:

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IDAL.DO;
+using DO;
 
-namespace IDAL
+namespace DalApi
 {
     public interface IDal
     {

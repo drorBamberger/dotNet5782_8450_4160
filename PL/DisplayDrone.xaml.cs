@@ -159,7 +159,7 @@ namespace PL
             {
                 func1.Content = "Send drone to charge";
                 func1.Click += ChargeDrone;
-                batteryPic.Visibility = Visibility.Visible;
+                //batteryPic.Visibility = Visibility.Visible;
                 func2.Content = "Link parcel to drone";
                 func2.Click += Attribution;
                 displayDrone.Children.Add(func2);
