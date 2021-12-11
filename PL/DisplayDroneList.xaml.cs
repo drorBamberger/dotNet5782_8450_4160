@@ -28,18 +28,18 @@ namespace PL
             InitializeComponent();
             dataBase = bl;
             DronesListView.ItemsSource = bl.DroneList();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(BLApi.BO.DroneStatuses));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(BLApi.BO.WeightCategories));
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
         
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (BLApi.BO.DroneStatuses)StatusSelector.SelectedItem); 
+            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem); 
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (BLApi.BO.WeightCategories)WeightSelector.SelectedItem);
+            DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,7 +56,7 @@ namespace PL
         }
         private void DronesListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            new DisplayDrone(dataBase, (BLApi.BO.DroneForList)DronesListView.SelectedItem).Show();
+            new DisplayDrone(dataBase, (BO.DroneForList)DronesListView.SelectedItem).Show();
             this.Close();
         }
     }

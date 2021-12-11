@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using BLApi.BO;
+using BO;
 
 namespace ConsoleUI_BL
 {
     class Program
-    { 
+    {
+        #region help funcs
         static BL.BL dataBase = new BL.BL();
         /// <summary>
         /// get int from the console
@@ -47,7 +48,8 @@ namespace ConsoleUI_BL
             Console.WriteLine("4. Display lists");
             Console.WriteLine("5. Exit");
         }
-
+        #endregion
+        #region add
         //~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to add things to the database
@@ -129,7 +131,7 @@ namespace ConsoleUI_BL
             {
                 dataBase.AddStation(stationId, name, loc, chargeSlots);
             }
-            catch(BL.BO.IdTakenException err)
+            catch(BO.IdTakenException err)
             {
                 Console.WriteLine(err);
             }
@@ -160,11 +162,11 @@ namespace ConsoleUI_BL
             {
                 dataBase.AddDrone(DroneId, model, maxWeight, numStat);
             }
-            catch (BL.BO.IdTakenException err)
+            catch (BO.IdTakenException err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
@@ -202,7 +204,7 @@ namespace ConsoleUI_BL
             {
                 dataBase.AddCustomer(id, name, phone, loc);
             }
-            catch (BL.BO.IdTakenException err)
+            catch (BO.IdTakenException err)
             {
                 Console.WriteLine(err);
             }
@@ -234,12 +236,13 @@ namespace ConsoleUI_BL
             {
                 dataBase.AddParcel(senderId, targetId, weight, priority);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
         }
-
+        #endregion
+        #region update
         //~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATE~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to update things to the database
@@ -323,7 +326,7 @@ namespace ConsoleUI_BL
             {
                 dataBase.DroneUpdate(droneId, droneModel);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
@@ -360,7 +363,7 @@ namespace ConsoleUI_BL
             {
                 dataBase.StationUpdate(Id, stationName, chargeSlots);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
@@ -388,7 +391,7 @@ namespace ConsoleUI_BL
             {
                 dataBase.CustomerUpdate(Id, customerName, phoneNumber);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
@@ -409,11 +412,11 @@ namespace ConsoleUI_BL
             {
                 dataBase.ChargeDrone(droneId);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.DroneIsntVacant err)
+            catch (BO.DroneIsntVacant err)
             {
                 Console.WriteLine(err);
             }
@@ -438,15 +441,15 @@ namespace ConsoleUI_BL
             {
                 dataBase.DisChargeDrone(droneId, time);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.DroneIsntMaintenance err) 
+            catch (BO.DroneIsntMaintenance err) 
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.CantBeNegative err)
+            catch (BO.CantBeNegative err)
             {
                 Console.WriteLine(err);
             }
@@ -466,7 +469,7 @@ namespace ConsoleUI_BL
             {
                 dataBase.Attribution(droneId);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
@@ -487,19 +490,19 @@ namespace ConsoleUI_BL
             {
                 dataBase.PickedParcelUp(parcelId);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.DroneIsntShipping err)
+            catch (BO.DroneIsntShipping err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.IdTakenException err)
+            catch (BO.IdTakenException err)
             { 
                 Console.WriteLine(err);
             }
-            catch (BL.BO.ParcelDeliveredOrNotPickedUp err)
+            catch (BO.ParcelDeliveredOrNotPickedUp err)
             {
                 Console.WriteLine(err);
             }
@@ -519,24 +522,25 @@ namespace ConsoleUI_BL
             {
                 dataBase.ParcelDelivered(droneId);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.DroneIsntShipping err)
+            catch (BO.DroneIsntShipping err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.IdTakenException err)
+            catch (BO.IdTakenException err)
             {
                 Console.WriteLine(err);
             }
-            catch (BL.BO.ParcelPickedUpOrIsntScheduled err)
+            catch (BO.ParcelPickedUpOrIsntScheduled err)
             {
                 Console.WriteLine(err);
             }
         }
-
+        #endregion
+        #region display
         //~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAY~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to display things to the database
@@ -600,7 +604,7 @@ namespace ConsoleUI_BL
             {
                 return dataBase.DisplayStation(id);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 return err.ToString();
             }
@@ -620,7 +624,7 @@ namespace ConsoleUI_BL
             {
                 return dataBase.DisplayDrone(id);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 return err.ToString();
             }
@@ -640,7 +644,7 @@ namespace ConsoleUI_BL
             {
                 return dataBase.DisplayCustomer(id);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 return err.ToString();
             }
@@ -660,12 +664,13 @@ namespace ConsoleUI_BL
             {
                 return dataBase.DisplayParcel(id);
             }
-            catch (BL.BO.IdNotExistException err)
+            catch (BO.IdNotExistException err)
             {
                 return err.ToString();
             }
         }
-
+        #endregion
+        #region display list
         //~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DISPLAYLISTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         /// <summary>
         /// Handles in case the user wants to display lists things to the database
@@ -753,6 +758,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter your choice:");
 
         }
+        #endregion
 
         static void Main(string[] args)
         {

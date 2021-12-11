@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class DisplayDrone : Window
     {
-        BLApi.BO.DroneForList localDrone;
+        BO.DroneForList localDrone;
         BLApi.IBL myBl;
         TextBox droneId = new TextBox();
         TextBox model = new TextBox();
@@ -95,15 +95,15 @@ namespace PL
 
             update.Click += Add_Click;
         }
-        public DisplayDrone(BLApi.IBL bl, BLApi.BO.DroneForList drone) //display and edit drone
+        public DisplayDrone(BLApi.IBL bl, BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
 
             localDrone = drone;
             myBl = bl;
 
-            BLApi.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            bool flag = myDrone.Status == BLApi.BO.DroneStatuses.Shipping;
+            BO.Drone myDrone = bl.GetDrone(drone.Id);
+            bool flag = myDrone.Status == BO.DroneStatuses.Shipping;
             idLabel.Content = "Id: " + myDrone.Id;
             maxWeightLabel.Content = "max weight drone can lift:\n" + myDrone.MaxWeight;
             batteryLabel.Content = (int)myDrone.Battery + "%";
@@ -147,7 +147,7 @@ namespace PL
             func2.FontStyle = FontStyles.Italic;
             Grid.SetRow(func2, 6);
             Grid.SetColumn(func2, 1);
-            if (drone.Status == BLApi.BO.DroneStatuses.maintenance)
+            if (drone.Status == BO.DroneStatuses.maintenance)
             {
                 func1.Content = "Release drone from charger";
                 func1.Click += DisChargeDrone;
@@ -155,7 +155,7 @@ namespace PL
                 timeText.IsEnabled = true;
                 timeLabel.Content = "enter time in charge:";
             }
-            else if (drone.Status == BLApi.BO.DroneStatuses.vacant)
+            else if (drone.Status == BO.DroneStatuses.vacant)
             {
                 func1.Content = "Send drone to charge";
                 func1.Click += ChargeDrone;
@@ -210,11 +210,11 @@ namespace PL
                             new DisplayDroneList(myBl).Show();
                             this.Close();
                         }
-                        catch (BL.BO.IdTakenException err)
+                        catch (BO.IdTakenException err)
                         {
                             MessageBox.Show("cannot to add because id is taken");
                         }
-                        catch (BL.BO.IdNotExistException err)
+                        catch (BO.IdNotExistException err)
                         {
                             MessageBox.Show("cannot to add because id is not exist");
                         }
@@ -258,7 +258,7 @@ namespace PL
                 }
                 myBl.DisChargeDrone(localDrone.Id, time);
             }
-            catch(BL.BO.CantBeNegative ERR)
+            catch(BO.CantBeNegative ERR)
             {
                 MessageBox.Show(ERR.ToString());
                 return;
@@ -275,7 +275,7 @@ namespace PL
             {
                 myBl.ChargeDrone(localDrone.Id);
             }
-            catch (BL.BO.DroneIsntVacant ERR)
+            catch (BO.DroneIsntVacant ERR)
             {
                 MessageBox.Show(ERR.ToString());
                 return;
@@ -291,7 +291,7 @@ namespace PL
             {
                 myBl.Attribution(localDrone.Id);
             }
-            catch (BL.BO.NoParcelMatch ERR)
+            catch (BO.NoParcelMatch ERR)
             {
                 MessageBox.Show(ERR.ToString());
                 return;

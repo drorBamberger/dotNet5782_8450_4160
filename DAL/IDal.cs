@@ -140,5 +140,10 @@ namespace DalApi
         /// </summary>
         /// <param name="id"></param>
         public void DeleteDrone(int id);
+        /// <summary>
+        /// delete station
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteStations(int id);
     }
 }

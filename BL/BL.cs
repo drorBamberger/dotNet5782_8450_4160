@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BLApi.BO;
+using BO;
 using DalObject;
 
 namespace BL
