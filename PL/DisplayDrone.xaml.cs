@@ -19,8 +19,8 @@ namespace PL
     /// </summary>
     public partial class DisplayDrone : Window
     {
-        IBL.BO.DroneForList localDrone;
-        IBL.IBL myBl;
+        BLApi.BO.DroneForList localDrone;
+        BLApi.IBL myBl;
         TextBox droneId = new TextBox();
         TextBox model = new TextBox();
         TextBox maxWeight = new TextBox();
@@ -30,7 +30,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        public DisplayDrone(IBL.IBL bl) //add drone
+        public DisplayDrone(BLApi.IBL bl) //add drone
         {
             //MessageBox.Show(bl.StationList().First().ToString());   // for knowing station id....
             InitializeComponent();
@@ -95,15 +95,15 @@ namespace PL
 
             update.Click += Add_Click;
         }
-        public DisplayDrone(IBL.IBL bl, IBL.BO.DroneForList drone) //display and edit drone
+        public DisplayDrone(BLApi.IBL bl, BLApi.BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
 
             localDrone = drone;
             myBl = bl;
 
-            IBL.BO.Drone myDrone = bl.GetDrone(drone.Id);
-            bool flag = myDrone.Status == IBL.BO.DroneStatuses.Shipping;
+            BLApi.BO.Drone myDrone = bl.GetDrone(drone.Id);
+            bool flag = myDrone.Status == BLApi.BO.DroneStatuses.Shipping;
             idLabel.Content = "Id: " + myDrone.Id;
             maxWeightLabel.Content = "max weight drone can lift:\n" + myDrone.MaxWeight;
             batteryLabel.Content = (int)myDrone.Battery + "%";
@@ -147,7 +147,7 @@ namespace PL
             func2.FontStyle = FontStyles.Italic;
             Grid.SetRow(func2, 6);
             Grid.SetColumn(func2, 1);
-            if (drone.Status == IBL.BO.DroneStatuses.maintenance)
+            if (drone.Status == BLApi.BO.DroneStatuses.maintenance)
             {
                 func1.Content = "Release drone from charger";
                 func1.Click += DisChargeDrone;
@@ -155,7 +155,7 @@ namespace PL
                 timeText.IsEnabled = true;
                 timeLabel.Content = "enter time in charge:";
             }
-            else if (drone.Status == IBL.BO.DroneStatuses.vacant)
+            else if (drone.Status == BLApi.BO.DroneStatuses.vacant)
             {
                 func1.Content = "Send drone to charge";
                 func1.Click += ChargeDrone;

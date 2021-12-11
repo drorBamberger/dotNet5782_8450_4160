@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IBL.BO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    public partial class BL : BLApi.IBL
     {
         internal void GetElecticity()
         {
@@ -47,12 +47,12 @@ namespace BL
         //gets--------------------------------------------------------------
         internal Station GetStation(int id)
         {
-            IDAL.DO.Station StructToClass;
+            DO.Station StructToClass;
             try
             {
                 StructToClass = MyDal.DisplayStation(id);
             }
-            catch(IDAL.DO.IdNotExistException err)
+            catch(DO.IdNotExistException err)
             {
                 throw new BO.IdNotExistException(err.Id);
             }
@@ -70,12 +70,12 @@ namespace BL
 
         public Drone GetDrone(int id)
         {
-            IDAL.DO.Drone StructToClass;
+            DO.Drone StructToClass;
             try
             {
                 StructToClass = MyDal.DisplayDrone(id);
             }
-            catch (IDAL.DO.IdNotExistException err)
+            catch (DO.IdNotExistException err)
             {
                 throw new BO.IdNotExistException(err.Id);
             }
@@ -91,12 +91,12 @@ namespace BL
 
         internal Customer GetCustomer(int id)
         {
-            IDAL.DO.Customer StructToClass;
+            DO.Customer StructToClass;
             try
             {
                 StructToClass = MyDal.DisplayCustomer(id);
             }
-            catch (IDAL.DO.IdNotExistException err)
+            catch (DO.IdNotExistException err)
             {
                 throw new BO.IdNotExistException(err.Id);
             }
@@ -121,12 +121,12 @@ namespace BL
 
         public Parcel GetParcel(int id)
         {
-            IDAL.DO.Parcel StructToClass;
+            DO.Parcel StructToClass;
             try
             {
                 StructToClass = MyDal.DisplayParcel(id);
             }
-            catch (IDAL.DO.IdNotExistException err)
+            catch (DO.IdNotExistException err)
             {
                 throw new BO.IdNotExistException(err.Id);
             }
@@ -146,9 +146,9 @@ namespace BL
             {
                 return null;
             }
-            IDAL.DO.Parcel parcel = MyDal.DisplayParcel(Drones.Find(x => x.Id == droneId).ParcelId);
-            IDAL.DO.Customer sender = MyDal.DisplayCustomer(parcel.SenderId);
-            IDAL.DO.Customer target = MyDal.DisplayCustomer(parcel.TargetId);
+            DO.Parcel parcel = MyDal.DisplayParcel(Drones.Find(x => x.Id == droneId).ParcelId);
+            DO.Customer sender = MyDal.DisplayCustomer(parcel.SenderId);
+            DO.Customer target = MyDal.DisplayCustomer(parcel.TargetId);
             Location SenderLocation = GetParcelSenderLocation(parcel.Id);
             Location TargetLocation = GetParcelTargetLocation(parcel.Id);
             CustomerInParcel senderInParcel = new CustomerInParcel(sender.Id, sender.Name);
@@ -161,7 +161,7 @@ namespace BL
 
         internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide)
         {
-            IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
+            DO.Parcel StructToClass = MyDal.DisplayParcel(id);
             return new ParcelForCustomer(id, (WeightCategories)StructToClass.Weight, (Priorities)StructToClass.Priority,
                 GetParcelStatus(id), otherSide);
         }
@@ -177,7 +177,7 @@ namespace BL
 
         internal ParcelStatuses GetParcelStatus(int id)
         {
-            IDAL.DO.Parcel StructToClass = MyDal.DisplayParcel(id);
+            DO.Parcel StructToClass = MyDal.DisplayParcel(id);
             ParcelStatuses status = new ParcelStatuses();
             if (StructToClass.Delivered != null)
                 status = ParcelStatuses.Delivered;
@@ -191,10 +191,10 @@ namespace BL
             return status;
         }
 
-        internal IDAL.DO.Station GetClosestStation(Location locationA, List<IDAL.DO.Station> stations)
+        internal DO.Station GetClosestStation(Location locationA, List<DO.Station> stations)
         {
             double smallDistance = double.MaxValue, tmpDis;
-            IDAL.DO.Station comeBack = new IDAL.DO.Station();
+            DO.Station comeBack = new DO.Station();
             foreach (var station in stations)
             {
                 Location stationLocation = new Location(station.Longitude, station.Lattitude);
@@ -208,10 +208,10 @@ namespace BL
             return comeBack;
         }
 
-        internal IDAL.DO.Parcel GetClosestParcel(Location locationA, List<IDAL.DO.Parcel> parcels)
+        internal DO.Parcel GetClosestParcel(Location locationA, List<DO.Parcel> parcels)
         {
             double smallDistance = double.MaxValue, tmpDis;
-            IDAL.DO.Parcel comeBack = new IDAL.DO.Parcel();
+            DO.Parcel comeBack = new DO.Parcel();
             foreach (var parcel in parcels)
             {
                 Location parcelLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude,
@@ -236,7 +236,7 @@ namespace BL
             return HeavyPackege*distance;
 
         }
-        internal IDAL.DO.Station GetClosestStationWithChargeSlots(Location locationA, List<IDAL.DO.Station> stations)
+        internal DO.Station GetClosestStationWithChargeSlots(Location locationA, List<DO.Station> stations)
         {
             var closestStation = GetClosestStation(locationA, stations);
             while(closestStation.ChargeSlots == 0)
@@ -257,9 +257,9 @@ namespace BL
             return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Lattitude);
         }
 
-        internal IEnumerable<StationForList> StationsToBL(IEnumerable<IDAL.DO.Station> stations)
+        internal IEnumerable<StationForList> StationsToBL(IEnumerable<DO.Station> stations)
         {
-            IEnumerable<IDAL.DO.Station> original = stations;
+            IEnumerable<DO.Station> original = stations;
             List<StationForList> comeBack = new List<StationForList>();
             int counter = 0;
             foreach (var station in original)
@@ -270,7 +270,7 @@ namespace BL
             }
             return comeBack;
         }
-        internal IEnumerable<ParcelForList> ParcelsToBL(IEnumerable<IDAL.DO.Parcel> Parcels)
+        internal IEnumerable<ParcelForList> ParcelsToBL(IEnumerable<DO.Parcel> Parcels)
         {
             List<ParcelForList> comeBack = new List<ParcelForList>();
             foreach (var parcel in Parcels)

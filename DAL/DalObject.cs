@@ -9,7 +9,6 @@ using DO;
 
 namespace DalObject
 {
-
     public class DataSource
     {
         public static List<Drone> Drones = new List<Drone>();
@@ -59,8 +58,22 @@ namespace DalObject
 
     }
 
-    internal sealed class DalObject  : DalApi.IDal
+    internal sealed class DalObject : DalApi.IDal
     {
+        private static DalObject instance = null;
+
+        internal static DalObject Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new DalObject();
+                }
+                return instance;
+            }
+        }
+
         // cnstrct:
         public DalObject()
         {

@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IDAL
+
+namespace DO
 {
-    namespace DO
+    public enum WeightCategories
     {
-        public enum WeightCategories
-        {
-            Light  =0,
-            Medium,
-            Heavy
-        }
+        Light = 0,
+        Medium,
+        Heavy
+    }
 
 
-        public enum Priorities
-        {
-            Normal = 0,
-            Fast,
-            Emergency
-        }
+    public enum Priorities
+    {
+        Normal = 0,
+        Fast,
+        Emergency
     }
 }
+

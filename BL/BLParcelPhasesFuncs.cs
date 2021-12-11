@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IBL.BO;
+using BLApi.BO;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    public partial class BL : BLApi.IBL
     {
         public void Attribution(int droneId)
         {
@@ -20,7 +20,7 @@ namespace BL
             {
                 throw new BO.DroneIsntVacant(droneId);
             }
-            List<IDAL.DO.Parcel> parcelList = (List<IDAL.DO.Parcel>)MyDal.ParcelList(x => (int)x.Weight <= (int)drone.MaxWeight&& x.Scheduled == null);//removing all the too heavy parcels
+            List<DO.Parcel> parcelList = (List<DO.Parcel>)MyDal.ParcelList(x => (int)x.Weight <= (int)drone.MaxWeight&& x.Scheduled == null);//removing all the too heavy parcels
             if (parcelList.Count == 0)
             {
                 throw new BO.NoParcelMatch(droneId);
@@ -30,7 +30,7 @@ namespace BL
             foreach (var parcel in parcelList)
             {
                 Location senderLocation = GetParcelSenderLocation(parcel.Id), targetLocation = GetParcelTargetLocation(parcel.Id);
-                var closestStationToTarget = GetClosestStation(targetLocation, (List<IDAL.DO.Station>)MyDal.StationList(x=>true));
+                var closestStationToTarget = GetClosestStation(targetLocation, (List<DO.Station>)MyDal.StationList(x=>true));
                 if (DistanceTo(drone.MyLocation, senderLocation) * Available +
                     GetElectricityPerKM(DistanceTo(senderLocation, targetLocation), (WeightCategories)parcel.Weight) +
                     DistanceTo(targetLocation, new Location(closestStationToTarget.Longitude, closestStationToTarget.Lattitude)) * Available < drone.Battery)
@@ -55,12 +55,12 @@ namespace BL
             {
                 throw new BO.DroneIsntShipping(parcelId);
             }
-            IDAL.DO.Parcel parcel;
+            DO.Parcel parcel;
             try
             {
                 parcel = MyDal.DisplayParcel(drone.ParcelId);
             }
-            catch (IDAL.DO.IdNotExistException err)
+            catch (DO.IdNotExistException err)
             {
                 throw new BO.IdNotExistException(err.Id);
             }
@@ -85,12 +85,12 @@ namespace BL
             {
                 throw new BO.DroneIsntShipping(parcelId);
             }
-            IDAL.DO.Parcel parcel;
+            DO.Parcel parcel;
             try
             {
                 parcel = MyDal.DisplayParcel(drone.ParcelId);
             }
-            catch (IDAL.DO.IdNotExistException err)
+            catch (DO.IdNotExistException err)
             {
                 throw new BO.IdNotExistException(err.Id);
             }

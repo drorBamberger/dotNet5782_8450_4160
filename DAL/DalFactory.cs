@@ -7,7 +7,7 @@ namespace DAL
 {
     public class DalFactory
     {
-        public DalApi.IDal GetDal(string str)
+        static public DalApi.IDal GetDal(string str)
         {
             if(str == "DalObject")
             {
@@ -15,7 +15,7 @@ namespace DAL
             }
             else if(str == "DalXml")
             {
-                return new DalObject.xml;
+                return new DalObject.DalObject();// return new DalObject.DalXml();
             }
             else
             {

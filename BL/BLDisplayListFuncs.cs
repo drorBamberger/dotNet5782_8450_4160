@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IBL.BO;
+using BLApi.BO;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    public partial class BL : BLApi.IBL
     {
         public IEnumerable<StationForList> StationList()
         {
@@ -25,7 +25,7 @@ namespace BL
 
         public IEnumerable<CustomerForList> CustomerList()
         {
-            IEnumerable<IDAL.DO.Customer> original = MyDal.CustomerList(x=>true);
+            IEnumerable<DO.Customer> original = MyDal.CustomerList(x=>true);
             List<CustomerForList> comeBack = new List<CustomerForList>();
             int counterSendProvide = 0, counterSendNotProvide = 0, counterGot = 0, counterOnTheWay = 0;
             foreach(var customer in original)
