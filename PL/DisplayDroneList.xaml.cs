@@ -18,28 +18,28 @@ namespace PL
     /// </summary>
     public partial class DisplayDroneList : Window
     {
-        private IBL.IBL dataBase;
+        private BLApi.IBL dataBase;
         public DisplayDroneList()
         {
             InitializeComponent();
         }
-        public DisplayDroneList(IBL.IBL bl)
+        public DisplayDroneList(BLApi.IBL bl)
         {
             InitializeComponent();
             dataBase = bl;
             DronesListView.ItemsSource = bl.DroneList();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
         
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (IBL.BO.DroneStatuses)StatusSelector.SelectedItem); 
+            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem); 
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+            DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,7 +56,7 @@ namespace PL
         }
         private void DronesListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            new DisplayDrone(dataBase, (IBL.BO.DroneForList)DronesListView.SelectedItem).Show();
+            new DisplayDrone(dataBase, (BO.DroneForList)DronesListView.SelectedItem).Show();
             this.Close();
         }
     }

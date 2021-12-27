@@ -1,9 +1,10 @@
-﻿using IBL.BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-namespace IBL
+
+namespace BLApi
 {
     public interface IBL
     {
@@ -168,11 +169,11 @@ namespace IBL
         //internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide);
         //internal DroneInParcel GetDroneInParcel(int parcelId);
         //internal ParcelStatuses GetParcelStatus(int id);
-        //internal IDAL.DO.Station GetClosestStation(Location locationA, List<IDAL.DO.Station> stations);
-        //internal IDAL.DO.Parcel GetClosestParcel(Location locationA, List<IDAL.DO.Parcel> parcels);
-        //internal IDAL.DO.Station GetClosestStationWithChargeSlots(Location locationA, List<IDAL.DO.Station> stations);
+        //internal DO.Station GetClosestStation(Location locationA, List<DO.Station> stations);
+        //internal DO.Parcel GetClosestParcel(Location locationA, List<DO.Parcel> parcels);
+        //internal DO.Station GetClosestStationWithChargeSlots(Location locationA, List<DO.Station> stations);
         //internal double GetElectricityPerKM(double distance, WeightCategories a);
-        //internal IEnumerable<StationForList> StationsToBl(IEnumerable<IDAL.DO.Station> stations);
-        //internal IEnumerable<ParcelForList> ParcelsToBl(IEnumerable<IDAL.DO.Parcel> Parcels);
+        //internal IEnumerable<StationForList> StationsToBl(IEnumerable<DO.Station> stations);
+        //internal IEnumerable<ParcelForList> ParcelsToBl(IEnumerable<DO.Parcel> Parcels);
     }
 }

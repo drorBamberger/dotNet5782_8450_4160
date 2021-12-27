@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IBL.BO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    public partial class BL : BLApi.IBL
     {
         public void ChargeDrone(int id)
         {
@@ -19,7 +19,7 @@ namespace BL
             {
                 throw new BO.DroneIsntVacant(id);
             }
-            var station = GetClosestStationWithChargeSlots(drone.MyLocation, (List<IDAL.DO.Station>)MyDal.StationList(x=>true));
+            var station = GetClosestStationWithChargeSlots(drone.MyLocation, (List<DO.Station>)MyDal.StationList(x=>true));
             Location stationLocation = new Location(station.Longitude, station.Lattitude);
             if (DistanceTo(drone.MyLocation, stationLocation )* Available>drone.Battery)
             {

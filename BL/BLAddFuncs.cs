@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IBL.BO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    public partial class BL : BLApi.IBL
     {
         public void AddStation(int id, string name, Location location, int chargeSlots)
         {
@@ -14,7 +14,7 @@ namespace BL
             {
                 MyDal.AddStation(id, name, location.Longitude, location.Latitude, chargeSlots);
             }
-            catch(IDAL.DO.IdTakenException err)
+            catch(DO.IdTakenException err)
             {
                 throw new BO.IdTakenException(err.Id);
             }
@@ -31,11 +31,11 @@ namespace BL
             {
                 MyDal.AddDrone(id, model, maxWeight);
             }
-            catch (IDAL.DO.IdTakenException err)
+            catch (DO.IdTakenException err)
             {
                 throw new BO.IdTakenException(err.Id);
             }
-            IDAL.DO.Station a = MyDal.DisplayStation(stationId);
+            DO.Station a = MyDal.DisplayStation(stationId);
             a.ChargeSlots--;
             MyDal.DeleteStations(stationId);
             MyDal.AddStation(a.Id, a.Name, a.Longitude, a.Lattitude, a.ChargeSlots);
@@ -50,7 +50,7 @@ namespace BL
             {
                 MyDal.AddCustomer(id, name, phone, location.Longitude, location.Latitude);
             }
-            catch (IDAL.DO.IdTakenException err)
+            catch (DO.IdTakenException err)
             {
                 throw new BO.IdTakenException(err.Id);
             }

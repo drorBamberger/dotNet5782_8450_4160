@@ -2,48 +2,47 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IBL
+
+namespace BO
 {
-    namespace BO
+    public enum WeightCategories
     {
-        public enum WeightCategories
-        {
-            Light = 0,
-            Medium,
-            Heavy
-        }
+        Light = 0,
+        Medium,
+        Heavy
+    }
 
 
-        public enum Priorities
-        {
-            Normal = 0,
-            Fast,
-            Emergency
-        }
+    public enum Priorities
+    {
+        Normal = 0,
+        Fast,
+        Emergency
+    }
 
-        public enum DroneStatuses
-        {
-            vacant = 0,
-            maintenance,
-            Shipping
-        }
+    public enum DroneStatuses
+    {
+        vacant = 0,
+        maintenance,
+        Shipping
+    }
 
-        public enum ParcelStatuses
-        {
-            Reuqested = 0,
-            Scheduled,
-            PickedUp,
-            Delivered
-        }
-        public enum ParcelOnDeliveryStatuses
-        {
-            Waiting = 0,
-            onTheWay
-        }
+    public enum ParcelStatuses
+    {
+        Reuqested = 0,
+        Scheduled,
+        PickedUp,
+        Delivered
+    }
+    public enum ParcelOnDeliveryStatuses
+    {
+        Waiting = 0,
+        onTheWay
+    }
 
-        public enum UpdateFuncs
-        {
+    public enum UpdateFuncs
+    {
 
-        }
     }
 }
+
