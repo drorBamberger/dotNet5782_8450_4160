@@ -26,9 +26,24 @@ namespace PL
         {
             InitializeComponent();
         }
-        private void NewEvent(object sender, RoutedEventArgs e)
+        private void GoToDrones(object sender, RoutedEventArgs e)
         {
             new DisplayDroneList(dataBase).Show();
+            this.Close();
+        }
+        private void GoToStations(object sender, RoutedEventArgs e)
+        {
+            new DisplayStationList(dataBase).Show();
+            this.Close();
+        }
+        private void GoToCustomers(object sender, RoutedEventArgs e)
+        {
+            new DisplayCustomerList(dataBase).Show();
+            this.Close();
+        }
+        private void GoToParcels(object sender, RoutedEventArgs e)
+        {
+            new DisplayParcelList(dataBase).Show();
             this.Close();
         }
 

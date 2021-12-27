@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Click="NewEvent" Content="to the drones list!" HorizontalAlignment="Left" Margin="290,101,0,0" VerticalAlignment="Top" Height="50" Width="168"/>
+        <Button Click="GoToDrones" Content="to the drones!" Background="LawnGreen" HorizontalAlignment="Left" Margin="45,96,0,0" VerticalAlignment="Top" Height="50" Width="168"/>
+        <Button Click="GoToStations" Content="to the stations!" Background="LightGreen" HorizontalAlignment="Left" Margin="218,96,0,0" VerticalAlignment="Top" Height="50" Width="168"/>
+        <Button Click="GoToCustomers" Content="to the customers!" Background="LightSeaGreen" HorizontalAlignment="Left" Margin="391,96,0,0" VerticalAlignment="Top" Height="50" Width="168"/>
+        <Button Click="GoToParcels" Content="to the parcels!" Background="GreenYellow" HorizontalAlignment="Left" Margin="564,96,0,0" VerticalAlignment="Top" Height="50" Width="168"/>
         <Button Background="Red" Content="close" Margin="719,10,10,0" VerticalAlignment="Top" Click="Button_Click" Height="25" RenderTransformOrigin="0,0.778"/>
         <Image Source="https://www.southwhidbeyrecord.com/wp-content/uploads/2021/10/26910687_web1_TSR-SWR-20211021-Skyline-X-Drone-Teaser.jpeg" Margin="-594,156,-543,10"/>
         <Label Content="welcome to our hamble program!" HorizontalAlignment="Left" Margin="266,28,0,0" VerticalAlignment="Top" Height="44" Width="340"/>

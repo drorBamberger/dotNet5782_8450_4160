@@ -12,6 +12,10 @@ namespace BL
         {
             return StationsToBL(MyDal.StationList(x => true));
         }
+        public IEnumerable<StationForList> StationList(Predicate<StationForList> predictaion)
+        {
+            return ((List<StationForList>)StationsToBL(MyDal.StationList(x => true))).FindAll(predictaion);
+        }
 
         public IEnumerable<DroneForList> DroneList()
         {

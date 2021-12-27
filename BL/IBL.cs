@@ -97,12 +97,18 @@ namespace BLApi
         /// <returns></returns>
         public IEnumerable<StationForList> StationList();
         /// <summary>
+        /// display all the drones that...
+        /// </summary>
+        /// <param name="predictaion"></param>
+        /// <returns></returns>
+        public IEnumerable<StationForList> StationList(Predicate<StationForList> predictaion);
+        /// <summary>
         /// display all the drones
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DroneForList> DroneList();
         /// <summary>
-        /// 
+        /// display all the drones that...
         /// </summary>
         /// <param name="predictaion"></param>
         /// <returns></returns>
