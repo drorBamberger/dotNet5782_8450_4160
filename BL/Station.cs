@@ -17,6 +17,10 @@ namespace BO
             Drones = drones;
         }
 
+        public Station()
+        {
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public Location MyLocation { get; set; }

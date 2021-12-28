@@ -26,10 +26,33 @@ namespace PL
         public DisplayCustomer(BLApi.IBL bl) //add Customer
         {
             InitializeComponent();
+            newCustomer = new BO.Customer();
+            newCustomer.CustomerLocation = new BO.Location();
+            DataContext = this;
+            myBl = bl;
         }
         public DisplayCustomer(BLApi.IBL bl, BO.CustomerForList customer) //display and edit Customer
         {
             InitializeComponent();
+            DataContext = this;
+            myBl = bl;
+            newCustomer = myBl.GetCustomer(customer.Id);
+            IdTextBox.IsReadOnly = true;
+            LonTextBox.IsReadOnly = true;
+            LatTextBox.IsReadOnly = true;
+            
+        }
+        private void Commit_All(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                myBl.AddCustomer(newCustomer.Id, newCustomer.Name, newCustomer.PhoneNum, newCustomer.CustomerLocation);
+            }
+            catch(BO.IdTakenException)
+            {
+                myBl.CustomerUpdate(newCustomer.Id, newCustomer.Name, newCustomer.PhoneNum);
+            }
+            MessageBox.Show("Commited.");
         }
         private void ToCustomerViewSelected(object sender, MouseButtonEventArgs e)
         {
@@ -46,5 +69,7 @@ namespace PL
             new DisplayCustomerList(myBl).Show();
             this.Close();
         }
+
+
     }
 }

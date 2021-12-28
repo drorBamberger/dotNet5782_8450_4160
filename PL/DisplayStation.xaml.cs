@@ -28,15 +28,37 @@ namespace PL
         public DisplayStation(BLApi.IBL bl) //add drone
         {
             InitializeComponent();
+            DataContext = this;
+            newStation = new BO.Station();
+            newStation.MyLocation = new BO.Location();
+            myBl = bl;
         }
         public DisplayStation(BLApi.IBL bl, BO.StationForList station) //display and edit station
         {
             InitializeComponent();
+            DataContext = this;
+            myBl = bl;
+            newStation = myBl.GetStation(station.Id);
+            IdTextBox.IsReadOnly = true;
+            LonTextBox.IsReadOnly = true;
+            LatTextBox.IsReadOnly = true;
         }
         private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
             new DisplayStationList(myBl).Show();
             this.Close();
+        }
+        private void Commit_All(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                myBl.AddStation(newStation.Id, newStation.Name, newStation.MyLocation, newStation.ChargeSlots);
+            }
+            catch (BO.IdTakenException)
+            {
+                myBl.StationUpdate(newStation.Id, newStation.Name, newStation.ChargeSlots + newStation.Drones.Count());
+            }
+            MessageBox.Show("Commited.");
         }
         private void DroneListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {

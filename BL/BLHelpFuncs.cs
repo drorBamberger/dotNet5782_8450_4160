@@ -45,7 +45,7 @@ namespace BL
             return dist;
         }
         //gets--------------------------------------------------------------
-        internal Station GetStation(int id)
+        public Station GetStation(int id)
         {
             DO.Station StructToClass;
             try
@@ -89,7 +89,7 @@ namespace BL
             return new DroneForList(id, drone.Model, drone.MaxWeight, drone.Battery, drone.Status, drone.MyParcel == null?0:drone.MyParcel.Id, drone.MyLocation);
         }
 
-        internal Customer GetCustomer(int id)
+        public Customer GetCustomer(int id)
         {
             DO.Customer StructToClass;
             try
@@ -106,11 +106,11 @@ namespace BL
             {
                 if(item.SenderId == id)
                 {
-                    fromCustomers.Add(GetParcelForCustomer(item.SenderId, new CustomerInParcel(item.TargetId, MyDal.DisplayCustomer(item.TargetId).Name)));
+                    fromCustomers.Add(GetParcelForCustomer(item.Id, new CustomerInParcel(item.TargetId, MyDal.DisplayCustomer(item.TargetId).Name)));
                 }
                 if (item.TargetId == id)
                 {
-                    toCustomers.Add(GetParcelForCustomer(item.TargetId, new CustomerInParcel(item.SenderId, MyDal.DisplayCustomer(item.SenderId).Name)));
+                    toCustomers.Add(GetParcelForCustomer(item.Id, new CustomerInParcel(item.SenderId, MyDal.DisplayCustomer(item.SenderId).Name)));
                 }
             }
 

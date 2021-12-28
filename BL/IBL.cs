@@ -175,8 +175,9 @@ namespace BLApi
         //internal Station GetStation(int id);
         public Drone GetDrone(int id);
         public DroneForList GetDroneForList(int id);
-        //internal Customer GetCustomer(int id);
+        public Customer GetCustomer(int id);
         public Parcel GetParcel(int id);
+        public Station GetStation(int id);
         //internal ParcelOnDelivery GetParcelOnDelivery(int droneId);
         //internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide);
         //internal DroneInParcel GetDroneInParcel(int parcelId);

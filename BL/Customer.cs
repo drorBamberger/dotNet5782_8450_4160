@@ -18,6 +18,10 @@ namespace BO
             ToCustomer = toCustomer;
         }
 
+        public Customer()
+        {
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string PhoneNum { get; set; }
