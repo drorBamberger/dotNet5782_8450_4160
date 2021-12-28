@@ -97,7 +97,7 @@ namespace BLApi
         /// <returns></returns>
         public IEnumerable<StationForList> StationList();
         /// <summary>
-        /// display all the drones that...
+        /// display all the stations that...
         /// </summary>
         /// <param name="predictaion"></param>
         /// <returns></returns>
@@ -123,6 +123,12 @@ namespace BLApi
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ParcelForList> ParcelList();
+        /// <summary>
+        /// display all the parcels that...
+        /// </summary>
+        /// <param name="predictaion"></param>
+        /// <returns></returns>
+        public IEnumerable<ParcelForList> ParcelList(Predicate<ParcelForList> predictaion);
         /// <summary>
         /// display all the free parcels
         /// </summary>

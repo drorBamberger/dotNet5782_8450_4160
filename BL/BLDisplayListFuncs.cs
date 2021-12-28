@@ -48,6 +48,10 @@ namespace BL
         {
             return ParcelsToBL(MyDal.ParcelList(x => true));
         }
+        public IEnumerable<ParcelForList> ParcelList(Predicate<ParcelForList> predictaion)
+        {
+            return ((List<ParcelForList>)ParcelsToBL(MyDal.ParcelList(x => true))).FindAll(predictaion);
+        }
 
         public IEnumerable<ParcelForList> ParcelListNotTaken()
         {

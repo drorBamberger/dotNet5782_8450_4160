@@ -1,0 +1,18 @@
+﻿<Window x:Class="PL.DisplayStation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="DisplayStation" Height="450" Width="800">
+    <Grid>
+        <TextBox Name ="IdTextBox" HorizontalAlignment="Left" Margin="10,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="344" Height="65" Text="{Binding newStation.Location}"/>
+        <TextBox Name ="NameTextBox" HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="344" Height="65" Text="{Binding newStation.Id}"/>
+        <TextBox Name ="LoactionTextBox" HorizontalAlignment="Left" Margin="384,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="344" Height="65" Text="{Binding newStation.ChargeSlots}"/>
+        <TextBox Name ="ChargeSlotsTextBox" HorizontalAlignment="Left" Margin="384,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="344" Height="65" Text="{Binding newStation.Name}"/>
+        <Button x:Name="Close_Window" Background="Red" Content="Close" HorizontalAlignment="Left" Margin="767,0,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
+        <Button Content="commit all" HorizontalAlignment="Left" Margin="0,361,0,0" VerticalAlignment="Top" Height="73" Width="420" FontSize="50"/>
+        <ListBox Name ="DroneListView" Margin="0,171,0,78"  ItemsSource="{Binding newStation.Drones}" MouseDoubleClick="DroneListView_SelectionChanged"/>
+    </Grid>
+</Window>
