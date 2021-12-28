@@ -21,5 +21,13 @@ namespace PL
         {
             InitializeComponent();
         }
+        public DisplayParcel(BLApi.IBL bl) //add Customer
+        {
+            InitializeComponent();
+        }
+        public DisplayParcel(BLApi.IBL bl, BO.CustomerForList customer) //display and edit Customer
+        {
+            InitializeComponent();
+        }
     }
 }

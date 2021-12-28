@@ -25,11 +25,18 @@ namespace PL
         {
             InitializeComponent();
         }
+        public DisplayStation(BLApi.IBL bl) //add drone
+        {
+            InitializeComponent();
+        }
+        public DisplayStation(BLApi.IBL bl, BO.StationForList station) //display and edit station
+        {
+            InitializeComponent();
+        }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             new DisplayStationList(myBl).Show();
             this.Close();
-
         }
         private void DroneListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
