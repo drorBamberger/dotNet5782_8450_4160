@@ -37,11 +37,10 @@ namespace PL
             ParcelListView.ItemsSource = dataBase.ParcelList(x => x.Status == (BO.ParcelStatuses)StatusSelector.SelectedItem);
         }
 
-        //private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
-        //}
-
+        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ParcelListView.ItemsSource = dataBase.ParcelList(x => x.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new DisplayParcel(dataBase).Show();

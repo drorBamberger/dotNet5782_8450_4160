@@ -33,7 +33,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        private void Close_Click(object sender, RoutedEventArgs e)
+        private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
             new DisplayStationList(myBl).Show();
             this.Close();

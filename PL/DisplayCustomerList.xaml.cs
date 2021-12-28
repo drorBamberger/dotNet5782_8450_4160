@@ -42,9 +42,9 @@ namespace PL
             new MainWindow().Show();
             this.Close();
         }
-        private void CustomersListView_SelectionChanged(object sender, MouseButtonEventArgs e)
+        private void CustomerListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            new DisplayCustomer(dataBase, (BO.DroneForList)CustomerListView.SelectedItem).Show();
+            new DisplayCustomer(dataBase, (BO.CustomerForList)CustomerListView.SelectedItem).Show();
             this.Close();
         }
     }

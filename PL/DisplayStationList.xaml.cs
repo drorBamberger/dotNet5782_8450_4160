@@ -60,9 +60,9 @@ namespace PL
             new MainWindow().Show();
             this.Close();
         }
-        private void StationsListView_SelectionChanged(object sender, MouseButtonEventArgs e)
+        private void StationListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            new DisplayStation(dataBase, (BO.DroneForList)StationListView.SelectedItem).Show();
+            new DisplayStation(dataBase, (BO.StationForList)StationListView.SelectedItem).Show();
             this.Close();
         }
     }
