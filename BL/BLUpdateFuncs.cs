@@ -35,7 +35,7 @@ namespace BL
             {
                 foreach(var drone in Drones)
                 {
-                    if(drone.MyLocation == new Location(d.Longitude, d.Lattitude) && drone.Status == DroneStatuses.maintenance)
+                    if(drone.MyLocation.Longitude == d.Longitude && drone.MyLocation.Latitude ==  d.Lattitude && drone.Status == DroneStatuses.maintenance)
                     {
                         counter++;
                     }
