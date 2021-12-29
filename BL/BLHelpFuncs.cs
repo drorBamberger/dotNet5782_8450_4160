@@ -59,7 +59,8 @@ namespace BL
             List<DroneInCharge> DronesInStation = new List<DroneInCharge> { };
             foreach (var item in Drones)
             {
-                if (item.MyLocation == new Location(StructToClass.Longitude, StructToClass.Lattitude))
+                if (StructToClass.Longitude == item.MyLocation.Longitude && StructToClass.Lattitude == item.MyLocation.Latitude
+                    && item.Status == DroneStatuses.maintenance)
                 {
                     DronesInStation.Add(new DroneInCharge(item.Id, item.Battery));
                 }
@@ -264,8 +265,8 @@ namespace BL
             int counter = 0;
             foreach (var station in original)
             {
-                counter = Drones.FindAll(x => x.MyLocation == new Location(station.Longitude, station.Lattitude) &&
-                x.Status == DroneStatuses.maintenance).Count();
+                counter = Drones.Count(x => x.MyLocation.Longitude == station.Longitude && x.MyLocation.Latitude ==  station.Lattitude &&
+                x.Status == DroneStatuses.maintenance);
                 comeBack.Add(new StationForList(station.Id, station.Name, station.ChargeSlots, counter));
             }
             return comeBack;

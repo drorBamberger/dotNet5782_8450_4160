@@ -25,7 +25,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        public DisplayStation(BLApi.IBL bl) //add drone
+        public DisplayStation(BLApi.IBL bl) //add station
         {
             InitializeComponent();
             DataContext = this;
@@ -62,7 +62,7 @@ namespace PL
         }
         private void DroneListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
-            new DisplayDrone(myBl, (BO.DroneForList)DroneListView.SelectedItem).Show();
+            new DisplayDrone(myBl, myBl.GetDroneForList(((BO.DroneInCharge)DroneListView.SelectedItem).Id)).Show();
             this.Close();
         }
     }
