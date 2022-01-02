@@ -25,12 +25,34 @@ VerticalAlignment="Stretch" Width="auto">
             <Button Content="add drone" Grid.Column="3" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Click="Button_Click"/>
             <Button x:Name="Close_Window" Background="Red" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Margin="120,-1,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
         </Grid>
-        <ListView Grid.Row="1" x:Name="DronesListView" MouseDoubleClick="DronesListView_SelectionChanged">
+        <ListView DataContext="BO.DroneForList" Grid.Row="1" x:Name="DronesListView" MouseDoubleClick="DronesListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
     </Grid>
 </Window>

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -19,6 +20,11 @@ namespace PL
     public partial class DisplayDroneList : Window
     {
         private BLApi.IBL dataBase;
+        public ObservableCollection<BO.DroneForList> drones
+        {
+            get;
+            set;
+        }
         public DisplayDroneList()
         {
             InitializeComponent();
@@ -27,7 +33,12 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
-            DronesListView.ItemsSource = bl.DroneList();
+            
+            DronesListView.ItemsSource = CollectionViewSource.GetDefaultView(bl.DroneList());
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DronesListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Status");
+            view.GroupDescriptions.Add(groupDescription);
+
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
@@ -56,6 +67,8 @@ namespace PL
         }
         private void DronesListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
+            if (DronesListView.SelectedItem is null)
+                return;
             new DisplayDrone(dataBase, (BO.DroneForList)DronesListView.SelectedItem).Show();
             this.Close();
         }
