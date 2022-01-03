@@ -27,7 +27,12 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
+
             StationListView.ItemsSource = bl.StationList();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChargeSlots");
+            view.GroupDescriptions.Add(groupDescription);
+
             ChargeSlots.Items.Add(new List<string>() { "all", "full", "have empty charge slots" });
         }
 
@@ -62,6 +67,8 @@ namespace PL
         }
         private void StationListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
+            if (StationListView.SelectedItem is null)
+                return;
             new DisplayStation(dataBase, (BO.StationForList)StationListView.SelectedItem).Show();
             this.Close();
         }
