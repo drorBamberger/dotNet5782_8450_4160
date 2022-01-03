@@ -24,7 +24,11 @@ VerticalAlignment="Stretch" Width="auto">
             <Label x:Name="logo" Content="PARCELS" Grid.Column="0" HorizontalAlignment="Left" Margin="22,14,0,0" VerticalAlignment="Top"/>
             <Button Content="add Parcel" Grid.Column="3" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Click="Button_Click"/>
             <Button x:Name="Close_Window" Background="Red" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Margin="120,-1,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
+            <Button Content="display all" Grid.Column="3" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Height="20" Width="59" Click="DispalyAll"/>
+            <Button Name  ="groupSender" Content="Grouping Sender" HorizontalAlignment="Left" Margin="83,19,0,0" VerticalAlignment="Top" Click="GroupUnGroupSender"/>
+            <Button Name  ="groupTarget" Content="Grouping Target" HorizontalAlignment="Left" Margin="83,44,0,0" VerticalAlignment="Top" Click="GroupUnGroupTarget"/>
         </Grid>
+
         <ListView Grid.Row="1" x:Name="ParcelListView" MouseDoubleClick="ParcelListView_SelectionChanged">
             <ListView.View>
                 <GridView>

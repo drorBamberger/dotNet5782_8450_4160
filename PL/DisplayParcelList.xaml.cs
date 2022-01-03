@@ -19,6 +19,11 @@ namespace PL
     public partial class DisplayParcelList : Window
     {
         private BLApi.IBL dataBase;
+        static bool temp1 = false;
+        static bool temp2 = false;
+        CollectionView view;
+        PropertyGroupDescription groupDescriptionSender = new PropertyGroupDescription("SenderName");
+        PropertyGroupDescription groupDescriptionTarget = new PropertyGroupDescription("TargetName");
         public DisplayParcelList()
         {
             InitializeComponent();
@@ -27,11 +32,9 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
+            ParcelListView.ItemsSource = dataBase.ParcelList();
 
-            ParcelListView.ItemsSource = CollectionViewSource.GetDefaultView(bl.ParcelList());
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
-            view.GroupDescriptions.Add(groupDescription);
+            view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.ParcelStatuses));
             //WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
@@ -39,23 +42,28 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ParcelListView.ItemsSource = CollectionViewSource.GetDefaultView(dataBase.ParcelList(x => x.Status == (BO.ParcelStatuses)StatusSelector.SelectedItem));
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
-            view.GroupDescriptions.Add(groupDescription);
+            groupSender.Visibility = Visibility.Hidden;
+            groupTarget.Visibility = Visibility.Hidden;
+            if (StatusSelector.SelectedIndex != -1)
+            {
+                ParcelListView.ItemsSource = dataBase.ParcelList(x => x.Status == (BO.ParcelStatuses)StatusSelector.SelectedItem);
+            }
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ParcelListView.ItemsSource = dataBase.ParcelList(x => x.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            groupSender.Visibility = Visibility.Hidden;
+            groupTarget.Visibility = Visibility.Hidden;
+            if (StatusSelector.SelectedIndex != -1)
+            {
+                ParcelListView.ItemsSource = dataBase.ParcelList(x => x.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new DisplayParcel(dataBase).Show();
-            //new DisplayParcelList(dataBase).Show();
             this.Close();
         }
-
         private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();
@@ -67,6 +75,54 @@ namespace PL
                 return;
             new DisplayParcel(dataBase, (BO.ParcelForList)ParcelListView.SelectedItem).Show();
             this.Close();
+        }
+        private void DispalyAll(object sender, RoutedEventArgs e)
+        {
+            ParcelListView.ItemsSource = dataBase.ParcelList();
+            view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            temp1 = false;
+            temp2 = false;
+            view.GroupDescriptions.Clear();
+            StatusSelector.SelectedIndex = -1;
+            WeightSelector.SelectedIndex = -1;
+            groupSender.Content = "Grouping Sender";
+            groupTarget.Content = "Grouping Target";
+            groupSender.Visibility = Visibility.Visible;
+            groupTarget.Visibility = Visibility.Visible;
+        }
+        private void GroupUnGroupSender(object sender, RoutedEventArgs e)
+        {
+            if (!temp1)
+            {
+                view.GroupDescriptions.Clear();
+                groupTarget.Content = "Grouping Target";
+                temp2 = false;
+                view.GroupDescriptions.Add(groupDescriptionSender);
+                groupSender.Content = "UnGrouping Sender";
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+                groupSender.Content = "Grouping Sender";
+            }
+            temp1 = !temp1;
+        }
+        private void GroupUnGroupTarget(object sender, RoutedEventArgs e)
+        {
+            if (!temp2)
+            {
+                view.GroupDescriptions.Clear();
+                groupSender.Content = "Grouping Sender";
+                temp1 = false;
+                view.GroupDescriptions.Add(groupDescriptionTarget);
+                groupTarget.Content = "UnGrouping Target";
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+                groupTarget.Content = "Grouping Target";
+            }
+            temp2 = !temp2;
         }
     }
 }
