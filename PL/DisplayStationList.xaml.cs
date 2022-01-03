@@ -19,6 +19,9 @@ namespace PL
     public partial class DisplayStationList : Window
     {
         private BLApi.IBL dataBase;
+        static bool temp = false;
+        CollectionView view;
+        PropertyGroupDescription groupDescription = new PropertyGroupDescription("FreeChargeSlots");
         public DisplayStationList()
         {
             InitializeComponent();
@@ -27,30 +30,9 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
-
             StationListView.ItemsSource = bl.StationList();
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("FreeChargeSlots");
-            view.GroupDescriptions.Add(groupDescription);
-            
-            ChargeSlots.Items.Add(new List<string>() { "all", "full", "have empty charge slots" });
-        }
 
-        private void ChargeSlots_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if((string)ChargeSlots.SelectedItem == "all")
-            {
-                StationListView.ItemsSource = dataBase.StationList(x => true);
-            }
-            else if((string)ChargeSlots.SelectedItem == "full")
-            {
-                StationListView.ItemsSource = dataBase.StationList(x => x.FreeChargeSlots == 0);
-            }
-            else
-            {
-                StationListView.ItemsSource = dataBase.StationList(x => x.FreeChargeSlots != 0);
-            }
-            
+            view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -71,6 +53,20 @@ namespace PL
                 return;
             new DisplayStation(dataBase, (BO.StationForList)StationListView.SelectedItem).Show();
             this.Close();
+        }
+        private void GroupUnGroup(object sender, RoutedEventArgs e)
+        {
+            if (!temp)
+            {
+                view.GroupDescriptions.Add(groupDescription);
+                group.Content = "UnGrouping";
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+                group.Content = "Grouping";
+            }
+            temp = !temp;
         }
     }
 }

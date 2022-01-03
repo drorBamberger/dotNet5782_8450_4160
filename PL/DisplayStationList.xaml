@@ -19,10 +19,10 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name = "ChargeSlots" Grid.Column="1" Margin="26,22,30,24" SelectionChanged="ChargeSlots_SelectionChanged"/>
             <Label x:Name="logo" Content="STATION:" Grid.Column="0" HorizontalAlignment="Left" Margin="22,14,0,0" VerticalAlignment="Top"/>
             <Button Content="add station" Grid.Column="3" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Click="Button_Click"/>
             <Button x:Name="Close_Window" Background="Red" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Margin="120,-1,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
+            <Button Name  ="group" Content="Grouping" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Click="GroupUnGroup"/>
         </Grid>
         <ListView Grid.Row="1" x:Name="StationListView" MouseDoubleClick="StationListView_SelectionChanged">
             <ListView.View>

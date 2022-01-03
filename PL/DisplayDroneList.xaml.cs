@@ -40,14 +40,14 @@ namespace PL
 
             view = (CollectionView)CollectionViewSource.GetDefaultView(DronesListView.ItemsSource);
 
-            temp = true;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(StatusSelector.SelectedIndex != -1)
+            group.Visibility = Visibility.Hidden;
+            if (StatusSelector.SelectedIndex != -1)
             {
                 DronesListView.ItemsSource = dataBase.DroneList(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem);
             }
@@ -55,6 +55,7 @@ namespace PL
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            group.Visibility = Visibility.Hidden;
             if (WeightSelector.SelectedIndex != -1)
             {
                 DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
@@ -88,16 +89,20 @@ namespace PL
             view.GroupDescriptions.Clear();
             StatusSelector.SelectedIndex = -1;
             WeightSelector.SelectedIndex = -1;
+            group.Content = "Grouping";
+            group.Visibility = Visibility.Visible;
         }
         private void GroupUnGroup(object sender, RoutedEventArgs e)
         {
             if (!temp)
             {
                 view.GroupDescriptions.Add(groupDescription);
+                group.Content = "UnGrouping";
             }
             else
             {
                 view.GroupDescriptions.Clear();
+                group.Content = "Grouping";
             }
             temp = !temp;
         }
