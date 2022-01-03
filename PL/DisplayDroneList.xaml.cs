@@ -19,7 +19,10 @@ namespace PL
     /// </summary>
     public partial class DisplayDroneList : Window
     {
+        static bool temp = false;
         private BLApi.IBL dataBase;
+        CollectionView view;
+        PropertyGroupDescription groupDescription = new PropertyGroupDescription("Status");
         public ObservableCollection<BO.DroneForList> drones
         {
             get;
@@ -33,19 +36,20 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
-            
-            DronesListView.ItemsSource = CollectionViewSource.GetDefaultView(bl.DroneList());
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DronesListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Status");
-            view.GroupDescriptions.Add(groupDescription);
+            DronesListView.ItemsSource = dataBase.DroneList();
 
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DronesListView.ItemsSource);
+
+            temp = true;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
-        
+
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x=> x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem); 
+            DronesListView.ItemsSource = dataBase.DroneList(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem);
+            view.GroupDescriptions.Clear();
+            view.GroupDescriptions.Add(groupDescription);
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,12 +69,32 @@ namespace PL
             new MainWindow().Show();
             this.Close();
         }
+
         private void DronesListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
             if (DronesListView.SelectedItem is null)
                 return;
             new DisplayDrone(dataBase, (BO.DroneForList)DronesListView.SelectedItem).Show();
             this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DronesListView.ItemsSource = dataBase.DroneList();
+            temp = false;
+            view.GroupDescriptions.Clear();
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (!temp)
+            {
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+            }
+            temp = !temp;
         }
     }
 }

@@ -30,9 +30,9 @@ namespace PL
 
             StationListView.ItemsSource = bl.StationList();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChargeSlots");
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("FreeChargeSlots");
             view.GroupDescriptions.Add(groupDescription);
-
+            
             ChargeSlots.Items.Add(new List<string>() { "all", "full", "have empty charge slots" });
         }
 

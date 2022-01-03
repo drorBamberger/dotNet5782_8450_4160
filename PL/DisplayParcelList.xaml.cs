@@ -27,14 +27,22 @@ namespace PL
         {
             InitializeComponent();
             dataBase = bl;
-            ParcelListView.ItemsSource = bl.ParcelList();
+
+            ParcelListView.ItemsSource = CollectionViewSource.GetDefaultView(bl.ParcelList());
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+            view.GroupDescriptions.Add(groupDescription);
+
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.ParcelStatuses));
             //WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ParcelListView.ItemsSource = dataBase.ParcelList(x => x.Status == (BO.ParcelStatuses)StatusSelector.SelectedItem);
+            ParcelListView.ItemsSource = CollectionViewSource.GetDefaultView(dataBase.ParcelList(x => x.Status == (BO.ParcelStatuses)StatusSelector.SelectedItem));
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+            view.GroupDescriptions.Add(groupDescription);
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,6 +63,8 @@ namespace PL
         }
         private void ParcelListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
+            if (ParcelListView.SelectedItem is null)
+                return;
             new DisplayParcel(dataBase, (BO.ParcelForList)ParcelListView.SelectedItem).Show();
             this.Close();
         }
