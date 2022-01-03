@@ -47,20 +47,23 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem);
-            view.GroupDescriptions.Clear();
-            view.GroupDescriptions.Add(groupDescription);
+            if(StatusSelector.SelectedIndex != -1)
+            {
+                DronesListView.ItemsSource = dataBase.DroneList(x => x.Status == (BO.DroneStatuses)StatusSelector.SelectedItem);
+            }
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            if (WeightSelector.SelectedIndex != -1)
+            {
+                DronesListView.ItemsSource = dataBase.DroneList(x => x.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add(object sender, RoutedEventArgs e)
         {
             new DisplayDrone(dataBase).Show();
-            //new DisplayDroneList(dataBase).Show();
             this.Close();
         }
 
@@ -78,13 +81,15 @@ namespace PL
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void DispalyAll(object sender, RoutedEventArgs e)
         {
             DronesListView.ItemsSource = dataBase.DroneList();
             temp = false;
             view.GroupDescriptions.Clear();
+            StatusSelector.SelectedIndex = -1;
+            WeightSelector.SelectedIndex = -1;
         }
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void GroupUnGroup(object sender, RoutedEventArgs e)
         {
             if (!temp)
             {
