@@ -17,11 +17,13 @@ namespace PL
     /// </summary>
     public partial class DisplayParcel : Window
     {
+        BLApi.IBL myBl;
+        public BO.Station newParcel { get; set; }
         public DisplayParcel()
         {
             InitializeComponent();
         }
-        public DisplayParcel(BLApi.IBL bl) //add Customer
+        public DisplayParcel(BLApi.IBL bl) //add Parcel
         {
             InitializeComponent();
         }
