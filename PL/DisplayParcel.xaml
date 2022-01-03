@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="DisplayParcel" Height="450" Width="800">
     <Grid>
-        
+        <TextBox HorizontalAlignment="Left" Margin="74,38,0,0" Text="{Binding newParcel.Reuqested}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="74,56,0,0" Text="{Binding newParcel.Scheduled}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="74,74,0,0" Text="{Binding newParcel.PickedUp}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="74,92,0,0" Text="{Binding newParcel.Delivered}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="time:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="59" FontSize="15"/>
+        <Label Content="Reuqested" HorizontalAlignment="Left" Margin="2,34,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="Scheduled" HorizontalAlignment="Left" Margin="0,51,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="PickedUp" HorizontalAlignment="Left" Margin="0,69,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="Delivered" HorizontalAlignment="Left" Margin="0,88,0,0" VerticalAlignment="Top" Width="67"/>
+
     </Grid>
 </Window>
