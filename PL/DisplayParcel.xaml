@@ -7,15 +7,23 @@
         mc:Ignorable="d"
         Title="DisplayParcel" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="74,38,0,0" Text="{Binding newParcel.Reuqested}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="74,56,0,0" Text="{Binding newParcel.Scheduled}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="74,74,0,0" Text="{Binding newParcel.PickedUp}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="74,92,0,0" Text="{Binding newParcel.Delivered}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="time:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="59" FontSize="15"/>
-        <Label Content="Reuqested" HorizontalAlignment="Left" Margin="2,34,0,0" VerticalAlignment="Top" Width="67"/>
-        <Label Content="Scheduled" HorizontalAlignment="Left" Margin="0,51,0,0" VerticalAlignment="Top" Width="67"/>
-        <Label Content="PickedUp" HorizontalAlignment="Left" Margin="0,69,0,0" VerticalAlignment="Top" Width="67"/>
-        <Label Content="Delivered" HorizontalAlignment="Left" Margin="0,88,0,0" VerticalAlignment="Top" Width="67"/>
+        <TextBox HorizontalAlignment="Left" Margin="256,34,0,0" Text="{Binding newParcel.Reuqested}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="256,52,0,0" Text="{Binding newParcel.Scheduled}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="256,70,0,0" Text="{Binding newParcel.PickedUp}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="256,88,0,0" Text="{Binding newParcel.Delivered}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="time:" HorizontalAlignment="Left" Margin="192,0,0,0" VerticalAlignment="Top" Width="59" FontSize="15"/>
+        <Label Content="Reuqested" HorizontalAlignment="Left" Margin="184,30,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="Scheduled" HorizontalAlignment="Left" Margin="184,48,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="PickedUp" HorizontalAlignment="Left" Margin="184,64,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="Delivered" HorizontalAlignment="Left" Margin="184,82,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="39,39,0,0" Text="{Binding newParcel.Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Priority:" HorizontalAlignment="Left" Margin="4,64,0,0" VerticalAlignment="Top" Width="53"/>
+        <TextBox HorizontalAlignment="Left" Margin="64,68,0,0" Text="{Binding newParcel.Priority}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="65,101,0,0" Text="{Binding newParcel.Weight}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="99,180,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="115"/>
+        <Label Content="Sender:" HorizontalAlignment="Left" Margin="16,217,0,0" VerticalAlignment="Top" FontSize="22"/>
 
     </Grid>
 </Window>
