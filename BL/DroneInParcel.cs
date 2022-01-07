@@ -12,6 +12,8 @@ namespace BO
             Battery = battery;
             MyLocation = myLocation;
         }
+        public DroneInParcel()
+        { }
 
         public int Id { get; set; }
         public double Battery { get; set; }

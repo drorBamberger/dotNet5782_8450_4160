@@ -20,6 +20,8 @@ namespace BO
             PickedUp = pickedUp;
             Delivered = delivered;
         }
+        public Parcel()
+        { }
 
         public int Id { get; set; }
         public CustomerInParcel Sender { get; set; }
