@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace PL
 {
@@ -38,7 +39,7 @@ namespace PL
             {
                 if (myBl.GetCustomer(int.Parse(Id.Text)).Name == Name.Text)
                 {
-                    new CustomerPage(myBl, int.Parse(Id.Text));
+                    new DisplayCustomer(myBl, myBl.CustomerList().Where(x=>x.Id.ToString() == Id.Text).First());
                     this.Close();
                 }
                 else
