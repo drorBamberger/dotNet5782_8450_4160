@@ -20,6 +20,7 @@ namespace PL
     {
         BLApi.IBL myBl;
         public BO.Parcel newParcel { get; set; }
+        public string drone { get; set; }
         public DisplayParcel()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace PL
             newParcel.Sender = new BO.CustomerInParcel();
             newParcel.Target = new BO.CustomerInParcel();
             newParcel.MyDrone = new BO.DroneInParcel();
+            Delete.Visibility = Visibility.Hidden;
             myBl = bl;
 
 
@@ -40,13 +42,19 @@ namespace PL
         {
             InitializeComponent();
             DataContext = this;
+            newParcel = new BO.Parcel();
+            newParcel.Sender = new BO.CustomerInParcel();
+            newParcel.Target = new BO.CustomerInParcel();
+            newParcel.MyDrone = new BO.DroneInParcel();
             myBl = bl;
             newParcel = myBl.GetParcel(parcel.Id);
             myBl = bl;
+            if(newParcel.Scheduled != null) drone = newParcel.MyDrone.ToString();
             Sender.IsReadOnly = true;
             Target.IsReadOnly = true;
             Priority.IsReadOnly = true;
             Weight.IsReadOnly = true;
+             
         }
         private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
@@ -55,13 +63,27 @@ namespace PL
         }
         private void SenderClick(object sender, RoutedEventArgs e)
         {
-            new DisplayCustomer(myBl, myBl.CustomerList().Where(x => x.Id == newParcel.Sender.Id).First()).Show();
-            this.Close();
+            try
+            {
+                new DisplayCustomer(myBl, myBl.CustomerList().Where(x => x.Id == newParcel.Sender.Id).First()).Show();
+                this.Close();
+            }
+            catch
+            {
+                return;
+            }
         }
         private void TargetClick(object sender, RoutedEventArgs e)
         {
-            new DisplayCustomer(myBl, myBl.CustomerList().Where(x => x.Id == newParcel.Target.Id).First()).Show();
-            this.Close();
+            try
+            {
+                new DisplayCustomer(myBl, myBl.CustomerList().Where(x => x.Id == newParcel.Target.Id).First()).Show();
+                this.Close();
+            }
+            catch
+            {
+                return;
+            }
         }
         private void DroneClick(object sender, RoutedEventArgs e)
         {
@@ -78,9 +100,10 @@ namespace PL
             {
                 myBl.AddParcel(newParcel.Sender.Id, newParcel.Target.Id, (int)newParcel.Weight, (int)newParcel.Priority);
             }
-            catch (BO.IdTakenException)
+            catch 
             {
-                //myBl.StationUpdate(newStation.Id, newStation.Name, newStation.ChargeSlots + newStation.Drones.Count());
+                MessageBox.Show("please enter the reqested field");
+                return;
             }
             MessageBox.Show("Commited.");
         }
@@ -111,8 +134,8 @@ namespace PL
                 return;
             }
             MessageBox.Show("sucess!");
-            new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == newParcel.Id).First()).Show();
-            this.Close();
+            newParcel = myBl.GetParcel(newParcel.Id);
+            DataContext = new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == newParcel.Id).First());
         }
     }
 }
