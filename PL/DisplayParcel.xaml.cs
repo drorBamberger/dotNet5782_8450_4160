@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace PL
 {
@@ -35,36 +36,47 @@ namespace PL
 
 
         }
-        public DisplayParcel(BLApi.IBL bl, BO.ParcelForList customer) //display and edit Parcel
+        public DisplayParcel(BLApi.IBL bl, BO.ParcelForList parcel) //display and edit Parcel
         {
             InitializeComponent();
+            DataContext = this;
+            myBl = bl;
+            newParcel = myBl.GetParcel(parcel.Id);
+            myBl = bl;
+            Sender.IsReadOnly = true;
+            Target.IsReadOnly = true;
+            Priority.IsReadOnly = true;
+            Weight.IsReadOnly = true;
         }
         private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
-            new DisplayStationList(myBl).Show();
+            new DisplayParcelList(myBl).Show();
             this.Close();
         }
         private void SenderClick(object sender, RoutedEventArgs e)
         {
-            new DisplayStationList(myBl).Show();
+            new DisplayCustomer(myBl, myBl.CustomerList().Where(x => x.Id == newParcel.Sender.Id).First()).Show();
             this.Close();
         }
         private void TargetClick(object sender, RoutedEventArgs e)
         {
-            new DisplayStationList(myBl).Show();
+            new DisplayCustomer(myBl, myBl.CustomerList().Where(x => x.Id == newParcel.Target.Id).First()).Show();
             this.Close();
         }
         private void DroneClick(object sender, RoutedEventArgs e)
         {
-            new DisplayStationList(myBl).Show();
-            this.Close();
+            if (newParcel.Scheduled != null)
+            {
+                new DisplayDrone(myBl, myBl.GetDroneForList(newParcel.MyDrone.Id)).Show();
+                this.Close();
+            }
         }
 
         private void Commit_All(object sender, RoutedEventArgs e)
         {
             try
             {
-                //myBl.AddStation(newStation.Id, newStation.Name, newStation.MyLocation, newStation.ChargeSlots);
+                myBl.AddParcel(newParcel.Sender.Id, newParcel.Target.Id, (int)newParcel.Weight, (int)newParcel.Priority);
             }
             catch (BO.IdTakenException)
             {
@@ -74,11 +86,33 @@ namespace PL
         }
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-
+            if(newParcel.Scheduled != null)
+            {
+                MessageBox.Show("cant delete parcel!");
+                return;
+            }
+            myBl.DeleteParcel(newParcel.Id);
+            new DisplayParcelList(myBl).Show();
+            this.Close();
         }
         private void StatusClick(object sender, RoutedEventArgs e)
         {
-
+            if(newParcel.PickedUp == null && newParcel.Scheduled != null)
+            {
+                myBl.PickedParcelUp(newParcel.Id);
+            }
+            else if(newParcel.Delivered == null && newParcel.PickedUp != null)
+            {
+                myBl.ParcelDelivered(newParcel.Id);
+            }
+            else
+            {
+                MessageBox.Show("can't update...");
+                return;
+            }
+            MessageBox.Show("sucess!");
+            new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == newParcel.Id).First()).Show();
+            this.Close();
         }
     }
 }

@@ -282,5 +282,14 @@ namespace BL
             }
             return comeBack;
         }
+
+        public void DeleteParcel(int id)
+        {
+            if (GetParcel(id).Scheduled == null)
+            {
+                MyDal.DeleteParcel(id);
+            }
+            else throw new BO.ParcelPickedUpOrIsntScheduled(id);
+        }
     }
 }

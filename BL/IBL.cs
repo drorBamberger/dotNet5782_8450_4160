@@ -162,7 +162,7 @@ namespace BLApi
         /// Pick up parcel by drone
         /// </summary>
         /// <param name="droneId"></param>
-        public void PickedParcelUp(int droneId);
+        public void PickedParcelUp(int parcelId);
         /// <summary>
         /// Deliver parcel by drone
         /// </summary>
@@ -178,6 +178,12 @@ namespace BLApi
         public Customer GetCustomer(int id);
         public Parcel GetParcel(int id);
         public Station GetStation(int id);
+
+        /// <summary>
+        /// delete parcel
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteParcel(int id);
         //internal ParcelOnDelivery GetParcelOnDelivery(int droneId);
         //internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide);
         //internal DroneInParcel GetDroneInParcel(int parcelId);

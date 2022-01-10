@@ -144,6 +144,11 @@ namespace DalApi
         /// delete station
         /// </summary>
         /// <param name="id"></param>
-        public void DeleteStations(int id);
+        public void DeleteStation(int id);
+        /// <summary>
+        /// delete parcel
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteParcel(int id);
     }
 }

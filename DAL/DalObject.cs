@@ -259,11 +259,15 @@ namespace DalObject
             DataSource.Drones.RemoveAll(
                 x => x.Id == id);
         }
-        public void DeleteStations(int id)
+        public void DeleteStation(int id)
         {
             DataSource.Stations.RemoveAll(
                 x => x.Id == id);
         }
 
+        public void DeleteParcel(int id)
+        {
+            DataSource.Parcels.RemoveAll(x => x.Id == id);
+        }
     }
 }
