@@ -1,0 +1,29 @@
+﻿<Window x:Class="PL.CustomerInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="CustomerInterface" Height="450" Width="800">
+    <Grid Margin="0,0,0,-37">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="377*"/>
+            <ColumnDefinition Width="424*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Name ="IdTextBox" IsReadOnly="True" HorizontalAlignment="Left" Margin="189,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="64" Text="{Binding newCustomer.Id}" Grid.ColumnSpan="2"/>
+        <TextBox Name ="NameTextBox" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="65" Text="{Binding newCustomer.Name}" Grid.ColumnSpan="2"/>
+        <TextBox Name ="LonTextBox" IsReadOnly="True" HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="49" Text="{Binding newCustomer.CustomerLocation.Longitude}" Grid.Column="1"/>
+        <TextBox Name ="LatTextBox" IsReadOnly="True" HorizontalAlignment="Left" Margin="180,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="43" Text="{Binding newCustomer.CustomerLocation.Latitude}" Grid.Column="1"/>
+        <TextBox Name ="phone" HorizontalAlignment="Left" Margin="180,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="65" Text="{Binding newCustomer.PhoneNum}" Grid.Column="1"/>
+        <Button x:Name="Close_Window" Background="Red" Content="Close" HorizontalAlignment="Left" Margin="390,0,0,0" VerticalAlignment="Top" Click="Close_Window_Click" Grid.Column="1"/>
+        <Button Content="commit all" Click="Commit_All" HorizontalAlignment="Left" Margin="0,361,0,0" VerticalAlignment="Top" Height="73" Width="420" FontSize="50" Grid.ColumnSpan="2"/>
+        <ListBox Name ="FromListView" Margin="10,188,416,120"  ItemsSource="{Binding newCustomer.FromCustomer}" MouseDoubleClick="FromCustomerViewSelected" />
+        <ListBox Name ="ToListView" Margin="400,188,20,120" ItemsSource="{Binding newCustomer.ToCustomer}" MouseDoubleClick="ToCustomerViewSelected"/>
+        <Label Content="name" HorizontalAlignment="Left" Margin="37,20,0,0" VerticalAlignment="Top" Height="65" Width="107" FontSize="30"/>
+        <Label Content="ID" HorizontalAlignment="Left" Margin="37,110,0,0" VerticalAlignment="Top" Height="65" Width="107" FontSize="30"/>
+        <Label Content="phone" HorizontalAlignment="Left" Margin="46,20,0,0" VerticalAlignment="Top" Height="65" Width="107" FontSize="30" Grid.Column="1"/>
+        <Label Content="longitude&#10;lattitude" HorizontalAlignment="Left" Margin="24,102,0,0" VerticalAlignment="Top" Height="72" Width="151" FontSize="25" Grid.Column="1"/>
+        <Button Content="add parcel" Click="Add_Parcel_Click" FontSize="50" HorizontalAlignment="Left" Margin="46,361,0,0" VerticalAlignment="Top" Height="73" Width="368" Grid.Column="1"/>
+    </Grid>
+</Window>
