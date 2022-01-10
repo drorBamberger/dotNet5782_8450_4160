@@ -7,7 +7,7 @@ using DalObject;
 
 namespace BL
 {
-
+    
     public partial class BL : BLApi.IBL
     {
         private static BL instance = null;

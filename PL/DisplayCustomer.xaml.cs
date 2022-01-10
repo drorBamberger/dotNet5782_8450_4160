@@ -48,6 +48,7 @@ namespace PL
             try
             {
                 myBl.AddCustomer(newCustomer.Id, newCustomer.Name, newCustomer.PhoneNum, newCustomer.CustomerLocation);
+                new CustomerPage(myBl, newCustomer.Id);
             }
             catch(BO.IdTakenException)
             {
