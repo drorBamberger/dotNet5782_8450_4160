@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace PL
 {
@@ -56,12 +57,12 @@ namespace PL
         }
         private void ToCustomerViewSelected(object sender, MouseButtonEventArgs e)
         {
-            new DisplayParcel(myBl, (BO.ParcelForList)ToListView.SelectedItem).Show();
+            new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == ((BO.ParcelForCustomer)ToListView.SelectedItem).Id).First()).Show();
             this.Close();
         }
         private void FromCustomerViewSelected(object sender, MouseButtonEventArgs e)
         {
-            new DisplayParcel(myBl, (BO.ParcelForList)FromListView.SelectedItem).Show();
+            new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == ((BO.ParcelForCustomer)FromListView.SelectedItem).Id).First()).Show();
             this.Close();
         }
         private void Close_Window_Click(object sender, RoutedEventArgs e)
