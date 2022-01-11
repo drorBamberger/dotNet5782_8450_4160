@@ -39,7 +39,7 @@ namespace PL
             {
                 if (myBl.GetCustomer(int.Parse(Id.Text)).Name == Name.Text)
                 {
-                    new DisplayCustomer(myBl, myBl.CustomerList().Where(x=>x.Id.ToString() == Id.Text).First());
+                    new CustomerInterface(myBl, myBl.CustomerList().Where(x=>x.Id.ToString() == Id.Text).First());
                     this.Close();
                 }
                 else
@@ -57,7 +57,6 @@ namespace PL
         private void Sigh_Up_Click(object sender, RoutedEventArgs e)
         {
             new DisplayCustomer(myBl).Show();
-            this.Close();
         }
     }
 }
