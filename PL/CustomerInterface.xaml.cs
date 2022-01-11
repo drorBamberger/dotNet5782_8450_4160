@@ -24,7 +24,15 @@ namespace PL
         {
             InitializeComponent();
         }
-
+        public CustomerInterface(BLApi.IBL bl) //add Customer
+        {
+            InitializeComponent();
+            newCustomer = new BO.Customer();
+            newCustomer.CustomerLocation = new BO.Location();
+            DataContext = this;
+            myBl = bl;
+            Add_Click.Visibility = Visibility.Hidden;
+        }
         public CustomerInterface(BLApi.IBL bl, BO.CustomerForList customer) //display and edit Customer
         {
             InitializeComponent();
@@ -39,23 +47,32 @@ namespace PL
         private void ToCustomerViewSelected(object sender, MouseButtonEventArgs e)
         {
             new CustomerInterfaceParcel(myBl, myBl.ParcelList().Where(x => x.Id == ((BO.ParcelForCustomer)ToListView.SelectedItem).Id).First()).Show();
+            this.Close();
         }
         private void FromCustomerViewSelected(object sender, MouseButtonEventArgs e)
         {
             new CustomerInterfaceParcel(myBl, myBl.ParcelList().Where(x => x.Id == ((BO.ParcelForCustomer)FromListView.SelectedItem).Id).First()).Show();
+            this.Close();
         }
         private void Commit_All(object sender, RoutedEventArgs e)
         {
-            
-            myBl.CustomerUpdate(newCustomer.Id, newCustomer.Name, newCustomer.PhoneNum);
-            
+
+            try
+            {
+                myBl.AddCustomer(newCustomer.Id, newCustomer.Name, newCustomer.PhoneNum, newCustomer.CustomerLocation);
+            }
+            catch (BO.IdTakenException)
+            {
+                myBl.CustomerUpdate(newCustomer.Id, newCustomer.Name, newCustomer.PhoneNum);
+            }
             MessageBox.Show("Commited.");
+            Close_Window_Click(sender, e);
         }
 
 
         private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
+            new CustomerIdentification(myBl).Show();
             this.Close();
         }
         private void Add_Parcel_Click(object sender, RoutedEventArgs e)

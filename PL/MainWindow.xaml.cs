@@ -51,10 +51,14 @@ namespace PL
         {
             this.Close();
         }
-        
-        
-    
-            
+
+        private void Customer_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerIdentification(dataBase).Show();
+            this.Close();
+        }
+
+
     }
     
      

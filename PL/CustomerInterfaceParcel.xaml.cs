@@ -29,23 +29,20 @@ namespace PL
         {
             InitializeComponent();
             DataContext = this;
+            myBl = bl;
             newParcel = new BO.Parcel();
-            newParcel.Sender = new BO.CustomerInParcel();
+            newParcel.Sender = new BO.CustomerInParcel(senderId, myBl.GetCustomer(senderId).Name);
             newParcel.Target = new BO.CustomerInParcel();
             newParcel.MyDrone = new BO.DroneInParcel();
-            Sender.Text = senderId.ToString();
             Sender.IsReadOnly = true;
             Delete.Visibility = Visibility.Hidden;
-            myBl = bl;
+            
         }
         public CustomerInterfaceParcel(BLApi.IBL bl, BO.ParcelForList parcel) //display and edit Parcel
         {
             InitializeComponent();
             DataContext = this;
             newParcel = new BO.Parcel();
-            newParcel.Sender = new BO.CustomerInParcel();
-            newParcel.Target = new BO.CustomerInParcel();
-            newParcel.MyDrone = new BO.DroneInParcel();
             myBl = bl;
             newParcel = myBl.GetParcel(parcel.Id);
             myBl = bl;
@@ -58,6 +55,7 @@ namespace PL
         }
         private void Close_Window_Click(object sender, RoutedEventArgs e)
         {
+            new CustomerInterface(myBl, myBl.CustomerList().Where(x=>x.Id.ToString() == Sender.Text).First()).Show();
             this.Close();
         }
         //private void SenderClick(object sender, RoutedEventArgs e)
@@ -97,7 +95,7 @@ namespace PL
         {
             try
             {
-                myBl.AddParcel(newParcel.Sender.Id, newParcel.Target.Id, (int)newParcel.Weight, (int)newParcel.Priority);
+                myBl.AddParcel(int.Parse(Sender.Text), newParcel.Target.Id, (int)newParcel.Weight, (int)newParcel.Priority);
             }
             catch
             {
@@ -105,6 +103,7 @@ namespace PL
                 return;
             }
             MessageBox.Show("Commited.");
+            Close_Window_Click(sender, e);
         }
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
@@ -114,7 +113,7 @@ namespace PL
                 return;
             }
             myBl.DeleteParcel(newParcel.Id);
-            this.Close();
+            Close_Window_Click(sender, e);
         }
         //private void StatusClick(object sender, RoutedEventArgs e)
         //{
