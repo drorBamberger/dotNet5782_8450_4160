@@ -11,11 +11,11 @@ namespace DAL
         {
             if(str == "DalObject")
             {
-                return new DalObject.DalObject();
+                return DalObject.DalObject.Instance;
             }
             else if(str == "DalXml")
             {
-                return new DalObject.DalObject();// return new DalObject.DalXml();
+                return DalXml.DalXml.Instance;
             }
             else
             {

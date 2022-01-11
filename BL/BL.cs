@@ -33,7 +33,7 @@ namespace BL
 
         public BL()
         {
-            MyDal = DAL.DalFactory.GetDal("DalObject");
+            MyDal = DAL.DalFactory.GetDal("DalXml");
             Random rnd = new Random();
             GetElecticity();
             var dalDrones = MyDal.DroneList(x=>true);

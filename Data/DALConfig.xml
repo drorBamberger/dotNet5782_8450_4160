@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<Available>0.00001</Available>
+	<SmallPackege>0.001</SmallPackege>
+	<MediumPackege>0.003</MediumPackege>
+	<HeavyPackege>0.005</HeavyPackege>
+	<ChargePerHour>20</ChargePerHour>
+</config>

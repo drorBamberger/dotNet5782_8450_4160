@@ -5,8 +5,6 @@ using System.Text;
 using DO;
 
 
-
-
 namespace DalObject
 {
     public class DataSource
@@ -53,7 +51,6 @@ namespace DalObject
                 Parcels.Add(new Parcel(Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id,
                    (WeightCategories)rnd.Next(0, 3), (Priorities)rnd.Next(0, 3), droneId[rnd.Next(0, 2)]));
             }
-
         }
 
     }

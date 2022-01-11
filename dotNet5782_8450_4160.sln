@@ -23,7 +23,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{286B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{9E572E4C-7E3C-4F9F-8828-2145A0A86207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{BDAE639D-AA00-4A86-AB12-526FB544B1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{BDAE639D-AA00-4A86-AB12-526FB544B1F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{D9BB219B-04BE-401E-8FBF-5DBDB5B8919A}"
+	ProjectSection(SolutionItems) = preProject
+		Customers.xml = Customers.xml
+		DALConfig.xml = DALConfig.xml
+		DroneCharge.xml = DroneCharge.xml
+		Drones.xml = Drones.xml
+		Parcels.xml = Parcels.xml
+		Stations.xml = Stations.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
