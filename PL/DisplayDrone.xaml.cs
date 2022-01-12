@@ -11,6 +11,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
 using Microsoft.VisualBasic;
+using System.Threading;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 
 namespace PL
 {
@@ -325,7 +329,7 @@ namespace PL
 
         private void batteryPic_PreviewDragOver(object sender, DragEventArgs e)
         {
-
+            
         }
     }
 }
