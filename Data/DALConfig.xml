@@ -5,4 +5,5 @@
 	<MediumPackege>0.003</MediumPackege>
 	<HeavyPackege>0.005</HeavyPackege>
 	<ChargePerHour>20</ChargePerHour>
+	<ParcelId>11</ParcelId>
 </config>

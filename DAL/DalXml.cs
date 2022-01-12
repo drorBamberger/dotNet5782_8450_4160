@@ -32,111 +32,62 @@ namespace DalXml
         }
         public static void Initialize()
         {
-            Random rnd = new Random();
-
             //stations initialization
 
-            /*XmlSerializer ser = new XmlSerializer(typeof(List<Station>));
-            XmlReader reader = new XmlTextReader(@"Data\Stations.xml");
+            XmlSerializer stationSer = new XmlSerializer(typeof(List<Station>));
+            XmlReader stationReader = new XmlTextReader(@"Data\Stations.xml");
             List<Station> stationData;
-            if (ser.CanDeserialize(reader))
+            if (stationSer.CanDeserialize(stationReader))
             {
-                stationData = (List<Station>)ser.Deserialize(reader);
+                stationData = (List<Station>)stationSer.Deserialize(stationReader);
             }
             else
             {
                 stationData = new List<Station>();
             }
-            reader.Close();
-            List<Station> stationData = new List<Station>();
-
-            stationData.Add(new Station(rnd.Next(), "London", -0.118092, 51.509865, 10));
-            stationData.Add(new Station(rnd.Next(), "Brighton", -0.13947, 50.82838, 8));
-
+            stationReader.Close();
 
             //customers initialization
-            /*ser = new XmlSerializer(typeof(List<Customer>));
-            reader = new XmlTextReader(@"Data\Customers.xml");
+            XmlSerializer customerSer = new XmlSerializer(typeof(List<Customer>));
+            XmlReader customerReader = new XmlTextReader(@"Data\Customers.xml");
             List<Customer> customerData;
-            if (ser.CanDeserialize(reader))
+            if (customerSer.CanDeserialize(customerReader))
             {
-                customerData = (List<Customer>)ser.Deserialize(reader);
+                customerData = (List<Customer>)customerSer.Deserialize(customerReader);
             }
             else
             {
                 customerData = new List<Customer>();
             }
-            reader.Close();*/
-            List<Customer> customerData = new List<Customer>();
-
-            string[] customerNames = new string[] { "Dror", "Yair", "Ofir", "Gil", "Benaya", "Ohad", "Michael", "Achiya", "Drew", "Shilo" };
-            for (int i = 0; i < 10; ++i)
-            {
-                customerData.Add(new Customer(rnd.Next(), customerNames[i], "05" + (rnd.Next(10000000, 99999999)).ToString()
-                    , rnd.NextDouble() * 180 * Math.Pow(-1, rnd.Next(0, 1)), rnd.NextDouble() * 90 * Math.Pow(-1, rnd.Next(0, 2))));
-            }
-
+            customerReader.Close();
 
             //drones initialization
-            /*ser = new XmlSerializer(typeof(List<Drone>));
-            reader = new XmlTextReader(@"Data\Drones.xml");
+            XmlSerializer droneSer = new XmlSerializer(typeof(List<Drone>));
+            XmlReader droneReader = new XmlTextReader(@"Data\Drones.xml");
             List<Drone> droneData;
-            if (ser.CanDeserialize(reader))
+            if (droneSer.CanDeserialize(droneReader))
             {
-                droneData = (List<Drone>)ser.Deserialize(reader);
+                droneData = (List<Drone>)droneSer.Deserialize(droneReader);
             }
             else
             {
                 droneData = new List<Drone>();
             }
-            reader.Close();*/
-            List<Drone> droneData = new List<Drone>();
-            for (int i = 0; i < 5; i++)
-            {
-                droneData.Add(new Drone(rnd.Next(), "version" + i.ToString(), (WeightCategories)rnd.Next(0, 3)));
-
-            }
-
+            droneReader.Close();
 
             //parcels initialization
-            /*ser = new XmlSerializer(typeof(List<Parcel>));
-            reader = new XmlTextReader(@"Data\Parcels.xml");
+            XmlSerializer parcelSer = new XmlSerializer(typeof(List<Parcel>));
+            XmlReader parcelReader = new XmlTextReader(@"Data\Parcels.xml");
             List<Parcel> parcelData;
-            if (ser.CanDeserialize(reader))
+            if (parcelSer.CanDeserialize(parcelReader))
             {
-                parcelData = (List<Parcel>)ser.Deserialize(reader);
+                parcelData = (List<Parcel>)parcelSer.Deserialize(parcelReader);
             }
             else
             {
                 parcelData = new List<Parcel>();
             }
-            reader.Close();
-
-            for (int i = 0; i < 10; i++)
-            {
-                int[] droneId = new int[] { droneData[rnd.Next(0, 5)].Id, 0 };
-                parcelData.Add(new Parcel(customerData[rnd.Next(0, 10)].Id, customerData[rnd.Next(0, 10)].Id,
-                   (WeightCategories)rnd.Next(0, 3), (Priorities)rnd.Next(0, 3), droneId[rnd.Next(0, 2)]));
-            }*/
-            List<Parcel> parcelData = parcelData = new List<Parcel>();
-
-            TextWriter writer = new StreamWriter(@"Data\Stations.xml");
-            try { ser.Serialize(writer, stationData); }
-            finally { writer.Close(); }
-
-            writer = new StreamWriter(@"Data\Customers.xml");
-            try { ser.Serialize(writer, customerData); }
-            finally { writer.Close(); }
-
-            writer = new StreamWriter(@"Data\Drones.xml");
-            try { ser.Serialize(writer, droneData); }
-            finally { writer.Close(); }
-
-            writer = new StreamWriter(@"Data\Parcels.xml");
-            try { ser.Serialize(writer, parcelData); }
-            finally { writer.Close(); }
-
-
+            parcelReader.Close();
         }
         private void IsIdTaken<T>(List<T> list, int id)
         {
@@ -214,8 +165,14 @@ namespace DalXml
             List<Parcel> data = (List<Parcel>)ser.Deserialize(reader);
             reader.Close();
 
-            data.Add(new Parcel(senderId, targetId, (WeightCategories)weight
+            XElement dataRoot = XElement.Load(@"Data\DALConfig.xml");
+            int parcelId = int.Parse(dataRoot.Element("ParcelId").Value);
+
+            data.Add(new Parcel(parcelId++, senderId, targetId, (WeightCategories)weight
             , (Priorities)priority, droneId));
+
+            dataRoot.Element("ParcelId").SetValue(parcelId);
+            dataRoot.Save(@"Data\DALConfig.xml");
 
             TextWriter writer = new StreamWriter(@"Data\Parcels.xml");
             try { ser.Serialize(writer, data); }
@@ -264,7 +221,7 @@ namespace DalXml
 
             TextWriter writer = new StreamWriter(@"Data\Parcels.xml");
             try { ser.Serialize(writer, data); }
-            finally { writer.Close(); }            
+            finally { writer.Close(); }
         }
 
         public void ParcelDelivered(int parcelId)
@@ -537,7 +494,14 @@ namespace DalXml
             List<Parcel> data = (List<Parcel>)ser.Deserialize(reader);
             reader.Close();
 
+            XElement dataRoot = XElement.Load(@"Data\DALConfig.xml");
+            int parcelId = int.Parse(dataRoot.Element("ParcelId").Value);
+
             data.RemoveAll(x => x.Id == id);
+            parcelId--;
+
+            dataRoot.Element("ParcelId").SetValue(parcelId);
+            dataRoot.Save(@"Data\DALConfig.xml");
 
             TextWriter writer = new StreamWriter(@"Data\Parcels.xml");
             try { ser.Serialize(writer, data); }

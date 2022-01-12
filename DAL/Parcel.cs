@@ -7,9 +7,9 @@ namespace DO
 {
     public struct Parcel
     {
-        public Parcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId) : this()
+        public Parcel(int parcelId, int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId) : this()
         {
-            Id = DalObject.DataSource.ParcelId++;
+            Id = parcelId;
             SenderId = senderId;
             TargetId = targetId;
             Weight = weight;
