@@ -29,6 +29,8 @@ namespace PL
         TextBox model = new TextBox();
         TextBox maxWeight = new TextBox();
         TextBox stationId = new TextBox();
+        Button func1 = new Button();
+        Button func2 = new Button();
 
         public DisplayDrone()
         {
@@ -98,6 +100,8 @@ namespace PL
             displayDrone.Children.Add(stationId);
 
             update.Click += Add_Click;
+
+            Simulation.Visibility = Visibility.Hidden;
         }
         public DisplayDrone(BLApi.IBL bl, BO.DroneForList drone) //display and edit drone
         {
@@ -137,14 +141,12 @@ namespace PL
             model.Text = drone.Model;
             displayDrone.Children.Add(model);
 
-            Button func1 = new Button();
             func1.Height = 74;
             func1.Width = 400;
             func1.FontSize = 32;
             func1.FontStyle = FontStyles.Italic;
             Grid.SetRow(func1, 6);
 
-            Button func2 = new Button();
             func2.Height = 74;
             func2.Width = 400;
             func2.FontSize = 32;
@@ -321,15 +323,30 @@ namespace PL
             new DisplayDrone(myBl, localDrone).Show();
             this.Close();
         }
-
-        private void batteryPic_RequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
+        private void Simulation_Click(object sender, RoutedEventArgs e)
         {
+            update.Visibility = Visibility.Hidden;
+            back.Visibility = Visibility.Hidden;
+            func1.Visibility = Visibility.Hidden;
+            func2.Visibility = Visibility.Hidden;
+            Simulation.Click -= Simulation_Click;
+            Simulation.Click += Un_Simulation_Click;
+            Simulation.Content = "Regular";
+
+        }
+        private void Un_Simulation_Click(object sender, RoutedEventArgs e)
+        {
+            update.Visibility = Visibility.Visible;
+            back.Visibility = Visibility.Visible;
+            func1.Visibility = Visibility.Visible;
+            func2.Visibility = Visibility.Visible;
+            Simulation.Click += Simulation_Click;
+            Simulation.Click -= Un_Simulation_Click;
+            Simulation.Content = "Simulation";
+
+
 
         }
 
-        private void batteryPic_PreviewDragOver(object sender, DragEventArgs e)
-        {
-            
-        }
     }
 }

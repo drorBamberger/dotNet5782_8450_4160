@@ -15,7 +15,8 @@ namespace BL
             int delay = 1000;//msec
             double speed = 30000.5;//km per second
             BO.Drone MyDrone = myBl.GetDrone(droneId);
-            while (stopCheck())
+            double time;
+            for (int i = 0; stopCheck();i++)
             {
                 switch(MyDrone.Status)
                 {
@@ -23,6 +24,7 @@ namespace BL
                         try
                         {
                             myBl.Attribution(droneId);
+                            i = 0;
                         }
                         catch(BO.DroneHaveToLittleBattery)
                         {
@@ -44,31 +46,36 @@ namespace BL
                     case DroneStatuses.Shipping:
                         if (myBl.GetParcel(MyDrone.MyParcel.Id).PickedUp == null)
                         {
-                            if(myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelSenderLocation(MyDrone.MyParcel.Id)) < (delay / 1000) * speed)
+                            time = myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelSenderLocation(MyDrone.MyParcel.Id)) / speed - i;
+                            if (time<1)
                             {
                                 myBl.PickedParcelUp(MyDrone.MyParcel.Id);
+                                i = 0;
                                 Thread.Sleep((int)(myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelSenderLocation(MyDrone.MyParcel.Id))/speed));
                             }
                             else
                             {
                                 Thread.Sleep(delay);
                                 myBl.AddBattery(droneId, -myBl.GetElectricityPerKM((delay / 1000) * speed, MyDrone.MyParcel.Weight));
-                                
+                                //TODO bonus location
                             }
                             
                         }
                         else
                         {
-                            if (myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelSenderLocation(MyDrone.MyParcel.Id)) < (delay / 1000) * speed)
+                            time = myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelTargetLocation(MyDrone.MyParcel.Id)) / speed - i;
+                            if (time < 1)
                             {
                                 myBl.ParcelDelivered(MyDrone.MyParcel.Id);
+                                i = 0;
                                 Thread.Sleep((int)(myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelTargetLocation(MyDrone.MyParcel.Id)) / speed));
+                                MyDrone.MyParcel.TransferDistance = 0;
                             }
                             else
                             {
                                 Thread.Sleep(delay);
                                 myBl.AddBattery(droneId, -myBl.GetElectricityPerKM((delay / 1000) * speed, MyDrone.MyParcel.Weight));
-
+                                MyDrone.MyParcel.TransferDistance -= (delay / 1000) * speed;
                             }
                             
                         }
@@ -78,6 +85,7 @@ namespace BL
                         if (MyDrone.Battery == 100)
                         {
                             myBl.DisChargeDrone(droneId, 0.1);
+                            i = 0;
                             break;
                         }
                         myBl.AddBattery(droneId, (delay / 1000)*myBl.ChargePerSecond);
