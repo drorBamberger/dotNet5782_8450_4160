@@ -53,7 +53,7 @@ namespace BL
             {
                 throw new BO.DroneIsntMaintenance(id);
             }
-            drone.Battery += time * ChargePerHour;
+            drone.Battery += time * ChargePerSecond;
             drone.Battery = drone.Battery > 100 ? 100 : drone.Battery;
             drone.Status = DroneStatuses.vacant;
             Drones[Drones.FindIndex(x => x.Id == id)] = drone;

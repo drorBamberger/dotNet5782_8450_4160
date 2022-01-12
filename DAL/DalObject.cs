@@ -22,7 +22,7 @@ namespace DalObject
             public static double SmallPackege = 0.001;
             public static double MediumPackege = 0.003;
             public static double HeavyPackege = 0.005;
-            public static double ChargePerHour = 20;
+            public static double ChargePerSecond = 10;
         }
         public static void Initialize()
         {
@@ -247,7 +247,7 @@ namespace DalObject
         public double[] AskForElectricity()
         {
             double[] s = new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
-                DataSource.Config.HeavyPackege, DataSource.Config.ChargePerHour };
+                DataSource.Config.HeavyPackege, DataSource.Config.ChargePerSecond };
             return s;
         }
 

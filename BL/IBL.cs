@@ -9,6 +9,13 @@ namespace BLApi
 {
     public interface IBL
     {
+        /// <summary>
+        /// play the simulator
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="updateDisplay"></param>
+        /// <param name="stopCheck"></param>
+        public void PlaySimulator(int droneId, Action updateDisplay,  Func<bool> stopCheck);
         //adds
         /// <summary>
         /// add a stattion
@@ -195,5 +202,6 @@ namespace BLApi
         //internal double GetElectricityPerKM(double distance, WeightCategories a);
         //internal IEnumerable<StationForList> StationsToBl(IEnumerable<DO.Station> stations);
         //internal IEnumerable<ParcelForList> ParcelsToBl(IEnumerable<DO.Parcel> Parcels);
+        // internal void AddBattery(int droneId, int time);
     }
 }

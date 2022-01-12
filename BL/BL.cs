@@ -24,12 +24,12 @@ namespace BL
             }
         }
         List<DroneForList> Drones = new List<DroneForList>();
-        static DalApi.IDal MyDal;
+        static internal DalApi.IDal MyDal;
         public double Available;
         public double SmallPackege;
         public double MediumPackege;
         public double HeavyPackege;
-        public double ChargePerHour;
+        public double ChargePerSecond;
 
         public BL()
         {

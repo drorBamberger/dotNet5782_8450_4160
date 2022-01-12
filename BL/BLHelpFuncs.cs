@@ -18,7 +18,7 @@ namespace BL
             SmallPackege  = tmp[1];
             MediumPackege = tmp[2];
             HeavyPackege  = tmp[3];
-            ChargePerHour = tmp[4];
+            ChargePerSecond = tmp[4];
         }
 
         internal double DistanceTo(Location x1, Location x2, char unit = 'K')
@@ -321,6 +321,11 @@ namespace BL
                 MyDal.DeleteParcel(id);
             }
             else throw new BO.ParcelPickedUpOrIsntScheduled(id);
+        }
+        internal void AddBattery(int droneId, int time)
+        {
+            DisChargeDrone(droneId, time);
+            ChargeDrone(droneId);
         }
     }
 }
