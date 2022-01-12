@@ -47,7 +47,7 @@ namespace DalXml
             {
                 stationData = new List<Station>();
             }
-            reader.Close();*/
+            reader.Close();
             List<Station> stationData = new List<Station>();
 
             stationData.Add(new Station(rnd.Next(), "London", -0.118092, 51.509865, 10));
