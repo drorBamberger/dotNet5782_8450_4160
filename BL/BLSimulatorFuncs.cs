@@ -12,7 +12,7 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void PlaySimulator(int droneId, Action updateDisplay, Func<bool> stopCheck)
         {
-
+            Simulator simi = new Simulator(droneId, updateDisplay, stopCheck, this);
         }
 
     }

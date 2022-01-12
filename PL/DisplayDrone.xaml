@@ -32,7 +32,7 @@
         </Border>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Background="#CF22C0B8"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Grid.Column="1" Background="#CF22C0B8"/>
-        <Button FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Close_Click" Height="72" Width="400" Grid.Row="8" Grid.Column="1"/>
+        <Button Name ="back"  FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Close_Click" Height="72" Width="400" Grid.Row="8" Grid.Column="1"/>
         <Button x:Name="update" FontStyle="Italic" FontSize="32" Content="Save Changed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="8"/>
         <Label Name ="batteryLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="88"/>
         <Label Name ="idLabel" FontSize="30" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Height="54" Margin="6,27,0,0" Grid.RowSpan="2"/>
@@ -51,6 +51,7 @@
         <Label Name="targetIdLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="177,5,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="148"/>
         <Label Name="targetLocLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,24,0,0" Grid.Row="4" VerticalAlignment="Top" Width="220" Height="42"/>
         <TextBox Name ="timeText" IsEnabled="False" Visibility= "Hidden" HorizontalAlignment="Left" Grid.Row="6" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="32" Grid.Column="1" Margin="231,31,0,0"/>
+        <Button Name="Simulation" Content="Simulation" Click="Simulation_Click" HorizontalAlignment="Left" Margin="279,0,0,0" VerticalAlignment="Center" Width="111" Height="54"/>
     </Grid>
 
 </Window>
