@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DO;
 
+using System.Runtime.CompilerServices;
 
 namespace DalObject
 {
@@ -102,24 +103,28 @@ namespace DalObject
         }
         //add option
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(int id, string name, double longitude, double lattitude, int chargeSlots)
         {
             IsIdTaken(DataSource.Stations, id);
             DataSource.Stations.Add(new Station(id, name, longitude, lattitude, chargeSlots));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, int maxWeight)
         {
             IsIdTaken(DataSource.Drones, id);
             DataSource.Drones.Add(new Drone(id, model, (WeightCategories)maxWeight));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
             IsIdTaken(DataSource.Customers, id);
             DataSource.Customers.Add(new Customer(id, name, phone, longitude, lattitude));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(int senderId, int targetId, int weight, int priority, int droneId)
         {
             DataSource.Parcels.Add(new Parcel(DataSource.ParcelId++,senderId, targetId, (WeightCategories)weight
@@ -127,6 +132,7 @@ namespace DalObject
         }
         //update options
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Attribution(int droneId, int parcelId)
         {
             IsIdExist(DataSource.Drones, droneId);
@@ -137,6 +143,7 @@ namespace DalObject
             DataSource.Parcels[DataSource.Parcels.FindIndex(x => x.Id == parcelId)] = tmp;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickedParcelUp(int parcelId)
         {
             IsIdExist(DataSource.Parcels, parcelId);
@@ -145,6 +152,7 @@ namespace DalObject
             DataSource.Parcels[DataSource.Parcels.FindIndex(x => x.Id == parcelId)] = tmp;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ParcelDelivered(int parcelId)
         {
             IsIdExist(DataSource.Parcels, parcelId);
@@ -153,6 +161,7 @@ namespace DalObject
             DataSource.Parcels[DataSource.Parcels.FindIndex(x => x.Id == parcelId)] = tmp;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ChargeDrone(int droneId, int stationId)
         {
             IsIdExist(DataSource.Drones, droneId);
@@ -163,6 +172,7 @@ namespace DalObject
             DataSource.Stations[DataSource.Stations.FindIndex(x => x.Id == stationId)] = tmp;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DisChargeDrone(int droneId, int stationId)
         {
             IsIdExist(DataSource.Drones, droneId);
@@ -175,24 +185,28 @@ namespace DalObject
 
 
         //displays
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station DisplayStation(int id)
         {
             IsIdExist(DataSource.Stations, id);
             return DataSource.Stations.Find(x => x.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone DisplayDrone(int id)
         {
             IsIdExist(DataSource.Drones, id);
             return DataSource.Drones.Find(x => x.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer DisplayCustomer(int id)
         {
             IsIdExist(DataSource.Customers, id);
             return DataSource.Customers.Find(x => x.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel DisplayParcel(int id)
         {
             IsIdExist(DataSource.Parcels, id);
@@ -201,30 +215,35 @@ namespace DalObject
 
         //displays Lists
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> StationList(Predicate<Station> prediction)
         {
             List<Station> stationList = DataSource.Stations.FindAll(prediction);
             return stationList;
         }
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> DroneList(Predicate<Drone> prediction)
         {
             List<Drone> droneList = DataSource.Drones.FindAll(prediction);
             return droneList;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> CustomerList(Predicate<Customer> prediction)
         {
             List<Customer> customerList = DataSource.Customers.FindAll(prediction);
             return customerList;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> ParcelList(Predicate<Parcel> prediction)
         {
             List<Parcel> parcelList = DataSource.Parcels.FindAll(prediction);
             return parcelList;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double[] AskForElectricity()
         {
             double[] s = new double[5] { DataSource.Config.Available, DataSource.Config.SmallPackege, DataSource.Config.MediumPackege,
@@ -234,32 +253,38 @@ namespace DalObject
 
         //update funcs:
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpDateDrone(Drone newDrone)
         {
             IsIdExist(DataSource.Drones, newDrone.Id);
             DataSource.Drones[DataSource.Drones.FindIndex(x => x.Id == newDrone.Id)] = newDrone;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpDateCustomer(Customer newCustomer)
         {
             IsIdExist(DataSource.Customers, newCustomer.Id);
             DataSource.Customers[DataSource.Customers.FindIndex(x => x.Id == newCustomer.Id)] = newCustomer;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpDateStation(Station newStation)
         {
             IsIdExist(DataSource.Stations, newStation.Id);
             DataSource.Stations[DataSource.Stations.FindIndex(x => x.Id == newStation.Id)] = newStation;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int id)
         {
             DataSource.Drones.RemoveAll(
                 x => x.Id == id);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteStation(int id)
         {
             DataSource.Stations.RemoveAll(
                 x => x.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int id)
         {
             DataSource.Parcels.RemoveAll(x => x.Id == id);

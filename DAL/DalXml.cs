@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
 using System.Xml.Linq;
+using System.Runtime.CompilerServices;
 
 namespace DalXml
 {
@@ -114,6 +115,7 @@ namespace DalXml
         }
         //add option
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(int id, string name, double longitude, double lattitude, int chargeSlots)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Station>));
@@ -129,6 +131,7 @@ namespace DalXml
             finally { writer.Close(); }
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, int maxWeight)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -143,6 +146,7 @@ namespace DalXml
             try { ser.Serialize(writer, data); }
             finally { writer.Close(); }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Customer>));
@@ -158,6 +162,7 @@ namespace DalXml
             finally { writer.Close(); }
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(int senderId, int targetId, int weight, int priority, int droneId)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Parcel>));
@@ -179,6 +184,7 @@ namespace DalXml
             finally { writer.Close(); }
         }
         //update options
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Attribution(int droneId, int parcelId)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -207,6 +213,7 @@ namespace DalXml
             finally { writer.Close(); }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickedParcelUp(int parcelId)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Parcel>));
@@ -224,6 +231,7 @@ namespace DalXml
             finally { writer.Close(); }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ParcelDelivered(int parcelId)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Parcel>));
@@ -241,6 +249,7 @@ namespace DalXml
             finally { writer.Close(); }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ChargeDrone(int droneId, int stationId)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -278,6 +287,7 @@ namespace DalXml
             finally { writer.Close(); }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DisChargeDrone(int droneId, int stationId)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -317,6 +327,7 @@ namespace DalXml
 
 
         //displays
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station DisplayStation(int id)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Station>));
@@ -328,6 +339,7 @@ namespace DalXml
             return data.Find(x => x.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone DisplayDrone(int id)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -339,6 +351,7 @@ namespace DalXml
             return data.Find(x => x.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer DisplayCustomer(int id)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Customer>));
@@ -350,6 +363,7 @@ namespace DalXml
             return data.Find(x => x.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel DisplayParcel(int id)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Parcel>));
@@ -363,6 +377,7 @@ namespace DalXml
 
         //displays Lists
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> StationList(Predicate<Station> prediction)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Station>));
@@ -374,6 +389,7 @@ namespace DalXml
             return stationList;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> DroneList(Predicate<Drone> prediction)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -385,6 +401,7 @@ namespace DalXml
             return droneList;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> CustomerList(Predicate<Customer> prediction)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Customer>));
@@ -396,6 +413,7 @@ namespace DalXml
             return customerList;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> ParcelList(Predicate<Parcel> prediction)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Parcel>));
@@ -406,6 +424,7 @@ namespace DalXml
             List<Parcel> parcelList = data.FindAll(prediction);
             return parcelList;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double[] AskForElectricity()
         {
             XElement dataRoot = XElement.Load(@"Data\DALConfig.xml");
@@ -417,6 +436,7 @@ namespace DalXml
             return s;
         }
         //update funcs:
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpDateDrone(Drone newDrone)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -431,6 +451,7 @@ namespace DalXml
             try { ser.Serialize(writer, data); }
             finally { writer.Close(); }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpDateCustomer(Customer newCustomer)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Customer>));
@@ -445,6 +466,7 @@ namespace DalXml
             try { ser.Serialize(writer, data); }
             finally { writer.Close(); }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpDateStation(Station newStation)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Station>));
@@ -459,6 +481,7 @@ namespace DalXml
             try { ser.Serialize(writer, data); }
             finally { writer.Close(); }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int id)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Drone>));
@@ -473,6 +496,7 @@ namespace DalXml
             try { ser.Serialize(writer, data); }
             finally { writer.Close(); }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteStation(int id)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Station>));
@@ -487,6 +511,7 @@ namespace DalXml
             try { ser.Serialize(writer, data); }
             finally { writer.Close(); }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int id)
         {
             XmlSerializer ser = new XmlSerializer(typeof(List<Parcel>));
