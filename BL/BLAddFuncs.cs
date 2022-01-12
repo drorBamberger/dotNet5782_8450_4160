@@ -46,13 +46,19 @@ namespace BL
 
         public void AddCustomer(int id, string name, string phone, Location location)
         {
+            
             try
             {
+                int.Parse(phone);
                 MyDal.AddCustomer(id, name, phone, location.Longitude, location.Latitude);
             }
             catch (DO.IdTakenException err)
             {
                 throw new BO.IdTakenException(err.Id);
+            }
+            catch
+            {
+                throw new BO.InvalidInput();
             }
         }
 

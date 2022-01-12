@@ -53,6 +53,11 @@ namespace PL
             {
                 myBl.CustomerUpdate(newCustomer.Id, newCustomer.Name, newCustomer.PhoneNum);
             }
+            catch(BO.InvalidInput err)
+            {
+                MessageBox.Show(err.ToString());
+                return;
+            }
             MessageBox.Show("Commited.");
         }
         private void ToCustomerViewSelected(object sender, MouseButtonEventArgs e)

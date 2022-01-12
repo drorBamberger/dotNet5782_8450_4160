@@ -120,4 +120,16 @@
     <Priority>Fast</Priority>
     <DroneId>56878760</DroneId>
   </Parcel>
+  <Parcel>
+    <Id>11</Id>
+    <SenderId>2</SenderId>
+    <TargetId>2</TargetId>
+    <Weight>Light</Weight>
+    <Reuqested>2022-01-12T18:53:17.082027+02:00</Reuqested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Normal</Priority>
+    <DroneId>0</DroneId>
+  </Parcel>
 </ArrayOfParcel>

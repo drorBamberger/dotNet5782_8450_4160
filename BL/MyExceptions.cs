@@ -126,4 +126,11 @@ namespace BO
         }
         public int Id { get; set; }
     }
+    public class InvalidInput : Exception
+    {
+        override public string ToString()
+        {
+            return "Invalid Input";
+        }
+    }
 }
