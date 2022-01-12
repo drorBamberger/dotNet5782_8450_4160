@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -18,6 +19,7 @@ namespace PL
     /// </summary>
     public partial class DisplayParcel : Window
     {
+        BackgroundWorker bgw;
         BLApi.IBL myBl;
         public BO.Parcel newParcel { get; set; }
         public string drone { get; set; }
@@ -35,8 +37,6 @@ namespace PL
             newParcel.MyDrone = new BO.DroneInParcel();
             Delete.Visibility = Visibility.Hidden;
             myBl = bl;
-
-
         }
         public DisplayParcel(BLApi.IBL bl, BO.ParcelForList parcel) //display and edit Parcel
         {
@@ -136,6 +136,11 @@ namespace PL
             MessageBox.Show("sucess!");
             newParcel = myBl.GetParcel(newParcel.Id);
             DataContext = new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == newParcel.Id).First());
+        }
+
+        private void Simulator(object sender, RoutedEventArgs e)
+        {
+            bgw.RunWorkerAsync();
         }
     }
 }
