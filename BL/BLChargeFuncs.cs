@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BO;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     public partial class BL : BLApi.IBL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ChargeDrone(int id)
         {
             if (Drones.Exists(x => x.Id == id) == false)
@@ -19,19 +21,23 @@ namespace BL
             {
                 throw new BO.DroneIsntVacant(id);
             }
-            var station = GetClosestStationWithChargeSlots(drone.MyLocation, (List<DO.Station>)MyDal.StationList(x=>true));
-            Location stationLocation = new Location(station.Longitude, station.Lattitude);
-            if (DistanceTo(drone.MyLocation, stationLocation )* Available>drone.Battery)
+            lock (MyDal)
             {
-                throw new BO.DroneHaveToLittleBattery(id);
+                var station = GetClosestStationWithChargeSlots(drone.MyLocation, (List<DO.Station>)MyDal.StationList(x => true));
+                Location stationLocation = new Location(station.Longitude, station.Lattitude);
+                if (DistanceTo(drone.MyLocation, stationLocation) * Available > drone.Battery)
+                {
+                    throw new BO.DroneHaveToLittleBattery(id);
+                }
+                drone.Battery -= DistanceTo(drone.MyLocation, stationLocation) * Available;
+                drone.MyLocation = stationLocation;
+                drone.Status = DroneStatuses.maintenance;
+                Drones[Drones.FindIndex(x => x.Id == id)] = drone;
+                MyDal.ChargeDrone(id, station.Id);
             }
-            drone.Battery -= DistanceTo(drone.MyLocation, stationLocation) * Available;
-            drone.MyLocation = stationLocation;
-            drone.Status = DroneStatuses.maintenance;
-            Drones[Drones.FindIndex(x => x.Id == id)] = drone;
-            MyDal.ChargeDrone(id, station.Id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DisChargeDrone(int id, double time)
         {
             if (time <= 0)
@@ -51,8 +57,11 @@ namespace BL
             drone.Battery = drone.Battery > 100 ? 100 : drone.Battery;
             drone.Status = DroneStatuses.vacant;
             Drones[Drones.FindIndex(x => x.Id == id)] = drone;
-            int stationId = MyDal.StationList(x => true).ToList().Find(x => x.Longitude== drone.MyLocation.Longitude && x.Lattitude == drone.MyLocation.Latitude).Id;
-            MyDal.DisChargeDrone(id, stationId);
+            lock (MyDal)
+            {
+                int stationId = MyDal.StationList(x => true).ToList().Find(x => x.Longitude == drone.MyLocation.Longitude && x.Lattitude == drone.MyLocation.Latitude).Id;
+                MyDal.DisChargeDrone(id, stationId);
+            }
         }
         
     }

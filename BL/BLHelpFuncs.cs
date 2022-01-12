@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BO;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     public partial class BL : BLApi.IBL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal void GetElecticity()
         {
             double[] tmp = new double[5];
@@ -45,6 +47,7 @@ namespace BL
             return dist;
         }
         //gets--------------------------------------------------------------
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station GetStation(int id)
         {
             DO.Station StructToClass;
@@ -69,6 +72,7 @@ namespace BL
                 StructToClass.ChargeSlots, DronesInStation);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int id)
         {
             DO.Drone StructToClass;
@@ -84,58 +88,68 @@ namespace BL
             return new Drone(id, StructToClass.Model, (WeightCategories)StructToClass.MaxWeight,
                 drone.Battery, drone.Status, GetParcelOnDelivery(id), drone.MyLocation);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DroneForList GetDroneForList(int id)
         {
             Drone drone = GetDrone(id);
             return new DroneForList(id, drone.Model, drone.MaxWeight, drone.Battery, drone.Status, drone.MyParcel == null?0:drone.MyParcel.Id, drone.MyLocation);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int id)
         {
-            DO.Customer StructToClass;
-            try
+            lock (MyDal)
             {
-                StructToClass = MyDal.DisplayCustomer(id);
-            }
-            catch (DO.IdNotExistException err)
-            {
-                throw new BO.IdNotExistException(err.Id);
-            }
-            List<ParcelForCustomer> fromCustomers = new List<ParcelForCustomer>();
-            List<ParcelForCustomer> toCustomers = new List<ParcelForCustomer>();
-            foreach(var item in MyDal.ParcelList(x=>true))
-            {
-                if(item.SenderId == id)
+                DO.Customer StructToClass;
+                try
                 {
-                    fromCustomers.Add(GetParcelForCustomer(item.Id, new CustomerInParcel(item.TargetId, MyDal.DisplayCustomer(item.TargetId).Name)));
+                    StructToClass = MyDal.DisplayCustomer(id);
                 }
-                if (item.TargetId == id)
+                catch (DO.IdNotExistException err)
                 {
-                    toCustomers.Add(GetParcelForCustomer(item.Id, new CustomerInParcel(item.SenderId, MyDal.DisplayCustomer(item.SenderId).Name)));
+                    throw new BO.IdNotExistException(err.Id);
                 }
-            }
+                List<ParcelForCustomer> fromCustomers = new List<ParcelForCustomer>();
+                List<ParcelForCustomer> toCustomers = new List<ParcelForCustomer>();
+                foreach (var item in MyDal.ParcelList(x => true))
+                {
+                    if (item.SenderId == id)
+                    {
+                        fromCustomers.Add(GetParcelForCustomer(item.Id, new CustomerInParcel(item.TargetId, MyDal.DisplayCustomer(item.TargetId).Name)));
+                    }
+                    if (item.TargetId == id)
+                    {
+                        toCustomers.Add(GetParcelForCustomer(item.Id, new CustomerInParcel(item.SenderId, MyDal.DisplayCustomer(item.SenderId).Name)));
+                    }
+                }
 
-            return new Customer(id, StructToClass.Name, StructToClass.Phone, new Location(StructToClass.Longitude, StructToClass.Lattitude),
-                fromCustomers, toCustomers);
+
+                return new Customer(id, StructToClass.Name, StructToClass.Phone, new Location(StructToClass.Longitude, StructToClass.Lattitude),
+                    fromCustomers, toCustomers);
+            }
                 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel GetParcel(int id)
         {
-            DO.Parcel StructToClass;
-            try
+            lock (MyDal)
             {
-                StructToClass = MyDal.DisplayParcel(id);
-            }
-            catch (DO.IdNotExistException err)
-            {
-                throw new BO.IdNotExistException(err.Id);
-            }
+                DO.Parcel StructToClass;
+                try
+                {
+                    StructToClass = MyDal.DisplayParcel(id);
+                }
+                catch (DO.IdNotExistException err)
+                {
+                    throw new BO.IdNotExistException(err.Id);
+                }
 
-            return new Parcel(id, new CustomerInParcel(StructToClass.SenderId, MyDal.DisplayCustomer(StructToClass.SenderId).Name),
-                new CustomerInParcel(StructToClass.TargetId, MyDal.DisplayCustomer(StructToClass.TargetId).Name), (WeightCategories)StructToClass.Weight,
-                (Priorities)StructToClass.Priority, GetDroneInParcel(id), StructToClass.Reuqested,
-                StructToClass.Scheduled, StructToClass.PickedUp, StructToClass.Delivered);
+                return new Parcel(id, new CustomerInParcel(StructToClass.SenderId, MyDal.DisplayCustomer(StructToClass.SenderId).Name),
+                    new CustomerInParcel(StructToClass.TargetId, MyDal.DisplayCustomer(StructToClass.TargetId).Name), (WeightCategories)StructToClass.Weight,
+                    (Priorities)StructToClass.Priority, GetDroneInParcel(id), StructToClass.Reuqested,
+                    StructToClass.Scheduled, StructToClass.PickedUp, StructToClass.Delivered);
+            }
         }
         internal ParcelOnDelivery GetParcelOnDelivery(int droneId)
         {
@@ -147,17 +161,21 @@ namespace BL
             {
                 return null;
             }
-            DO.Parcel parcel = MyDal.DisplayParcel(Drones.Find(x => x.Id == droneId).ParcelId);
-            DO.Customer sender = MyDal.DisplayCustomer(parcel.SenderId);
-            DO.Customer target = MyDal.DisplayCustomer(parcel.TargetId);
-            Location SenderLocation = GetParcelSenderLocation(parcel.Id);
-            Location TargetLocation = GetParcelTargetLocation(parcel.Id);
-            CustomerInParcel senderInParcel = new CustomerInParcel(sender.Id, sender.Name);
-            CustomerInParcel targetInParcel = new CustomerInParcel(target.Id, target.Name);
+            lock (MyDal)
+            {
+                DO.Parcel parcel = MyDal.DisplayParcel(Drones.Find(x => x.Id == droneId).ParcelId);
+                DO.Customer sender = MyDal.DisplayCustomer(parcel.SenderId);
+                DO.Customer target = MyDal.DisplayCustomer(parcel.TargetId);
 
-            return new ParcelOnDelivery(parcel.Id, ParcelOnDeliveryStatuses.onTheWay,
-                (WeightCategories)parcel.Weight, (Priorities)parcel.Priority, senderInParcel, targetInParcel, SenderLocation,
-                TargetLocation, DistanceTo(SenderLocation, TargetLocation));
+                Location SenderLocation = GetParcelSenderLocation(parcel.Id);
+                Location TargetLocation = GetParcelTargetLocation(parcel.Id);
+                CustomerInParcel senderInParcel = new CustomerInParcel(sender.Id, sender.Name);
+                CustomerInParcel targetInParcel = new CustomerInParcel(target.Id, target.Name);
+
+                return new ParcelOnDelivery(parcel.Id, ParcelOnDeliveryStatuses.onTheWay,
+                    (WeightCategories)parcel.Weight, (Priorities)parcel.Priority, senderInParcel, targetInParcel, SenderLocation,
+                    TargetLocation, DistanceTo(SenderLocation, TargetLocation));
+            }
         }
 
         internal ParcelForCustomer GetParcelForCustomer(int id, CustomerInParcel otherSide)
@@ -211,20 +229,23 @@ namespace BL
 
         internal DO.Parcel GetClosestParcel(Location locationA, List<DO.Parcel> parcels)
         {
-            double smallDistance = double.MaxValue, tmpDis;
-            DO.Parcel comeBack = new DO.Parcel();
-            foreach (var parcel in parcels)
+            lock (MyDal)
             {
-                Location parcelLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude,
-                    MyDal.DisplayCustomer(parcel.SenderId).Longitude);
-                tmpDis = DistanceTo(locationA, parcelLocation);
-                if (tmpDis < smallDistance)
+                double smallDistance = double.MaxValue, tmpDis;
+                DO.Parcel comeBack = new DO.Parcel();
+                foreach (var parcel in parcels)
                 {
-                    smallDistance = tmpDis;
-                    comeBack = parcel;
+                    Location parcelLocation = new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude,
+                        MyDal.DisplayCustomer(parcel.SenderId).Longitude);
+                    tmpDis = DistanceTo(locationA, parcelLocation);
+                    if (tmpDis < smallDistance)
+                    {
+                        smallDistance = tmpDis;
+                        comeBack = parcel;
+                    }
                 }
+                return comeBack;
             }
-            return comeBack;
         }
 
 
@@ -249,13 +270,19 @@ namespace BL
         }
         internal Location GetParcelSenderLocation(int id)
         {
-            var parcel = MyDal.DisplayParcel(id);
-            return new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
+            lock (MyDal)
+            {
+                var parcel = MyDal.DisplayParcel(id);
+                return new Location(MyDal.DisplayCustomer(parcel.SenderId).Longitude, MyDal.DisplayCustomer(parcel.SenderId).Lattitude);
+            }
         }
         internal Location GetParcelTargetLocation(int id)
         {
-            var parcel = MyDal.DisplayParcel(id);
-            return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Lattitude);
+            lock (MyDal)
+            {
+                var parcel = MyDal.DisplayParcel(id);
+                return new Location(MyDal.DisplayCustomer(parcel.TargetId).Longitude, MyDal.DisplayCustomer(parcel.TargetId).Lattitude);
+            }
         }
 
         internal IEnumerable<StationForList> StationsToBL(IEnumerable<DO.Station> stations)
@@ -273,16 +300,20 @@ namespace BL
         }
         internal IEnumerable<ParcelForList> ParcelsToBL(IEnumerable<DO.Parcel> Parcels)
         {
-            List<ParcelForList> comeBack = new List<ParcelForList>();
-            foreach (var parcel in Parcels)
+            lock (MyDal)
             {
-                comeBack.Add(new ParcelForList(parcel.Id, MyDal.DisplayCustomer(parcel.SenderId).Name,
-                    MyDal.DisplayCustomer(parcel.TargetId).Name, (WeightCategories)parcel.Weight,
-                    (Priorities)parcel.Priority, GetParcelStatus(parcel.Id)));
+                List<ParcelForList> comeBack = new List<ParcelForList>();
+                foreach (var parcel in Parcels)
+                {
+                    comeBack.Add(new ParcelForList(parcel.Id, MyDal.DisplayCustomer(parcel.SenderId).Name,
+                        MyDal.DisplayCustomer(parcel.TargetId).Name, (WeightCategories)parcel.Weight,
+                        (Priorities)parcel.Priority, GetParcelStatus(parcel.Id)));
+                }
+                return comeBack;
             }
-            return comeBack;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int id)
         {
             if (GetParcel(id).Scheduled == null)
