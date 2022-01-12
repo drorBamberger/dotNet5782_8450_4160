@@ -328,7 +328,6 @@ namespace PL
             Simulation.Click -= Simulation_Click;
             Simulation.Click += Un_Simulation_Click;
             Simulation.Content = "Regular";
-
         }
         private void Un_Simulation_Click(object sender, RoutedEventArgs e)
         {
