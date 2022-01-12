@@ -494,14 +494,7 @@ namespace DalXml
             List<Parcel> data = (List<Parcel>)ser.Deserialize(reader);
             reader.Close();
 
-            XElement dataRoot = XElement.Load(@"Data\DALConfig.xml");
-            int parcelId = int.Parse(dataRoot.Element("ParcelId").Value);
-
             data.RemoveAll(x => x.Id == id);
-            parcelId--;
-
-            dataRoot.Element("ParcelId").SetValue(parcelId);
-            dataRoot.Save(@"Data\DALConfig.xml");
 
             TextWriter writer = new StreamWriter(@"Data\Parcels.xml");
             try { ser.Serialize(writer, data); }

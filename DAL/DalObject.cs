@@ -263,7 +263,6 @@ namespace DalObject
         public void DeleteParcel(int id)
         {
             DataSource.Parcels.RemoveAll(x => x.Id == id);
-            DataSource.ParcelId--;
         }
     }
 }
