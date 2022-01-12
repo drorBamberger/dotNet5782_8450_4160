@@ -1,1 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Station>
+    <Id>1482119494</Id>
+    <Name>London</Name>
+    <Longitude>-0.118092</Longitude>
+    <Lattitude>51.509865</Lattitude>
+    <ChargeSlots>10</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>1007664362</Id>
+    <Name>Brighton</Name>
+    <Longitude>-0.13947</Longitude>
+    <Lattitude>50.82838</Lattitude>
+    <ChargeSlots>8</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>1</Id>
+    <Name>1</Name>
+    <Longitude>0</Longitude>
+    <Lattitude>0</Lattitude>
+    <ChargeSlots>0</ChargeSlots>
+  </Station>
+</ArrayOfStation>

@@ -1,4 +1,123 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfParcel>
-
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Parcel>
+    <Id>1</Id>
+    <SenderId>402906059</SenderId>
+    <TargetId>1368147114</TargetId>
+    <Weight>Heavy</Weight>
+    <Reuqested>2022-01-12T17:59:09.8109003+02:00</Reuqested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Normal</Priority>
+    <DroneId>0</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>2</Id>
+    <SenderId>530003596</SenderId>
+    <TargetId>402906059</TargetId>
+    <Weight>Light</Weight>
+    <Reuqested>2022-01-12T17:59:09.8147539+02:00</Reuqested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Emergency</Priority>
+    <DroneId>0</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>3</Id>
+    <SenderId>530003596</SenderId>
+    <TargetId>242844247</TargetId>
+    <Weight>Medium</Weight>
+    <Reuqested>2022-01-12T17:59:09.8147605+02:00</Reuqested>
+    <Scheduled>2022-01-12T17:59:09.8147612+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Normal</Priority>
+    <DroneId>56878760</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>4</Id>
+    <SenderId>478277830</SenderId>
+    <TargetId>478277830</TargetId>
+    <Weight>Heavy</Weight>
+    <Reuqested>2022-01-12T17:59:09.8147619+02:00</Reuqested>
+    <Scheduled>2022-01-12T17:59:09.8147623+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Normal</Priority>
+    <DroneId>1975709097</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>5</Id>
+    <SenderId>722040117</SenderId>
+    <TargetId>1631242782</TargetId>
+    <Weight>Light</Weight>
+    <Reuqested>2022-01-12T17:59:09.814763+02:00</Reuqested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Emergency</Priority>
+    <DroneId>0</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>6</Id>
+    <SenderId>1368147114</SenderId>
+    <TargetId>242844247</TargetId>
+    <Weight>Heavy</Weight>
+    <Reuqested>2022-01-12T17:59:09.8147642+02:00</Reuqested>
+    <Scheduled>2022-01-12T17:59:09.8147645+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Fast</Priority>
+    <DroneId>56878760</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>7</Id>
+    <SenderId>242844247</SenderId>
+    <TargetId>1631242782</TargetId>
+    <Weight>Medium</Weight>
+    <Reuqested>2022-01-12T17:59:09.8147652+02:00</Reuqested>
+    <Scheduled>2022-01-12T17:59:09.8147656+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Normal</Priority>
+    <DroneId>2133164308</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>8</Id>
+    <SenderId>102975507</SenderId>
+    <TargetId>478277830</TargetId>
+    <Weight>Heavy</Weight>
+    <Reuqested>2022-01-12T17:59:09.8147663+02:00</Reuqested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Fast</Priority>
+    <DroneId>0</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>9</Id>
+    <SenderId>1253361210</SenderId>
+    <TargetId>1368147114</TargetId>
+    <Weight>Heavy</Weight>
+    <Reuqested>2022-01-12T17:59:09.8147669+02:00</Reuqested>
+    <Scheduled>2022-01-12T17:59:09.8147673+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Fast</Priority>
+    <DroneId>2133164308</DroneId>
+  </Parcel>
+  <Parcel>
+    <Id>10</Id>
+    <SenderId>242844247</SenderId>
+    <TargetId>1742774555</TargetId>
+    <Weight>Medium</Weight>
+    <Reuqested>2022-01-12T17:59:09.814781+02:00</Reuqested>
+    <Scheduled>2022-01-12T17:59:09.8147816+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Priority>Fast</Priority>
+    <DroneId>56878760</DroneId>
+  </Parcel>
 </ArrayOfParcel>

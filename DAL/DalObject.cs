@@ -48,11 +48,10 @@ namespace DalObject
             for (int i = 0; i < 10; i++)
             {
                 int[] droneId = new int[]{ Drones[rnd.Next(0, 5)].Id, 0 };
-                Parcels.Add(new Parcel(Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id,
+                Parcels.Add(new Parcel(ParcelId++, Customers[rnd.Next(0, 10)].Id, Customers[rnd.Next(0, 10)].Id,
                    (WeightCategories)rnd.Next(0, 3), (Priorities)rnd.Next(0, 3), droneId[rnd.Next(0, 2)]));
             }
         }
-
     }
 
     internal sealed class DalObject : DalApi.IDal
@@ -75,7 +74,6 @@ namespace DalObject
         public DalObject()
         {
             DataSource.Initialize();
-            
         }
 
         //help funcs:
@@ -124,7 +122,7 @@ namespace DalObject
 
         public void AddParcel(int senderId, int targetId, int weight, int priority, int droneId)
         {
-            DataSource.Parcels.Add(new Parcel(senderId, targetId, (WeightCategories)weight
+            DataSource.Parcels.Add(new Parcel(DataSource.ParcelId++,senderId, targetId, (WeightCategories)weight
                 , (Priorities)priority, droneId));
         }
         //update options
@@ -265,6 +263,7 @@ namespace DalObject
         public void DeleteParcel(int id)
         {
             DataSource.Parcels.RemoveAll(x => x.Id == id);
+            DataSource.ParcelId--;
         }
     }
 }
