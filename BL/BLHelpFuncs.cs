@@ -322,10 +322,13 @@ namespace BL
             }
             else throw new BO.ParcelPickedUpOrIsntScheduled(id);
         }
-        internal void AddBattery(int droneId, int time)
+        internal void AddBattery(int droneId, double battery)
         {
-            DisChargeDrone(droneId, time);
-            ChargeDrone(droneId);
+            Drones.Find(x => x.Id == droneId).Battery += battery;
+        }
+        internal void ChangeLocation(int droneId, Location location)
+        {
+            Drones.Find(x => x.Id == droneId).MyLocation = location;
         }
     }
 }
