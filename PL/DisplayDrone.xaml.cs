@@ -24,7 +24,7 @@ namespace PL
     public partial class DisplayDrone : Window
     {
         BackgroundWorker BGW;
-        BO.DroneForList localDrone;
+        BO.Drone localDrone;
         BLApi.IBL myBl;
 
         public DisplayDrone()
@@ -55,9 +55,9 @@ namespace PL
         public DisplayDrone(BLApi.IBL bl, BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
-
-            localDrone = drone;
             myBl = bl;
+            localDrone = myBl.GetDrone(drone.Id);
+            
 
             BO.Drone myDrone = bl.GetDrone(drone.Id);
             bool flag = myDrone.Status == BO.DroneStatuses.Shipping;
@@ -182,8 +182,7 @@ namespace PL
             }
             
             MessageBox.Show("drone disCharging!!!!");
-            localDrone = myBl.GetDroneForList(localDrone.Id);
-            new DisplayDrone(myBl, localDrone).Show();
+            new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id)).Show();
             this.Close();
         }
         private void ChargeDrone(object sender, RoutedEventArgs e)
@@ -198,8 +197,7 @@ namespace PL
                 return;
             }
             MessageBox.Show("drone charging!!!!");
-            localDrone = myBl.GetDroneForList(localDrone.Id);
-            new DisplayDrone(myBl, localDrone).Show();
+            new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id)).Show();
             this.Close();
         }
         private void Attribution(object sender, RoutedEventArgs e)
@@ -213,25 +211,22 @@ namespace PL
                 MessageBox.Show(ERR.ToString());
                 return;
             }
-            localDrone = myBl.GetDroneForList(localDrone.Id);
             MessageBox.Show("drone Attribution!!!!");
-            new DisplayDrone(myBl, localDrone).Show();
+            new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id)).Show();
             this.Close();
         }
         private void PickedParcelUp(object sender, RoutedEventArgs e)
         {
-            myBl.PickedParcelUp(localDrone.ParcelId);
-            localDrone = myBl.GetDroneForList(localDrone.Id);
+            myBl.PickedParcelUp(localDrone.MyParcel.Id);
             MessageBox.Show("drone picked parcel!!!!");
-            new DisplayDrone(myBl, localDrone).Show();
+            new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id)).Show();
             this.Close();
         }
         private void ParcelDelivered(object sender, RoutedEventArgs e)
         {
-            myBl.ParcelDelivered(localDrone.ParcelId);
-            localDrone = myBl.GetDroneForList(localDrone.Id);
+            myBl.ParcelDelivered(localDrone.MyParcel.Id);
             MessageBox.Show("parcel delivered!!!!");
-            new DisplayDrone(myBl, localDrone).Show();
+            new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id)).Show();
             this.Close();
         }
         private void Simulation_Click(object sender, RoutedEventArgs e)
