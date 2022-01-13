@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using BO;
-using DalObject;
-using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -34,7 +31,7 @@ namespace BL
         public BL()
         {
             
-            MyDal = DAL.DalFactory.GetDal("DalObject");
+            MyDal = DAL.DalFactory.GetDal("DalXml");
             lock (MyDal)
             {
                 Random rnd = new Random();
