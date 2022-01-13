@@ -18,7 +18,8 @@ namespace BL
             double time;
             for (int i = 0; stopCheck();i++)
             {
-                switch(MyDrone.Status)
+                MyDrone = myBl.GetDrone(droneId);
+                switch (MyDrone.Status)
                 {
                     case DroneStatuses.vacant:
                         try

@@ -336,6 +336,8 @@ namespace PL
             
             BGW = new BackgroundWorker();
             BGW.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
+
+            BGW.RunWorkerAsync();
         }
 
         private void Un_Simulation_Click(object sender, RoutedEventArgs e)
@@ -348,12 +350,10 @@ namespace PL
             Simulation.Click -= Un_Simulation_Click;
             Simulation.Content = "Simulation";
 
-
-
         }
         bool stop()
         {
-           // return true;
+           return true;
         }
         void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -364,7 +364,7 @@ namespace PL
 
         public static void ConsolePrint()
         {
-            Console.WriteLine(i);
+            Console.WriteLine(10);
         }
 
     }
