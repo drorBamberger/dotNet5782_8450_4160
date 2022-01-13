@@ -28,11 +28,10 @@
         <Label Content="Sender:" HorizontalAlignment="Left" Margin="16,217,0,0" VerticalAlignment="Top" FontSize="22"/>
         <Label Content="Drone:" HorizontalAlignment="Left" Margin="400,57,0,0" VerticalAlignment="Top" FontSize="22"/>
         <Label Content="Target:" HorizontalAlignment="Left" Margin="293,217,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <Button x:Name="Close_Window" Background="Red" Content="Close" HorizontalAlignment="Left" Margin="767,0,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
-        <Button Content="commit all" Click="Commit_All"  HorizontalAlignment="Left" Margin="0,361,0,0" VerticalAlignment="Top" Height="73" Width="285" FontSize="50"/>
-        <Button  Name="Delete" Content="Delete" Click="DeleteClick"  HorizontalAlignment="Left" Margin="499,361,0,0" VerticalAlignment="Top" Height="73" Width="301" FontSize="50"/>
-        <Button Content="status Upgrade" Click="StatusClick" HorizontalAlignment="Left" Margin="285,361,0,0" VerticalAlignment="Top" Height="73" Width="214" FontSize="30"/>
-        <Button Content="Simulator" FontSize="25" HorizontalAlignment="Left" Margin="597,238,0,0" VerticalAlignment="Top" Height="57" Width="130" Click="Simulator"/>
+        <Button x:Name="Close_Window" Background="Red" Content="Close" HorizontalAlignment="Left" Margin="729,0,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
+        <Button Content="commit all" Click="Commit_All"  HorizontalAlignment="Left" Margin="0,324,0,0" VerticalAlignment="Top" Height="75" Width="285" FontSize="30"/>
+        <Button  Name="Delete" Content="Delete" Click="DeleteClick"  HorizontalAlignment="Left" Margin="499,324,0,0" VerticalAlignment="Top" Height="75" Width="301" FontSize="30"/>
+        <Button Content="status Upgrade" Click="StatusClick" HorizontalAlignment="Left" Margin="285,324,0,0" VerticalAlignment="Top" Height="75" Width="214" FontSize="30"/>
 
     </Grid>
 </Window>

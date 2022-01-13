@@ -26,6 +26,7 @@ namespace PL
         BackgroundWorker BGW;
         BO.Drone localDrone;
         BLApi.IBL myBl;
+        bool stoping = true;
 
         public DisplayDrone()
         {
@@ -254,11 +255,17 @@ namespace PL
             Simulation.Click += Simulation_Click;
             Simulation.Click -= Un_Simulation_Click;
             Simulation.Content = "Simulation";
+            stoping = false;
+
+            while (true)
+            {
+
+            }
 
         }
         bool stop()
         {
-           return true;
+           return stoping;
         }
         void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
         {
