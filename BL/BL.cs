@@ -31,7 +31,7 @@ namespace BL
         public BL()
         {
             
-            MyDal = DAL.DalFactory.GetDal("DalXml");
+            MyDal = DAL.DalFactory.GetDal("DalObject");
             lock (MyDal)
             {
                 Random rnd = new Random();

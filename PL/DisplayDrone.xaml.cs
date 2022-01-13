@@ -27,6 +27,7 @@ namespace PL
         public BO.Drone localDrone { get; set; }
         BLApi.IBL myBl;
         bool isExit = false;
+
         public DisplayDrone()
         {
             InitializeComponent();
@@ -109,16 +110,16 @@ namespace PL
             BGW.ProgressChanged += Worker_ProgressChanged;
 
         }
-        protected override void OnClosing( CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            if(BGW != null && BGW.IsBusy)
+            if (BGW != null && BGW.IsBusy)
             {
                 isExit = true;
                 BGW.CancelAsync();
                 e.Cancel = true;
-                
+
             }
-            else if((string)Simulation.Content == "Regular") new DisplayDroneList(myBl).Show();
+            else if ((string)Simulation.Content == "Regular") new DisplayDroneList(myBl).Show();
 
         }
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -167,10 +168,10 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            
+
             myBl.DroneUpdate(localDrone.Id, localDrone.Model);
             MessageBox.Show("drone updated!!!!");
-            
+
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -190,12 +191,12 @@ namespace PL
                 }
                 myBl.DisChargeDrone(localDrone.Id, time);
             }
-            catch(BO.CantBeNegative ERR)
+            catch (BO.CantBeNegative ERR)
             {
                 MessageBox.Show(ERR.ToString());
                 return;
             }
-            
+
             MessageBox.Show("drone disCharging!!!!");
             new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id)).Show();
             this.Close();
@@ -269,12 +270,12 @@ namespace PL
             Simulation.Click += Simulation_Click;
             Simulation.Click -= Un_Simulation_Click;
             Simulation.Content = "Simulation";
-            stoping = false;
 
             while (true)
             {
 
-            BGW.CancelAsync();
+                BGW.CancelAsync();
+            }
         }
         void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
         {
