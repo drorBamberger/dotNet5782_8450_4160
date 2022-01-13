@@ -19,7 +19,6 @@ namespace PL
     /// </summary>
     public partial class DisplayParcel : Window
     {
-        BackgroundWorker bgw;
         BLApi.IBL myBl;
         public BO.Parcel newParcel { get; set; }
         public string drone { get; set; }
@@ -138,9 +137,5 @@ namespace PL
             DataContext = new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == newParcel.Id).First());
         }
 
-        private void Simulator(object sender, RoutedEventArgs e)
-        {
-            bgw.RunWorkerAsync();
-        }
     }
 }

@@ -32,7 +32,6 @@
         <Button Content="commit all" Click="Commit_All"  HorizontalAlignment="Left" Margin="0,361,0,0" VerticalAlignment="Top" Height="73" Width="285" FontSize="50"/>
         <Button  Name="Delete" Content="Delete" Click="DeleteClick"  HorizontalAlignment="Left" Margin="499,361,0,0" VerticalAlignment="Top" Height="73" Width="301" FontSize="50"/>
         <Button Content="status Upgrade" Click="StatusClick" HorizontalAlignment="Left" Margin="285,361,0,0" VerticalAlignment="Top" Height="73" Width="214" FontSize="30"/>
-        <Button Content="Simulator" FontSize="25" HorizontalAlignment="Left" Margin="597,238,0,0" VerticalAlignment="Top" Height="57" Width="130" Click="Simulator"/>
 
     </Grid>
 </Window>
