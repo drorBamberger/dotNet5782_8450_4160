@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using BO;
-using DalObject;
-using System.Runtime.CompilerServices;
 
 namespace BL
 {

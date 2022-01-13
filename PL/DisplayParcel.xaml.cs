@@ -10,7 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
-using System.ComponentModel;
 
 namespace PL
 {
@@ -36,6 +35,8 @@ namespace PL
             newParcel.MyDrone = new BO.DroneInParcel();
             Delete.Visibility = Visibility.Hidden;
             myBl = bl;
+
+
         }
         public DisplayParcel(BLApi.IBL bl, BO.ParcelForList parcel) //display and edit Parcel
         {
@@ -115,7 +116,7 @@ namespace PL
             }
             myBl.DeleteParcel(newParcel.Id);
             new DisplayParcelList(myBl).Show();
-            Close();
+            this.Close();
         }
         private void StatusClick(object sender, RoutedEventArgs e)
         {
@@ -135,6 +136,11 @@ namespace PL
             MessageBox.Show("sucess!");
             newParcel = myBl.GetParcel(newParcel.Id);
             DataContext = new DisplayParcel(myBl, myBl.ParcelList().Where(x => x.Id == newParcel.Id).First());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

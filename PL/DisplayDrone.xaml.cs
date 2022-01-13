@@ -27,6 +27,7 @@ namespace PL
         public BO.Drone localDrone { get; set; }
         BLApi.IBL myBl;
         bool isExit = false;
+
         public DisplayDrone()
         {
             InitializeComponent();
@@ -275,10 +276,11 @@ namespace PL
 
                 BGW.CancelAsync();
             }
-            void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
-            {
-                myBl.PlaySimulator(localDrone.Id, () => BGW.ReportProgress(1), () => BGW.CancellationPending);
-            }
+        }
+        void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            myBl.PlaySimulator(localDrone.Id, () => BGW.ReportProgress(1), () => BGW.CancellationPending);
+        }
 
             void Run_WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
