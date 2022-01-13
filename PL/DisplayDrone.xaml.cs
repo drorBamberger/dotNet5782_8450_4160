@@ -282,20 +282,20 @@ namespace PL
             myBl.PlaySimulator(localDrone.Id, () => BGW.ReportProgress(1), () => BGW.CancellationPending);
         }
 
-            void Run_WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-            {
-                if (isExit)
-                    this.Close();
-            }
-
-            void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-            {
-                //localDrone = myBl.GetDrone(localDrone.Id);
-                //DataContext = new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id));
-                //MessageBox.Show("aaa");
-            }
-
-
+        void Run_WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (isExit)
+                this.Close();
         }
+
+        void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //localDrone = myBl.GetDrone(localDrone.Id);
+            //DataContext = new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id));
+            //MessageBox.Show("aaa");
+        }
+
+
     }
 }
+
