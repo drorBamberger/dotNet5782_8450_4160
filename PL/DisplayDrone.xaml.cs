@@ -269,6 +269,10 @@ namespace PL
             Simulation.Click += Simulation_Click;
             Simulation.Click -= Un_Simulation_Click;
             Simulation.Content = "Simulation";
+            stoping = false;
+
+            while (true)
+            {
 
             BGW.CancelAsync();
         }
