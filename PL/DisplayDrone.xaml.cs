@@ -24,7 +24,7 @@ namespace PL
     public partial class DisplayDrone : Window
     {
         BackgroundWorker BGW;
-        BO.Drone localDrone;
+        public BO.Drone localDrone { get; set; }
         BLApi.IBL myBl;
         bool stoping = true;
 
@@ -49,23 +49,20 @@ namespace PL
             labelWeight.Visibility = Visibility.Visible;
             labelStatId.Visibility = Visibility.Visible;
 
-           
+            idLabel.Visibility = Visibility.Hidden;
+            func1.Visibility = Visibility.Hidden;
             modelUpdate.Visibility = Visibility.Hidden;
             Simulation.Visibility = Visibility.Hidden;
         }
         public DisplayDrone(BLApi.IBL bl, BO.DroneForList drone) //display and edit drone
         {
             InitializeComponent();
+            DataContext = this;
             myBl = bl;
             localDrone = myBl.GetDrone(drone.Id);
-            
 
-            BO.Drone myDrone = bl.GetDrone(drone.Id);
-            bool flag = myDrone.Status == BO.DroneStatuses.Shipping;
-            batteryLabel.Content = (int)myDrone.Battery + "%";
-            statusLabel.Content = myDrone.Status;
+            bool flag = localDrone.Status == BO.DroneStatuses.Shipping;
 
-            modelUpdate.Text = drone.Model;
 
             if (drone.Status == BO.DroneStatuses.maintenance)
             {
@@ -86,7 +83,10 @@ namespace PL
             }
             else //shipping
             {
-                if (bl.GetParcel(myDrone.MyParcel.Id).PickedUp == null)
+                parcel.Visibility = Visibility.Visible;
+                B4.Visibility = Visibility.Hidden;
+                B6.Visibility = Visibility.Hidden;
+                if (bl.GetParcel(localDrone.MyParcel.Id).PickedUp == null)
                 {
                     func1.Content = "Pick up parcel by drone";
                     func1.Click += PickedParcelUp;
@@ -206,6 +206,9 @@ namespace PL
             try
             {
                 myBl.Attribution(localDrone.Id);
+                parcel.Visibility = Visibility.Visible;
+                B4.Visibility = Visibility.Hidden;
+                B6.Visibility = Visibility.Hidden;
             }
             catch (BO.NoParcelMatch ERR)
             {
