@@ -26,12 +26,6 @@ namespace PL
         BackgroundWorker BGW;
         BO.Drone localDrone;
         BLApi.IBL myBl;
-        TextBox droneId = new TextBox();
-        TextBox model = new TextBox();
-        TextBox maxWeight = new TextBox();
-        TextBox stationId = new TextBox();
-        Button func1 = new Button();
-        Button func2 = new Button();
 
         public DisplayDrone()
         {
@@ -42,66 +36,20 @@ namespace PL
             //MessageBox.Show(bl.StationList().First().ToString());   // for knowing station id....
             InitializeComponent();
             myBl = bl;
-
-            Label labelId = new Label();
-            labelId.Content = "Enter the id of the drone: ";
-            labelId.FontSize = 25;
-            Grid.SetRow(labelId, 0);
-            Grid.SetColumn(labelId, 0);
-            displayDrone.Children.Add(labelId);
-
-
-            Label labelModel = new Label();
-            labelModel.Content = "Enter the model of the drone: ";
-            labelModel.FontSize = 25;
-            Grid.SetRow(labelModel, 2);
-            Grid.SetColumn(labelModel, 0);
-            displayDrone.Children.Add(labelModel);
-
-            Label labelWeight = new Label();
-            labelWeight.Content = "Enter max weight of the drone: ";
-            labelWeight.FontSize = 25;
-            Grid.SetRow(labelWeight, 4);
-            Grid.SetColumn(labelWeight, 0);
-            displayDrone.Children.Add(labelWeight);
-
-            Label labelStatId = new Label();
-            labelStatId.Content = "Enter station id for initial charging: ";
-            labelStatId.FontSize = 25;
-            Grid.SetRow(labelStatId, 6);
-            Grid.SetColumn(labelStatId, 0);
-            displayDrone.Children.Add(labelStatId);
-
-            droneId.FontSize = 25;
-            Grid.SetColumn(droneId, 1);
-            Grid.SetRow(droneId, 0);
-            droneId.Height = 43;
-            droneId.Width = 380;
-            displayDrone.Children.Add(droneId);
-
-            model.FontSize = 25;
-            Grid.SetColumn(model, 1);
-            Grid.SetRow(model, 2);
-            model.Height = 43;
-            model.Width = 380;
-            displayDrone.Children.Add(model);
-
-            maxWeight.FontSize = 25;
-            Grid.SetColumn(maxWeight, 1);
-            Grid.SetRow(maxWeight, 4);
-            maxWeight.Height = 43;
-            maxWeight.Width = 380;
-            displayDrone.Children.Add(maxWeight);
-
-            stationId.FontSize = 25;
-            Grid.SetColumn(stationId, 1);
-            Grid.SetRow(stationId, 6);
-            stationId.Height = 43;
-            stationId.Width = 380;
-            displayDrone.Children.Add(stationId);
-
             update.Click += Add_Click;
 
+
+            droneId.Visibility = Visibility.Visible;
+            modelAdd.Visibility = Visibility.Visible;
+            maxWeight.Visibility = Visibility.Visible;
+            stationId.Visibility = Visibility.Visible;
+            labelId.Visibility = Visibility.Visible;
+            labelModel.Visibility = Visibility.Visible;
+            labelWeight.Visibility = Visibility.Visible;
+            labelStatId.Visibility = Visibility.Visible;
+
+           
+            modelUpdate.Visibility = Visibility.Hidden;
             Simulation.Visibility = Visibility.Hidden;
         }
         public DisplayDrone(BLApi.IBL bl, BO.DroneForList drone) //display and edit drone
@@ -130,30 +78,8 @@ namespace PL
             transferDisLabel.Content = flag ? "distance: " + (int)myDrone.MyParcel.TransferDistance + " KM" : "";
             droneLocationLabel.Content = "drone location: " + myDrone.MyLocation;
 
-            Grid.SetRow(model, 2);
-            model.Height = 20;
-            model.Width = 120;
-            Thickness myThickness = new Thickness();
-            myThickness.Bottom = 6;
-            myThickness.Left = 0;
-            myThickness.Right = 260;
-            myThickness.Top = 28;
-            model.Margin = myThickness;
-            model.Text = drone.Model;
-            displayDrone.Children.Add(model);
+            modelUpdate.Text = drone.Model;
 
-            func1.Height = 74;
-            func1.Width = 400;
-            func1.FontSize = 32;
-            func1.FontStyle = FontStyles.Italic;
-            Grid.SetRow(func1, 6);
-
-            func2.Height = 74;
-            func2.Width = 400;
-            func2.FontSize = 32;
-            func2.FontStyle = FontStyles.Italic;
-            Grid.SetRow(func2, 6);
-            Grid.SetColumn(func2, 1);
             if (drone.Status == BO.DroneStatuses.maintenance)
             {
                 func1.Content = "Release drone from charger";
@@ -167,9 +93,9 @@ namespace PL
                 func1.Content = "Send drone to charge";
                 func1.Click += ChargeDrone;
                 //batteryPic.Visibility = Visibility.Visible;
+                func2.Visibility = Visibility.Visible;
                 func2.Content = "Link parcel to drone";
                 func2.Click += Attribution;
-                displayDrone.Children.Add(func2);
             }
             else //shipping
             {
@@ -185,10 +111,8 @@ namespace PL
                 }
 
             }
-            displayDrone.Children.Add(func1);
 
             update.Click += Update_Click;
-
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -209,7 +133,7 @@ namespace PL
                 {
                     if (int.TryParse(stationId.Text, out StationId))
                     {
-                        Model = model.Text;
+                        Model = modelUpdate.Text;
                         try
                         {
                             myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
@@ -243,9 +167,9 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            if (model.Text != localDrone.Model)
+            if (modelUpdate.Text != localDrone.Model)
             {
-                myBl.DroneUpdate(localDrone.Id, model.Text);
+                myBl.DroneUpdate(localDrone.Id, modelUpdate.Text);
                 MessageBox.Show("drone updated!!!!");
             }
             else
