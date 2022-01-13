@@ -261,6 +261,7 @@ namespace PL
             BGW.RunWorkerAsync();
         }
 
+
         private void Un_Simulation_Click(object sender, RoutedEventArgs e)
         {
             update.Visibility = Visibility.Visible;
