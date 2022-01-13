@@ -101,16 +101,10 @@ namespace PL
 
             update.Click += Update_Click;
         }
-        protected override void OnClosing( CancelEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
-            if(BGW != null && BGW.IsBusy)
-            {
-                isExit = true;
-                BGW.CancelAsync();
-                e.Cancel = true;
-                
-            }
-            else if((string)Simulation.Content == "Regular") new DisplayDroneList(myBl).Show();
+            new DisplayDroneList(myBl).Show();
+            this.Close();
 
         }
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -160,16 +154,15 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            
-            myBl.DroneUpdate(localDrone.Id, localDrone.Model);
-            MessageBox.Show("drone updated!!!!");
-            
-        }
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            if ((string)Simulation.Content != "Regular")
-                new DisplayDroneList(myBl).Show();
-            this.Close();
+            if (modelUpdate.Text != localDrone.Model)
+            {
+                myBl.DroneUpdate(localDrone.Id, modelUpdate.Text);
+                MessageBox.Show("drone updated!!!!");
+            }
+            else
+            {
+                MessageBox.Show("No change to update");
+            }
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
@@ -267,9 +260,8 @@ namespace PL
             Simulation.Click -= Un_Simulation_Click;
             Simulation.Content = "Simulation";
 
-            BGW.CancelAsync();
         }
-        void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
+        bool stop()
         {
            return true;
         }
