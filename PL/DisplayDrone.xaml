@@ -22,36 +22,28 @@
             <RowDefinition Height="18*"/>
             <RowDefinition Height="65*"/>
         </Grid.RowDefinitions>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="1" Background="#CF22C0B8"/>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="1" Grid.Column="1" Background="#CF22C0B8"/>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="3" Background="#CF22C0B8"/>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="3" Grid.Column="1" Background="#CF22C0B8"/>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="5" Background="#CF22C0B8"/>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="5" Grid.Column="1" Background="#CF22C0B8">
+        <Border Name="B1" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="1" Background="#CF22C0B8"/>
+        <Border Name="B2" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="1" Grid.Column="1" Background="#CF22C0B8"/>
+        <Border Name="B3" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="3" Background="#CF22C0B8"/>
+        <Border Name="B4" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="3" Grid.Column="1" Background="#CF22C0B8"/>
+        <Border Name="B5" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="5" Background="#CF22C0B8"/>
+        <Border Name="B6" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="5" Grid.Column="1" Background="#CF22C0B8">
             <Label Name="timeLabel" Content="" Margin="112,49,-129,-60"/>
         </Border>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Background="#CF22C0B8"/>
-        <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Grid.Column="1" Background="#CF22C0B8"/>
+        <Border Name="B7" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Background="#CF22C0B8"/>
+        <Border Name="B8" BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Grid.Column="1" Background="#CF22C0B8"/>
         <Button Name ="back"  FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Close_Click" Height="72" Width="400" Grid.Row="8" Grid.Column="1"/>
         <Button Name="update" FontStyle="Italic" FontSize="32" Content="Save Changed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="8"/>
         <Button Name="func1" FontStyle="Italic" FontSize="32" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="6"/>
         <Button Name="func2" FontStyle="Italic" Visibility="Hidden" FontSize="32" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="6" Grid.Column="1"/>
-        <Label Name ="batteryLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="88"/>
-        <Label Name ="idLabel"             Content="Id: " FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Height="54" Margin="6,27,0,0" Grid.RowSpan="2"/>
-        <Label Name ="statusLabel"         Content="" HorizontalAlignment="Left" Margin="89,2,0,0" VerticalAlignment="Top" Width="111" Height="37"/>
-        <Label Name ="maxWeightLabel"      Content="max weight drone can lift:" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="159" Height="62" Margin="231,27,0,0" Grid.RowSpan="2"/>
-        <Label Name ="droneLocationLabel"  Content="drone location:" Grid.Column="1" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="400" Height="48"/>
-        <Label Name ="parcelIdLabel"       Content="parcel ID:" FontSize ="30" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="242" Height="63" Margin="158,4,0,0"/>
-        <Label Name ="parcelStatusLabel"   Content="parcel status:" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="176" Height="36"/>
-        <Label Name ="parcelWeightLabel"   Content="parcel weight:" Grid.Column="1" HorizontalAlignment="Left" Margin="0,36,0,0" Grid.Row="2" VerticalAlignment="Top" Width="176" Height="31"/>
-        <Label Name ="parcelPriorityLabel" Content="priority:" Grid.Column="1" HorizontalAlignment="Left" Margin="200,0,0,0" Grid.Row="2" VerticalAlignment="Top" Width="200" Height="36"/>
-        <Label Name ="transferDisLabel"    Content="distance:" Grid.Column="1" HorizontalAlignment="Left" Margin="200,36,0,0" Grid.Row="2" VerticalAlignment="Top" Width="200" Height="37"/>
-        <Label Name ="senderNameLabel"     Content="sender name:" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="4" VerticalAlignment="Top" Width="137"/>
-        <Label Name="senderIdLabel"        Content="sender ID:" HorizontalAlignment="Left" Margin="137,7,0,0" Grid.Row="4" VerticalAlignment="Top" Width="204"/>
-        <Label Name="sendelLocLabel"       Content="sender location:" HorizontalAlignment="Left" Margin="6,23,0,0" Grid.Row="4" VerticalAlignment="Top" Width="277" Height="45"/>
-        <Label Name="targetNameLabel"      Content="target name:" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Margin="0,3,0,0" Width="150"/>
-        <Label Name="targetIdLabel"        Content="target ID:" Grid.Column="1" HorizontalAlignment="Left" Margin="177,5,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="148"/>
-        <Label Name="targetLocLabel"       Content="target location:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,24,0,0" Grid.Row="4" VerticalAlignment="Top" Width="220" Height="42"/>
+        <Label Name ="batteryLabel" Content="{Binding localDrone.Battery}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="88"/>
+        <Label Name ="idLabel"             Content="Id: " FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Height="54" Margin="6,27,0,0" Grid.RowSpan="2"/>
+        <Label Name ="Id"             Content="{Binding localDrone.Id}" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="54" Margin="61,18,0,0"/>
+        <Label Name ="statusLabel"         Content="{Binding localDrone.Status}" HorizontalAlignment="Left" Margin="89,2,0,0" VerticalAlignment="Top" Width="111" Height="37"/>
+        <Label Name ="maxWeightLabel"      Content="max weight drone can lift:" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="159" Height="27" Margin="231,27,0,0"/>
+        <Label Name ="maxWeighjt"      Content="{Binding localDrone.MaxWeight}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="159" Height="27" Margin="231,45,0,0"/>
+        <Label Name ="droneLocationLabel"  Content="drone location:" Grid.Column="1" HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top" Width="88" Height="48"/>
+        <Label Name ="droneLocatonLabel"  Content="{Binding localDrone.MyLocation}" Grid.Column="1" HorizontalAlignment="Left" Margin="93,2,0,0" VerticalAlignment="Top" Width="158" Height="48"/>
         <Label Name="labelId" Content="Enter the id of the drone: " Grid.Column="0" Grid.Row="0" FontSize="25" Visibility= "Hidden"/>
         <Label Name="labelModel" Content="Enter the model of the drone: " Grid.Column="0" Grid.Row="2" FontSize="25" Visibility= "Hidden"/>
         <Label Name="labelWeight" Content="Enter max weight of the drone: " Grid.Column="0" Grid.Row="4" FontSize="25" Visibility= "Hidden"/>
@@ -62,7 +54,8 @@
         <TextBox Name ="maxWeight" Visibility= "Hidden" Grid.Row="4" Width="380" Height="43" Grid.Column="1" FontSize = "25"/>
         <TextBox Name ="stationId" Visibility= "Hidden" Grid.Row="6" Width="380" Height="43" Grid.Column="1" FontSize = "25"/>
         <Button Name="Simulation" Content="Simulation" Click="Simulation_Click" HorizontalAlignment="Left" Margin="279,0,0,0" VerticalAlignment="Center" Width="111" Height="54"/>
-        <TextBox Name ="modelUpdate" Grid.Row="2" Width="120" Height="20" Margin="6,0,260,28"/>
+        <TextBox Name ="modelUpdate" Grid.Row="2" Width="120" Height="20" Margin="6,0,260,28" Text="{Binding localDrone.Model}"/>
+        <TextBlock Name ="parcel" Visibility="Hidden" Grid.Row="2" Margin="18,2,-13,0" Text="{Binding localDrone.MyParcel}" Grid.RowSpan="5" Grid.Column="1"/>
     </Grid>
 
 </Window>

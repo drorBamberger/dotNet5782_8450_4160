@@ -140,7 +140,7 @@ namespace PL
 
         private void Simulator(object sender, RoutedEventArgs e)
         {
-            bgw.RunWorkerAsync();
+            //bgw.RunWorkerAsync();
         }
     }
 }
