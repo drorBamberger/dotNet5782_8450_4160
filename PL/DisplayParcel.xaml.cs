@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class DisplayParcel : Window
     {
-        BackgroundWorker bgw;
+        //BackgroundWorker bgw;
         BLApi.IBL myBl;
         public BO.Parcel newParcel { get; set; }
         public string drone { get; set; }
