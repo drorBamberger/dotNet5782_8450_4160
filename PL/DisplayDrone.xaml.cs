@@ -26,8 +26,7 @@ namespace PL
         BackgroundWorker BGW;
         public BO.Drone localDrone { get; set; }
         BLApi.IBL myBl;
-        bool stoping = true;
-
+        bool isExit = false;
         public DisplayDrone()
         {
             InitializeComponent();
@@ -60,6 +59,7 @@ namespace PL
             DataContext = this;
             myBl = bl;
             localDrone = myBl.GetDrone(drone.Id);
+
 
             bool flag = localDrone.Status == BO.DroneStatuses.Shipping;
 
@@ -100,11 +100,25 @@ namespace PL
             }
 
             update.Click += Update_Click;
+
+            BGW = new BackgroundWorker();
+            BGW.DoWork += m_oWorker_DoWork;
+            BGW.WorkerSupportsCancellation = true;
+            BGW.RunWorkerCompleted += Run_WorkerCompleted;
+            BGW.WorkerReportsProgress = true;
+            BGW.ProgressChanged += Worker_ProgressChanged;
+
         }
-        private void Close_Click(object sender, RoutedEventArgs e)
+        protected override void OnClosing( CancelEventArgs e)
         {
-            new DisplayDroneList(myBl).Show();
-            this.Close();
+            if(BGW != null && BGW.IsBusy)
+            {
+                isExit = true;
+                BGW.CancelAsync();
+                e.Cancel = true;
+                
+            }
+            else if((string)Simulation.Content == "Regular") new DisplayDroneList(myBl).Show();
 
         }
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -125,7 +139,6 @@ namespace PL
                         {
                             myBl.AddDrone(DroneId, Model, MaxWieght, StationId);
                             MessageBox.Show("drone added!!!!");
-                            new DisplayDroneList(myBl).Show();
                             this.Close();
                         }
                         catch (BO.IdTakenException err)
@@ -154,15 +167,16 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            if (modelUpdate.Text != localDrone.Model)
-            {
-                myBl.DroneUpdate(localDrone.Id, modelUpdate.Text);
-                MessageBox.Show("drone updated!!!!");
-            }
-            else
-            {
-                MessageBox.Show("No change to update");
-            }
+            
+            myBl.DroneUpdate(localDrone.Id, localDrone.Model);
+            MessageBox.Show("drone updated!!!!");
+            
+        }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            if ((string)Simulation.Content != "Regular")
+                new DisplayDroneList(myBl).Show();
+            this.Close();
         }
         private void DisChargeDrone(object sender, RoutedEventArgs e)
         {
@@ -242,9 +256,6 @@ namespace PL
             Simulation.Click -= Simulation_Click;
             Simulation.Click += Un_Simulation_Click;
             Simulation.Content = "Regular";
-            
-            BGW = new BackgroundWorker();
-            BGW.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
 
             BGW.RunWorkerAsync();
         }
@@ -254,7 +265,7 @@ namespace PL
             update.Visibility = Visibility.Visible;
             back.Visibility = Visibility.Visible;
             func1.Visibility = Visibility.Visible;
-            func2.Visibility = Visibility.Visible;
+            if (localDrone.Status == BO.DroneStatuses.vacant) func2.Visibility = Visibility.Visible; else func2.Visibility = Visibility.Hidden;
             Simulation.Click += Simulation_Click;
             Simulation.Click -= Un_Simulation_Click;
             Simulation.Content = "Simulation";
@@ -263,24 +274,26 @@ namespace PL
             while (true)
             {
 
-            }
-
-        }
-        bool stop()
-        {
-           return stoping;
+            BGW.CancelAsync();
         }
         void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Action temp = ConsolePrint;
-            myBl.PlaySimulator(localDrone.Id, temp, stop);
-            return;
+            myBl.PlaySimulator(localDrone.Id, () => BGW.ReportProgress(1), () => BGW.CancellationPending);
         }
 
-        public static void ConsolePrint()
+        void Run_WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine(10);
+            if (isExit)
+                this.Close();
         }
+
+        void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //localDrone = myBl.GetDrone(localDrone.Id);
+            //DataContext = new DisplayDrone(myBl, myBl.GetDroneForList(localDrone.Id));
+            //MessageBox.Show("aaa");
+        }
+
 
     }
 }

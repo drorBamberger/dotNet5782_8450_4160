@@ -324,7 +324,12 @@ namespace BL
         }
         internal void AddBattery(int droneId, double battery)
         {
-            Drones.Find(x => x.Id == droneId).Battery += battery;
+            (Drones.Find(x => x.Id == droneId).Battery) += battery;
+            if((Drones.Find(x => x.Id == droneId).Battery>100))
+            {
+                (Drones.Find(x => x.Id == droneId).Battery) = 100;
+            }
+            
         }
         internal void ChangeLocation(int droneId, Location location)
         {
