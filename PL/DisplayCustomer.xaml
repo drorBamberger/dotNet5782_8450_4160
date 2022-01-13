@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DisplayCustomer" Height="450" Width="800">
-    <Grid Margin="0,0,0,-37">
+    <Grid Margin="0,0,0,0">
         <TextBox Name ="IdTextBox" HorizontalAlignment="Left" Margin="189,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="64" Text="{Binding newCustomer.Id}"/>
         <TextBox Name ="NameTextBox" HorizontalAlignment="Left" Margin="189,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="65" Text="{Binding newCustomer.Name}"/>
         <TextBox Name ="LonTextBox" HorizontalAlignment="Left" Margin="556,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="49" Text="{Binding newCustomer.CustomerLocation.Longitude}"/>
         <TextBox Name ="LatTextBox" HorizontalAlignment="Left" Margin="556,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="43" Text="{Binding newCustomer.CustomerLocation.Latitude}"/>
         <TextBox Name ="phone" HorizontalAlignment="Left" Margin="556,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="65" Text="{Binding newCustomer.PhoneNum}"/>
-        <Button x:Name="Close_Window" Background="Red" Content="Close" HorizontalAlignment="Left" Margin="767,0,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
-        <Button Content="commit all" Click="Commit_All" HorizontalAlignment="Left" Margin="0,361,0,0" VerticalAlignment="Top" Height="73" Width="420" FontSize="50"/>
+        <Button x:Name="Close_Window" Background="Red" Content="Close" HorizontalAlignment="Left" Margin="729,0,0,0" VerticalAlignment="Top" Click="Close_Window_Click"/>
+        <Button Content="commit all" Click="Commit_All" HorizontalAlignment="Left" Margin="0,314,0,0" VerticalAlignment="Top" Height="73" Width="420" FontSize="50"/>
         <ListBox Name ="FromListView" Margin="10,188,416,120"  ItemsSource="{Binding newCustomer.FromCustomer}" MouseDoubleClick="FromCustomerViewSelected" />
         <ListBox Name ="ToListView" Margin="400,188,20,120" ItemsSource="{Binding newCustomer.ToCustomer}" MouseDoubleClick="ToCustomerViewSelected"/>
         <Label Content="name" HorizontalAlignment="Left" Margin="37,20,0,0" VerticalAlignment="Top" Height="65" Width="107" FontSize="30"/>
