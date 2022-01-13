@@ -33,7 +33,9 @@
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Background="#CF22C0B8"/>
         <Border BorderThickness="1" BorderBrush="#FF1DC0C1" Grid.Row="7" Grid.Column="1" Background="#CF22C0B8"/>
         <Button Name ="back"  FontStyle="Italic" FontSize="32" Content="Back to drones list" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Close_Click" Height="72" Width="400" Grid.Row="8" Grid.Column="1"/>
-        <Button x:Name="update" FontStyle="Italic" FontSize="32" Content="Save Changed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="8"/>
+        <Button Name="update" FontStyle="Italic" FontSize="32" Content="Save Changed" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="8"/>
+        <Button Name="func1" FontStyle="Italic" FontSize="32" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="6"/>
+        <Button Name="func2" FontStyle="Italic" Visibility="Hidden" FontSize="32" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="400" Grid.Row="6" Grid.Column="1"/>
         <Label Name ="batteryLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="88"/>
         <Label Name ="idLabel" FontSize="30" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Height="54" Margin="6,27,0,0" Grid.RowSpan="2"/>
         <Label Name ="statusLabel" Content="" HorizontalAlignment="Left" Margin="89,2,0,0" VerticalAlignment="Top" Width="111" Height="37"/>
@@ -50,8 +52,17 @@
         <Label Name="targetNameLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Margin="0,3,0,0" Width="150"/>
         <Label Name="targetIdLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="177,5,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="148"/>
         <Label Name="targetLocLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10,24,0,0" Grid.Row="4" VerticalAlignment="Top" Width="220" Height="42"/>
+        <Label Name="labelId" Content="Enter the id of the drone: " Grid.Column="0" Grid.Row="0" FontSize="25" Visibility= "Hidden"/>
+        <Label Name="labelModel" Content="Enter the model of the drone: " Grid.Column="0" Grid.Row="2" FontSize="25" Visibility= "Hidden"/>
+        <Label Name="labelWeight" Content="Enter max weight of the drone: " Grid.Column="0" Grid.Row="4" FontSize="25" Visibility= "Hidden"/>
+        <Label Name="labelStatId" Content="Enter station id for initial charging: " Grid.Column="0" Grid.Row="6" FontSize="25" Visibility= "Hidden"/>
         <TextBox Name ="timeText" IsEnabled="False" Visibility= "Hidden" HorizontalAlignment="Left" Grid.Row="6" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="32" Grid.Column="1" Margin="231,31,0,0"/>
+        <TextBox Name ="droneId" Visibility= "Hidden" Grid.Row="0" Width="380" Height="43" Grid.Column="1" FontSize = "25"/>
+        <TextBox Name ="modelAdd" Visibility= "Hidden" Grid.Row="2" Width="380" Height="43" Grid.Column="1" FontSize = "25"/>
+        <TextBox Name ="maxWeight" Visibility= "Hidden" Grid.Row="4" Width="380" Height="43" Grid.Column="1" FontSize = "25"/>
+        <TextBox Name ="stationId" Visibility= "Hidden" Grid.Row="6" Width="380" Height="43" Grid.Column="1" FontSize = "25"/>
         <Button Name="Simulation" Content="Simulation" Click="Simulation_Click" HorizontalAlignment="Left" Margin="279,0,0,0" VerticalAlignment="Center" Width="111" Height="54"/>
+        <TextBox Name ="modelUpdate" Grid.Row="2" Width="120" Height="20" Margin="6,0,260,28"/>
     </Grid>
 
 </Window>
