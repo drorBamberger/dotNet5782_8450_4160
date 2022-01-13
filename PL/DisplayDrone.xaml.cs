@@ -23,6 +23,7 @@ namespace PL
     /// </summary>
     public partial class DisplayDrone : Window
     {
+        BackgroundWorker BGW;
         BO.DroneForList localDrone;
         BLApi.IBL myBl;
         TextBox droneId = new TextBox();
@@ -332,7 +333,11 @@ namespace PL
             Simulation.Click -= Simulation_Click;
             Simulation.Click += Un_Simulation_Click;
             Simulation.Content = "Regular";
+            
+            BGW = new BackgroundWorker();
+            BGW.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
         }
+
         private void Un_Simulation_Click(object sender, RoutedEventArgs e)
         {
             update.Visibility = Visibility.Visible;
@@ -345,6 +350,21 @@ namespace PL
 
 
 
+        }
+        bool stop()
+        {
+           // return true;
+        }
+        void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Action temp = ConsolePrint;
+            myBl.PlaySimulator(localDrone.Id, temp, stop);
+            return;
+        }
+
+        public static void ConsolePrint()
+        {
+            Console.WriteLine(i);
         }
 
     }
