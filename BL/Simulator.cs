@@ -16,9 +16,8 @@ namespace BL
             double speed = 30000.5;//km per second
             BO.Drone MyDrone = myBl.GetDrone(droneId);
             double time;
-            for (int i = 0; !stopCheck();i++)
+            for (int i = 0; stopCheck();i++)
             {
-                updateDisplay();
                 MyDrone = myBl.GetDrone(droneId);
                 switch (MyDrone.Status)
                 {
@@ -26,7 +25,7 @@ namespace BL
                         try
                         {
                             myBl.Attribution(droneId);
-                            i = -1;
+                            i = 0;
                         }
                         catch(BO.DroneHaveToLittleBattery)
                         {
@@ -49,11 +48,10 @@ namespace BL
                         if (myBl.GetParcel(MyDrone.MyParcel.Id).PickedUp == null)
                         {
                             time = myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelSenderLocation(MyDrone.MyParcel.Id)) / speed - i;
-
                             if (time<1)
                             {
                                 myBl.PickedParcelUp(MyDrone.MyParcel.Id);
-                                i = -1;
+                                i = 0;
                                 Thread.Sleep((int)(myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelSenderLocation(MyDrone.MyParcel.Id))/speed));
                             }
                             else
@@ -70,9 +68,9 @@ namespace BL
                             if (time < 1)
                             {
                                 myBl.ParcelDelivered(MyDrone.MyParcel.Id);
-                                i = -1;
+                                i = 0;
                                 Thread.Sleep((int)(myBl.DistanceTo(MyDrone.MyLocation, myBl.GetParcelTargetLocation(MyDrone.MyParcel.Id)) / speed));
-                                MyDrone = myBl.GetDrone(MyDrone.Id);
+                                MyDrone.MyParcel.TransferDistance = 0;
                             }
                             else
                             {
@@ -85,11 +83,10 @@ namespace BL
                         break;
                     case DroneStatuses.maintenance:
                         Thread.Sleep(delay);
-                        if (MyDrone.Battery >= 100)
+                        if (MyDrone.Battery == 100)
                         {
                             myBl.DisChargeDrone(droneId, 0.1);
-                            MyDrone = myBl.GetDrone(MyDrone.Id);
-                            i = -1;
+                            i = 0;
                             break;
                         }
                         myBl.AddBattery(droneId, (delay / 1000)*myBl.ChargePerSecond);
